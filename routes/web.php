@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::view('/blog', 'client.pages.blog');
+Route::view('/single-blog', 'client.pages.single_blog');
