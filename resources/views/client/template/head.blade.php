@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PATROS - HTML5 FREE TEMPLATE</title>
+    <title>@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
 
