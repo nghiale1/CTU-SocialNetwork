@@ -5,8 +5,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PATROS - HTML5 FREE TEMPLATE</title>
-
+    <title>CTU - Social Network</title>
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('client/images/logo-ctu.png')}}" />
     <!-- Bootstrap Core CSS -->
 
     <link href="{{asset('client/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -23,5 +23,10 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
+    <style>
+        .navbar-brand img {
+            margin-top: -15px;
+            height: 55px;
+        }
+    </style>
 </head>

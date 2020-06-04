@@ -3,10 +3,11 @@
 <!-- Page Content -->
 <section class="container blog">
     <div class="row">
+
         <!-- Blog Column -->
         <div class="col-md-8">
             <h1 class="page-header sidebar-title">
-                Company Blog
+                Hỏi đáp
             </h1>
             <!-- First Blog Post -->
             <div class="row blogu">
@@ -19,15 +20,18 @@
                 </div>
                 <div class="col-sm-8 col-md-8">
                     <h2 class="blog-title">
-                        <a href="single-post.html">Post title 1</a>
+                        <a href="single-post.html">BI thi gì vậy mấy bạn?</a>
                     </h2>
-                    <p><i class="fa fa-calendar-o"></i> August 28, 2013
+                    <p>
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true">5 likes</i>
                         <span class="comments-padding"></span>
                         <i class="fa fa-comment"></i> 0 comments
+                        <span class="comments-padding"></span>
+                        <i class="fa fa-thumbs-o-down" aria-hidden="true">5 dislikes</i>
+                        <span class="comments-padding"></span>
+                        <i class="fa fa-calendar-o"></i> August 28, 2013
                     </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi
-                        corrupti debitis ipsum officiis rerum.</p>
+                    <p>Mọi người cho mình hỏi môn BI thầy nghe thi đề gì vậy</p>
                 </div>
             </div>
             <hr>
@@ -42,15 +46,18 @@
                 </div>
                 <div class="col-sm-8 col-md-8">
                     <h2 class="blog-title">
-                        <a href="single-post.html">Post title 2</a>
+                        <a href="single-post.html">Có ai báo cáo tmdt chưa?</a>
                     </h2>
-                    <p><i class="fa fa-calendar-o"></i> August 28, 2013
+                    <p>
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true">5 likes</i>
                         <span class="comments-padding"></span>
-                        <i class="fa fa-comment"></i> 3 comments
+                        <i class="fa fa-comment"></i> 0 comments
+                        <span class="comments-padding"></span>
+                        <i class="fa fa-thumbs-o-down" aria-hidden="true">5 dislikes</i>
+                        <span class="comments-padding"></span>
+                        <i class="fa fa-calendar-o"></i> August 28, 2013
                     </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi
-                        corrupti debitis ipsum officiis rerum.</p>
+                    <p>Cho hỏi tmdt nào báo cáo dạ</p>
                 </div>
             </div>
             <hr>
@@ -168,35 +175,35 @@
                 <div class="input-group searchbar">
                     <input type="text" class="form-control searchbar" placeholder="Search for...">
                     <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Search</button>
+                        <button class="btn btn-default" type="button">Tìm kiếm</button>
                     </span>
                 </div><!-- /input-group -->
             </div>
             <!-- Blog Categories -->
             <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Categories</h4>
+                <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Học phần</h4>
                 <hr>
                 <ul class="sidebar-list">
-                    <li><a href="#">Applications</a></li>
-                    <li><a href="#">Photography</a></li>
-                    <li><a href="#">Art Design</a></li>
-                    <li><a href="#">Graphic Design</a></li>
-                    <li><a href="#">Category Name</a></li>
+                    <li><a href="#">CT258 - Phát triển thương mại điện tử</a></li>
+                    <li><a href="#">CT255 - Nghiệp vụ thông minh</a></li>
+                    <li><a href="#">CT264 - Cơ sở dữ liệu phân tán</a></li>
+                    <li><a href="#">CT244 - Bảo trì phần mềm</a></li>
+                    <li><a href="#">CT236 - Quản trị cơ sở dữ liệu trên Windows</a></li>
                 </ul>
             </div>
             <!-- Recent Posts -->
             <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Recent Posts</h4>
+                <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
                 <hr style="margin-bottom: 5px;">
 
                 <div class="media">
                     <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog1.jpg')}}"
+                        <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
                             alt="Media Object">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading"><a href="#">Post title 1</a></h4>
-                        This is some sample text. This is some sample text. This is some sample text.
+                        <h4 class="media-heading"><a href="#">BI thi gì vậy mấy bạn?</a></h4>
+                        Mọi người cho mình hỏi môn BI thầy nghe thi đề gì vậy
                     </div>
                 </div>
 
