@@ -27,7 +27,10 @@ class majors extends Seeder
             ['academy_name'=>'Khoa Phát triển Nông thôn'],
         ]);
         DB::table('courses')->insert([
-            'course_name'=>'K42'
+            ['course_name'=>'K42'],
+            ['course_name'=>'K43'],
+            ['course_name'=>'K44'],
+            ['course_name'=>'K45']
         ]);
         DB::table('majors')->insert([
             ['academy_id'=>'1',
@@ -225,9 +228,6 @@ class majors extends Seeder
             'major_name'=>'uản trị kinh doanh'],
             ['academy_id'=>'12',
             'major_name'=>'Việt Nam học'],
-        ]);
-        DB::table('youth_branchs')->insert([
-            
         ]);
     }
 }
