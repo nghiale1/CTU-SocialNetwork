@@ -5,8 +5,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>CTU - Social Network</title>
+    <title>@yield('title')</title>
+
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('client/images/logo-ctu.png')}}" />
+
     <!-- Bootstrap Core CSS -->
 
     <link href="{{asset('client/css/bootstrap.min.css')}}" rel="stylesheet">

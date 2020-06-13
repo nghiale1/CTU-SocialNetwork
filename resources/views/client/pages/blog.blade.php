@@ -1,4 +1,10 @@
 @extends('client.client')
+
+{{-- Thêm khúc này để có trang tiêu đề nha --}}
+@section('title')
+    Trang chủ
+@endsection
+
 @section('content')
 <!-- Page Content -->
 <section class="container blog">

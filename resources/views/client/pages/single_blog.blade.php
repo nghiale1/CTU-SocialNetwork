@@ -1,4 +1,10 @@
 @extends('client.client')
+
+{{-- Thêm khúc này để có trang tiêu đề nha --}}
+@section('title')
+    Chi tiết bài viết
+@endsection
+
 @section('content')
 
 <!-- Page Content -->
@@ -230,4 +236,5 @@
         </aside>
     </div>
 </div>
+
 @endsection
