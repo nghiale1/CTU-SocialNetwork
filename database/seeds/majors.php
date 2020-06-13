@@ -26,6 +26,9 @@ class majors extends Seeder
             // ['academy_name'=>'Khoa Ngoại ngữ'],
             ['academy_name'=>'Khoa Phát triển Nông thôn'],
         ]);
+        DB::table('courses')->insert([
+            'course_name'=>'K42'
+        ]);
         DB::table('majors')->insert([
             ['academy_id'=>'1',
             'major_name'=>'Công nghệ kỹ thuật hóa học'],
@@ -50,9 +53,9 @@ class majors extends Seeder
             ['academy_id'=>'1',
             'major_name'=>'Kỹ thuật xây dựng - CLC'],
             ['academy_id'=>'1',
-            'major_name'=>'	Kỹ thuật vật liệu'],
+            'major_name'=>'Kỹ thuật vật liệu'],
             ['academy_id'=>'1',
-            'major_name'=>'	Kỹ thuật xây dựng công trình giao thông'],
+            'major_name'=>'Kỹ thuật xây dựng công trình giao thông'],
             ['academy_id'=>'1',
             'major_name'=>'Kỹ thuật xây dựng công trình thủy'],
             ['academy_id'=>'1',
@@ -205,7 +208,26 @@ class majors extends Seeder
             'major_name'=>'Nuôi trồng thủy sản - CLC'],
             ['academy_id'=>'11',
             'major_name'=>'Quản lý thủy sản'],
-
+            
+            ['academy_id'=>'12',
+            'major_name'=>'Kinh doanh nông nghiệp'],
+            ['academy_id'=>'12',
+            'major_name'=>'Công nghệ thông tin'],
+            ['academy_id'=>'12',
+            'major_name'=>'Kinh tế Nông nghiệp'],
+            ['academy_id'=>'12',
+            'major_name'=>'Kỹ thuật xây dựng'],
+            ['academy_id'=>'12',
+            'major_name'=>'Luật'],
+            ['academy_id'=>'12',
+            'major_name'=>'Ngôn ngữ Anh'],
+            ['academy_id'=>'12',
+            'major_name'=>'uản trị kinh doanh'],
+            ['academy_id'=>'12',
+            'major_name'=>'Việt Nam học'],
+        ]);
+        DB::table('youth_branchs')->insert([
+            
         ]);
     }
 }
