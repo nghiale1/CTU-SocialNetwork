@@ -12,26 +12,41 @@
     <!-- //Meta tags -->
     <link rel="stylesheet" href="{{asset('login/css/style.css')}}" type="text/css" media="all" /><!-- Style-CSS -->
     <link href="{{asset('login/css/font-awesome.css')}}" rel="stylesheet"><!-- font-awesome-icons -->
+    <style>
+        .alert {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
+
     <section class="w3l-form-36">
         <div class="form-36-mian section-gap">
             <div class="wrapper">
                 <div class="form-inner-cont">
                     <h3>Đăng nhập</h3>
-                    <form action="#" method="post" class="signin-form">
+                    <form action="{{route('login')}}" method="post" class="signin-form">
+                        @csrf
                         <div class="form-input">
-                            <span class="fa fa-envelope-o" aria-hidden="true"></span> <input type="email" name="email"
-                                placeholder="MSSV" required />
+                            <span class="fa fa-envelope-o" aria-hidden="true"></span>
+                            <input type="text" name="code" placeholder="MSSV" required />
                         </div>
                         <div class="form-input">
                             <span class="fa fa-key" aria-hidden="true"></span> <input type="password" name="password"
                                 placeholder="Mật khẩu" required />
                         </div>
+                        @if($message = Session::get('error'))
+                        <br>
+                        <div class="alert alert-warning" role="alert">
+                            <p>{{$message}}</p>
+                            <p class="mb-0"></p>
+                        </div>
+                        @endif
+
                         <div class="login-remember d-grid">
                             <label class="check-remaind">
-                                <input type="checkbox">
+                                <input type="checkbox" name="remember">
                                 <span class="checkmark"></span>
                                 <p class="remember">Ghi nhớ đăng nhập</p>
                             </label>

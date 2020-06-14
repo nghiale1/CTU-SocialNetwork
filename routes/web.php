@@ -15,5 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::view('/dang-nhap', 'login.login');
-Route::view('/blog', 'client.pages.blog');
+Route::post('/xac-thuc', 'LoginController@login')->name('login');
+Route::view('/hoc-tap', 'client.pages.blog')->name('blog');
 Route::view('/single-blog', 'client.pages.single_blog');
+Route::get('/dang-xuat', 'LoginController@logout');
