@@ -25,6 +25,8 @@ class students extends Seeder
                     [
                         'username'=>'B'.$course.$dem,
                         'password'=>\Hash::make('ctu'),
+                        'stu_name'=>$faker->name,
+                        'stu_avatar'=>'/img/avatar.jpg',
                         'stu_birth'=>$faker->date,
                         'stu_code'=>'B'.$course.$dem,
                         'stu_address'=>$faker->address,
