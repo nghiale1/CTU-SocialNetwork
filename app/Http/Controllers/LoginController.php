@@ -99,4 +99,11 @@ class LoginController extends Controller
         }
         return redirect('/dang-nhap');
     }
+    public function form_login()
+    {
+        if(Auth::check() || Auth::guard('admin')->check()){
+            return redirect()->route('blog');
+        }
+        return redirect('/dang-nhap'); 
+    }
 }
