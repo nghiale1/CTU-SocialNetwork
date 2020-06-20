@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'student',
         'passwords' => 'users',
     ],
 
@@ -46,6 +46,23 @@ return [
             'provider' => 'users',
             'hash' => false,
         ],
+        //đây là đoạn mình thêm vào dùng để xác thực
+        'student' => [
+            'driver' => 'session',
+            'provider' => 'student',
+        ],
+        'student-api' => [
+            'driver' => 'token',
+            'provider' => 'student',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admin',
+        ],
+        'admin-api' => [
+            'driver' => 'token',
+            'provider' => 'admin',
+        ],
     ],
 
     /*
@@ -71,10 +88,15 @@ return [
             'model' => App\User::class,
         ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        //truy suất dữ liệu cho bảng
+        'student' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Student::class,
+        ],
+        'admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class,
+        ],
     ],
 
     /*
@@ -95,6 +117,16 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'student' => [
+            'provider' => 'student',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'admin' => [
+            'provider' => 'admin',
             'table' => 'password_resets',
             'expire' => 60,
         ],

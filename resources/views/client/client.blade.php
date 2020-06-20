@@ -5,6 +5,7 @@
 
 <body data-spy="scroll">
     @include('client.template.navbar')
+    @include('client.template.error')
 
     @yield('content')
 

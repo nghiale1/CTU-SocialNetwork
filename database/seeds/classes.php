@@ -20,7 +20,7 @@ class classes extends Seeder
             foreach($course as $value){
 
                 // tạo theo lớp
-                $j=rand(1,3);
+                $j=rand(1,2);
                 for($i=1;$i<=$j;$i++){
     
                     DB::table('youth_branchs')->insert([
