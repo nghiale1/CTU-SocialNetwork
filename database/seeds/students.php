@@ -13,25 +13,24 @@ class students extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        $dem=10000;
-        $yb=DB::table('youth_branchs')->get();
-        foreach($yb as $item){
-            $amount_class=rand(30,60);
-            $course=substr($item->yb_name,2,4);
+        $dem=1600000;
+        for($i=1;$i<=557;$i++){
+            // lớp từ 10 đến 20 sv
+            $amount_class=rand(10,20);
 
             for($j=1;$j<=$amount_class;$j++){
                 $dem++;
                 DB::table('students')->insert([
                     [
-                        'username'=>'B'.$course.$dem,
+                        'username'=>'B'.$dem,
                         'password'=>\Hash::make('ctu'),
                         'stu_name'=>$faker->name,
                         'stu_avatar'=>'/img/avatar.jpg',
                         'stu_birth'=>$faker->date,
-                        'stu_code'=>'B'.$course.$dem,
+                        'stu_code'=>'B'.$dem,
                         'stu_address'=>$faker->address,
                         'stu_gmail'=>$faker->unique()->safeEmail,
-                        'yb_id'=>$item->yb_id
+                        'yb_id'=>$i
                     ],
                 ]);
             }
