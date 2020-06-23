@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('p_slug')->index();
             $table->string('p_title');
             $table->string('p_content');
-            $table->string('p_view_count');
+            $table->string('p_view_count')->default(0);
             $table->timestamp('p_created')
             ->default(DB::raw('CURRENT_TIMESTAMP'));
 

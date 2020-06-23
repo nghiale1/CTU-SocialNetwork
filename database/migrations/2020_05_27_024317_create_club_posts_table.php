@@ -19,7 +19,7 @@ class CreateClubPostsTable extends Migration
             $table->string('cp_avatar');
             $table->string('cp_title');
             $table->string('cp_content');
-            $table->string('cp_view_count');
+            $table->string('cp_view_count')->default(0);
             $table->timestamp('cp_created')
             ->default(DB::raw('CURRENT_TIMESTAMP'));
 
