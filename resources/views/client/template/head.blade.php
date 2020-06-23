@@ -30,5 +30,19 @@
             margin-top: -15px;
             height: 55px;
         }
+
+        .borderless td {
+            border: none !important;
+        }
+
+        .btn-ctu {
+            background-color: #2f9de3;
+            color: white;
+        }
+
+        .text-right td {
+            text-align: right;
+        }
     </style>
+    @stack('css')
 </head>

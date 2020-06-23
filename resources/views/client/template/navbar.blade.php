@@ -9,7 +9,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href=""><img src="{{asset('client/images/logo-ctu.png')}}" alt="company logo" /></a>
+            <a class="navbar-brand" href="{{route('forum')}}"><img src="{{asset('client/images/logo-ctu.png')}}"
+                    alt="company logo" /></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 

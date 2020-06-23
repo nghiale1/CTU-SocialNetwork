@@ -4,12 +4,15 @@
 @include('client.template.head')
 
 <body data-spy="scroll">
-    @include('client.template.navbar')
-    @include('client.template.error')
+    <div id="app">
 
-    @yield('content')
+        @include('client.template.navbar')
+        @include('client.template.error')
 
-    @include('client.template.footer')
+        @yield('content')
+
+        @include('client.template.footer')
+    </div>
     @include('client.template.script')
 </body>
 
