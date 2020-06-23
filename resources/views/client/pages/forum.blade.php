@@ -2,20 +2,22 @@
 
 {{-- Thêm khúc này để có trang tiêu đề nha --}}
 @section('title')
-    Trang chủ
+Hỏi đáp
 @endsection
 
 @section('content')
 <!-- Page Content -->
 <section class="container blog">
     <div class="row">
-
         <!-- Blog Column -->
         <div class="col-md-8">
             <h1 class="page-header sidebar-title">
                 Hỏi đáp
+                <span style="float: right"><button class="btn btn-ctu"
+                        onclick="window.location.href='{{route('question.create')}}'"> Thêm câu hỏi</button> </span>
             </h1>
-            <!-- First Blog Post -->
+            <!--
+                        First Blog Post -->
             <div class="row blogu">
                 <div class="col-sm-4 col-md-4 ">
                     <div class="blog-thumb">
@@ -25,19 +27,25 @@
                     </div>
                 </div>
                 <div class="col-sm-8 col-md-8">
+                    @foreach ($blog as $item)
+
                     <h2 class="blog-title">
-                        <a href="single-post.html">BI thi gì vậy mấy bạn?</a>
+                        <a href="single-post.html">{{$item->p_title}}</a>
                     </h2>
                     <p>
-                        <i class="fa fa-thumbs-o-up" aria-hidden="true">5 likes</i>
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true"> 5 likes</i>
                         <span class="comments-padding"></span>
                         <i class="fa fa-comment"></i> 0 comments
                         <span class="comments-padding"></span>
-                        <i class="fa fa-thumbs-o-down" aria-hidden="true">5 dislikes</i>
+                        <i class="fa fa-thumbs-o-down" aria-hidden="true"> 5 dislikes</i>
                         <span class="comments-padding"></span>
+                        <i class="fa fa-eye" aria-hidden="true"></i> 5 watches</i>
+                        <br>
                         <i class="fa fa-calendar-o"></i> August 28, 2013
                     </p>
-                    <p>Mọi người cho mình hỏi môn BI thầy nghe thi đề gì vậy</p>
+
+                    @endforeach
+                    {!!$blog->links()!!}
                 </div>
             </div>
             <hr>
@@ -85,7 +93,8 @@
                         <i class="fa fa-comment"></i> 1 comment
                     </p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi
+                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum
+                        dicta id animi
                         corrupti debitis ipsum officiis rerum.</p>
                 </div>
             </div>
@@ -108,7 +117,8 @@
                         <i class="fa fa-comment"></i> 3 comments
                     </p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi
+                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum
+                        dicta id animi
                         corrupti debitis ipsum officiis rerum.</p>
                 </div>
             </div>
@@ -132,7 +142,8 @@
                         <i class="fa fa-comment"></i> 3 comments
                     </p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi
+                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum
+                        dicta id animi
                         corrupti debitis ipsum officiis rerum.</p>
                 </div>
             </div>
@@ -156,7 +167,8 @@
                         <i class="fa fa-comment"></i> 3 comments
                     </p>
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum dicta id animi
+                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum
+                        dicta id animi
                         corrupti debitis ipsum officiis rerum.</p>
                 </div>
             </div>
@@ -272,3 +284,9 @@
     </div>
 </section>
 @endsection
+@push('scrip')
+<script>
+    var myContent = tinymce.get('#te').getContent({format: 'text'});
+document.getElementById('pla').innerHTML=myContent;
+</script>
+@endpush
