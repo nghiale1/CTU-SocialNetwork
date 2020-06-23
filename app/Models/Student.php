@@ -128,4 +128,8 @@ class Student extends Authenticatable
 	{
 		return $this->hasMany(UnionPost::class, 'stu_id');
 	}
+
+	public function message() {
+        return $this->hasMany(Messsage::class,'mess_id');
+    }
 }
