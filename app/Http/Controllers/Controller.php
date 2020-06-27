@@ -6,9 +6,30 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-
+use Carbon\Carbon;
 class Controller extends BaseController
 {
+    // lấy thời gian hiện tạo
+    public static function now(){
+        Carbon::setlocale('vi');
+        return $now = Carbon::now();
+        
+    }
+    // tính ngày đã đăng quá 10 ngày chưa
+    public function diffInDays($create){
+        $ten_day=Carbon::parse($create)->diffInDays($this->now());
+        if($ten_day>10){
+            return false;
+        }
+        return true;
+        
+    }
+    // format định dạng ngày tháng năm
+    public function format_date($date)
+    {
+        return date('d-m-Y',strtotime($date));
+    }
+    // chuyển chuỗi thành slug
     public static function sanitize($title) {
         $replacement = '-';
         $map = array();

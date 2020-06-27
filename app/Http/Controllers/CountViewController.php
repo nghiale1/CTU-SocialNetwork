@@ -1,0 +1,83 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use DB;
+class CountViewController extends Controller
+{
+    public function increase_post($check,$p_id)
+    {
+        DB::raw("");
+        DB::table('posts')
+        ->where('p_id',$p_id)
+        ->update([
+            'p_view_count'=>DB::raw( 'p_view_count +1' )
+        ]);
+
+    }
+    public function increase_union($check,$up_id)
+    {
+        
+        DB::table('union_posts')
+        ->where('up_id',$up_id)
+        ->update([
+            'up_view_count'=>DB::raw( 'up_view_count +1' )
+        ]);
+
+    }
+    public function increase_club($check,$cp_id)
+    {
+        
+        DB::table('club_posts')
+        ->where('cp_id',$cp_id)
+        ->update([
+            'cp_view_count'=>DB::raw( 'cp_view_count +1' )
+        ]);
+
+    }
+    public function check($p_id,$up_id,$cp_id)
+    {
+        $id=\Auth::id();
+        if($p_id){
+
+            $check=DB::table('count_view_posts')->where('p_id',$p_id)
+            ->first();
+            if(!$check){
+                DB::table('count_view_posts')
+                ->insert([
+                    'stu_id'=>$id,
+                    'p_id'=>$p_id
+                ]);
+                $this->increase_post($check,$p_id);
+            }
+        }
+        elseif($up_id){
+
+            $check=DB::table('count_view_unions')->where('up_id',$up_id)
+            ->first();
+            if(!$check){
+                DB::table('count_view_unions')
+                ->insert([
+                    'stu_id'=>$id,
+                    'up_id'=>$up_id
+                ]);
+                $this->increase_union($check,$up_id);
+            }
+        }
+        elseif($cp_id){
+
+            $check=DB::table('count_view_clubs')->where('cp_id',$cp_id)
+            ->first();
+            if(!$check){
+                DB::table('count_view_clubs')
+                ->insert([
+                    'stu_id'=>$id,
+                    'p_id'=>$cp_id
+                ]);
+                $this->increase_club($check,$cp_id);
+            }
+        }
+    }
+    
+}

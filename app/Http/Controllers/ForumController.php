@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DB;
+use Carbon\Carbon;
+use App\Http\Controllers\CountViewController;
 
 class ForumController extends Controller
 {
@@ -24,7 +27,7 @@ class ForumController extends Controller
         $blog=$blog->paginate(10);
         // dd($blog);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.forum',compact('subject','blog'));
+        return view('client.pages.forum.forum',compact('subject','blog'));
     }
 
     /**
@@ -44,9 +47,26 @@ class ForumController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$slug)
     {
-        //
+        // dd(\Sec)
+        $post=DB::table('posts as p')
+        ->join('students as s','s.stu_id','p.stu_id')
+        ->where('p_slug',$slug)
+        ->first();
+        $now=$this->now();  
+        $ten_day=$this->diffInDays($post->p_created);
+        if($ten_day){
+
+            $post->p_created=Carbon::parse($post->p_created)->diffForHumans($now);
+        }
+        else{
+            $post->p_created=$this->format_date($post->p_created);
+        }
+        // đếm lượt xem
+        app(\App\Http\Controllers\CountViewController::class)->check($post->p_id,false,false);
+        
+        return view('client.pages.forum.single',compact('post'));
     }
 
     /**

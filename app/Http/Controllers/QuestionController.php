@@ -31,7 +31,7 @@ class QuestionController extends Controller
     public function create()
     {
         $subject=$this->getSubjectsStudent();
-        return view('client.pages.question',compact('subject'));
+        return view('client.pages.forum.question',compact('subject'));
     }
     /**
      * Store a newly created resource in storage.
@@ -47,7 +47,7 @@ class QuestionController extends Controller
         \DB::table('posts')->insert([
             'stu_id'=>\Auth::id(),
             'sub_id'=>$request->subject,
-            'p_slug'=>$title.'.'.$request->subject.'&'.$id,//kết hợp id môn và id bài viết
+            'p_slug'=>$title.'.'.$request->subject.'&'.($id+1),//kết hợp id môn và id bài viết
             'p_title'=>$request->title,
             'p_content'=>$request->content,
         ]);
