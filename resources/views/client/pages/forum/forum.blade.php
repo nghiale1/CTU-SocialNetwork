@@ -19,18 +19,11 @@ Hỏi đáp
             <!--
                         First Blog Post -->
             <div class="row blogu">
-                <div class="col-sm-4 col-md-4 ">
-                    <div class="blog-thumb">
-                        <a href="single-post.html">
-                            <img class="img-responsive" src="{{asset('client/images/blog-photo1.jpg')}}" alt="photo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-8">
+                <div class="col-sm-12 col-md-12">
                     @foreach ($blog as $item)
 
                     <h2 class="blog-title">
-                        <a href="single-post.html">{{$item->p_title}}</a>
+                        <a href="{{route('forum.show',$item->p_slug)}}">{{$item->p_title}}</a>
                     </h2>
                     <p>
                         <i class="fa fa-thumbs-o-up" aria-hidden="true"> 5 likes</i>
@@ -40,142 +33,18 @@ Hỏi đáp
                         <i class="fa fa-thumbs-o-down" aria-hidden="true"> 5 dislikes</i>
                         <span class="comments-padding"></span>
                         <i class="fa fa-eye" aria-hidden="true"></i> 5 watches</i>
-                        <br>
+                        <span class="comments-padding"></span>
                         <i class="fa fa-calendar-o"></i> August 28, 2013
                     </p>
 
+                    <hr>
                     @endforeach
                     {!!$blog->links()!!}
                 </div>
             </div>
-            <hr>
-            <!-- Second Blog Post -->
-            <div class="row">
-                <div class="col-sm-4 col-md-4">
-                    <div class="blog-thumb">
-                        <a href="single-post.html">
-                            <img class="img-responsive" src="{{asset('client/images/blog-photo2.jpg')}}" alt="photo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <h2 class="blog-title">
-                        <a href="single-post.html">Có ai báo cáo tmdt chưa?</a>
-                    </h2>
-                    <p>
-                        <i class="fa fa-thumbs-o-up" aria-hidden="true">5 likes</i>
-                        <span class="comments-padding"></span>
-                        <i class="fa fa-comment"></i> 0 comments
-                        <span class="comments-padding"></span>
-                        <i class="fa fa-thumbs-o-down" aria-hidden="true">5 dislikes</i>
-                        <span class="comments-padding"></span>
-                        <i class="fa fa-calendar-o"></i> August 28, 2013
-                    </p>
-                    <p>Cho hỏi tmdt nào báo cáo dạ</p>
-                </div>
-            </div>
-            <hr>
-            <!-- Third Blog Post -->
-            <div class="row">
-                <div class="col-sm-4 col-md-4">
-                    <div class="blog-thumb">
-                        <a href="single-post.html">
-                            <img class="img-responsive" src="{{asset('client/images/blog-photo3.jpg')}}" alt="photo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <h2 class="blog-title">
-                        <a href="single-post.html">Post title 3</a>
-                    </h2>
-                    <p><i class="fa fa-calendar-o"></i> August 28, 2013
-                        <span class="comments-padding"></span>
-                        <i class="fa fa-comment"></i> 1 comment
-                    </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum
-                        dicta id animi
-                        corrupti debitis ipsum officiis rerum.</p>
-                </div>
-            </div>
-            <hr>
-            <!-- Fourth Blog Post -->
-            <div class="row">
-                <div class="col-sm-4 col-md-4">
-                    <div class="blog-thumb">
-                        <a href="single-post.html">
-                            <img class="img-responsive" src="{{asset('client/images/blog-photo1.jpg')}}" alt="photo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <h2 class="blog-title">
-                        <a href="single-post.html">Post title 4</a>
-                    </h2>
-                    <p><i class="fa fa-calendar-o"></i> August 28, 2013
-                        <span class="comments-padding"></span>
-                        <i class="fa fa-comment"></i> 3 comments
-                    </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum
-                        dicta id animi
-                        corrupti debitis ipsum officiis rerum.</p>
-                </div>
-            </div>
-
-            <hr>
-            <!-- Fifth Blog Post -->
-            <div class="row">
-                <div class="col-sm-4 col-md-4">
-                    <div class="blog-thumb">
-                        <a href="single-post.html">
-                            <img class="img-responsive" src="{{asset('client/images/blog-photo2.jpg')}}" alt="photo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <h2 class="blog-title">
-                        <a href="single-post.html">Post title 5</a>
-                    </h2>
-                    <p><i class="fa fa-calendar-o"></i> August 28, 2013
-                        <span class="comments-padding"></span>
-                        <i class="fa fa-comment"></i> 3 comments
-                    </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum
-                        dicta id animi
-                        corrupti debitis ipsum officiis rerum.</p>
-                </div>
-            </div>
-
-            <hr>
-            <!-- Six Blog Post -->
-            <div class="row">
-                <div class="col-sm-4 col-md-4">
-                    <div class="blog-thumb">
-                        <a href="single-post.html">
-                            <img class="img-responsive" src="{{asset('client/images/blog-photo3.jpg')}}" alt="photo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-8">
-                    <h2 class="blog-title">
-                        <a href="single-post.html">Post title 6</a>
-                    </h2>
-                    <p><i class="fa fa-calendar-o"></i> August 28, 2013
-                        <span class="comments-padding"></span>
-                        <i class="fa fa-comment"></i> 3 comments
-                    </p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolore, veritatis, tempora,
-                        necessitatibus inventore nisi quam quia repellat ut tempore laborum possimus eum
-                        dicta id animi
-                        corrupti debitis ipsum officiis rerum.</p>
-                </div>
-            </div>
 
 
 
-            <hr>
             <div class="text-center">
                 <ul class="pagination">
                     <li class="active"> <a href="#">1</a> </li>
@@ -189,6 +58,10 @@ Hỏi đáp
         </div>
         <!-- Blog Sidebar Column -->
         <aside class="col-md-4 sidebar-padding">
+            <div id="app">
+                <chat-layout></chat-layout>
+            </div>
+            <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
             <div class="blog-sidebar">
                 <div class="input-group searchbar">
                     <input type="text" class="form-control searchbar" placeholder="Search for...">
