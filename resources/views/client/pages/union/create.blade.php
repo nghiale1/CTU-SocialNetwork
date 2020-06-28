@@ -4,32 +4,38 @@
 @section('title')
 Đặt câu hỏi
 @endsection
-
+@push('css')
+<style>
+</style>
+@endpush
 @section('content')
 <!-- Page Content -->
 <section class="container blog">
     <div class="row">
         <div class="col-md-8">
-            <form action="" method="post">
+            <form action="{{route('union.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
+                <input type="hidden" name="union" value="{{$union->ub_id}}">
                 <table class="table table-responsive borderless text-right">
                     <tr>
-                        <td style="white-space: nowrap;">Môn học
+                        <td>Chọn ảnh<red-star></red-star>
                         </td>
-                        <td>
-                            <select name="subject" id="" class="form-control" style="color: #555;">
-                                @foreach ($subject as $item)
+                        <td><img id="image" alt="Chọn hình đại diện" style="max-height: 185px;
+                            float: left;
+                            width: 230px;" src="https://via.placeholder.com/230x185" />
 
-                                <option value="{{$item->sub_id}}">{{$item->sub_name}}</option>
-                                @endforeach
-                            </select>
-                            <br>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><label for="avatar" style="float: left">Chọn ảnh đại diện của tin...</label>
+                            <input type="file" name="avatar" id="avatar" accept="image/*" style="display:none;"
+                                onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])">
                         </td>
                     </tr>
                     <tr>
                         <td style="white-space: nowrap;">Tiêu đề <red-star></red-star>
                         </td>
-                        <td><input type="text" class="form-control" name="title">
+                        <td><input type="text" class="form-control" name="title" required>
                             <br></td>
                     </tr>
                     <br>
@@ -44,7 +50,7 @@
                     <tr>
                         <td></td>
                         <td style="text-align: left">
-                            <button type="submit" class="btn btn-ctu">Gửi bài lên diễn đàn</button>
+                            <button type="submit" class="btn btn-ctu">Đăng bài</button>
                         </td>
                     </tr>
                 </table>

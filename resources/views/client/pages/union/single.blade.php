@@ -17,24 +17,22 @@ Chi tiết bài viết
 <div class="container blog singlepost">
     <div class="row">
         <article class="col-md-8">
-            <h1 class="page-header sidebar-title">{{$post->p_title}}</h1>
+            <h1 class="page-header sidebar-title">{{$post->up_title}}</h1>
             {{-- <img src="{{asset('client/images/unsplash1.jpg')}}" class="img-responsive" alt="photo" /> --}}
             {{-- <hr> --}}
             <div class="row">
                 <div class="col-md-12">
                     <div class="entry-meta">
-                        <span><i class="fa fa-calendar-o"></i> {{$post->p_created}}</span>
-                        <span><i class="fa fa-user"></i> Bởi <a href="#">{{$post->stu_name}}</a></span>
+                        <span><i class="fa fa-calendar-o"></i> {{$post->up_created}}</span>
+                        <span><i class="fa fa-user"></i> Bởi {{$post->sub_role}} -<a href="#">
+                                {{$post->stu_name}}</a></span>
                         <div class="pull-right">
-                            <span><i class="fa fa-eye"></i> 184</span>
-                            <span> <i class="fa fa-thumbs-up" aria-hidden="true"></i>20</a></span>
-                            <span> <i class="fa fa-thumbs-down" aria-hidden="true"></i> 2</a></span>
-                            <span><i class="fa fa-comment"></i> 4</span>
+                            <span><i class="fa fa-eye"></i> {{$post->up_view_count}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <p>{!!$post->p_content!!}</p>
+            <p>{!!$post->up_content!!}</p>
 
             {{-- <div class="mysharing">
                 <!-- Twitter -->
@@ -51,59 +49,6 @@ Chi tiết bài viết
                     class="btn btn-linkedin"><i class="fa fa-linkedin"></i> LinkedIn</a>
             </div> --}}
 
-            <!-- Blog Comments -->
-            <div class="comments1">
-                <div class="well">
-                    <h4>Bình luận:</h4>
-                    <form>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Gửi</button>
-                    </form>
-                </div>
-                <hr>
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="{{asset('client/images/avatar1.png')}}" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Author Name
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
-                        commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum
-                        nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="{{asset('client/images/avatar1.png')}}" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Author Name
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin
-                        commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum
-                        nunc ac nisi vulputate fringilla.
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{asset('client/images/avatar1.png')}}" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Author Name
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-                                sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra
-                                turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis
-                                in faucibus.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </article>
         <!-- Blog Sidebar Column -->
         <aside class="col-md-4 sidebar-padding">
@@ -176,27 +121,6 @@ Chi tiết bài viết
                 </div>
             </div>
 
-            <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-comments"></i> Recent Comments</h4>
-                <hr style="margin-bottom: 5px;">
-                <ul class="sidebar-list">
-                    <li>
-                        <h5 class="blog-title">Author Name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore</p>
-                    </li>
-                    <li>
-                        <h5 class="blog-title">Author Name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore</p>
-                    </li>
-                    <li>
-                        <h5 class="blog-title">Author Name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore</p>
-                    </li>
-                </ul>
-            </div>
 
         </aside>
     </div>

@@ -29,13 +29,22 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/them-cau-hoi', 'QuestionController@store')->name('question.store');
     });
     Route::group(['prefix' => 'chia-se'], function () {
-        
+        Route::get('/', 'ClubController@index')->name('share');
+        Route::get('/bai-viet/{slug}', 'ClubController@show')->name('share.show');
+        Route::get('/them-bai-viet', 'ClubController@create')->name('share.create');
+        Route::post('/them-bai-viet', 'ClubController@store')->name('share.store');
     });
     Route::group(['prefix' => 'cau-lac-bo'], function () {
-        
+        Route::get('/', 'ClubController@index')->name('club');
+        Route::get('/bai-viet/{slug}', 'ClubController@show')->name('club.show');
+        Route::get('/them-bai-viet', 'ClubController@create')->name('club.create');
+        Route::post('/them-bai-viet', 'ClubController@store')->name('club.store');
     });
     Route::group(['prefix' => 'doan-hoi'], function () {
-        
+        Route::get('/', 'UnionController@index')->name('union');
+        Route::get('/bai-viet/{slug}', 'UnionController@show')->name('union.show');
+        Route::get('/them-bai-viet', 'UnionController@create')->name('union.create');
+        Route::post('/them-bai-viet', 'UnionController@store')->name('union.store');
     });
     Route::group(['prefix' => 'tai-khoan'], function () {
         

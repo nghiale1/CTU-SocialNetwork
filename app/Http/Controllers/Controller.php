@@ -60,5 +60,11 @@ class Controller extends BaseController
         $map = array_merge($map, $default);
         return strtolower(preg_replace(array_keys($map), array_values($map), $title));
     }   
+    public static function getUnionStudent()
+    {
+        $id=\Auth::user()->students_ubs;
+        
+        return $id;
+    }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

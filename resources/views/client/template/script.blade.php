@@ -5,10 +5,14 @@
 <script src="{{asset('vendor/tinymce/js/tinymce/tinymce.min.js')}}"></script>
 <script src="{{asset('vendor/tinymce/langs/vi.js')}}"></script>
 <script src="{{asset('vendor/vuejs/vue.js')}}"></script>
+<!-- Axios -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!-- VueJs -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
 {{-- dấu * màu đỏ --}}
 <script>
-    Vue.component('star-red', {
+    Vue.component('red-star', {
     template: '<span style="color: red">*</span>',
 });
 </script>
@@ -40,7 +44,6 @@
         contextmenu: "link image imagetools table",
         });
 </script>
-
 
 <!--Jquery Smooth Scrolling-->
 <script>
@@ -85,5 +88,21 @@
                 });
 
             });
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    var elements = document.getElementsByTagName("INPUT");
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].oninvalid = function(e) {
+            e.target.setCustomValidity("");
+            if (!e.target.validity.valid) {
+                e.target.setCustomValidity("Vui lòng nhập đầy đủ thông tin");
+            }
+        };
+        elements[i].oninput = function(e) {
+            e.target.setCustomValidity("");
+        };
+    }
+})
 </script>
 @stack('script')

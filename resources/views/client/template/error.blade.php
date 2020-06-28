@@ -1,3 +1,7 @@
+<div class="alert alert-success" role="alert">
+    <p>123</p>
+    <p class="mb-0"></p>
+</div>
 @if($message = Session::get('success'))
 <div class="alert alert-success" role="alert">
     <p>{{$message}}</p>

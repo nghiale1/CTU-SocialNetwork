@@ -39,6 +39,7 @@ class CountViewController extends Controller
     public function check($p_id,$up_id,$cp_id)
     {
         $id=\Auth::id();
+        //nếu là xem bài trong diễn đàn
         if($p_id){
 
             $check=DB::table('count_view_posts')->where('p_id',$p_id)
@@ -52,6 +53,7 @@ class CountViewController extends Controller
                 $this->increase_post($check,$p_id);
             }
         }
+        //nếu là xem bài trong chi hội
         elseif($up_id){
 
             $check=DB::table('count_view_unions')->where('up_id',$up_id)
@@ -65,6 +67,7 @@ class CountViewController extends Controller
                 $this->increase_union($check,$up_id);
             }
         }
+        //nếu là xem bài trong club
         elseif($cp_id){
 
             $check=DB::table('count_view_clubs')->where('cp_id',$cp_id)

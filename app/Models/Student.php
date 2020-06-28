@@ -130,5 +130,14 @@ class Student extends Authenticatable
 	}
 	public function message() {
         return $this->hasMany('App\Models\Message');
-    }
+	}
+	public function students_uos()
+	{
+		return $this->hasMany(StudentsUo::class, 'stu_id');
+	}
+	public function subjects()
+	{
+		return $this->belongsToMany(Subject::class, 'subjects_student', 'stu_id', 'sub_id');
+	}
+
 }
