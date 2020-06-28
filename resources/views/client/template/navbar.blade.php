@@ -13,13 +13,16 @@
                     alt="company logo" /></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
             <ul class="nav navbar-nav navbar-right custom-menu">
-                <li class="active"><a href="">Học tập</a></li>
-                <li><a href="">Chia sẻ</a></li>
-                <li><a href="">Câu lạc bộ</a></li>
-                <li><a href="">Đoàn, Hội</a></li>
-                <li class="nav-item dropdown">
+                <li @if (Request::segment(1)=='hoc-tap' ) class='active' @endif>
+                    <a href="{{route('forum')}}">Học tập</a></li>
+                <li @if (Request::segment(1)=='chia-se' ) class='active' @endif>
+                    <a href="{{route('share')}}">Chia sẻ</a></li>
+                <li @if (Request::segment(1)=='cau-lac-bo' ) class='active' @endif>
+                    <a href="{{route('club')}}">Câu lạc bộ</a></li>
+                <li @if (Request::segment(1)=='doan-hoi' ) class='active' @endif>
+                    <a href="{{route('union')}}">Đoàn, Hội</a></li>
+                <li class="nav-item dropdown @if (Request::segment(1)=='tai-khoan') active @endif">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Tài khoản

@@ -76,7 +76,7 @@ class CountViewController extends Controller
                 DB::table('count_view_clubs')
                 ->insert([
                     'stu_id'=>$id,
-                    'p_id'=>$cp_id
+                    'cp_id'=>$cp_id
                 ]);
                 $this->increase_club($check,$cp_id);
             }

@@ -66,5 +66,10 @@ class Controller extends BaseController
         
         return $id;
     }
+    public static function getClubStudent()
+    {
+        $id=\Auth::user()->clubs;
+        return $id;
+    }
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }
