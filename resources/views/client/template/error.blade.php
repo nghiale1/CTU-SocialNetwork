@@ -1,18 +1,12 @@
-<div class="alert alert-success" role="alert">
-    <p>123</p>
-    <p class="mb-0"></p>
-</div>
 @if($message = Session::get('success'))
 <div class="alert alert-success" role="alert">
     <p>{{$message}}</p>
-    <p class="mb-0"></p>
 </div>
 @endif
 
 @if($message = Session::get('error'))
 <div class="alert alert-warning" role="alert">
     <p>{{$message}}</p>
-    <p class="mb-0"></p>
 </div>
 @endif
 @if (count($errors) > 0)

@@ -29,10 +29,12 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/them-cau-hoi', 'QuestionController@store')->name('question.store');
     });
     Route::group(['prefix' => 'chia-se'], function () {
-        Route::get('/', 'ClubController@index')->name('share');
-        Route::get('/bai-viet/{slug}', 'ClubController@show')->name('share.show');
-        Route::get('/them-bai-viet', 'ClubController@create')->name('share.create');
-        Route::post('/them-bai-viet', 'ClubController@store')->name('share.store');
+        Route::get('/', 'ShareController@index')->name('share');
+        Route::get('/bai-viet/{slug}', 'ShareController@show')->name('share.show');
+        Route::get('/them-bai-viet', 'ShareController@create')->name('share.create');
+        Route::post('/them-bai-viet', 'ShareController@store')->name('share.store');
+        Route::get('/{slug}', 'ShareController@list')->name('share.list');
+        
     });
     Route::group(['prefix' => 'cau-lac-bo'], function () {
         Route::get('/', 'ClubController@index')->name('club');

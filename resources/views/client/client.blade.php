@@ -7,10 +7,12 @@
     <div id="app">
 
         @include('client.template.navbar')
-        @include('client.template.error')
-
-        @yield('content')
-
+        <!-- Page Content -->
+        <section class="container blog">
+            @include('client.template.error')
+            @yield('breadcrumb')
+            @yield('content')
+        </section>
         @include('client.template.footer')
     </div>
     @include('client.template.script')

@@ -43,6 +43,24 @@
         .text-right td {
             text-align: right;
         }
+
+        .alert {
+            padding: 0px;
+            padding-left: 15px;
+        }
+
+        .alert p {
+            display: table-cell;
+            padding: 5px 0;
+            vertical-align: middle;
+        }
+
+        ul.brcmp {
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+            font-size: 20px;
+        }
     </style>
     @stack('css')
 </head>

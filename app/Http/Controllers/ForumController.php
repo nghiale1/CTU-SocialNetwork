@@ -64,7 +64,7 @@ class ForumController extends Controller
             $post->p_created=$this->format_date($post->p_created);
         }
         // đếm lượt xem
-        app(\App\Http\Controllers\CountViewController::class)->check($post->p_id,false,false);
+        app(\App\Http\Controllers\CountViewController::class)->check($post->p_id,false,false,false);
         
         return view('client.pages.forum.single',compact('post'));
     }

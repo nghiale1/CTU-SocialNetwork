@@ -101,7 +101,7 @@ class UnionController extends Controller
             $post->up_created=$this->format_date($post->up_created);
         }
         // đếm lượt xem
-        app(\App\Http\Controllers\CountViewController::class)->check(false,$post->up_id,false);
+        app(\App\Http\Controllers\CountViewController::class)->check(false,$post->up_id,false,false);
         
         return view('client.pages.union.single',compact('post'));
     }

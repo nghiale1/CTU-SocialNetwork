@@ -36,7 +36,17 @@ class CountViewController extends Controller
         ]);
 
     }
-    public function check($p_id,$up_id,$cp_id)
+    public function increase_item($check,$item_id)
+    {
+        
+        DB::table('items')
+        ->where('item_id',$item_id)
+        ->update([
+            'item_view_count'=>DB::raw( 'item_view_count +1' )
+        ]);
+
+    }
+    public function check($p_id,$up_id,$cp_id,$item_id)
     {
         $id=\Auth::id();
         //nếu là xem bài trong diễn đàn
@@ -79,6 +89,20 @@ class CountViewController extends Controller
                     'cp_id'=>$cp_id
                 ]);
                 $this->increase_club($check,$cp_id);
+            }
+        }
+        //nếu là xem bài trong chia sẻ
+        elseif($item_id){
+
+            $check=DB::table('count_view_items')->where('item_id',$item_id)
+            ->first();
+            if(!$check){
+                DB::table('count_view_items')
+                ->insert([
+                    'stu_id'=>$id,
+                    'item_id'=>$item_id
+                ]);
+                $this->increase_item($check,$item_id);
             }
         }
     }

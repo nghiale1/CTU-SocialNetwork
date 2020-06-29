@@ -101,7 +101,7 @@ class ClubController extends Controller
             $post->cp_created=$this->format_date($post->cp_created);
         }
         // đếm lượt xem
-        app(\App\Http\Controllers\CountViewController::class)->check(false,false,$post->cp_id);
+        app(\App\Http\Controllers\CountViewController::class)->check(false,false,$post->cp_id,false);
         
         return view('client.pages.club.single',compact('post'));
     }
