@@ -24,6 +24,18 @@ class Controller extends BaseController
         return true;
         
     }
+    public function getDay($time,$create)
+    {
+        $ten_day=$this->diffInDays($create);
+        if($ten_day){
+
+            return $day[$time]=Carbon::parse($create)->diffForHumans();
+        }
+        else{
+            return $day[$time]=$this->format_date($create);
+        }
+    }
+    
     // format định dạng ngày tháng năm
     public function format_date($date)
     {

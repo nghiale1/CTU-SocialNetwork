@@ -34,7 +34,7 @@ Câu lạc bộ
                 </h2>
                 <p>
 
-                    <i class="fa fa-calendar-o"></i> {{$item->cp_created}}
+                    <i class="fa fa-calendar-o"></i> {{$day[$item->cp_id]}}
                     <span class="comments-padding"></span>
                     <i class="fa fa-eye" aria-hidden="true"></i> {{$item->cp_view_count}}</i>
                 </p>

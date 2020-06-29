@@ -23,20 +23,14 @@ class UnionController extends Controller
             ->where('ub_id',$union[0]->ub_id)
             ->paginate(10);
             $now=$this->now();  
-
+            $day[]='';
 
             foreach($blog as $item)
-            if($this->diffInDays($item->up_created)){
-
-                $item->up_created=Carbon::parse($item->up_created)->diffForHumans($now);
-            }
-            else{
-                $item->up_created=$this->format_date($item->up_created);
-            }
+            $day[$item->up_id]=$this->getDay($item->up_id,$item->up_created);
         }
         // dd($blog);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.union.index',compact('union','blog'));
+        return view('client.pages.union.index',compact('union','blog','day'));
     }
 
     /**
@@ -91,19 +85,15 @@ class UnionController extends Controller
         ->join('students as s','s.stu_id','p.stu_id')
         ->where('up_slug',$slug)
         ->first();
-        $now=$this->now();  
-        $ten_day=$this->diffInDays($post->up_created);
-        if($ten_day){
+        $day='';
+        if($post){
 
-            $post->up_created=Carbon::parse($post->up_created)->diffForHumans($now);
-        }
-        else{
-            $post->up_created=$this->format_date($post->up_created);
+            $day=$this->getDay($post->up_id,$post->up_created);
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,$post->up_id,false,false);
         
-        return view('client.pages.union.single',compact('post'));
+        return view('client.pages.union.single',compact('post','day'));
     }
 
     /**

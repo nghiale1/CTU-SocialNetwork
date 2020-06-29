@@ -16,7 +16,13 @@ class ShareController extends Controller
     public function index()
     {
        $share=Item::paginate(10);
-       return view('client.pages.share.index',compact('share'));
+        $day[]='';
+
+        foreach($share as $item){
+
+            $day[$item->item_id]=$this->getDay($item->item_id,$item->item_created);
+        }
+       return view('client.pages.share.index',compact('share','day'));
     }
 
     /**
@@ -78,20 +84,14 @@ class ShareController extends Controller
         ->join('types','types.type_id','p.type_id')
         ->where('item_slug',$slug)
         ->first();
-        // dd($post->type)
-        $now=$this->now();  
-        $ten_day=$this->diffInDays($post->item_created);
-        if($ten_day){
-
-            $post->item_created=Carbon::parse($post->item_created)->diffForHumans($now);
-        }
-        else{
-            $post->item_created=$this->format_date($post->item_created);
+        $day='';
+        if($post){
+            $day=$this->getDay($post->item_id,$post->item_created);
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,false,false,$post->item_id);
         
-        return view('client.pages.share.single',compact('post'));
+        return view('client.pages.share.single',compact('post','day'));
     }
 
     /**
@@ -132,6 +132,20 @@ class ShareController extends Controller
         $share=Item::join('types as t','t.type_id','items.type_id')
         ->where('type_slug',$slug)
         ->paginate(10);
-       return view('client.pages.share.index',compact('share'));
+        $now=$this->now();
+        $day[]='';
+
+
+        foreach($share as $item){
+
+            if($this->diffInDays($item->item_created)){
+
+                $day[$item->item_id]=Carbon::parse($item->item_created)->diffForHumans($now);
+            }
+            else{
+                $day[$item->item_id]=$this->format_date($item->item_created);
+            }
+        }
+       return view('client.pages.share.index',compact('share','day'));
     }
 }

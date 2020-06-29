@@ -27,6 +27,9 @@ Chia sẻ
                         <img src="{{asset($item->item_avatar)}}" class="img-responsive card-img-top"
                             alt="{{asset($item->item_avatar)}}">
                     </a>
+                    <span>{{$day[$item->item_id]}}</span>
+                    <span style="float: right"><i class="fa fa-eye" aria-hidden="true"></i>
+                        {{$item->item_view_count}}</i></span>
                     <div class="card-body">
                         <a href="{{route('share.show',$item->item_slug)}}">
                             <h4>{{$item->item_title}}</h4>

@@ -23,7 +23,7 @@ Chi tiết bài viết
             <div class="row">
                 <div class="col-md-12">
                     <div class="entry-meta">
-                        <span><i class="fa fa-calendar-o"></i> {{$post->p_created}}</span>
+                        <span><i class="fa fa-calendar-o"></i> {{$day}}</span>
                         <span><i class="fa fa-user"></i> Bởi <a href="#">{{$post->stu_name}}</a></span>
                         <div class="pull-right">
                             <span><i class="fa fa-eye"></i> 184</span>

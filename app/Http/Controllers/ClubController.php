@@ -17,26 +17,19 @@ class ClubController extends Controller
         //get subject of user
         $club=$this->getClubStudent();
         $blog='';
+        $day[]='';
         if($club->isNotEmpty()){
 
             $blog=\DB::table('club_posts')
             ->where('c_id',$club[0]->c_id)
             ->paginate(10);
-            $now=$this->now();  
-
 
             foreach($blog as $item)
-            if($this->diffInDays($item->cp_created)){
-
-                $item->cp_created=Carbon::parse($item->cp_created)->diffForHumans($now);
-            }
-            else{
-                $item->cp_created=$this->format_date($item->cp_created);
-            }
+                $day[$item->cp_id]=$this->getDay($item->cp_id,$item->cp_created);
         }
         // dd($blog);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.club.index',compact('club','blog'));
+        return view('client.pages.club.index',compact('club','blog','day'));
     }
 
     /**
@@ -91,19 +84,15 @@ class ClubController extends Controller
         ->join('students as s','s.stu_id','p.stu_id')
         ->where('cp_slug',$slug)
         ->first();
-        $now=$this->now();  
-        $ten_day=$this->diffInDays($post->cp_created);
-        if($ten_day){
+        $day='';
+        if($post){
 
-            $post->cp_created=Carbon::parse($post->cp_created)->diffForHumans($now);
-        }
-        else{
-            $post->cp_created=$this->format_date($post->cp_created);
+            $day=$this->getDay($post->cp_id,$post->cp_created);
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,false,$post->cp_id,false);
         
-        return view('client.pages.club.single',compact('post'));
+        return view('client.pages.club.single',compact('post','day'));
     }
 
     /**

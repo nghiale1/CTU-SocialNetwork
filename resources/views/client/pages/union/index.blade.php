@@ -34,7 +34,7 @@
                 </h2>
                 <p>
 
-                    <i class="fa fa-calendar-o"></i> {{$item->up_created}}
+                    <i class="fa fa-calendar-o"></i> {{$day[$item->up_id]}}
                     <span class="comments-padding"></span>
                     <i class="fa fa-eye" aria-hidden="true"></i> {{$item->up_view_count}}</i>
                 </p>

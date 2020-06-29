@@ -54,12 +54,12 @@ Chi tiết bài viết
 <!-- Page Content -->
 <div class="row">
     <article class="col-md-8">
-        <h1 class="page-header sidebar-title">{{$post->item_title}}</h1>
+        <h1 class="sidebar-title">{{$post->item_title}}</h1>
         {{-- <hr> --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="entry-meta">
-                    <span><i class="fa fa-calendar-o"></i> {{$post->item_created}}</span>
+                    <span><i class="fa fa-calendar-o"></i> {{$day}}</span>
                     <span><i class="fa fa-user"></i> Bởi <a href="#">
                             {{$post->stu_name}}</a></span>
                     <div class="pull-right">
@@ -68,6 +68,7 @@ Chi tiết bài viết
                 </div>
             </div>
         </div>
+        <br>
         <img src="{{asset($post->item_avatar)}}" class="img-responsive" alt="photo" />
         <br>
         <table class="table">
