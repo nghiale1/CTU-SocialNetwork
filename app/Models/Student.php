@@ -89,6 +89,11 @@ class Student extends Authenticatable
 		return $this->hasMany(CountViewClub::class, 'stu_id');
 	}
 
+	public function count_view_items()
+	{
+		return $this->hasMany(CountViewItem::class, 'stu_id');
+	}
+
 	public function count_view_posts()
 	{
 		return $this->hasMany(CountViewPost::class, 'stu_id');
@@ -102,6 +107,16 @@ class Student extends Authenticatable
 	public function favourites()
 	{
 		return $this->hasMany(Favourite::class, 'stu_id');
+	}
+
+	public function item_likes()
+	{
+		return $this->hasMany(ItemLike::class, 'stu_id');
+	}
+
+	public function item_reports()
+	{
+		return $this->hasMany(ItemReport::class, 'stu_id');
 	}
 
 	public function items()
