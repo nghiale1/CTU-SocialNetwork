@@ -40,7 +40,7 @@ Chi tiết bài viết
 @section('breadcrumb')
 <ul class="brcmp">
     <li>
-        <a href="">Chia sẻ</a>
+        <a href="{{route('share')}}">Chia sẻ</a>
         <i>|</i>
     </li>
     <li><a href="{{route('share.list',$post->type_slug)}}">

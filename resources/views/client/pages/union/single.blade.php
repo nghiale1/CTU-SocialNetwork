@@ -14,7 +14,7 @@ Chi tiết bài viết
 @section('content')
 
 <!-- Page Content -->
-<div class="container blog singlepost">
+<div class="container singlepost">
     <div class="row">
         <article class="col-md-8">
             <h1 class="page-header sidebar-title">{{$post->up_title}}</h1>
