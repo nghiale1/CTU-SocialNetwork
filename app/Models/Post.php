@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Student $student
  * @property Subject $subject
  * @property Collection|Comment[] $comments
- * @property Collection|Like[] $likes
+ * @property Collection|CountViewPost[] $count_view_posts
  *
  * @package App\Models
  */
@@ -69,8 +69,14 @@ class Post extends Model
 		return $this->hasMany(Comment::class, 'p_id');
 	}
 
-	public function likes()
+	public function count_view_posts()
 	{
-		return $this->hasMany(Like::class, 'p_id');
+		return $this->hasMany(CountViewPost::class, 'p_id');
+	}
+	public function count_like($id)
+	{
+		return \DB::table('posts as p')->join('comments as c','c.com_id','p.p_id')
+		->join('likes as l','l.com_id','c.com_id')
+		->where('p.p_id',$id)->count();
 	}
 }

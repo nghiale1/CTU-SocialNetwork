@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2020 at 07:01 AM
+-- Generation Time: Jun 30, 2020 at 03:52 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.5
 
@@ -142,7 +142,7 @@ CREATE TABLE `club_posts` (
 --
 
 INSERT INTO `club_posts` (`cp_id`, `cp_slug`, `cp_avatar`, `cp_title`, `cp_content`, `cp_view_count`, `cp_created`, `stu_id`, `c_id`) VALUES
-(1, 'an-chay.&1', 'img/club_post/an-chay.&1.png', 'ăn chay', '<p>ăn chay</p>\r\n<p>ăn chay</p>\r\n<p>&nbsp;</p>\r\n<p>ăn chay</p>\r\n<p>ăn chay</p>\r\n<p>&nbsp;</p>\r\n<p>ăn chay</p>\r\n<p>ăn chay</p>', '2', '2020-06-28 14:50:42', 2, 10);
+(1, 'an-chay.&1', 'img/club_post/an-chay.&1.png', 'ăn chay', '<p>ăn chay</p>\r\n<p>ăn chay</p>\r\n<p>&nbsp;</p>\r\n<p>ăn chay</p>\r\n<p>ăn chay</p>\r\n<p>&nbsp;</p>\r\n<p>ăn chay</p>\r\n<p>ăn chay</p>', '4', '2020-06-28 14:50:42', 2, 10);
 
 -- --------------------------------------------------------
 
@@ -2921,7 +2921,8 @@ CREATE TABLE `comments` (
   `com_id` bigint(20) UNSIGNED NOT NULL,
   `com_content` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `com_created` timestamp NOT NULL DEFAULT current_timestamp(),
-  `p_id` bigint(20) UNSIGNED NOT NULL
+  `p_id` bigint(20) UNSIGNED NOT NULL,
+  `stu_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3098,7 +3099,7 @@ CREATE TABLE `items` (
   `item_title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `item_content` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `item_slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `item_view_count` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `item_view_count` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
   `item_avatar` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `item_created` timestamp NOT NULL DEFAULT current_timestamp(),
   `item_deleted` timestamp NULL DEFAULT NULL,
@@ -3111,7 +3112,7 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_name`, `item_price`, `item_phone`, `item_title`, `item_content`, `item_slug`, `item_view_count`, `item_avatar`, `item_created`, `item_deleted`, `stu_id`, `type_id`) VALUES
-(1, 'Nghĩa lê', '0', '0826903960', 'cho cây đàn nè', '<p>cho c&acirc;y đ&agrave;n n&egrave;cho c&acirc;y đ&agrave;n n&egrave;cho c&acirc;y đ&agrave;n n&egrave;cho c&acirc;y đ&agrave;n n&egrave;cho c&acirc;y đ&agrave;n n&egrave;</p>', 'cho-cay-dan-ne.1&1', '', 'img/items/cho-cay-dan-ne.1&1.png', '2020-06-29 03:07:37', NULL, 2, 1);
+(1, 'Nghĩa lê', '0', '0826903960', 'cho cây đàn nè', '<p>cho c&acirc;y đ&agrave;n n&egrave;cho c&acirc;y đ&agrave;n n&egrave;cho c&acirc;y đ&agrave;n n&egrave;cho c&acirc;y đ&agrave;n n&egrave;cho c&acirc;y đ&agrave;n n&egrave;</p>', 'cho-cay-dan-ne.1&1', '1', 'img/items/cho-cay-dan-ne.1&1.png', '2020-06-29 03:07:37', NULL, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -3143,7 +3144,7 @@ CREATE TABLE `item_reports` (
 --
 
 CREATE TABLE `likes` (
-  `p_id` bigint(20) UNSIGNED NOT NULL,
+  `com_id` bigint(20) UNSIGNED NOT NULL,
   `stu_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -3306,14 +3307,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (16, '2020_05_27_024317_create_club_posts_table', 1),
 (17, '2020_05_27_024320_create_admins_table', 1),
 (18, '2020_05_27_024334_create_statuses_table', 1),
-(19, '2020_05_27_024358_create_notifications_table', 1),
 (20, '2020_05_27_024419_create_semesters_table', 1),
 (21, '2020_05_27_024437_create_school_years_table', 1),
 (22, '2020_05_27_024452_create_year_semesters_table', 1),
 (23, '2020_05_27_024506_create_subjects_table', 1),
 (24, '2020_05_27_024519_create_posts_table', 1),
-(25, '2020_05_27_024529_create_comments_table', 1),
-(26, '2020_05_27_024544_create_likes_table', 1),
 (27, '2020_05_27_024553_create_reports_table', 1),
 (28, '2020_05_27_024636_create_reasons_table', 1),
 (29, '2020_05_27_024736_create_reasons_report_table', 1),
@@ -3332,7 +3330,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (44, '2020_06_29_101616_create_count_view_items_table', 5),
 (45, '2020_06_29_113049_create_item_reports_table', 6),
 (46, '2020_06_29_113111_create_ir_reasons_table', 6),
-(47, '2020_06_29_113123_create_item_likes_table', 6);
+(47, '2020_06_29_113123_create_item_likes_table', 6),
+(48, '2020_05_27_024544_create_likes_table', 7),
+(49, '2020_05_27_024529_create_comments_table', 8),
+(50, '2020_05_27_024358_create_notifications_table', 9);
 
 -- --------------------------------------------------------
 
@@ -3343,6 +3344,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 CREATE TABLE `notifications` (
   `noti_id` bigint(20) UNSIGNED NOT NULL,
   `noti_content` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `noti_status` tinyint(1) NOT NULL DEFAULT 0,
   `noti_created` timestamp NOT NULL DEFAULT current_timestamp(),
   `stu_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -3393,7 +3395,8 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`p_id`, `p_slug`, `p_title`, `p_content`, `p_view_count`, `p_created`, `stu_id`, `sub_id`) VALUES
-(1, 'bi-thi-gi-vay-may-ban.700&1', 'BI thi gì vậy mấy bạn?', '<h2 class=\"blog-title\"><a href=\"single-post.html\">BI thi g&igrave; vậy mấy bạn?</a></h2>', '1', '2020-06-03 08:16:08', 2, 700);
+(1, 'bi-thi-gi-vay-may-ban.700&1', 'BI thi gì vậy mấy bạn?', '<h2 class=\"blog-title\"><a href=\"single-post.html\">BI thi g&igrave; vậy mấy bạn?</a></h2>', '1', '2020-06-03 08:16:08', 2, 700),
+(2, 'an-chay.1395&2', 'ăn chay', '<p>ăn chayăn chayăn chayăn chayăn chayăn chayăn chayăn chayăn chayăn chayăn chayăn chayăn chayăn chay</p>', '0', '2020-06-29 08:45:17', 2, 1395);
 
 -- --------------------------------------------------------
 
@@ -43955,7 +43958,8 @@ ALTER TABLE `club_students`
 --
 ALTER TABLE `comments`
   ADD PRIMARY KEY (`com_id`),
-  ADD KEY `comments_p_id_index` (`p_id`);
+  ADD KEY `comments_p_id_index` (`p_id`),
+  ADD KEY `comments_stu_id_index` (`stu_id`);
 
 --
 -- Indexes for table `count_view_clubs`
@@ -44063,9 +44067,9 @@ ALTER TABLE `item_reports`
 -- Indexes for table `likes`
 --
 ALTER TABLE `likes`
-  ADD PRIMARY KEY (`p_id`,`stu_id`),
+  ADD PRIMARY KEY (`com_id`,`stu_id`),
   ADD KEY `likes_stu_id_foreign` (`stu_id`),
-  ADD KEY `likes_p_id_index` (`p_id`);
+  ADD KEY `likes_com_id_index` (`com_id`);
 
 --
 -- Indexes for table `majors`
@@ -44352,7 +44356,7 @@ ALTER TABLE `messages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT for table `notifications`
@@ -44370,7 +44374,7 @@ ALTER TABLE `organization_banners`
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `p_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `p_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `reasons`
@@ -44478,7 +44482,8 @@ ALTER TABLE `club_students`
 -- Constraints for table `comments`
 --
 ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_p_id_foreign` FOREIGN KEY (`p_id`) REFERENCES `posts` (`p_id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `comments_p_id_foreign` FOREIGN KEY (`p_id`) REFERENCES `posts` (`p_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `comments_stu_id_foreign` FOREIGN KEY (`stu_id`) REFERENCES `students` (`stu_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `count_view_clubs`
@@ -44567,7 +44572,7 @@ ALTER TABLE `item_reports`
 -- Constraints for table `likes`
 --
 ALTER TABLE `likes`
-  ADD CONSTRAINT `likes_p_id_foreign` FOREIGN KEY (`p_id`) REFERENCES `posts` (`p_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `likes_com_id_foreign` FOREIGN KEY (`com_id`) REFERENCES `comments` (`com_id`) ON DELETE CASCADE,
   ADD CONSTRAINT `likes_stu_id_foreign` FOREIGN KEY (`stu_id`) REFERENCES `students` (`stu_id`) ON DELETE CASCADE;
 
 --
