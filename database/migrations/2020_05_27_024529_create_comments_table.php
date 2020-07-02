@@ -21,7 +21,9 @@ class CreateCommentsTable extends Migration
 
             //foreign key
             $table->bigInteger('p_id')->index()->unsigned();
+            $table->integer('stu_id')->index()->unsigned();
             
+            $table->foreign('stu_id')->references('stu_id')->on('students')->onDelete('cascade');
             $table->foreign('p_id')->references('p_id')->on('posts')->onDelete('cascade');
         });
     }

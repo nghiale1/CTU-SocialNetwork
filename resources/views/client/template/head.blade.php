@@ -5,7 +5,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>PATROS - HTML5 FREE TEMPLATE</title>
+    <title>@yield('title')</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('client/images/logo-ctu.png')}}" />
 
     <!-- Bootstrap Core CSS -->
 
@@ -23,5 +25,42 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
+    <style>
+        .navbar-brand img {
+            margin-top: -15px;
+            height: 55px;
+        }
 
+        .borderless td {
+            border: none !important;
+        }
+
+        .btn-ctu {
+            background-color: #2f9de3;
+            color: white;
+        }
+
+        .text-right td {
+            text-align: right;
+        }
+
+        .alert {
+            padding: 0px;
+            padding-left: 15px;
+        }
+
+        .alert p {
+            display: table-cell;
+            padding: 5px 0;
+            vertical-align: middle;
+        }
+
+        ul.brcmp {
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+            font-size: 20px;
+        }
+    </style>
+    @stack('css')
 </head>
