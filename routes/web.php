@@ -17,7 +17,7 @@ Route::get('/', function () {
 // Route::redirect('/', '/there');
 Route::get('/dang-nhap', 'LoginController@form_login')->name('form_login');
 Route::post('/xac-thuc', 'LoginController@login')->name('login');
-Route::get('/dang-xuat', 'LoginController@logout');
+Route::get('/dang-xuat', 'LoginController@logout')->name('logout');
 
 Route::group(['middleware' => ['checkLogin']], function () {
     // forum

@@ -1,6 +1,8 @@
 <!-- jQuery -->
 {{-- <script src="{{asset('client/js/jquery.js')}}"></script> --}}
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+{{-- @if (Request::path() != 'tai-khoan/tai-lieu')
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+@endif --}}
 
 
 <!-- Bootstrap Core JavaScript -->
@@ -10,12 +12,6 @@
 <script src="{{asset('vendor/vuejs/vue.js')}}"></script>
 
 
-{{-- upload file đừng xóa --}}
-{{-- <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-<script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script> --}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/js/fileinput.min.js" integrity="sha256-ToAtQBDkuc7vGWSgIlSslrN5mB9Yz+986tGSGMlzgog=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/themes/fa/theme.min.js" integrity="sha256-0UQosjXgHA+GA9QD3K2AGUZLrzWoVGzuBi2LwNOML40=" crossorigin="anonymous"></script> 
 
 <!-- Axios -->
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
@@ -117,4 +113,6 @@
     }
 })
 </script> --}}
+
+
 @stack('script')
