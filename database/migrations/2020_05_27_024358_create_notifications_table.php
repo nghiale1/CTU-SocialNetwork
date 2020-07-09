@@ -16,6 +16,7 @@ class CreateNotificationsTable extends Migration
         Schema::create('notifications', function (Blueprint $table) {
             $table->bigIncrements('noti_id');
             $table->string('noti_content');
+            $table->boolean('noti_status')->default(false);
             $table->timestamp('noti_created')
             ->default(DB::raw('CURRENT_TIMESTAMP'));
             //foreign key

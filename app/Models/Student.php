@@ -84,14 +84,39 @@ class Student extends Authenticatable
 					->withPivot('cs_role', 'cs_created');
 	}
 
+	public function count_view_clubs()
+	{
+		return $this->hasMany(CountViewClub::class, 'stu_id');
+	}
+
+	public function count_view_items()
+	{
+		return $this->hasMany(CountViewItem::class, 'stu_id');
+	}
+
+	public function count_view_posts()
+	{
+		return $this->hasMany(CountViewPost::class, 'stu_id');
+	}
+
+	public function count_view_unions()
+	{
+		return $this->hasMany(CountViewUnion::class, 'stu_id');
+	}
+
 	public function favourites()
 	{
 		return $this->hasMany(Favourite::class, 'stu_id');
 	}
 
-	public function folders()
+	public function item_likes()
 	{
-		return $this->hasMany(Folder::class, 'stu_id');
+		return $this->hasMany(ItemLike::class, 'stu_id');
+	}
+
+	public function item_reports()
+	{
+		return $this->hasMany(ItemReport::class, 'stu_id');
 	}
 
 	public function items()
@@ -122,6 +147,16 @@ class Student extends Authenticatable
 	public function students_ubs()
 	{
 		return $this->hasMany(StudentsUb::class, 'stu_id');
+	}
+
+	public function students_uos()
+	{
+		return $this->hasMany(StudentsUo::class, 'stu_id');
+	}
+
+	public function subjects()
+	{
+		return $this->belongsToMany(Subject::class, 'subjects_student', 'stu_id', 'sub_id');
 	}
 
 	public function union_posts()

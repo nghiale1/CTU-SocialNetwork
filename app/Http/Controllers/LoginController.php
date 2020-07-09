@@ -78,10 +78,10 @@ class LoginController extends Controller
         //kiểm tra trường remember có được chọn hay không
 
         if (Auth::attempt($arr, $remember)) {
-            return redirect()->route('blog');
+            return redirect()->route('forum');
         }
         if (Auth::guard('admin')->attempt($arr, $remember)) {
-            return redirect()->route('blog');
+            return redirect()->route('forum');
         }
         else{
             return redirect()->back()->with('error','MSSV hoặc mật khẩu chưa chính xác')->withInput();
@@ -102,8 +102,8 @@ class LoginController extends Controller
     public function form_login()
     {
         if(Auth::check() || Auth::guard('admin')->check()){
-            return redirect()->route('blog');
+            return redirect()->route('forum');
         }
-        return redirect('/dang-nhap'); 
+        return view('login.login'); 
     }
 }

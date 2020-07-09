@@ -21,7 +21,7 @@ class CreateItemsTable extends Migration
             $table->string('item_title');
             $table->string('item_content');
             $table->string('item_slug');
-            $table->string('item_view_count');
+            $table->string('item_view_count')->default(0);
             $table->string('item_avatar');
             $table->timestamp('item_created')
             ->default(DB::raw('CURRENT_TIMESTAMP'));

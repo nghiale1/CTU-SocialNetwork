@@ -19,6 +19,10 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{asset('client/css/patros.css')}}">
 
+
+    {{-- upload file --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.0.9/css/fileinput.min.css" media="all" type="text/css" rel="stylesheet">
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -30,5 +34,37 @@
             margin-top: -15px;
             height: 55px;
         }
+
+        .borderless td {
+            border: none !important;
+        }
+
+        .btn-ctu {
+            background-color: #2f9de3;
+            color: white;
+        }
+
+        .text-right td {
+            text-align: right;
+        }
+
+        .alert {
+            padding: 0px;
+            padding-left: 15px;
+        }
+
+        .alert p {
+            display: table-cell;
+            padding: 5px 0;
+            vertical-align: middle;
+        }
+
+        ul.brcmp {
+            margin: 0;
+            padding: 0;
+            display: inline-flex;
+            font-size: 20px;
+        }
     </style>
+    @stack('css')
 </head>

@@ -74,6 +74,11 @@ class Item extends Model
 		return $this->belongsTo(Type::class);
 	}
 
+	public function count_view_items()
+	{
+		return $this->hasMany(CountViewItem::class);
+	}
+
 	public function images()
 	{
 		return $this->hasMany(Image::class);

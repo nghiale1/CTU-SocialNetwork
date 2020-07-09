@@ -38,6 +38,7 @@ class Notification extends Model
 	protected $fillable = [
 		'noti_content',
 		'noti_created',
+		'noti_status',
 		'stu_id'
 	];
 

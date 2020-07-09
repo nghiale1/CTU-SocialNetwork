@@ -30,7 +30,7 @@ class students extends Seeder
                         'stu_code'=>'B'.$dem,
                         'stu_address'=>$faker->address,
                         'stu_gmail'=>$faker->unique()->safeEmail,
-                        'yb_id'=>$i
+                        'yb_id'=>1
                     ],
                 ]);
             }
