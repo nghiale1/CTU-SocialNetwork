@@ -27,6 +27,11 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/bai-viet/{slug}', 'ForumController@show')->name('forum.show');
         Route::get('/them-cau-hoi', 'QuestionController@create')->name('question.create');
         Route::post('/them-cau-hoi', 'QuestionController@store')->name('question.store');
+        Route::post('/bai-viet/binh-luan', 'CommentController@store')->name('comment.store');
+        Route::post('/bai-viet/binh-luan/tra-loi/', 'CommentController@repcomment')->name('repcomment.store');
+        Route::post('/bai-viet/binh-luan/xoa/', 'CommentController@destroycmt')->name('comment.destroy');
+        Route::post('/bai-viet/binh-luan/thich', 'CommentController@Ajaxlike')->name('comment.like');
+
     });
     Route::group(['prefix' => 'chia-se'], function () {
         Route::get('/', 'ShareController@index')->name('share');
