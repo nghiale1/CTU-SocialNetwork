@@ -23,7 +23,7 @@ class LienChiHoi extends Seeder
                 return $text;
         }
         $lienchihoi = [
-            
+
             [
                 'uo_name' => 'Liên chi hội sinh viên Long An',
                 'uo_slug' => utf8tourl('Liên chi hội sinh viên Long An')
@@ -32,62 +32,62 @@ class LienChiHoi extends Seeder
                 'uo_name' => 'Liên chi hội sinh viên Tiền Giang',
                 'uo_slug' => utf8tourl('Liên chi hội sinh viên Tiền Giang')
             ],
-            
-            [ 
+
+            [
                 'uo_name' => 'Liên chi hội sinh viên Tiền Giang',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Tiền Giang') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Tiền Giang')
             ],
-            
-            [ 
+
+            [
                 'uo_name' => 'Liên chi hội sinh viên Bến Tre',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Bến Tre') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Bến Tre')
             ],
-            
-            [ 
+
+            [
                 'uo_name' => 'Liên chi hội sinh viên Vĩnh Long',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Vĩnh Long') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Vĩnh Long')
             ],
-            
-            [ 
+
+            [
                 'uo_name' => 'Liên chi hội sinh viên An Giang',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên An Giang') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên An Giang')
             ],
 
-            [ 
+            [
                 'uo_name' => 'Liên chi hội sinh viên Trà Vinh',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Trà Vinh') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Trà Vinh')
             ],
 
-            [ 
+            [
                 'uo_name' => 'Liên chi hội sinh viên Cần Thơ',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Cần Thơ') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Cần Thơ')
             ],
-            
-            [ 
+
+            [
                 'uo_name' => 'Liên chi hội sinh viên Hậu Giang',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Hậu Giang') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Hậu Giang')
             ],
 
-            [ 
+            [
                 'uo_name' => 'Liên chi hội sinh viên Sóc Trăng',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Sóc Trăng') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Sóc Trăng')
             ],
 
-            [ 
+            [
                 'uo_name' => 'Liên chi hội sinh viên Bạc Liêu',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Bạc Liêu') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Bạc Liêu')
             ],
 
-            [ 
+            [
                 'uo_name' => 'Liên chi hội sinh viên Kiên Giang',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Kiên Giang') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Kiên Giang')
             ],
 
-            [ 
+            [
                 'uo_name' => 'Liên chi hội sinh viên Cà Mau',
-                'uo_slug' => utf8tourl('Liên chi hội sinh viên Cà Mau') 
+                'uo_slug' => utf8tourl('Liên chi hội sinh viên Cà Mau')
             ],
-    ]; 
+    ];
     DB::table('union_organizations')->insert($lienchihoi);
     }
 }

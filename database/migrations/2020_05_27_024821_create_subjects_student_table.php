@@ -16,11 +16,11 @@ class CreateSubjectsStudentTable extends Migration
         Schema::create('subjects_student', function (Blueprint $table) {
             $table->integer('sub_id')->index()->unsigned();
             $table->integer('stu_id')->index()->unsigned();
-            
+
             $table->foreign('sub_id')->references('sub_id')->on('subjects')->onDelete('cascade');
             $table->foreign('stu_id')->references('stu_id')->on('students')->onDelete('cascade');
-               
-            $table->primary(['sub_id','stu_id']);
+
+            $table->primary('stu_id');
         });
     }
 
