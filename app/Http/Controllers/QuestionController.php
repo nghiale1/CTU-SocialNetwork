@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Student;
+use App\Notifications\InvoicePaid;
+use App\Notifications\Noti;
 
 class QuestionController extends Controller
 {
@@ -51,6 +54,13 @@ class QuestionController extends Controller
             'p_title'=>$request->title,
             'p_content'=>$request->content,
         ]);
+        $user = Student::find(2); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
+        $data = [
+            'Thử ',
+            'thông báo',
+        ];
+        \Notification::send($user, new Noti($data));
+        // $user->notify(new InvoicePaid($data));
         return redirect()->route('forum');
     }
 
