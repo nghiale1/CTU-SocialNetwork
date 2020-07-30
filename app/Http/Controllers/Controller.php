@@ -83,5 +83,18 @@ class Controller extends BaseController
         $id=\Auth::user()->clubs;
         return $id;
     }
+
+    public function postNoti($content,$id)
+    {
+        DB::table('notifications')->insert([
+            'noti_content'=>$content,
+            'stu_id'=>$id
+        ]);
+    }
+
+
+
+
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

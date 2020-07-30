@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use App\Events\NotificationClub;
 class ClubController extends Controller
 {
     /**
@@ -47,6 +48,7 @@ class ClubController extends Controller
     }
     public function store(Request $request)
     {
+        event(new NotificationClub($request->club,\Auth::id()));
         $id=\DB::table('club_posts')->max('cp_id');
         $title=$this->sanitize($request->title);
         $slug=$title.'.'.$request->union.'&'.($id+1);

@@ -19,7 +19,7 @@
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 @yield('scrpit')
 {{-- dấu * màu đỏ --}}
-{{-- <script>
+<script>
     Vue.component('red-star', {
     template: '<span style="color: red">*</span>',
 });
@@ -112,7 +112,19 @@
         };
     }
 })
-</script> --}}
+</script>
+<script src="https://js.pusher.com/4.4/pusher.min.js"></script>
+<script type="text/javascript">
+    var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+        encrypted: true,
+        cluster: "ap1"
+    });
+    var channel = pusher.subscribe('NotificationEvent');
+    channel.bind('notification_club', function(e) {
+        console.log(e);
+        
+    });
+</script>
 
 
 @stack('script')

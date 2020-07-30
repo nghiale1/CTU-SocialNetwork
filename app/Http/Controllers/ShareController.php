@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Student;
+use App\Notifications\InvoicePaid;
 use DB;
 use Carbon\Carbon;
 class ShareController extends Controller
@@ -44,6 +46,7 @@ class ShareController extends Controller
      */
     public function store(Request $request)
     {
+        
         $id=\DB::table('items')->max('item_id');
         $title=$this->sanitize($request->title);
         $slug=$title.'.'.$request->type.'&'.($id+1);
@@ -68,6 +71,7 @@ class ShareController extends Controller
                 'item_content'=>$request->content,
             ]);
         }
+        
         return redirect()->route('share')->with('success','Đã thêm thành công');
     }
 

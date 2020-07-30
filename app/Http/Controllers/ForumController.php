@@ -72,22 +72,26 @@ class ForumController extends Controller
         $myself=array();
         $count_like=array();
         // dd($comment);
-        foreach($comment as $item){
-            $like = DB::table('likes as l')
-            ->where('l.com_id',$item->com_id)
-            ->where('l_status',1);
-            $count_like[$item->com_id]=count($like->get());
+        $like=0;
+        if($comment->isNotEmpty()){
 
-            $like =$like->where('l.stu_id',\Auth::id())
-            ->first();
-            if($like){
-                $myself[$item->com_id]=1;
+            foreach($comment as $item){
+                $like = DB::table('likes as l')
+                ->where('l.com_id',$item->com_id)
+                ->where('l_status',1);
+                $count_like[$item->com_id]=count($like->get());
+    
+                $like =$like->where('l.stu_id',\Auth::id())
+                ->first();
+                if($like){
+                    $myself[$item->com_id]=1;
+                }
+                else{
+                    
+                    $myself[$item->com_id]=0;
+                }
+    
             }
-            else{
-                
-                $myself[$item->com_id]=0;
-            }
-
         }
 
         // đếm lượt xem

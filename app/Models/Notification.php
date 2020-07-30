@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * 
  * @property int $noti_id
  * @property string $noti_content
+ * @property bool $noti_status
  * @property Carbon $noti_created
  * @property int $stu_id
  * 
@@ -28,6 +29,7 @@ class Notification extends Model
 	public $timestamps = false;
 
 	protected $casts = [
+		'noti_status' => 'bool',
 		'stu_id' => 'int'
 	];
 
@@ -37,8 +39,8 @@ class Notification extends Model
 
 	protected $fillable = [
 		'noti_content',
-		'noti_created',
 		'noti_status',
+		'noti_created',
 		'stu_id'
 	];
 

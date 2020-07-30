@@ -77,3 +77,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
     //lấy ra user hiện tại
     Route::get('current-user', 'UserController@currentUser');
 });
+Route::get('/x', function () {
+    $user=Auth::user();
+    // Notification::send($user, new App\Notifications\InvoicePaid());
+    $user->notify(new App\Notifications\InvoicePaid());
+});

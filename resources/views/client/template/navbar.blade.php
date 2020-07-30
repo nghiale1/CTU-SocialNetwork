@@ -33,7 +33,21 @@
                         <br>
                         <a class="dropdown-item" href="#">Lượt đánh giá</a>
                         <br>
-                        <a class="dropdown-item" href="{{ route('logout') }}" style="background-color: red; color: white; ">Đăng xuất</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            style="background-color: red; color: white; ">Đăng xuất</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown dropdown-notifications">
+                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <i class="fa fa-bell-o" aria-hidden="true"></i><span class="caret"></span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right menu-notification" aria-labelledby="navbarDropdown">
+                        @foreach (Auth::user()->notifications->take(9) as $notification)
+                        <a class="dropdown-item" href="#">
+                            <span>{!! $notification->noti_content!!}</span><br>
+                        </a>
+                        @endforeach
                     </div>
                 </li>
             </ul>
