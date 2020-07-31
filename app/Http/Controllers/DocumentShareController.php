@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use File;
+use Carbon\Carbon;
 class DocumentShareController extends Controller
 {
     //Chọn niên khóa và học kỳ
@@ -141,9 +142,11 @@ class DocumentShareController extends Controller
             $folder = DB::table('folders')->where('stu_id','=',$idStudent)->where('fo_slug','=',$nameFolders)->first();
             $folder_detail = DB::table('folders')->where('fo_child','=',$folder->fo_id)->get();
             $folder_child = DB::table('folders')->where('fo_id','=',$folder->fo_child)->first();
-            // dd($folder_detail);
+            // dd($folder->fo_id);
+            $files = DB::table('files')->where('fo_id','=',$folder->fo_id)->get();
+            // dd($files);
             // dd($folder);
-            return view('client.pages.docs-share.detail',compact(['folder','folder_detail','hkSelected','nkSelected','hkSelected1','nkSelected1','folder_child']));
+            return view('client.pages.docs-share.detail',compact(['folder','folder_detail','hkSelected','nkSelected','hkSelected1','nkSelected1','folder_child','files']));
         } catch (\Throwable $th) {
             //throw $th;
             dd("Có lỗi gì đó sửa đi");
@@ -227,8 +230,40 @@ class DocumentShareController extends Controller
         }
     }
 
+
+    //Upload file
     public function uploadDocuments(Request $request)
     {
+        // dd('123');
+        // dd($request->fo_id, $request->fo_dir);
+        $time_now = Carbon::now();
+        try {
+            //code...
+            if ($request->hasFile('file')) {
+                # code...
+                foreach ($request->file('file') as $file) {
+                    # code...
+                    $name = $file->getClientOriginalName();
+                    $size = $file->getClientSize();
+                    $file->move(public_path().'/'.$request->fo_dir, $name);
+                    DB::table('files')->insert(
+                        [
+                            'f_name' => $name,
+                            'f_size' => $size,
+                            'f_path' => $request->fo_dir.'/'.$name,
+                            'f_created' => $time_now,
+                            'f_updated' => 'NULL',
+                            'f_deleted' => 'NULL',
+                            'fo_id' => $request->fo_id
+                        ]
+                    );
+                }
+                return redirect()->back();
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd("Có cái lỗi gì đó ở đây mà tôi không biết hihi !");
+        }
 
     }
 }

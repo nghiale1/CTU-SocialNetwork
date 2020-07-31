@@ -62,6 +62,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('tai-lieu/thu-muc/{nkSelected}/{hkSelected}/{nameFolder}','DocumentShareController@folderDetail')->name('chi-tiet-thu-muc');
 
         Route::post('tai-lieu/thu-muc/tao-thu-muc-con', 'DocumentShareController@createNewFolderChild')->name('tao-thu-muc-con');
+        Route::post('tai-lieu/file/upload-file', 'DocumentShareController@uploadDocuments')->name('upload-file');
     });
     //lấy tất cả các messages, và sẽ có form để chat
     Route::get('messages', 'MessageController@index');
