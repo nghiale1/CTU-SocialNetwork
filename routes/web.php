@@ -82,3 +82,9 @@ Route::get('/x', function () {
     // Notification::send($user, new App\Notifications\InvoicePaid());
     $user->notify(new App\Notifications\InvoicePaid());
 });
+
+// Route::get('/tong-luot-thich/{id}', 'StatisticController@getLike');
+Route::get('/chon-hoc-ky', 'StatisticController@choiceSemester');
+Route::get('/danh-sach-luot-thich', 'StatisticController@getAllLike')->name('listLike');
+Route::get('/tong-luot-thich', 'StatisticController@getLikeSingleUser')->name('listLike');
+Route::view('a', 'client.pages.account.index');
