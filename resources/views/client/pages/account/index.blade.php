@@ -2,138 +2,175 @@
 
 {{-- Thêm khúc này để có trang tiêu đề nha --}}
 @section('title')
-tên
+{{$student->stu_name}}
 @endsection
+@push('css')
+<style>
+    .level_1 {
+        text-align: right
+    }
+
+    .level_2 {
+        text-align: left
+    }
+</style>
+@endpush
 @section('content')
 
 <table class="table table-striped borderless">
     <tr>
-        <td width="21%" height="22" align="right" class="level_1_1">Mã số sinh viên </td>
-        <td width="24%" align="left" class="level_1_1">
-            <strong>B1605229</strong> </td>
-        <td width="23%" colspan="-1" align="right" class="level_1_1">Họ và tên </td>
-        <td align="left" class="level_1_1">
-            <strong>Lê Minh Nghĩa</strong> </td>
+        <td width="21%" class="level_1 font-weight-bold ">Mã số sinh viên </td>
+        <td width="24%" class="level_2" id="stu_code">
+            {{$student->stu_code}}
+        </td>
+        <td width="23%" class="level_1">Họ và tên </td>
+        <td class="level_2">
+            {{$student->stu_name}}
+        </td>
     </tr>
     <tr>
-        <td height="22" align="right" class="level_1_2">Phái</td>
-        <td align="left" class="level_1_2">
-            <input name="rdoPhai" type="radio" id="radio" checked="checked" disabled="disabled">
-            Nam
-            <input name="rdoPhai" type="radio" id="radio" disabled="disabled">
-            Nữ</td>
-        <td colspan="-1" align="right" class="level_1_2">Ngày sinh</td>
-        <td align="left" valign="middle" class="level_1_2"><strong>24/04/1998</strong>&nbsp; </td>
+        <td class="level_1 ">Ngày sinh </td>
+        <td class="level_2">
+            {{$student->stu_birth}}
+        </td>
+        <td class="level_1">Chuyên ngành</td>
+        <td class="level_2">
+            {{$student->major_name}}
+        </td>
     </tr>
     <tr>
-        <td height="22" align="right" class="level_1_1">Lớp</td>
-        <td align="left" class="level_1_1"><strong>DI1695A1</strong>&nbsp;</td>
-        <td colspan="-1" align="right" class="level_1_1">Khoa</td>
-        <td align="left" class="level_1_1"><strong>K.Công nghệ Thông tin &amp;Truyền thông</strong>&nbsp;</td>
+        <td class="level_1">Lớp</td>
+        <td class="level_2">{{$student->yb_name}}&nbsp;</td>
+        <td class="level_1">Khoa</td>
+        <td class="level_2">{{$student->academy_name}}&nbsp;</td>
     </tr>
     <tr>
-        <td width="21%" height="22" align="right" class="level_1_2">Chuyên ngành</td>
-        <td align="left" class="level_1_2"><strong>95 - Hệ thống thông tin</strong>&nbsp;</td>
-        <td width="23%" colspan="-1" align="right" class="level_1_2">Hệ đào tạo</td>
-        <td align="left" class="level_1_2"><strong>Đại học - Chính quy</strong>&nbsp;</td>
+        <td class="level_1">Thuộc chi hội</td>
+        <td class="level_2">
+            {{$student->ub_name}}&nbsp;</td>
+        <td class="level_1">Ngày tham gia</td>
+        <td class="level_2">{{$student->sub_created}}&nbsp; </td>
     </tr>
     <tr>
-        <td width="21%" height="22" align="right" class="level_1_1">Ngày vào Đoàn</td>
-        <td align="left" class="level_1_1"><input type="hidden" id="testtest"
-                value="date_default_timezone_set: Asia/Ho_Chi_Minh"><strong>
-                20-11-2014 </strong>&nbsp;</td>
-        <td width="23%" colspan="-1" align="right" class="level_1_1">Thuộc chi đoàn</td>
-        <td align="left" class="level_1_1"><strong>DI1695A1 - Hệ thống thông tin khóa 42-A1</strong>&nbsp; </td>
+        <td class="level_1">Đã thích</td>
+        <td class="level_2" id="luotLike">{{$Data['Like']}}&nbsp;
+        </td>
+        <td class="level_1">Đã báo cáo</td>
+        <td class="level_2">{{$Data['Report']}}&nbsp; </td>
     </tr>
     <tr>
-        <td width="21%" height="22" align="right" class="level_1_1">Thuộc chi hội</td>
-        <td align="left" class="level_1_1"><input type="hidden" id="testtest"
-                value="date_default_timezone_set: Asia/Ho_Chi_Minh"><strong>
-                Ninh Kiều </strong>&nbsp;</td>
-        <td width="23%" colspan="-1" align="right" class="level_1_1">Ngày tham gia</td>
-        <td align="left" class="level_1_1"><strong>01/01/2020</strong>&nbsp; </td>
+        <td class="level_1">Bài viết đã đăng</td>
+        <td class="level_2" id="baiDaDang">{{$Data['Post']}} &nbsp;</td>
+        <td class="level_1">Lượt bình luận</td>
+        <td class="level_2">{{$Data['Comment']}}&nbsp;</td>
     </tr>
     <tr>
-        <td width="21%" height="22" align="right" class="level_1_1">Lượt like</td>
-        <td align="left" class="level_1_1"><input type="hidden" id="testtest"
-                value="date_default_timezone_set: Asia/Ho_Chi_Minh"><strong>
-                1 </strong>&nbsp;</td>
-        <td width="23%" colspan="-1" align="right" class="level_1_1">Lượt report</td>
-        <td align="left" class="level_1_1"><strong>0</strong>&nbsp; </td>
-    </tr>
-    <tr>
-        <td width="21%" height="22" align="right" class="level_1_1">Bài viết đã đăng</td>
-        <td align="left" class="level_1_1"><input type="hidden" id="testtest"
-                value="date_default_timezone_set: Asia/Ho_Chi_Minh"><strong>
-                0 </strong>&nbsp;</td>
-        <td width="23%" colspan="-1" align="right" class="level_1_1">Lượt comment</td>
-        <td align="left" class="level_1_1"><strong>0</strong>&nbsp; </td>
-    </tr>
-    <tr>
-        <td width="21%" height="22" align="right" class="level_1_1">Đã like</td>
-        <td align="left" class="level_1_1"><input type="hidden" id="testtest"
-                value="date_default_timezone_set: Asia/Ho_Chi_Minh"><strong>
-                0 </strong>&nbsp;</td>
-        <td width="23%" colspan="-1" align="right" class="level_1_1">Đã report</td>
-        <td align="left" class="level_1_1"><strong>0</strong>&nbsp; </td>
+        <td class="level_1">Lượt thích nhận được</td>
+        <td class="level_2" id="daLike">{{$Data['Liked']}} &nbsp;</td>
+        <td class="level_1">Bị báo cáo</td>
+        <td class="level_2">{{$Data['Reported']}}&nbsp; </td>
     </tr>
 </table>
 <h3>Câu lạc bộ đã tham gia</h3>
 <table class="table table-striped borderless">
-    <tr>
-        <th>STT</th>
-        <th>Tên câu lạc bộ</th>
-        <th>Ngày tham gia</th>
-        <th>Bài viết đã xem</th>
-        <th>Tổng bài viết</th>
-        <th>Tỉ lệ đóng góp khi tham gia</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>Tương lai xanh</td>
-        <td>1/1/2020</td>
-        <td>5</td>
-        <td>5</td>
-        <td>100%</td>
-    </tr>
+    <thead>
+
+        <tr>
+            <th>STT</th>
+            <th>Tên câu lạc bộ</th>
+            <th>Ngày tham gia</th>
+
+            <th>
+                <div data-toggle="tooltip" title="Bài viết bạn đã xem kể từ khi tham gia">Bài viết đã xem</div>
+            </th>
+            <th data-toggle="tooltip" title="Tổng bài viết của clb kể từ khi tham gia">Tổng bài viết</th>
+            <th data-toggle="tooltip" title="Tỉ lệ bài đã xem trên tổng bài của clb kể từ khi bạn tham gia">Tỉ lệ đóng
+                góp (%)</th>
+        </tr>
+    </thead>
+    <tbody id="club">
+        <?php $i=1?>
+        @foreach ($JoinedClub as $item)
+        <tr>
+            <td>{{$i}}</td>
+            <td>{{$item->c_name}}</td>
+            <td>{{$item->cs_created}}</td>
+            <td>{{$item->view}}</td>
+            <td>{{$item->posTotal}}</td>
+            <td>{{$item->perContribute}}</td>
+        </tr>
+        <?php $i++?>
+        @endforeach
+    </tbody>
 </table>
 <h3>Vật dụng đã chia sẻ</h3>
 <table class="table table-striped borderless">
-    <tr>
-        <th>STT</th>
-        <th>Tên vật dụng</th>
-        <th>Ngày trao tặng</th>
-        <th>Lượt cảm ơn</th>
-        <th>Lượt không thích</th>
-        <th>Lượt xem</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>Laptop Macbook pro 2019</td>
-        <td>Chưa tặng</td>
-        <td>1000</td>
-        <td>0</td>
-        <td>1000</td>
-    </tr>
+    <thead>
+
+        <tr>
+            <th>STT</th>
+            <th>Loại vật dụng</th>
+            <th>Tên vật dụng</th>
+            <th>Ngày trao tặng</th>
+            <th>Lượt cảm ơn</th>
+            <th>Lượt không thích</th>
+            <th>Lượt xem</th>
+        </tr>
+    </thead>
+    <tbody id="shareitem">
+        <?php $i=1?>
+        @foreach ($ShareItem as $item)
+        <tr>
+            <td>{{$i}}</td>
+            <td>{{$item->type_name}}</td>
+            <td>{{$item->item_name}}</td>
+            <td>{{$item->item_created}}</td>
+            <td>{{$item->thanks}}</td>
+            <td>{{$item->dislike}}</td>
+            <td>{{$item->view}}</td>
+        </tr>
+        <?php $i++?>
+        @endforeach
+    </tbody>
 </table>
 <h3>Câu hỏi đã trao đổi trên diễn đàn</h3>
 <table class="table table-striped borderless">
-    <tr>
-        <th>STT</th>
-        <th>Năm học học kỳ</th>
-        <th>Mã học phần</th>
-        <th>Tên học phần</th>
-        <th>Lượt phúc đáp</th>
-        <th>Lượt xem</th>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>2019-2020 HK 1</td>
-        <td>CT123</td>
-        <td>Môn 123</td>
-        <td>0</td>
-        <td>100</td>
-    </tr>
+    <thead>
+
+        <tr>
+            <th>STT</th>
+            <th>Năm học học kỳ</th>
+            <th>Mã học phần</th>
+            <th>Tên học phần</th>
+            <th>Số câu hỏi</th>
+            <th>Lượt phúc đáp</th>
+            <th>Lượt xem</th>
+        </tr>
+    </thead>
+    <tbody id="postforum">
+        <?php $i=1?>
+        @foreach ($PostForum as $item)
+        <tr>
+            <td>{{$i}}</td>
+            <td>{{$item->school_year_name}} {{$item->semester_name}}</td>
+            <td>{{$item->sub_code}}</td>
+            <td>{{$item->sub_name}}</td>
+            <td>{{$item->post}}</td>
+            <td>{{$item->comment}}</td>
+            <td>{{$item->view}}</td>
+        </tr>
+        <?php $i++?>
+        @endforeach
+    </tbody>
+
 </table>
 
 @endsection
+@push('script')
+<script>
+    $(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+{{-- @include('client.pages.account.script') --}}
+@endpush

@@ -86,5 +86,16 @@ Route::get('/x', function () {
 // Route::get('/tong-luot-thich/{id}', 'StatisticController@getLike');
 Route::get('/chon-hoc-ky', 'StatisticController@choiceSemester');
 Route::get('/danh-sach-luot-thich', 'StatisticController@getAllLike')->name('listLike');
-Route::get('/tong-luot-thich', 'StatisticController@getLikeSingleUser')->name('listLike');
-Route::view('a', 'client.pages.account.index');
+Route::get('/tong-luot-thich', 'StatisticController@getLikeSingleUser')->name('getLike');
+
+// Trang thông tin cá nhân
+Route::get('/thong-tin/{slug}', 'AccountController@Info')->name('Info');
+
+
+
+Route::get('/nam-hoc-hien-tai', 'ApiController@SemesterYear')->name('SemesterYear');
+Route::get('/bai-viet-da-dang', 'ApiController@Posted')->name('Posted');
+Route::get('/da-like', 'ApiController@Liked')->name('Liked');
+Route::get('/cau-lac-bo-da-tham-gia', 'ApiController@JoinedClub')->name('JoinedClub');
+Route::get('/vat-dung-da-chia-se', 'ApiController@ShareItem')->name('ShareItem');
+Route::get('/bai-da-dang', 'ApiController@PostForum')->name('PostForum');

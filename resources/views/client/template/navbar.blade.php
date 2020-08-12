@@ -29,9 +29,11 @@
                         {{ Auth::guard('student')->user()->stu_name }}
                     </a>
                     <div class="dropdown-menu" style="left: 0;" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{ route('chon-hoc-ky') }}">Tài liệu</a>
+                        <a class="dropdown-item"
+                            href="{{ route('Info',\Auth::user()->stu_code.".".(new Illuminate\Support\Str)::slug(\Auth::user()->stu_name)) }}">Thông
+                            tin cá nhân</a>
                         <br>
-                        <a class="dropdown-item" href="#">Lượt đánh giá</a>
+                        <a class="dropdown-item" href="{{ route('chon-hoc-ky') }}">Tài liệu</a>
                         <br>
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             style="background-color: red; color: white; ">Đăng xuất</a>
