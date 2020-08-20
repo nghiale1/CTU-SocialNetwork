@@ -22,6 +22,18 @@
     hr {
         border-color: #3571ad;
     }
+
+    thead th:first-child {
+        border-radius: 10px 0px 0px 0px;
+    }
+
+    thead th:last-child {
+        border-radius: 0px 10px 0px 0px;
+    }
+
+    .fade {
+        display: inline !important;
+    }
 </style>
 @endpush
 @section('content')
@@ -90,11 +102,19 @@
             <th>Tên câu lạc bộ</th>
             <th>Ngày tham gia</th>
 
-            <th>
+            {{-- <th>
                 <div data-toggle="tooltip" title="Bài viết bạn đã xem kể từ khi tham gia">Bài viết đã xem</div>
             </th>
-            <th data-toggle="tooltip" title="Tổng bài viết của clb kể từ khi tham gia">Tổng bài viết</th>
+            <th data-toggle="tooltip" title="Tổng bài viết từ khi tham gia">Tổng bài viết
+            </th>
             <th data-toggle="tooltip" title="Tỉ lệ bài đã xem trên tổng bài của clb kể từ khi bạn tham gia">Tỉ lệ đóng
+                góp (%)</th> --}}
+            <th>
+                <div>Bài viết đã xem</div>
+            </th>
+            <th>Tổng bài viết
+            </th>
+            <th>Tỉ lệ đóng
                 góp (%)</th>
         </tr>
     </thead>
