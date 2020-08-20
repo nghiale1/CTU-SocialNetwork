@@ -13,6 +13,15 @@
     .level_2 {
         text-align: left
     }
+
+    thead {
+        background-color: #3571ad;
+        color: white;
+    }
+
+    hr {
+        border-color: #3571ad;
+    }
 </style>
 @endpush
 @section('content')
@@ -71,7 +80,8 @@
         <td class="level_2">{{$Data['Reported']}}&nbsp; </td>
     </tr>
 </table>
-<h3>Câu lạc bộ đã tham gia</h3>
+<hr>
+<h4>Câu lạc bộ đã tham gia</h4>
 <table class="table table-striped borderless">
     <thead>
 
@@ -103,7 +113,8 @@
         @endforeach
     </tbody>
 </table>
-<h3>Vật dụng đã chia sẻ</h3>
+<hr>
+<h4>Vật dụng đã chia sẻ</h4>
 <table class="table table-striped borderless">
     <thead>
 
@@ -133,7 +144,8 @@
         @endforeach
     </tbody>
 </table>
-<h3>Câu hỏi đã trao đổi trên diễn đàn</h3>
+<hr>
+<h4>Câu hỏi đã trao đổi trên diễn đàn</h4>
 <table class="table table-striped borderless">
     <thead>
 

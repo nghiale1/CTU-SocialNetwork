@@ -20,6 +20,8 @@ class ForumController extends Controller
         //get subject of user
         $subject=\App::call('App\Http\Controllers\QuestionController@getSubjectsStudent');
         // dd($subject);
+        //lấy lý do report
+        
         $blog=Post::query();
         
         foreach($subject as $item){
@@ -56,6 +58,8 @@ class ForumController extends Controller
      */
     public function show(Request $request,$slug)
     {
+        //lấy lý do report
+        $reason=$this->getReasons();
         $post=Post::join('students as s','s.stu_id','posts.stu_id')
         ->where('p_slug',$slug)
         ->first();
@@ -97,7 +101,7 @@ class ForumController extends Controller
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check($post->p_id,false,false,false);
         
-        return view('client.pages.forum.single',compact(['post','day','comment','like','myself','count_like']));
+        return view('client.pages.forum.single',compact(['post','day','comment','like','myself','count_like','reason']));
     }
 
     /**

@@ -83,6 +83,7 @@ class ShareController extends Controller
      */
     public function show($slug)
     {
+        $reason=$this->getReasons();
         $post=DB::table('items as p')
         ->join('students as s','s.stu_id','p.stu_id')
         ->join('types','types.type_id','p.type_id')
@@ -95,7 +96,7 @@ class ShareController extends Controller
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,false,false,$post->item_id);
         
-        return view('client.pages.share.single',compact('post','day'));
+        return view('client.pages.share.single',compact('post','day','reason'));
     }
 
     /**

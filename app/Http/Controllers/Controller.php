@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use DB;
 use Carbon\Carbon;
 class Controller extends BaseController
 {
@@ -90,6 +91,14 @@ class Controller extends BaseController
             'noti_content'=>$content,
             'stu_id'=>$id
         ]);
+    }
+    public function getReasons()
+    {
+        $reasons=DB::table('reasons')->orderby('reason_content')->get();
+        // if(!$reasons->isNotEmpty()){
+        //     $reasons='';
+        // }
+        return $reasons;
     }
 
 

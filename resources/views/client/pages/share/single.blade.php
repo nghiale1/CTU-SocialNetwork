@@ -63,8 +63,11 @@ Chi tiết bài viết
                     <span><i class="fa fa-user"></i> Bởi <a href="#">
                             {{$post->stu_name}}</a></span>
                     <div class="pull-right">
+                        <a href="#" title="Báo cáo" data-toggle="modal" data-target="#report"
+                            data-modal="{!! $post->item_id!!}" class="clickModal"><i class="fa fa-flag"></i></a>
                         <span><i class="fa fa-eye"></i> {{$post->item_view_count}}</span>
                     </div>
+                    @include('client.pages.share.report')
                 </div>
             </div>
         </div>

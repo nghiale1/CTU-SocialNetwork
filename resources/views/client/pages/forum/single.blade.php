@@ -25,7 +25,8 @@ Chi tiết bài viết
         padding: 0 10px;
         /* margin-left: -3px; */
     }
-    ._cm_right > a {
+
+    ._cm_right>a {
         margin-right: 10px;
     }
 
@@ -34,7 +35,8 @@ Chi tiết bài viết
         /* border: 1px solid; */
         margin-top: 10px;
     }
-    .icon-color{
+
+    .icon-color {
         color: #3571ad;
 
     }
@@ -64,6 +66,7 @@ Chi tiết bài viết
                 </div>
             </div>
             <p>{!!$post->p_content!!}</p>
+            @include('client.pages.forum.report')
 
             {{-- <div class="mysharing">
                 <!-- Twitter -->
@@ -98,117 +101,135 @@ Chi tiết bài viết
                 {{-- {{dd($comment)}} --}}
                 {{-- {{dd($like)}} --}}
                 @foreach ($comment as $val)
-                    @if ($val->com_idrep == null && $val->p_id == $post->p_id)
-                        <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="{{asset('client/images/').$val->stu_avatar}}" alt="{{$val->username}}">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading" >{{$val->stu_name}}
-                                    <small class="pull-right"> {{date('d-m-Y H:m', strtotime($val->com_created))}}</small>
-                                </h4>
-                                {{$val->com_content}}
-                                <div class="row cm_icon">
-                                    <div class="col-md-6">
-                                    <div class="_cm_left">
-                                        
-                                        <a class="click_like" data-com_id="{!! $val->com_id!!}" title="Thích" ><i class="fa fa-thumbs-up icon{!! $val->com_id!!} @if ($myself[$val->com_id]==1) icon-color @endif " aria-hidden="true"></i></a> 
-                                        
-                                        
-                                        {{-- <a class="click_like" data-com_id="{!! $val->com_id!!}" title="Thích" ><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
+                @if ($val->com_idrep == null && $val->p_id == $post->p_id)
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" src="{{asset('client/images/').$val->stu_avatar}}"
+                            alt="{{$val->username}}">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{$val->com_content}}
+                            <small class="pull-right"> {{date('d-m-Y H:m', strtotime($val->com_created))}}</small>
+                        </h4>
+                        {{$val->stu_name}}
+
+                        <div class="row cm_icon">
+                            <div class="col-md-6">
+                                <div class="_cm_left">
+
+                                    <a class="click_like" data-com_id="{!! $val->com_id!!}" title="Thích"><i
+                                            class="fa fa-thumbs-up icon{!! $val->com_id!!} @if ($myself[$val->com_id]==1) icon-color @endif "
+                                            aria-hidden="true"></i></a>
+
+
+                                    {{-- <a class="click_like" data-com_id="{!! $val->com_id!!}" title="Thích" ><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
                                         @endif --}}
-                                       <span id="show_count{!! $val->com_id!!}"> {{$count_like[$val->com_id]==0 ? '' : $count_like[$val->com_id]}}</span> 
-                                      
+                                    <span id="show_count{!! $val->com_id!!}">
+                                        {{$count_like[$val->com_id]==0 ? '' : $count_like[$val->com_id]}}</span>
 
-                                        <a title="Bình luận" class="showform" data-id="{!! $val->com_id!!}"><i class="fa fa-comments" aria-hidden="true"></i></a>
-                                        <input type="hidden" class="get_stu{!! $val->com_id!!}" value="{!! $val->stu_id!!}">
-                                        <a href="#" title="Báo cáo"><i class="fa fa-flag"></i></a>
-                                        
-                                        
-                                    </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="_cm_right">
-                                            @if ($val->stu_id == Auth::guard('student')->id())
-                                                <a  class="pull-right" title="Xóa bình luận"><i class="fa fa-trash " data-toggle="modal" data-target="#delete"></i></a>
-                                                {{-- thông báo xóa bình luận --}}
-                                                <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Bạn có thất sự muốn xóa?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            
-                                                            <form action="{{ route('comment.destroy') }}" method="post">
-                                                                @csrf
-                                                                <input type="hidden" name="com_id" value="{!! $val->com_id!!}">
-                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                                                                <button type="submit" class="btn btn-primary">Xóa</button> 
-                                                            </form>
-                                                            
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                                </div>
 
-                                            @endif                               
-                                        </div>
-                                    </div>
+                                    <a title="Bình luận" class="showform" data-id="{!! $val->com_id!!}"><i
+                                            class="fa fa-comments" aria-hidden="true"></i></a>
+                                    <input type="hidden" class="get_stu{!! $val->com_id!!}" value="{!! $val->stu_id!!}">
+                                    <a href="#" title="Báo cáo" data-toggle="modal" data-target="#report"
+                                        data-modal="{!! $val->com_id!!}" class="clickModal"><i
+                                            class="fa fa-flag"></i></a>
+
+
                                 </div>
-                                @foreach ($comment as $val1)
-                                    @if ($val->com_id ==$val1->com_idrep)
-                                        <div class="media" style="border-bottom:none;">
-                                            <a class="pull-left" href="#">
-                                                <img class="media-object" src="{{asset('client/images/').$val1->stu_avatar}}" alt="{{$val1->username}}">
-                                            </a>
-                                            <div class="media-body">
-                                                <h4 class="media-heading" >{{$val1->stu_name}}
-                                                    <small class="pull-right"> {{date('d-m-Y H:m', strtotime($val1->com_created))}}</small>
-                                                </h4>
-                                                {{$val1->com_content}}
-                                                <div class="row cm_icon">
-                                                    <div class="col-md-6">
-                                                    <div class="_cm_left">
-                                                        <a href="#" title="Thích"><i class="fa fa-thumbs-up" aria-hidden="true"></i></a>
-                                                        {{-- <a title="Bình luận" class="showform" data-id="{!! $val->com_id!!}" ><i class="fa fa-comments" aria-hidden="true"></i></a> --}}
-                                                        <a href="#" title="Báo cáo"><i class="fa fa-flag"></i></a>
-                                                    </div>
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        <div class="_cm_right">
-                                                            @if ($val1->stu_id == Auth::guard('student')->id())
-                                                                <a href="" class="pull-right" title="Xóa bình luận"><i class="fa fa-trash "></i></a>
-                                                            @endif
-                                                        </div>
-                                                    </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="_cm_right">
+                                    @if ($val->stu_id == Auth::guard('student')->id())
+                                    <a class="pull-right" title="Xóa bình luận"><i class="fa fa-trash "
+                                            data-toggle="modal" data-target="#delete"></i></a>
+                                    {{-- thông báo xóa bình luận --}}
+                                    <div class="modal fade" id="delete" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                                                </div>
+                                                <div class="modal-body">
+                                                    Bạn có thất sự muốn xóa?
+                                                </div>
+                                                <div class="modal-footer">
+
+                                                    <form action="{{ route('comment.destroy') }}" method="post">
+                                                        @csrf
+                                                        <input type="hidden" name="com_id" value="{!! $val->com_id!!}">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Đóng</button>
+                                                        <button type="submit" class="btn btn-primary">Xóa</button>
+                                                    </form>
+
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+
                                     @endif
-                                @endforeach
-                                <div class="form-comment showrep"  id="showrep{!! $val->com_id!!}">
-                                    <form action="{{ route('repcomment.store') }}" method="post">
-                                        @csrf
-                                        <div class="form-group">
-                                            <input type="hidden" name="com_id" value="{!! $val->com_id!!}">
-                                            <input type="hidden" name="st_id" value="{{ Auth::guard('student')->id()}}">
-                                            <input type="hidden" name="p_id" value="{{$post->p_id}}">
-                                            <textarea class="form-control rep_com" rows="1" name="com_repcontent"></textarea>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary">Gửi</button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
-                    @endif
-                  
-                    
+                        @foreach ($comment as $val1)
+                        @if ($val->com_id ==$val1->com_idrep)
+                        <div class="media" style="border-bottom:none;">
+                            <a class="pull-left" href="#">
+                                <img class="media-object" src="{{asset('client/images/').$val1->stu_avatar}}"
+                                    alt="{{$val1->username}}">
+                            </a>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{$val1->com_content}}
+                                    <small class="pull-right">
+                                        {{date('d-m-Y H:m', strtotime($val1->com_created))}}</small>
+                                </h4>
+                                {{$val1->stu_name}}
+                                {{$val1->com_content}}
+                                <div class="row cm_icon">
+                                    <div class="col-md-6">
+                                        <div class="_cm_left">
+                                            <a href="#" title="Thích"><i class="fa fa-thumbs-up"
+                                                    aria-hidden="true"></i></a>
+                                            {{-- <a title="Bình luận" class="showform" data-id="{!! $val->com_id!!}" ><i class="fa fa-comments" aria-hidden="true"></i></a> --}}
+                                            <a href="#" title="Báo cáo" data-toggle="modal" data-target="#report"
+                                                data-modal="{{$val1->com_id}}" class="clickModal"><i
+                                                    class="fa fa-flag"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="_cm_right">
+                                            @if ($val1->stu_id == Auth::guard('student')->id())
+                                            <a href="" class="pull-right" title="Xóa bình luận"><i
+                                                    class="fa fa-trash "></i></a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                        <div class="form-comment showrep" id="showrep{!! $val->com_id!!}">
+                            <form action="{{ route('repcomment.store') }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="hidden" name="com_id" value="{!! $val->com_id!!}">
+                                    <input type="hidden" name="st_id" value="{{ Auth::guard('student')->id()}}">
+                                    <input type="hidden" name="p_id" value="{{$post->p_id}}">
+                                    <textarea class="form-control rep_com" rows="1" name="com_repcontent"></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Gửi</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                @endif
+
+
                 @endforeach
-                
+
             </div>
         </article>
         <!-- Blog Sidebar Column -->
@@ -309,8 +330,8 @@ Chi tiết bài viết
 </div>
 @endsection
 @section('scrpit')
-    <script>
-      $(document).ready(function () {
+<script>
+    $(document).ready(function () {
 
 
         //bình luận nè
@@ -331,7 +352,7 @@ Chi tiết bài viết
             
             // console.log(com_id);
             var stu_id_cmt = $(".get_stu"+com_id).val();
-            console.log(stu_id_cmt);
+            // console.log(stu_id_cmt);
             
 
             $.ajaxSetup({
@@ -347,8 +368,8 @@ Chi tiết bài viết
                 dataType: "json",
                 success: function (response) {
                     // jQuery(this).children("i").css('color','rgb(51, 111, 172)!important;');
-                    console.log(response.data);
-                    console.log(com_id);
+                    // console.log(response.data);
+                    // console.log(com_id);
                     
                     $("#show_count"+com_id).html(response.data);
                     $(".show_count"+com_id).append("ok");
@@ -376,6 +397,6 @@ Chi tiết bài viết
           });
 
       });
-    </script>
+</script>
 
 @endsection
