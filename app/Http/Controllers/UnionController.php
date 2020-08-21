@@ -22,7 +22,7 @@ class UnionController extends Controller
             $blog=\DB::table('union_posts')
             ->where('ub_id',$union[0]->ub_id)
             ->paginate(10);
-            $now=$this->now();  
+            $now=$this->now();
             $day[]='';
 
             foreach($blog as $item)
@@ -58,8 +58,7 @@ class UnionController extends Controller
             $name_file=$slug.'.'.$type_file;
             $request->file('avatar')->move(
                 public_path('/img/union_post/'), //nơi cần lưu
-                $name_file,
-                );
+                $name_file);
             \DB::table('union_posts')->insert([
                 'stu_id'=>\Auth::id(),
                 'ub_id'=>$request->union,
@@ -92,7 +91,7 @@ class UnionController extends Controller
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,$post->up_id,false,false);
-        
+
         return view('client.pages.union.single',compact('post','day'));
     }
 

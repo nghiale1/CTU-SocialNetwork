@@ -28,7 +28,7 @@
                         <h5><b>Họ tên:</b> {{ Auth::guard('student')->user()->stu_name }}</h5>
                         <h5><b>MSSV:</b> {{ Auth::guard('student')->user()->stu_code }}</h5>
                         <h5><b>Ngày sinh:</b> {{ date('d-m-Y',strtotime(Auth::guard('student')->user()->stu_birth)) }}</h5>
-                        <img src="{{ asset('') }}{{ Auth::guard('student')->user()->stu_avatar }}" alt="">
+                        <img src="{{ asset('') }}img/avatar.jpg" alt="">
                         <h4><a class="dropdown-item" href="{{ route('chon-hoc-ky') }}">Tài liệu sinh viên</a></h4>
                     </div>
                     <div class="modal-footer">

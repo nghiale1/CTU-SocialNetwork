@@ -54,8 +54,7 @@ class ShareController extends Controller
             $name_file=$slug.'.'.$type_file;
             $request->file('avatar')->move(
                 public_path('/img/items/'.$request->type.'/'), //nơi cần lưu
-                $name_file,
-                );
+                $name_file);
             \DB::table('items')->insert([
                 'stu_id'=>\Auth::id(),
                 'type_id'=>$request->type,
@@ -90,7 +89,7 @@ class ShareController extends Controller
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,false,false,$post->item_id);
-        
+
         return view('client.pages.share.single',compact('post','day'));
     }
 

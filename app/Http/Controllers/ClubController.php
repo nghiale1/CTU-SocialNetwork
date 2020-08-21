@@ -57,8 +57,7 @@ class ClubController extends Controller
             $name_file=$slug.'.'.$type_file;
             $request->file('avatar')->move(
                 public_path('/img/club_post/'), //nơi cần lưu
-                $name_file,
-                );
+                $name_file);
             \DB::table('club_posts')->insert([
                 'stu_id'=>\Auth::id(),
                 'c_id'=>$request->club,
@@ -91,7 +90,7 @@ class ClubController extends Controller
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,false,$post->cp_id,false);
-        
+
         return view('client.pages.club.single',compact('post','day'));
     }
 
