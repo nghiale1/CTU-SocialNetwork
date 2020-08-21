@@ -82,6 +82,7 @@ class Controller extends BaseController
     public static function getClubStudent()
     {
         $id=\Auth::user()->clubs;
+        // dd($id);
         return $id;
     }
 

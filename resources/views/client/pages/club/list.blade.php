@@ -2,7 +2,7 @@
 
 {{-- Thêm khúc này để có trang tiêu đề nha --}}
 @section('title')
-Đoàn, hội
+Danh sách câu lạc bộ
 @endsection
 
 @section('content')
@@ -10,59 +10,22 @@
 <div class="row">
     <!-- Blog Column -->
     <div class="col-md-8">
-        <h1 class="page-header sidebar-title">
-            Đoàn hội
-            <span style="float: right"><button class="btn btn-ctu"
-                    onclick="window.location.href='{{route('union.create')}}'"> Thêm bài viết</button> </span>
-        </h1>
-        <!--
-                        First Blog Post -->
-        <div class="row blogu">
-            @forelse ($blog as $item)
-            <div class="col-md-12">
 
-                <div class="col-sm-4 col-md-4 ">
-                    <div class="blog-thumb">
-                        <a href="{{route('union.show',$item->up_slug)}}">
-                            <img class="img-responsive" src="{{asset($item->up_avatar)}}" alt="photo">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-sm-8 col-md-8">
+        @foreach ($list as $item)
+        <ul>
+            <li>
 
-
-                    <h2 class="blog-title">
-                        <a href="{{route('union.show',$item->up_slug)}}">{{$item->up_title}}</a>
-                    </h2>
-                    <p>
-
-                        <i class="fa fa-calendar-o"></i> {{$item->ngaydang}}
-                        <span class="comments-padding"></span>
-                        <i class="fa fa-eye" aria-hidden="true"></i> {{$item->up_view_count}}</i>
-                    </p>
-                </div>
-            </div>
-            <div class="col-md-12">&nbsp;</div>
-            @empty
-            <h2 class="blog-title">Bạn chưa tham gia chi hội nào
-            </h2>
-            @endforelse
-            {!!$blog->links()!!}
-        </div>
-        <hr>
+                {{$item->c_name}} <br>
+                {{$item->sothanhvien}} thành viên <br>
+                {{$item->sobaiviet}} bài viết <br>
+                <a href="{{route('club.join',$item->c_slug)}}">Tham gia</a>
+            </li>
+        </ul>
+        @endforeach
 
 
 
-        <div class="text-center">
-            <ul class="pagination">
-                <li class="active"> <a href="#">1</a> </li>
-                <li> <a href="#">2</a> </li>
-                <li> <a href="#">3</a> </li>
-                <li> <a href="#">4</a> </li>
-                <li> <a href="#">5</a> </li>
-                <li> <a href="#">Next</a> </li>
-            </ul>
-        </div>
+
     </div>
     <!-- Blog Sidebar Column -->
     <aside class="col-md-4 sidebar-padding">

@@ -15,8 +15,18 @@
         <div class="col-md-8">
             <form action="{{route('club.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
-                <input type="hidden" name="club" value="{{$club->c_id}}">
                 <table class="table table-responsive borderless text-right">
+                    <tr>
+                        <td>Chọn clb</td>
+                        <td>
+                            <select name="club" id="" class="form-control" style="color: #555;">
+                                @foreach ($club as $item)
+
+                                <option value="{{$item->c_id}}">{{$item->c_name}}</option>
+                                @endforeach
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <td>Chọn ảnh<red-star></red-star>
                         </td>

@@ -23,14 +23,13 @@ class UnionController extends Controller
             ->where('ub_id',$union[0]->ub_id)
             ->paginate(10);
             $now=$this->now();  
-            $day[]='';
 
             foreach($blog as $item)
-            $day[$item->up_id]=$this->getDay($item->up_id,$item->up_created);
+            $item->ngaydang=$this->getDay($item->up_id,$item->up_created);
         }
         // dd($blog);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.union.index',compact('union','blog','day'));
+        return view('client.pages.union.index',compact('union','blog'));
     }
 
     /**

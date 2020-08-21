@@ -46,10 +46,16 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
     });
     Route::group(['prefix' => 'cau-lac-bo'], function () {
+
         Route::get('/', 'ClubController@index')->name('club');
-        Route::get('/bai-viet/{slug}', 'ClubController@show')->name('club.show');
+        Route::group(['middleware' => ['checkMemberClub']], function () {
+            
+            Route::get('/bai-viet/{slug}', 'ClubController@show')->name('club.show');
+        });
         Route::get('/them-bai-viet', 'ClubController@create')->name('club.create');
         Route::post('/them-bai-viet', 'ClubController@store')->name('club.store');
+        Route::get('/tham-gia/{slug}', 'ClubController@join')->name('club.join');
+        Route::get('/danh-sach','ClubController@list' )->name('club.list');
     });
     Route::group(['prefix' => 'doan-hoi'], function () {
         Route::get('/', 'UnionController@index')->name('union');
@@ -72,6 +78,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
         Route::post('tai-lieu/thu-muc/tao-thu-muc-con', 'DocumentShareController@createNewFolderChild')->name('tao-thu-muc-con');
     });
+
     //lấy tất cả các messages, và sẽ có form để chat
     Route::get('messages', 'MessageController@index');
 
