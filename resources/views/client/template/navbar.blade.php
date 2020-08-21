@@ -23,18 +23,23 @@
                 <li @if (Request::segment(1)=='doan-hoi' ) class='active' @endif>
                     <a href="{{route('union')}}">Đoàn, Hội</a></li>
                 <li class="nav-item dropdown @if (Request::segment(1)=='tai-khoan') active @endif">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    {{-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    </a> --}}
+                    <!-- Button to Open the Modal -->
+                    <a href="#" id="user-click" class="nav-link" data-toggle="modal" data-target="#exampleModal">
                         Chào,
                         {{ Auth::guard('student')->user()->stu_name }}
                     </a>
-                    <div class="dropdown-menu" style="left: 0;" aria-labelledby="navbarDropdown">
+
+                    {{-- <div class="dropdown-menu" style="left: 0;" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('chon-hoc-ky') }}">Tài liệu</a>
                         <br>
                         <a class="dropdown-item" href="#">Lượt đánh giá</a>
                         <br>
                         <a class="dropdown-item" href="{{ route('logout') }}" style="background-color: red; color: white; ">Đăng xuất</a>
-                    </div>
+                    </div> --}}
                 </li>
             </ul>
         </div>

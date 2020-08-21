@@ -72,4 +72,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
     //lấy ra user hiện tại
     Route::get('current-user', 'UserController@currentUser');
+
+
+    Route::post('/chat','ChatController@sendMessage');
+    Route::get('/chat','ChatController@chatPage');
 });
