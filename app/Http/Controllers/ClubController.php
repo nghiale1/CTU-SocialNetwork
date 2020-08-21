@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use App\Events\NotificationClub;
 class ClubController extends Controller
 {
     /**
@@ -17,19 +18,17 @@ class ClubController extends Controller
         //get subject of user
         $club=$this->getClubStudent();
         $blog='';
-        $day[]='';
-        if($club->isNotEmpty()){
-
-            $blog=\DB::table('club_posts')
-            ->where('c_id',$club[0]->c_id)
-            ->paginate(10);
-
-            foreach($blog as $item)
-                $day[$item->cp_id]=$this->getDay($item->cp_id,$item->cp_created);
+        // dd($club);
+        $blog=\DB::table('club_posts')
+        ->join('clubs','clubs.c_id','club_posts.c_id')
+        ->where('club_posts.stu_id',\Auth::id())
+        ->paginate(10);
+        foreach($blog as $item){
+            $item->ngaydang=$this->getDay($item->cp_id,$item->cp_created);
         }
-        // dd($blog);
+        // dd($club);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.club.index',compact('club','blog','day'));
+        return view('client.pages.club.index',compact('club','blog'));
     }
 
     /**
@@ -42,11 +41,11 @@ class ClubController extends Controller
     {
         // dd(\Auth::id());
         $club=$this->getClubStudent();
-        $club=$club[0];
         return view('client.pages.club.create',compact('club'));
     }
     public function store(Request $request)
     {
+        // event(new NotificationClub($request->club,\Auth::id()));
         $id=\DB::table('club_posts')->max('cp_id');
         $title=$this->sanitize($request->title);
         $slug=$title.'.'.$request->union.'&'.($id+1);
@@ -115,5 +114,27 @@ class ClubController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function join($slug)
+    {
+        $find=DB::table('clubs')->where('c_slug',$slug)->first();
+        if($find){
+            DB::table('club_students')->insert([
+                'c_id'=>$find->c_id,
+                'stu_id'=>\Auth::id(),
+                'cs_role'=>'YC'
+            ]);
+            return back()->with('success','Yêu cầu tham gia của bạn đã được gửi!');
+        }
+        return back()->with('error','Yêu cầu tham gia của bạn đã được gửi!');
+    }
+    public function list()
+    {
+        $list=DB::select("SELECT clubs.*, COUNT(club_students.stu_id) as sothanhvien,COUNT(cp_id) as sobaiviet
+        FROM `clubs`
+        LEFT JOIN club_students on club_students.c_id=clubs.c_id
+        LEFT JOIN club_posts on club_students.stu_id=club_posts.stu_id and club_students.c_id=club_posts.c_id
+        GROUP BY clubs.c_id");
+        return view('client.pages.club.list',compact('list'));
     }
 }

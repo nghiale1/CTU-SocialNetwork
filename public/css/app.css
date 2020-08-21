@@ -1,10 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
 
 /*!
+<<<<<<< HEAD
  * Bootstrap v4.5.2 (https://getbootstrap.com/)
  * Copyright 2011-2020 The Bootstrap Authors
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+=======
+ * Bootstrap v4.5.0 (https://getbootstrap.com/)
+ * Copyright 2011-2020 The Bootstrap Authors
+ * Copyright 2011-2020 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+>>>>>>> nghia.le
  */
 
 :root {
@@ -180,12 +187,20 @@ a:hover {
   text-decoration: underline;
 }
 
+<<<<<<< HEAD
 a:not([href]):not([class]) {
+=======
+a:not([href]) {
+>>>>>>> nghia.le
   color: inherit;
   text-decoration: none;
 }
 
+<<<<<<< HEAD
 a:not([href]):not([class]):hover {
+=======
+a:not([href]):hover {
+>>>>>>> nghia.le
   color: inherit;
   text-decoration: none;
 }
@@ -572,7 +587,42 @@ pre code {
   overflow-y: scroll;
 }
 
+<<<<<<< HEAD
 .container,
+=======
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+
+>>>>>>> nghia.le
 .container-fluid,
 .container-xl,
 .container-lg,
@@ -716,6 +766,10 @@ pre code {
 .col {
   flex-basis: 0;
   flex-grow: 1;
+<<<<<<< HEAD
+=======
+  min-width: 0;
+>>>>>>> nghia.le
   max-width: 100%;
 }
 
@@ -923,6 +977,10 @@ pre code {
   .col-sm {
     flex-basis: 0;
     flex-grow: 1;
+<<<<<<< HEAD
+=======
+    min-width: 0;
+>>>>>>> nghia.le
     max-width: 100%;
   }
 
@@ -1135,6 +1193,10 @@ pre code {
   .col-md {
     flex-basis: 0;
     flex-grow: 1;
+<<<<<<< HEAD
+=======
+    min-width: 0;
+>>>>>>> nghia.le
     max-width: 100%;
   }
 
@@ -1347,6 +1409,10 @@ pre code {
   .col-lg {
     flex-basis: 0;
     flex-grow: 1;
+<<<<<<< HEAD
+=======
+    min-width: 0;
+>>>>>>> nghia.le
     max-width: 100%;
   }
 
@@ -1559,6 +1625,10 @@ pre code {
   .col-xl {
     flex-basis: 0;
     flex-grow: 1;
+<<<<<<< HEAD
+=======
+    min-width: 0;
+>>>>>>> nghia.le
     max-width: 100%;
   }
 
@@ -2334,7 +2404,10 @@ textarea.form-control {
 .valid-tooltip {
   position: absolute;
   top: 100%;
+<<<<<<< HEAD
   left: 0;
+=======
+>>>>>>> nghia.le
   z-index: 5;
   display: none;
   max-width: 100%;
@@ -2449,7 +2522,10 @@ textarea.form-control.is-valid {
 .invalid-tooltip {
   position: absolute;
   top: 100%;
+<<<<<<< HEAD
   left: 0;
+=======
+>>>>>>> nghia.le
   z-index: 5;
   display: none;
   max-width: 100%;
@@ -3940,7 +4016,10 @@ input[type=button].btn-block {
 
 .custom-control {
   position: relative;
+<<<<<<< HEAD
   z-index: 1;
+=======
+>>>>>>> nghia.le
   display: block;
   min-height: 1.44rem;
   padding-left: 1.5rem;
@@ -4476,13 +4555,19 @@ input[type=button].btn-block {
   background-color: #3490dc;
 }
 
+<<<<<<< HEAD
 .nav-fill > .nav-link,
+=======
+>>>>>>> nghia.le
 .nav-fill .nav-item {
   flex: 1 1 auto;
   text-align: center;
 }
 
+<<<<<<< HEAD
 .nav-justified > .nav-link,
+=======
+>>>>>>> nghia.le
 .nav-justified .nav-item {
   flex-basis: 0;
   flex-grow: 1;
@@ -4969,11 +5054,14 @@ input[type=button].btn-block {
   border-bottom-left-radius: calc(0.25rem - 1px);
 }
 
+<<<<<<< HEAD
 .card > .card-header + .list-group,
 .card > .list-group + .card-footer {
   border-top: 0;
 }
 
+=======
+>>>>>>> nghia.le
 .card-body {
   flex: 1 1 auto;
   min-height: 1px;
@@ -5012,6 +5100,13 @@ input[type=button].btn-block {
   border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
 }
 
+<<<<<<< HEAD
+=======
+.card-header + .list-group .list-group-item:first-child {
+  border-top: 0;
+}
+
+>>>>>>> nghia.le
 .card-footer {
   padding: 0.75rem 1.25rem;
   background-color: rgba(0, 0, 0, 0.03);
@@ -5041,7 +5136,10 @@ input[type=button].btn-block {
   bottom: 0;
   left: 0;
   padding: 1.25rem;
+<<<<<<< HEAD
   border-radius: calc(0.25rem - 1px);
+=======
+>>>>>>> nghia.le
 }
 
 .card-img,
@@ -5154,10 +5252,13 @@ input[type=button].btn-block {
   }
 }
 
+<<<<<<< HEAD
 .accordion {
   overflow-anchor: none;
 }
 
+=======
+>>>>>>> nghia.le
 .accordion > .card {
   overflow: hidden;
 }
@@ -6108,13 +6209,23 @@ a.close.disabled {
 }
 
 .toast {
+<<<<<<< HEAD
   flex-basis: 350px;
   max-width: 350px;
+=======
+  max-width: 350px;
+  overflow: hidden;
+>>>>>>> nghia.le
   font-size: 0.875rem;
   background-color: rgba(255, 255, 255, 0.85);
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.1);
   box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
+<<<<<<< HEAD
+=======
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+>>>>>>> nghia.le
   opacity: 0;
   border-radius: 0.25rem;
 }
@@ -6144,8 +6255,11 @@ a.close.disabled {
   background-color: rgba(255, 255, 255, 0.85);
   background-clip: padding-box;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+<<<<<<< HEAD
   border-top-left-radius: calc(0.25rem - 1px);
   border-top-right-radius: calc(0.25rem - 1px);
+=======
+>>>>>>> nghia.le
 }
 
 .toast-body {
@@ -10790,8 +10904,12 @@ a.text-dark:focus {
 }
 
 .text-break {
+<<<<<<< HEAD
   word-break: break-word !important;
   overflow-wrap: break-word !important;
+=======
+  word-wrap: break-word !important;
+>>>>>>> nghia.le
 }
 
 .text-reset {

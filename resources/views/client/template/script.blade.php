@@ -17,18 +17,18 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <!-- VueJs -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-
+@yield('scrpit')
 {{-- dấu * màu đỏ --}}
-{{-- <script>
+<script>
     Vue.component('red-star', {
     template: '<span style="color: red">*</span>',
 });
 </script>
-<script>
+{{-- <script>
     var app=new Vue({
         el:'#app'
     });
-</script>
+</script> --}}
 <script>
     tinymce.init({
         selector:'.tiny',
@@ -54,7 +54,7 @@
 </script>
 
 <!--Jquery Smooth Scrolling-->
-<script>
+{{-- <script>
     $(document).ready(function(){
                 $('.custom-menu a[href^="#"], .intro-scroller .inner-link').on('click',function (e) {
                     e.preventDefault();
@@ -89,14 +89,14 @@
                         } else {
                             $('#toTop').fadeOut();
                         }
-                    }); 
+                    });
                 $('#toTop').click(function(){
                     $("html, body").animate({ scrollTop: 0 }, 700);
                     return false;
                 });
 
             });
-</script>
+</script> --}}
 <script>
     document.addEventListener("DOMContentLoaded", function() {
     var elements = document.getElementsByTagName("INPUT");
@@ -112,6 +112,18 @@
         };
     }
 })
+</script>
+{{-- <script src="https://js.pusher.com/4.4/pusher.min.js"></script>
+<script type="text/javascript">
+    var pusher = new Pusher('{{ env('PUSHER_APP_KEY') }}', {
+        encrypted: true,
+        cluster: "ap1"
+    });
+    var channel = pusher.subscribe('NotificationEvent');
+    channel.bind('notification_club', function(e) {
+        console.log(e);
+
+    });
 </script> --}}
 
 

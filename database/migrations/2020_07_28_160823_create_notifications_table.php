@@ -23,7 +23,6 @@ class CreateNotificationsTable extends Migration
             $table->integer('stu_id')->unsigned();
             
             $table->foreign('stu_id')->references('stu_id')->on('students')->onDelete('cascade');
-
         });
     }
 

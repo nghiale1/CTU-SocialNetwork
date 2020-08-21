@@ -19,26 +19,30 @@
                         First Blog Post -->
         <div class="row blogu">
             @forelse ($blog as $item)
-            <div class="col-sm-4 col-md-4 ">
-                <div class="blog-thumb">
-                    <a href="{{route('union.show',$item->up_slug)}}">
-                        <img class="img-responsive" src="{{asset($item->up_avatar)}}" alt="photo">
-                    </a>
+            <div class="col-md-12">
+
+                <div class="col-sm-4 col-md-4 ">
+                    <div class="blog-thumb">
+                        <a href="{{route('union.show',$item->up_slug)}}">
+                            <img class="img-responsive" src="{{asset($item->up_avatar)}}" alt="photo">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-8">
+
+
+                    <h2 class="blog-title">
+                        <a href="{{route('union.show',$item->up_slug)}}">{{$item->up_title}}</a>
+                    </h2>
+                    <p>
+
+                        <i class="fa fa-calendar-o"></i> {{$item->ngaydang}}
+                        <span class="comments-padding"></span>
+                        <i class="fa fa-eye" aria-hidden="true"></i> {{$item->up_view_count}}</i>
+                    </p>
                 </div>
             </div>
-            <div class="col-sm-8 col-md-8">
-
-
-                <h2 class="blog-title">
-                    <a href="{{route('union.show',$item->up_slug)}}">{{$item->up_title}}</a>
-                </h2>
-                <p>
-
-                    <i class="fa fa-calendar-o"></i> {{$day[$item->up_id]}}
-                    <span class="comments-padding"></span>
-                    <i class="fa fa-eye" aria-hidden="true"></i> {{$item->up_view_count}}</i>
-                </p>
-            </div>
+            <div class="col-md-12">&nbsp;</div>
             @empty
             <h2 class="blog-title">Bạn chưa tham gia chi hội nào
             </h2>

@@ -19,7 +19,9 @@ Hỏi đáp
                         First Blog Post -->
         <div class="row blogu">
             <div class="col-sm-12 col-md-12">
-                @foreach ($blog as $item) <h2 class="blog-title">
+                {{-- {{dd($blog)}} --}}
+                @foreach ($blog as $item)
+                <h2 class="blog-title">
                     <a href="{{route('forum.show',$item->p_slug)}}">{{$item->p_title}}</a>
                 </h2>
                 <p>
@@ -51,6 +53,7 @@ Hỏi đáp
             </ul>
         </div>
     </div>
+
     <!-- Blog Sidebar Column -->
     <aside class="col-md-4 sidebar-padding">
         <div id="app">

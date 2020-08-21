@@ -6,6 +6,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use DB;
 use Carbon\Carbon;
 class Controller extends BaseController
 {
@@ -81,7 +82,29 @@ class Controller extends BaseController
     public static function getClubStudent()
     {
         $id=\Auth::user()->clubs;
+        // dd($id);
         return $id;
     }
+
+    public function postNoti($content,$id)
+    {
+        DB::table('notifications')->insert([
+            'noti_content'=>$content,
+            'stu_id'=>$id
+        ]);
+    }
+    public function getReasons()
+    {
+        $reasons=DB::table('reasons')->orderby('reason_content')->get();
+        // if(!$reasons->isNotEmpty()){
+        //     $reasons='';
+        // }
+        return $reasons;
+    }
+
+
+
+
+
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

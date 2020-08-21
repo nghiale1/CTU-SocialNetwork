@@ -19,28 +19,33 @@ Câu lạc bộ
                         First Blog Post -->
         <div class="row blogu">
             @forelse ($blog as $item)
-            <div class="col-sm-4 col-md-4 ">
-                <div class="blog-thumb">
-                    <a href="{{route('club.show',$item->cp_slug)}}">
-                        <img class="img-responsive" src="{{asset($item->cp_avatar)}}" alt="photo">
-                    </a>
+            <div class="col-md-12">
+
+                <div class="col-md-4 ">
+                    <div class="blog-thumb">
+                        <a href="{{route('club.show',$item->cp_slug)}}">
+                            <img class="img-responsive" src="{{asset($item->cp_avatar)}}" alt="photo">
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-sm-8 col-md-8">
+                <div class="col-md-8">
 
 
-                <h2 class="blog-title">
-                    <a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a>
-                </h2>
-                <p>
+                    <h2 class="blog-title">
+                        <a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a>
+                    </h2>
+                    <p>
 
-                    <i class="fa fa-calendar-o"></i> {{$day[$item->cp_id]}}
-                    <span class="comments-padding"></span>
-                    <i class="fa fa-eye" aria-hidden="true"></i> {{$item->cp_view_count}}</i>
-                </p>
+                        <i class="fa fa-calendar-o"></i> {{$item->ngaydang}}
+                        <span class="comments-padding"></span>
+                        <i class="fa fa-eye" aria-hidden="true"></i> {{$item->cp_view_count}}</i>
+                        <h4>{{$item->c_name}}</h4>
+                    </p>
+                </div>
+                <div class="col-md-12">&nbsp;</div>
             </div>
             @empty
-            <h2 class="blog-title">Bạn chưa tham gia câu lạc bộ nào
+            <h2 class="blog-title">Chưa có bài viết nào!
             </h2>
             @endforelse
             {!!$blog->links()!!}
