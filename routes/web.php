@@ -48,10 +48,17 @@ Route::group(['middleware' => ['checkLogin']], function () {
     Route::group(['prefix' => 'cau-lac-bo'], function () {
 
         Route::get('/', 'ClubController@index')->name('club');
-        Route::group(['middleware' => ['checkMemberClub']], function () {
+        // Route::group(['middleware' => ['checkManage']], function () {
             
-            Route::get('/bai-viet/{slug}', 'ClubController@show')->name('club.show');
-        });
+            Route::get('/{slug}/danh-sach-thanh-vien', 'ClubController@listMember')->name('club.listMember');
+            Route::get('/{slug}/danh-sach-yeu-cau', 'ClubController@listRequest')->name('club.listRequest');
+            Route::post('/{slug}/duyet-thanh-vien/', 'ClubController@accept')->name('club.accept');
+            Route::post('/{slug}/huy-thanh-vien/', 'ClubController@denied')->name('club.denied');
+            Route::post('/{slug}/xoa-thanh-vien/', 'ClubController@delete')->name('club.delete');
+            Route::post('/{slug}/thay-doi-chuc-vu/', 'ClubController@changeRole')->name('club.changeRole');
+        // });
+
+        Route::get('/bai-viet/{slug}/', 'ClubController@show')->name('club.show');
         Route::get('/them-bai-viet', 'ClubController@create')->name('club.create');
         Route::post('/them-bai-viet', 'ClubController@store')->name('club.store');
         Route::get('/tham-gia/{slug}', 'ClubController@join')->name('club.join');
@@ -110,3 +117,5 @@ Route::get('/da-like', 'ApiController@Liked')->name('Liked');
 Route::get('/cau-lac-bo-da-tham-gia', 'ApiController@JoinedClub')->name('JoinedClub');
 Route::get('/vat-dung-da-chia-se', 'ApiController@ShareItem')->name('ShareItem');
 Route::get('/bai-da-dang', 'ApiController@PostForum')->name('PostForum');
+
+Route::view('/404', '404')->name('404');

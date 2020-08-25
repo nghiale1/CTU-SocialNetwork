@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
 use App\Events\NotificationClub;
+use App\Models\ClubStudent;
 class ClubController extends Controller
 {
     /**
@@ -13,24 +14,117 @@ class ClubController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //get subject of user
-        $club=$this->getClubStudent();
         $blog='';
         // dd($club);
         $blog=\DB::table('club_posts')
+        ->join('club_students','club_students.c_id','club_posts.c_id')
         ->join('clubs','clubs.c_id','club_posts.c_id')
+        ->where('club_students.cs_role','!=','YC')
         ->where('club_posts.stu_id',\Auth::id())
+        ->groupBy('club_posts.cp_id')
         ->paginate(10);
         foreach($blog as $item){
             $item->ngaydang=$this->getDay($item->cp_id,$item->cp_created);
         }
         // dd($club);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.club.index',compact('club','blog'));
+        return view('client.pages.club.index',compact('blog'));
+    }
+    public function listRequest($slug)
+    {
+        
+        $list=ClubStudent::join('clubs','clubs.c_id','club_students.c_id')
+        ->join('students','students.stu_id','club_students.stu_id')
+        ->where('cs_role','YC')
+        ->where('c_slug',$slug)->get();
+        return view('client.pages.club.request',compact('list'));
+            
+    }
+    public function accept(Request $request)
+    {
+        $c=DB::table('clubs')->where('c_slug',$request->slug)->first();
+        if($c){
+            DB::table('club_students')->where('c_id',$c->c_id)
+            ->join('students as s','s.stu_id','club_students.stu_id')
+            ->where('stu_code',$request->code)->update([
+                'cs_role'=>'TV'
+            ]);
+        }
+        return response()->json('success', 200);
+        
+    }
+    public function denied(Request $request)
+    {
+        $c=DB::table('clubs')->where('c_slug',$request->slug)->first();
+        if($c){
+            DB::table('club_students')
+            ->join('students as s','s.stu_id','club_students.stu_id')
+            ->where('stu_code',$request->code)
+            ->where('c_id',$c->c_id)->delete();
+        }
+        return response()->json('success', 200);
+    }
+    public function delete(Request $request)
+    {
+        $c=DB::table('clubs')->where('c_slug',$request->slug)->first();
+        if($c){
+
+            DB::table('club_posts')
+            ->join('students as s','s.stu_id','club_posts.stu_id')
+            ->where('stu_code',$request->code)
+            ->where('c_id',$c->c_id)->delete();
+            DB::table('club_students')
+            ->join('students as s','s.stu_id','club_students.stu_id')
+            ->where('stu_code',$request->code)
+            ->where('c_id',$c->c_id)->delete();
+        }
+        return response()->json('success', 200);
     }
 
+    public function listMember(Request $request)
+    {
+        $club=DB::table('clubs')->where('c_slug',$request->slug)->first();
+        $list=DB::table('club_students')
+            ->join('students','students.stu_id','club_students.stu_id')->where('cs_role','!=','YC')
+            ->where('club_students.c_id',$club->c_id)
+            ->groupby('club_students.stu_id')
+            ->get()->ToArray();
+
+            $arr=['CNCLB','PCNCLB','UVCLB','TV'];
+
+            $count=DB::table('club_posts')
+            ->select('stu_id',DB::raw('count(*) as sobaidang'))->groupby('stu_id')->get();
+
+            foreach($list as $item){
+                $item->count=0;
+                $item->sort=array_search($item->cs_role,$arr);
+                foreach($count as $item2){
+                    if($item->stu_id==$item2->stu_id){
+                        
+                        $item->count=$item2->sobaidang;
+                    }
+                }
+            }
+            
+            usort($list,fn($a,$b)=>strcmp($a->sort,$b->sort));
+        return view('client.pages.club.member',compact('list','club'));
+    }
+    
+    public function changeRole(Request $request)
+    {
+        $c=DB::table('clubs')->where('c_slug',$request->slug)->first();
+        if($c){
+            DB::table('club_students')
+            ->join('students as s','s.stu_id','club_students.stu_id')
+            ->where('stu_code',$request->code)
+            ->where('c_id',$c->c_id)->update([
+                'cs_role'=>$request->value
+            ]);
+        }
+        return response()->json('success', 200);
+    }
     /**
      * Store a newly created resource in storage.
      *
