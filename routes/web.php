@@ -34,7 +34,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/bai-viet/binh-luan/thich', 'CommentController@Ajaxlike')->name('comment.like');
         // báo cáo
         Route::post('/bai-viet/bao-cao', 'ReportController@reportComment')->name('report.store');
-        
+
     });
     Route::group(['prefix' => 'chia-se'], function () {
         Route::get('/', 'ShareController@index')->name('share');
@@ -49,7 +49,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
         Route::get('/', 'ClubController@index')->name('club');
         Route::group(['middleware' => ['checkMemberClub']], function () {
-            
+
             Route::get('/bai-viet/{slug}', 'ClubController@show')->name('club.show');
         });
         Route::get('/them-bai-viet', 'ClubController@create')->name('club.create');
@@ -63,7 +63,9 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/them-bai-viet', 'UnionController@create')->name('union.create');
         Route::post('/them-bai-viet', 'UnionController@store')->name('union.store');
     });
-
+    Route::group(['prefix' => 'mon-hoc'], function () {
+        Route::get('/{slug}', 'SubjectController@show')->name('subject.detail');
+    });
     //Tài liệu để chung với cái group này luôn
     Route::group(['prefix' => 'tai-khoan'], function () {
         Route::get('tai-lieu/chon-hoc-ky','DocumentShareController@getHocKy')->name('chon-hoc-ky');

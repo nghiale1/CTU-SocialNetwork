@@ -24,7 +24,19 @@ class ShareController extends Controller
 
             $day[$item->item_id]=$this->getDay($item->item_id,$item->item_created);
         }
-       return view('client.pages.share.index',compact('share','day'));
+
+        $lastedPost = DB::table('items')->orderBy('item_created','DESC')->paginate(5);
+
+        $post_viewed = session()->get('posts.post_club');
+        // dd($post_viewed);
+        if($post_viewed)
+        {
+            $baivietdaxem = DB::table('items')->whereIn('item_slug',$post_viewed)->get();
+            // dd($baivietdaxem);
+            return view('client.pages.share.index',compact('share','day','baivietdaxem','lastedPost'));
+        }
+        $baivietdaxem = 0;
+        return view('client.pages.share.index',compact('share','day','baivietdaxem','lastedPost'));
     }
 
     /**
@@ -89,13 +101,14 @@ class ShareController extends Controller
         ->where('item_slug',$slug)
         ->first();
         $day='';
+        session()->push('posts.post_club', $slug);
         if($post){
             $day=$this->getDay($post->item_id,$post->item_created);
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,false,false,$post->item_id);
 
-        return view('client.pages.share.single',compact('post','day'));
+        return view('client.pages.share.single',compact('post','day','reason'));
     }
 
     /**
@@ -150,6 +163,14 @@ class ShareController extends Controller
                 $day[$item->item_id]=$this->format_date($item->item_created);
             }
         }
-       return view('client.pages.share.index',compact('share','day'));
+        $post_viewed = session()->get('posts.post_club');
+        if($post_viewed)
+        {
+            $baivietdaxem = DB::table('items')->whereIn('item_slug',$post_viewed)->get();
+            // dd($baivietdaxem);
+            return view('client.pages.share.index',compact('share','day','baivietdaxem'));
+        }
+        $baivietdaxem = 0;
+        return view('client.pages.share.index',compact('share','day','baivietdaxem'));
     }
 }

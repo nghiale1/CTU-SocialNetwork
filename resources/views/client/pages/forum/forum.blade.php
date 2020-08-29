@@ -36,21 +36,14 @@ Hỏi đáp
 
                 <hr>
                 @endforeach
-                {!!$blog->links()!!}
+                {{-- {!!$blog->links()!!} --}}
             </div>
         </div>
 
 
 
         <div class="text-center">
-            <ul class="pagination">
-                <li class="active"> <a href="#">1</a> </li>
-                <li> <a href="#">2</a> </li>
-                <li> <a href="#">3</a> </li>
-                <li> <a href="#">4</a> </li>
-                <li> <a href="#">5</a> </li>
-                <li> <a href="#">Next</a> </li>
-            </ul>
+            {{ $blog->links() }}
         </div>
     </div>
 
@@ -70,90 +63,36 @@ Hỏi đáp
         </div>
         <!-- Blog Categories -->
         <div class="blog-sidebar">
-            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Học phần</h4>
+            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Học phần đang học</h4>
             <hr>
             <ul class="sidebar-list">
-                <li><a href="#">CT258 - Phát triển thương mại điện tử</a></li>
-                <li><a href="#">CT255 - Nghiệp vụ thông minh</a></li>
-                <li><a href="#">CT264 - Cơ sở dữ liệu phân tán</a></li>
-                <li><a href="#">CT244 - Bảo trì phần mềm</a></li>
-                <li><a href="#">CT236 - Quản trị cơ sở dữ liệu trên Windows</a></li>
+                @foreach ($getSubPopular as $item)
+                    <li><a href="{{ route('subject.detail', ['idCode'=>$item->sub_code]) }}">{{ $item->sub_name }}</a></li>
+                @endforeach
             </ul>
         </div>
         <!-- Recent Posts -->
         <div class="blog-sidebar">
             <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
             <hr style="margin-bottom: 5px;">
+            @if ($baivietdaxem)
+                @foreach ($baivietdaxem as $item)
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
+                            alt="Media Object">
+                    </a>
+                    <div class="media-body">
+                        <h4 class="media-heading"><a href="{{route('forum.show',$item->p_slug)}}">{{ $item->p_title }}</a></h4>
+                        <span><a href="#">{{ $item->stu_name }}</a></span>
+                    </div>
+                </div>
+                @endforeach
+            @endif
 
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
-                        alt="Media Object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#">BI thi gì vậy mấy bạn?</a></h4>
-                    Mọi người cho mình hỏi môn BI thầy nghe thi đề gì vậy
-                </div>
-            </div>
-
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog2.jpg')}}"
-                        alt="Media Object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#">Post title 2</a></h4>
-                    This is some sample text. This is some sample text. This is some sample text.
-                </div>
-            </div>
-
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog3.jpg')}}"
-                        alt="Media Object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#">Post title 3</a></h4>
-                    This is some sample text. This is some sample text. This is some sample text.
-                </div>
-            </div>
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog1.jpg')}}"
-                        alt="Media Object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#">Post title 4</a></h4>
-                    This is some sample text. This is some sample text. This is some sample text.
-                </div>
-            </div>
         </div>
-
-        <div class="blog-sidebar">
-            <h4 class="sidebar-title"><i class="fa fa-comments"></i> Recent Comments</h4>
-            <hr style="margin-bottom: 5px;">
-            <ul class="sidebar-list">
-                <li>
-                    <h5 class="blog-title">Author Name</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore</p>
-                </li>
-                <li>
-                    <h5 class="blog-title">Author Name</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore</p>
-                </li>
-                <li>
-                    <h5 class="blog-title">Author Name</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                        labore et dolore</p>
-                </li>
-            </ul>
-        </div>
-
     </aside>
 </div>
 @endsection
 @push('script')
-
 @endpush

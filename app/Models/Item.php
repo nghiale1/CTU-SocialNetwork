@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Item
- * 
+ *
  * @property int $item_id
  * @property string $item_name
  * @property string $item_price
@@ -26,7 +26,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $item_deleted
  * @property int $stu_id
  * @property int $type_id
- * 
+ *
  * @property Student $student
  * @property Type $type
  * @property Collection|Image[] $images

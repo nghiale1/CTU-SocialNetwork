@@ -80,7 +80,7 @@ Câu lạc bộ
         </div>
         <!-- Blog Categories -->
         <div class="blog-sidebar">
-            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Học phần</h4>
+            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Câu lạc bộ tham gia</h4>
             <hr>
             <ul class="sidebar-list">
                 <li><a href="#">CT258 - Phát triển thương mại điện tử</a></li>

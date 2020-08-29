@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use DB;
+use Illuminate\Support\Facades\DB;
 use File;
 use Carbon\Carbon;
 class DocumentShareController extends Controller
@@ -114,7 +114,7 @@ class DocumentShareController extends Controller
                         'fo_slug' => utf8tourl($ten_mon_hoc),
                         'fo_name' => $ten_mon_hoc,
                         'fo_directory' => 'tai-lieu-sinh-vien'.'/'.$idStudent.'/'.utf8tourl($ten_mon_hoc),
-                        'fo_permission' => 'accesss',
+                        'fo_permission' => 'access',
                         'sub_id' => $id_mon_hoc,
                         'stu_id' => $idStudent
                     ]
@@ -122,7 +122,6 @@ class DocumentShareController extends Controller
             $path = public_path().'/'.'tai-lieu-sinh-vien'.'/'.$idStudent.'/'.utf8tourl($ten_mon_hoc);
             File::makeDirectory($path, 0777, true);
             return redirect()->back();
-            dd($path);
 
         } catch (\Throwable $th) {
             //throw $th;
