@@ -46,8 +46,12 @@
             @empty
             <h2 class="blog-title">Bạn chưa tham gia chi hội nào
             </h2>
+
             @endforelse
+            @if ($blog!='')
+
             {!!$blog->links()!!}
+            @endif
         </div>
         <hr>
 
