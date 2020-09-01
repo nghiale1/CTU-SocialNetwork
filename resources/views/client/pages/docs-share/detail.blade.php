@@ -49,7 +49,12 @@ Quản lý tài liệu - Tên môn
                         'nkSelected' => $nkSelected1->school_year_id,
                         'hkSelected' => $hkSelected1->semester_id,
                         'nameFolder'=> $item->fo_slug,
-                        ]) }}" class="btn btn-success" style="width: 100%;">
+                        ]) }}" class="btn
+                                        @if ($item->fo_permission == 'access')
+                                            btn-success
+                                        @else
+                                            btn-warning
+                                        @endif" style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
                         <h5 style="font-size: 10px;">
                             <i class="fa fa-folder" aria-hidden="true"></i> {{$item->fo_name}}
                         </h5>
@@ -73,7 +78,7 @@ Quản lý tài liệu - Tên môn
     @if (count($files) != null)
         @foreach ($files as $item)
             <div class="col-md-3">
-                <a href="#" class="btn btn-success" style="width: 100%;">
+                <a href="#" class="btn btn-success" style="width: 100%;" >
                     <h5 style="font-size: 10px;">
                         <i class="fa fa-folder" aria-hidden="true"></i> {{$item->f_name}}
                     </h5>
@@ -189,4 +194,65 @@ Quản lý tài liệu - Tên môn
     </script>
 @endsection
 @push('script')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+<script>
+    $(document).ready(function () {
+        $.contextMenu({
+            selector: '#right-click',
+            callback: function(key, options) {
+                var id = $(this).data('id');
+                if (key == "change") {
+                    console.log(id);
+                    var url = '{{ URL::to('tai-khoan/tai-lieu/thu-muc/thay-doi-trang-thai/') }}/' + id;
+                    console.log(url);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        // data: "data",
+                        dataType: "json",
+                        success: function (response) {
+                            alert(response);
+                            location.reload();
+                        }
+                    });
+                }
+            },
+            items: {
+                // "edit": {name: "Thay đổi trạng thái", icon: "edit"},
+                // "fold1": {
+                //     "name": "Thay đổi trạng thái",
+                //     "items": {
+                //         "private": {"name": "Riêng tư"},
+                //         "public": {"name": "Công khai"},
+                //     }
+                // },
+                "change" : {name : "Thay đôi trạng thái"},
+                "copy": {name: "Sao chép"},
+                "paste": {name: "Dán"},
+                "delete": {name: "Xóa"},
+            }
+        });
+
+        $.contextMenu({
+            selector: '#right-click-bg',
+            callback: function(key, options) {
+                // var m = "clicked: " + key;
+                // window.console && console.log(m) || alert(m);
+                if(key == "delete"){
+                    alert("Đã xóa");
+                }else if(key == "private"){
+                    alert("Đã chuyển trạng thái về riêng tư")
+                }else if(key == "public"){
+                    alert("Đã chuyển trạng thái về công khai")
+                }
+            },
+            items: {
+                "paste": {name: "Dán"},
+                "cancel": {name: "Hủy"},
+            }
+        });
+    });
+</script>
 @endpush

@@ -80,20 +80,17 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
         Route::post('tai-lieu/thu-muc/tao-thu-muc-con', 'DocumentShareController@createNewFolderChild')->name('tao-thu-muc-con');
         Route::post('tai-lieu/file/upload-file', 'DocumentShareController@uploadDocuments')->name('upload-file');
+
+        //Thay đổi trạng thái thư mục
+        Route::get('tai-lieu/thu-muc/thay-doi-trang-thai/{id}','DocumentShareController@changePermission')->name('thay-doi-trang-thai');
+        //Xoa thu muc
+        Route::get('tai-lieu/thu-muc/xoa-thu-muc/{id}', 'DocumentShareController@deleteFolder')->name('xoa-thu-muc');
     });
-
-    //lấy tất cả các messages, và sẽ có form để chat
-    Route::get('messages', 'MessageController@index');
-
-    //insert chat content vào trong database
-    Route::post('messages', 'MessageController@store');
-
     //lấy ra user hiện tại
     Route::get('current-user', 'UserController@currentUser');
 
-
-    Route::post('/chat','ChatController@sendMessage');
-    Route::get('/chat','ChatController@chatPage');
+    //form chat
+    Route::get('chat', 'ChatController@chatRoom')->name('chat');
 });
 Route::get('/x', function () {
     $user=Auth::user();

@@ -30,6 +30,7 @@
                         <h5><b>Ngày sinh:</b> {{ date('d-m-Y',strtotime(Auth::guard('student')->user()->stu_birth)) }}</h5>
                         <img src="{{ asset('') }}client/images/img/avatar.jpg" alt="">
                         <h4><a class="dropdown-item" href="{{ route('chon-hoc-ky') }}">Tài liệu sinh viên</a></h4>
+                        <h4><a class="dropdown-item" href="{{ route('chat') }}">Nhóm trò chuyện</a></h4>
                     </div>
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-modal">Đóng</button>

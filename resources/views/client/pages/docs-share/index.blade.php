@@ -77,8 +77,8 @@ Quản lý tài liệu
                                                     @else
                                                         btn-warning
                                                     @endif"
-                                                    style="width: 100%;" id="right-click">
-                    <p class="folder-{{ $item->fo_id }} idF" data-id="{{ $item->fo_id }}">{{ $item->fo_id }}</p>
+                                                    style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
+                    {{-- <p class="folder-{{ $item->fo_id }} idF" data-id="{{ $item->fo_id }}">{{ $item->fo_id }}</p> --}}
                     <h5 style="font-size: 10px;">
                         <i class="fa fa-folder" aria-hidden="true"></i> {{ $item->fo_name }}
                     </h5>
@@ -97,32 +97,48 @@ Quản lý tài liệu
         $.contextMenu({
             selector: '#right-click',
             callback: function(key, options) {
-                // var m = "clicked: " + key;
-                // window.console && console.log(m) || alert(m);
-                // if(key == "delete"){
-                //     alert("Đã xóa");
-                // }else if(key == "private"){
-                //     alert("Đã chuyển trạng thái về riêng tư")
-                // }else if(key == "public"){
-                //     alert("Đã chuyển trạng thái về công khai")
-                // }
-                //Xử lý phần công khai hoặc riêng tư
-                if (key == "private") {
-                    var idFolder = $('.idF').data('id');
-                    var name_id = $('#folder-'+idFolder).val();
-                    console.log(idFolder);
-                    // alert("Đã chuyển trạng thái thư mục "+ $('#folder-id').text() +" về riêng tư");
+                var id = $(this).data('id');
+                if (key == "change") {
+                    console.log(id);
+                    var url = '{{ URL::to('tai-khoan/tai-lieu/thu-muc/thay-doi-trang-thai/') }}/' + id;
+                    console.log(url);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        // data: "data",
+                        dataType: "json",
+                        success: function (response) {
+                            alert(response);
+                            location.reload();
+                        }
+                    });
+                }
+
+                if(key == "delete") {
+                    console.log(id);
+                    var url = '{{ URL::to('tai-khoan/tai-lieu/thu-muc/xoa-thu-muc/') }}/' + id;
+                    console.log(url);
+                    const del = confirm("Bạn có muốn xóa thư mục này ?");
+                    if(del == true){
+                        $.ajax({
+                            type: "GET",
+                            url: url,
+                            // data: "data",
+                            dataType: "json",
+                            success: function (response) {
+                                alert(response);
+                                location.reload();
+                            }
+                        });
+                    }
+                    else{
+
+                    }
+
                 }
             },
             items: {
-                // "edit": {name: "Thay đổi trạng thái", icon: "edit"},
-                "fold1": {
-                    "name": "Thay đổi trạng thái",
-                    "items": {
-                        "private": {"name": "Riêng tư"},
-                        "public": {"name": "Công khai"},
-                    }
-                },
+                "change" : {name : "Thay đôi trạng thái"},
                 "copy": {name: "Sao chép"},
                 "paste": {name: "Dán"},
                 "delete": {name: "Xóa"},

@@ -265,4 +265,27 @@ class DocumentShareController extends Controller
         }
 
     }
+
+    public function changePermission($id){
+        $idFolder = DB::table('folders')->where('fo_id',$id)->first();
+        if($idFolder->fo_permission === "access"){
+            DB::table('folders')->where('fo_id',$id)->update(['fo_permission' => 'denied']);
+            return response()->json("Đã chuyển về trạng thái riêng tư", 200);
+        }
+        else {
+            DB::table('folders')->where('fo_id',$id)->update(['fo_permission' => 'access']);
+            return response()->json("Đã chuyển về trạng thái công khai", 200);
+        }
+    }
+
+    public function deleteFolder($id){
+        $idStudent = Auth::guard('student')->id();
+        $idFolder = DB::table('folders')->where('fo_id',$id)->first();
+        $path = public_path().'/'.'tai-lieu-sinh-vien'.'/'.$idStudent.'/'.$idFolder->fo_slug;
+        File::deleteDirectory($path);
+        $delFolder = DB::table('folders')->where('fo_id',$id)->delete();
+
+        return response()->json("Đã xóa thư mục", 200);
+
+    }
 }

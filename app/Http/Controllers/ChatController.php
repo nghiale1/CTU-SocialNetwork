@@ -9,29 +9,15 @@ use DB;
 use Auth;
 class ChatController extends Controller
 {
-    public function __construct()
-   {
-       $this->middleware('checkLogin');
-   }
-
-   //Gửi tin nhắn đi
-    public function sendMessage(Request $request)
-   {
-       $message = [
-           "id" => $request->userid,
-           "sourceuserid" => Auth::guard('student')->id(),
-           "name" => Auth::guard('student')->user()->username,
-           "message" => $request->message
-       ];
-       event(new ChatMessage($message));
-       return "true";
-   }
-
-   //Trang để chat
-   public function chatPage()
-   {
-       $users = Student::take(10)->get();
-    //    User::take
-       return view('test-chat.chat',['users'=> $users]);
-   }
+    public function chatRoom(){
+        $idStudent = Auth::guard('student')->id();
+        $student= DB::table('students')->where('stu_id', $idStudent)->first();
+        $studentInClass = DB::table('youth_branchs')->where('yb_id',$student->yb_id)
+                        ->join('courses','courses.course_id','youth_branchs.course_id')
+                        ->join('majors','majors.major_id','youth_branchs.major_id')
+                        ->first();
+        $listStudent = DB::table('students')->where('yb_id',$studentInClass->yb_id)->get();
+        // dd($listStudent);
+        return view('client.pages.chat.index', compact('listStudent','studentInClass','student'));
+    }
 }
