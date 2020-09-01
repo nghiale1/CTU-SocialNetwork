@@ -7,7 +7,7 @@ Quản lý tài liệu - Tên môn
 
 @section('content')
 <div class="row">
-    
+
 </div>
 <div class="row" style="margin-bottom: 20px;">
     <h1 class="text-center">Quản lý tài liệu cá nhân</h1>
@@ -44,7 +44,7 @@ Quản lý tài liệu - Tên môn
             </div>
         </div>
     </div>
-    
+
 
     <div class="col-md-3">
         <div class="folder">
@@ -96,4 +96,65 @@ Quản lý tài liệu - Tên môn
     </script>
 @endsection
 @push('script')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+<script>
+    $(document).ready(function () {
+        $.contextMenu({
+            selector: '#right-click',
+            callback: function(key, options) {
+                var id = $(this).data('id');
+                if (key == "change") {
+                    console.log(id);
+                    var url = '{{ URL::to('tai-khoan/tai-lieu/thu-muc/thay-doi-trang-thai/') }}/' + id;
+                    console.log(url);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        // data: "data",
+                        dataType: "json",
+                        success: function (response) {
+                            alert(response);
+                            location.reload();
+                        }
+                    });
+                }
+            },
+            items: {
+                // "edit": {name: "Thay đổi trạng thái", icon: "edit"},
+                // "fold1": {
+                //     "name": "Thay đổi trạng thái",
+                //     "items": {
+                //         "private": {"name": "Riêng tư"},
+                //         "public": {"name": "Công khai"},
+                //     }
+                // },
+                "change" : {name : "Thay đôi trạng thái"},
+                "copy": {name: "Sao chép"},
+                "paste": {name: "Dán"},
+                "delete": {name: "Xóa"},
+            }
+        });
+
+        $.contextMenu({
+            selector: '#right-click-bg',
+            callback: function(key, options) {
+                // var m = "clicked: " + key;
+                // window.console && console.log(m) || alert(m);
+                if(key == "delete"){
+                    alert("Đã xóa");
+                }else if(key == "private"){
+                    alert("Đã chuyển trạng thái về riêng tư")
+                }else if(key == "public"){
+                    alert("Đã chuyển trạng thái về công khai")
+                }
+            },
+            items: {
+                "paste": {name: "Dán"},
+                "cancel": {name: "Hủy"},
+            }
+        });
+    });
+</script>
 @endpush

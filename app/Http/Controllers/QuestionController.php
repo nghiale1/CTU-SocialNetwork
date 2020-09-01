@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Notifications\InvoicePaid;
-use App\Notifications\Noti;
 
 class QuestionController extends Controller
 {
@@ -18,7 +17,7 @@ class QuestionController extends Controller
     {
         //
     }
-    
+
     public function getSubjectsStudent()
     {
         // get id of user
@@ -59,7 +58,7 @@ class QuestionController extends Controller
             'Thử ',
             'thông báo',
         ];
-        \Notification::send($user, new Noti($data));
+        // \Notification::send($user, new Noti($data));
         // $user->notify(new InvoicePaid($data));
         return redirect()->route('forum');
     }
@@ -71,7 +70,7 @@ class QuestionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-  
+
     public function show($id)
     {
         //

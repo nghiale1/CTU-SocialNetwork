@@ -23,34 +23,23 @@
                 <li @if (Request::segment(1)=='doan-hoi' ) class='active' @endif>
                     <a href="{{route('union')}}">Đoàn, Hội</a></li>
                 <li class="nav-item dropdown @if (Request::segment(1)=='tai-khoan') active @endif">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                    {{-- <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    </a> --}}
+                    <!-- Button to Open the Modal -->
+                    <a href="#" id="user-click" class="nav-link" data-toggle="modal" data-target="#exampleModal">
                         Chào,
                         {{ Auth::guard('student')->user()->stu_name }}
                     </a>
-                    <div class="dropdown-menu" style="left: 0;" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item"
-                            href="{{ route('Info',\Auth::user()->stu_code.".".(new Illuminate\Support\Str)::slug(\Auth::user()->stu_name)) }}">Thông
-                            tin cá nhân</a>
+
+                    {{-- <div class="dropdown-menu" style="left: 0;" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ route('chon-hoc-ky') }}">Tài liệu</a>
                         <br>
                         <a class="dropdown-item" href="{{ route('chon-hoc-ky') }}">Tài liệu</a>
                         <br>
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            style="background-color: red; color: white; ">Đăng xuất</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown dropdown-notifications">
-                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <i class="fa fa-bell-o" aria-hidden="true"></i><span class="caret"></span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right menu-notification" aria-labelledby="navbarDropdown">
-                        @foreach (Auth::user()->notifications->take(9) as $notification)
-                        <a class="dropdown-item" href="#">
-                            <span>{!! $notification->noti_content!!}</span><br>
-                        </a>
-                        @endforeach
-                    </div>
+                        <a class="dropdown-item" href="{{ route('logout') }}" style="background-color: red; color: white; ">Đăng xuất</a>
+                    </div> --}}
                 </li>
             </ul>
         </div>

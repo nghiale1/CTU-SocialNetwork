@@ -59,7 +59,7 @@ Quản lý tài liệu
         </div>
     </div>
 </div>
-<div class="row" style="margin-bottom: 20px;">
+<div class="row" style="margin-bottom: 20px;" id="right-click-bg">
     <h1 class="text-center">Thư mục môn học đã tạo</h1>
     <p style="border-top: 2px solid blue;"></p>
     @foreach ($sub_studied as $item)
@@ -71,8 +71,14 @@ Quản lý tài liệu
                                                     'hocky' => $hkSelected->semester_id,
                                                     'nameFolder'=> $item->fo_slug,
                                                     ]) }}"
-                                                    class="btn btn-success"
-                                                    style="width: 100%;">
+                                                    class="btn
+                                                    @if ($item->fo_permission == 'access')
+                                                        btn-success
+                                                    @else
+                                                        btn-warning
+                                                    @endif"
+                                                    style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
+                    {{-- <p class="folder-{{ $item->fo_id }} idF" data-id="{{ $item->fo_id }}">{{ $item->fo_id }}</p> --}}
                     <h5 style="font-size: 10px;">
                         <i class="fa fa-folder" aria-hidden="true"></i> {{ $item->fo_name }}
                     </h5>
@@ -81,33 +87,82 @@ Quản lý tài liệu
         </div>
     @endforeach
 </div>
-
-
-
-{{-- <script>
-    $(document).ready(function() {
-        $("#input-res-1").fileinput({
-            uploadUrl: "/site/test-upload",
-            enableResumableUpload: true,
-            initialPreviewAsData: true,
-            maxFileCount: 5,
-            theme: 'fas',
-            deleteUrl: '/site/file-delete',
-            fileActionSettings: {
-                showZoom: function(config) {
-                    if (config.type === 'pdf' || config.type === 'image') {
-                        return true;
-                    }
-                    return false;
+@endsection
+@push('script')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+<script>
+    $(document).ready(function () {
+        $.contextMenu({
+            selector: '#right-click',
+            callback: function(key, options) {
+                var id = $(this).data('id');
+                if (key == "change") {
+                    console.log(id);
+                    var url = '{{ URL::to('tai-khoan/tai-lieu/thu-muc/thay-doi-trang-thai/') }}/' + id;
+                    console.log(url);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        // data: "data",
+                        dataType: "json",
+                        success: function (response) {
+                            alert(response);
+                            location.reload();
+                        }
+                    });
                 }
+
+                if(key == "delete") {
+                    console.log(id);
+                    var url = '{{ URL::to('tai-khoan/tai-lieu/thu-muc/xoa-thu-muc/') }}/' + id;
+                    console.log(url);
+                    const del = confirm("Bạn có muốn xóa thư mục này ?");
+                    if(del == true){
+                        $.ajax({
+                            type: "GET",
+                            url: url,
+                            // data: "data",
+                            dataType: "json",
+                            success: function (response) {
+                                alert(response);
+                                location.reload();
+                            }
+                        });
+                    }
+                    else{
+
+                    }
+
+                }
+            },
+            items: {
+                "change" : {name : "Thay đôi trạng thái"},
+                "copy": {name: "Sao chép"},
+                "paste": {name: "Dán"},
+                "delete": {name: "Xóa"},
             }
         });
 
-        $('.file-drop-zone-title').text('Kéo & thả file vào đây');
-        $('.file-caption-name').attr('placeholder','Chọn file tải lên');
-        $('.close fileinput-remove').style('display','none');
+        $.contextMenu({
+            selector: '#right-click-bg',
+            callback: function(key, options) {
+                // var m = "clicked: " + key;
+                // window.console && console.log(m) || alert(m);
+                if(key == "delete"){
+                    alert("Đã xóa");
+                }else if(key == "private"){
+                    alert("Đã chuyển trạng thái về riêng tư")
+                }else if(key == "public"){
+                    alert("Đã chuyển trạng thái về công khai")
+                }
+            },
+            items: {
+                "paste": {name: "Dán"},
+                "cancel": {name: "Hủy"},
+            }
+        });
     });
-    </script> --}}
-@endsection
-@push('script')
+</script>
 @endpush

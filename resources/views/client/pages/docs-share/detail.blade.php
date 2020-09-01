@@ -26,7 +26,8 @@ Quản lý tài liệu - Tên môn
 </div>
 <div class="row" style="margin-bottom: 20px;">
     {{-- {{ dd($folder->fo_child) }} --}}
-    @if ($folder->fo_child != null)
+
+    @if ($folder->fo_child != null )
         <div class="col-md-12">
             <a href="{{ route('chi-tiet-thu-muc', [
                 'nkSelected' => $nkSelected1->school_year_id,
@@ -37,6 +38,9 @@ Quản lý tài liệu - Tên môn
     @endif
     <br>
     <br>
+    <div class="col-md-12">
+        <h2>Các thư mục</h2>
+    </div>
     @if (count($folder_detail) > 0)
         @foreach ($folder_detail as $item)
             <div class="col-md-3">
@@ -45,7 +49,12 @@ Quản lý tài liệu - Tên môn
                         'nkSelected' => $nkSelected1->school_year_id,
                         'hkSelected' => $hkSelected1->semester_id,
                         'nameFolder'=> $item->fo_slug,
-                        ]) }}" class="btn btn-success" style="width: 100%;">
+                        ]) }}" class="btn
+                                        @if ($item->fo_permission == 'access')
+                                            btn-success
+                                        @else
+                                            btn-warning
+                                        @endif" style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
                         <h5 style="font-size: 10px;">
                             <i class="fa fa-folder" aria-hidden="true"></i> {{$item->fo_name}}
                         </h5>
@@ -56,11 +65,33 @@ Quản lý tài liệu - Tên môn
     @else
         <div class="col-md-3">
             <div class="folder">
-                <h5>Thư mục rỗng</h5>
+                <h5>Không có thư mục con</h5>
             </div>
         </div>
     @endif
+    <br>
+    <br>
 
+    <div class="col-md-12">
+        <h2>Các tập tin</h2>
+    </div>
+    @if (count($files) != null)
+        @foreach ($files as $item)
+            <div class="col-md-3">
+                <a href="#" class="btn btn-success" style="width: 100%;" >
+                    <h5 style="font-size: 10px;">
+                        <i class="fa fa-folder" aria-hidden="true"></i> {{$item->f_name}}
+                    </h5>
+                </a>
+            </div>
+        @endforeach
+    @else
+        <div class="col-md-3">
+            <div class="folder">
+                <h5>Không có tệp</h5>
+            </div>
+        </div>
+    @endif
 </div>
 <!-- Modal Upload file-->
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -73,11 +104,22 @@ Quản lý tài liệu - Tên môn
         </button>
         </div>
         <div class="modal-body">
-            <form action="">
+            <form action="{{ route('upload-file') }}" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <input type="text" value="{{ $folder->fo_id }}" name="fo_id">
+                    <input type="text" value="{{ $folder->fo_directory }}" name="fo_dir">
                     <div class="file-loading">
-                        <input id="input-res-1" name="input-res-1[]" type="file" multiple>
+                        <input id="input-res-1"
+                        name="file[]"
+                        type="file"
+                        multiple
+                        data-min-file-count="2"
+                        >
                     </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="uploadImage">Upload</button>
                 </div>
             </form>
         </div>
@@ -124,12 +166,16 @@ Quản lý tài liệu - Tên môn
 <script>
     $(document).ready(function() {
         $("#input-res-1").fileinput({
-            uploadUrl: "/site/test-upload",
+            uploadUrl: "{{ route('upload-file') }}",
             enableResumableUpload: true,
             initialPreviewAsData: true,
-            maxFileCount: 5,
+            maxFileNum: 5,
             theme: 'fas',
-            deleteUrl: '/site/file-delete',
+            uploadExtraData: function () {
+                return {
+                    _token: $("input[name='_token']").val()
+                }
+            },
             fileActionSettings: {
                 showZoom: function(config) {
                     if (config.type === 'pdf' || config.type === 'image') {
@@ -144,7 +190,69 @@ Quản lý tài liệu - Tên môn
         $('.file-caption-name').attr('placeholder','Chọn file tải lên');
         $('.close fileinput-remove').style('display','none');
     });
+
     </script>
 @endsection
 @push('script')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
+<script>
+    $(document).ready(function () {
+        $.contextMenu({
+            selector: '#right-click',
+            callback: function(key, options) {
+                var id = $(this).data('id');
+                if (key == "change") {
+                    console.log(id);
+                    var url = '{{ URL::to('tai-khoan/tai-lieu/thu-muc/thay-doi-trang-thai/') }}/' + id;
+                    console.log(url);
+                    $.ajax({
+                        type: "GET",
+                        url: url,
+                        // data: "data",
+                        dataType: "json",
+                        success: function (response) {
+                            alert(response);
+                            location.reload();
+                        }
+                    });
+                }
+            },
+            items: {
+                // "edit": {name: "Thay đổi trạng thái", icon: "edit"},
+                // "fold1": {
+                //     "name": "Thay đổi trạng thái",
+                //     "items": {
+                //         "private": {"name": "Riêng tư"},
+                //         "public": {"name": "Công khai"},
+                //     }
+                // },
+                "change" : {name : "Thay đôi trạng thái"},
+                "copy": {name: "Sao chép"},
+                "paste": {name: "Dán"},
+                "delete": {name: "Xóa"},
+            }
+        });
+
+        $.contextMenu({
+            selector: '#right-click-bg',
+            callback: function(key, options) {
+                // var m = "clicked: " + key;
+                // window.console && console.log(m) || alert(m);
+                if(key == "delete"){
+                    alert("Đã xóa");
+                }else if(key == "private"){
+                    alert("Đã chuyển trạng thái về riêng tư")
+                }else if(key == "public"){
+                    alert("Đã chuyển trạng thái về công khai")
+                }
+            },
+            items: {
+                "paste": {name: "Dán"},
+                "cancel": {name: "Hủy"},
+            }
+        });
+    });
+</script>
 @endpush
