@@ -78,7 +78,6 @@ Quản lý tài liệu
                                                         btn-warning
                                                     @endif"
                                                     style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
-                    {{-- <p class="folder-{{ $item->fo_id }} idF" data-id="{{ $item->fo_id }}">{{ $item->fo_id }}</p> --}}
                     <h5 style="font-size: 10px;">
                         <i class="fa fa-folder" aria-hidden="true"></i> {{ $item->fo_name }}
                     </h5>

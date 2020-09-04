@@ -131,7 +131,7 @@
                 html += "</a>";
             }
             html += "<div class='img_cont_msg'><img src='https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg' class='rounded-circle user_img_msg'></div>";
-            html += "<div class='msg_cotainer'>" + snapshot.val().message + "<span class='msg_time'>" + snapshot.val().sender + "</span></div>";
+            html += "<div class='msg_cotainer' style='max-width: 200px;'>" + snapshot.val().message + "<span class='msg_time'>" + snapshot.val().sender + "</span></div>";
             //close tag
             html += "</div>";
             // console.log(snapshot.val().message);

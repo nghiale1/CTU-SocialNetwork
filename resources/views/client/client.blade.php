@@ -2,7 +2,6 @@
 <html lang="en">
 
 @include('client.template.head')
-
 <body data-spy="scroll">
     <div id="app">
 
@@ -14,7 +13,7 @@
             @yield('content')
 
         </section>
-        @include('client.template.footer')
+        {{-- @include('client.template.footer') --}}
     </div>
     <!-- The Modal -->
             <!-- Modal -->
