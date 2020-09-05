@@ -27,6 +27,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/bai-viet/{slug}', 'ForumController@show')->name('forum.show');
         Route::get('/them-cau-hoi', 'QuestionController@create')->name('question.create');
         Route::post('/them-cau-hoi', 'QuestionController@store')->name('question.store');
+        // tìm kiếm
+        Route::get('/tim-kiem', 'ForumController@search')->name('forum.search');
         // bình luận
         Route::post('/bai-viet/binh-luan', 'CommentController@store')->name('comment.store');
         Route::post('/bai-viet/binh-luan/tra-loi/', 'CommentController@repcomment')->name('repcomment.store');
