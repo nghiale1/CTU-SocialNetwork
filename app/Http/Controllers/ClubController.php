@@ -22,15 +22,31 @@ class ClubController extends Controller
         ->join('club_students','club_students.c_id','club_posts.c_id')
         ->join('clubs','clubs.c_id','club_posts.c_id')
         ->where('club_students.cs_role','!=','YC')
-        ->where('club_posts.stu_id',\Auth::id())
+        ->where('club_students.stu_id',\Auth::id())
         ->groupBy('club_posts.cp_id')
         ->paginate(10);
         foreach($blog as $item){
-            $item->ngaydang=$this->getDay($item->cp_id,$item->cp_created);
+            $item->day=$this->getDay($item->cp_id,$item->cp_created);
         }
         // dd($club);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
         return view('client.pages.club.index',compact('blog'));
+    }
+    public function search(Request $request)
+    {
+        $blog=\DB::table('club_posts')
+        ->join('club_students','club_students.c_id','club_posts.c_id')
+        ->join('clubs','clubs.c_id','club_posts.c_id')
+        ->where('club_students.cs_role','!=','YC')
+        ->where('club_students.stu_id',\Auth::id())
+        ->where('cp_title',"LIKE",'%'.$request->content.'%')->get();
+        if($blog->isNotEmpty()){
+            foreach($blog as $item){
+
+            $item->day=$this->getDay($item->cp_id,$item->cp_created);
+            }
+        }
+        return response()->json($blog, 200);
     }
     public function listRequest($slug)
     {

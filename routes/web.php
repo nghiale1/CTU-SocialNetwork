@@ -44,12 +44,17 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/them-bai-viet', 'ShareController@create')->name('share.create');
         Route::post('/them-bai-viet', 'ShareController@store')->name('share.store');
         Route::post('/bao-cao', 'ReportController@reportItem')->name('share.report');
+        // tìm kiếm
+        Route::get('/tim-kiem', 'ShareController@search')->name('share.search');
+        
+        
         Route::get('/{slug}', 'ShareController@list')->name('share.list');
-
     });
     Route::group(['prefix' => 'cau-lac-bo'], function () {
 
         Route::get('/', 'ClubController@index')->name('club');
+         // tìm kiếm
+         Route::get('/tim-kiem', 'ClubController@search')->name('club.search');
         // Route::group(['middleware' => ['checkManage']], function () {
 
             Route::get('/{slug}/danh-sach-thanh-vien', 'ClubController@listMember')->name('club.listMember');
