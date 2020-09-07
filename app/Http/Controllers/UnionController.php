@@ -26,10 +26,13 @@ class UnionController extends Controller
 
             foreach($blog as $item)
             $item->ngaydang=$this->getDay($item->up_id,$item->up_created);
+            return view('client.pages.union.index',compact('union','blog'));
+        }
+        else{
+            return redirect('/404');
         }
         // dd($blog);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.union.index',compact('union','blog'));
     }
 
     /**

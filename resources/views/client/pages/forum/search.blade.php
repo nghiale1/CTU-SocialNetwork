@@ -1,9 +1,15 @@
 <div class="blog-sidebar">
     <div class="input-group searchbar">
-        <input type="text" class="form-control searchbar" id="search" placeholder="Tìm kiếm...">
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="button" id="btnSearch">Tìm kiếm</button>
-        </span>
+
+        <form action="#" id="frmSearch">
+            <div class="form-group">
+
+                <input type="text" class="form-control searchbar" id="search" placeholder="Tìm kiếm...">
+                {{-- <span class="input-group-btn"> --}}
+                <button class="btn btn-default" type="submit" id="btnSearch">Tìm kiếm</button>
+                {{-- </span> --}}
+            </div>
+        </form>
     </div><!-- /input-group -->
 </div>
 @push('script')

@@ -66,6 +66,14 @@
             display: inline-flex;
             font-size: 20px;
         }
+
+        .blog-title {
+            font-size: 20px;
+        }
+
+        input#search {
+            width: auto;
+        }
     </style>
     @stack('css')
 </head>
