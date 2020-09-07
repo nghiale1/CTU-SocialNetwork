@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use DB;
+use Illuminate\Support\Facades\DB;
 use File;
+use Carbon\Carbon;
 class DocumentShareController extends Controller
 {
     //Chọn niên khóa và học kỳ
@@ -113,7 +114,7 @@ class DocumentShareController extends Controller
                         'fo_slug' => utf8tourl($ten_mon_hoc),
                         'fo_name' => $ten_mon_hoc,
                         'fo_directory' => 'tai-lieu-sinh-vien'.'/'.$idStudent.'/'.utf8tourl($ten_mon_hoc),
-                        'fo_permission' => 'accesss',
+                        'fo_permission' => 'access',
                         'sub_id' => $id_mon_hoc,
                         'stu_id' => $idStudent
                     ]
@@ -121,7 +122,6 @@ class DocumentShareController extends Controller
             $path = public_path().'/'.'tai-lieu-sinh-vien'.'/'.$idStudent.'/'.utf8tourl($ten_mon_hoc);
             File::makeDirectory($path, 0777, true);
             return redirect()->back();
-            dd($path);
 
         } catch (\Throwable $th) {
             //throw $th;
@@ -141,9 +141,11 @@ class DocumentShareController extends Controller
             $folder = DB::table('folders')->where('stu_id','=',$idStudent)->where('fo_slug','=',$nameFolders)->first();
             $folder_detail = DB::table('folders')->where('fo_child','=',$folder->fo_id)->get();
             $folder_child = DB::table('folders')->where('fo_id','=',$folder->fo_child)->first();
-            // dd($folder_detail);
+            // dd($folder->fo_id);
+            $files = DB::table('files')->where('fo_id','=',$folder->fo_id)->get();
+            // dd($files);
             // dd($folder);
-            return view('client.pages.docs-share.detail',compact(['folder','folder_detail','hkSelected','nkSelected','hkSelected1','nkSelected1','folder_child']));
+            return view('client.pages.docs-share.detail',compact(['folder','folder_detail','hkSelected','nkSelected','hkSelected1','nkSelected1','folder_child','files']));
         } catch (\Throwable $th) {
             //throw $th;
             dd("Có lỗi gì đó sửa đi");
@@ -227,8 +229,63 @@ class DocumentShareController extends Controller
         }
     }
 
+
+    //Upload file
     public function uploadDocuments(Request $request)
     {
+        // dd('123');
+        // dd($request->fo_id, $request->fo_dir);
+        $time_now = Carbon::now();
+        try {
+            //code...
+            if ($request->hasFile('file')) {
+                # code...
+                foreach ($request->file('file') as $file) {
+                    # code...
+                    $name = $file->getClientOriginalName();
+                    $size = $file->getClientSize();
+                    $file->move(public_path().'/'.$request->fo_dir, $name);
+                    DB::table('files')->insert(
+                        [
+                            'f_name' => $name,
+                            'f_size' => $size,
+                            'f_path' => $request->fo_dir.'/'.$name,
+                            'f_created' => $time_now,
+                            'f_updated' => 'NULL',
+                            'f_deleted' => 'NULL',
+                            'fo_id' => $request->fo_id
+                        ]
+                    );
+                }
+                return redirect()->back();
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd("Có cái lỗi gì đó ở đây mà tôi không biết hihi !");
+        }
+
+    }
+
+    public function changePermission($id){
+        $idFolder = DB::table('folders')->where('fo_id',$id)->first();
+        if($idFolder->fo_permission === "access"){
+            DB::table('folders')->where('fo_id',$id)->update(['fo_permission' => 'denied']);
+            return response()->json("Đã chuyển về trạng thái riêng tư", 200);
+        }
+        else {
+            DB::table('folders')->where('fo_id',$id)->update(['fo_permission' => 'access']);
+            return response()->json("Đã chuyển về trạng thái công khai", 200);
+        }
+    }
+
+    public function deleteFolder($id){
+        $idStudent = Auth::guard('student')->id();
+        $idFolder = DB::table('folders')->where('fo_id',$id)->first();
+        $path = public_path().'/'.'tai-lieu-sinh-vien'.'/'.$idStudent.'/'.$idFolder->fo_slug;
+        File::deleteDirectory($path);
+        $delFolder = DB::table('folders')->where('fo_id',$id)->delete();
+
+        return response()->json("Đã xóa thư mục", 200);
 
     }
 }

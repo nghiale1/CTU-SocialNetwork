@@ -18,37 +18,40 @@ Câu lạc bộ
         <!--
                         First Blog Post -->
         <div class="row blogu">
-            @forelse ($blog as $item)
-            <div class="col-md-12">
+            <div id="content">
 
-                <div class="col-md-4 ">
-                    <div class="blog-thumb">
-                        <a href="{{route('club.show',$item->cp_slug)}}">
-                            <img class="img-responsive" src="{{asset($item->cp_avatar)}}" alt="photo">
-                        </a>
+                @forelse ($blog as $item)
+                <div class="col-md-12">
+
+                    <div class="col-md-4 ">
+                        <div class="blog-thumb">
+                            <a href="{{route('club.show',$item->cp_slug)}}">
+                                <img class="img-responsive" src="{{asset($item->cp_avatar)}}" alt="photo">
+                            </a>
+                        </div>
                     </div>
+                    <div class="col-md-8">
+
+
+                        <h2 class="blog-title">
+                            <a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a>
+                        </h2>
+                        <p>
+
+                            <i class="fa fa-calendar-o"></i> {{$item->day}}
+                            <span class="comments-padding"></span>
+                            <i class="fa fa-eye" aria-hidden="true"></i> {{$item->cp_view_count}}</i>
+                            <h4>{{$item->c_name}}</h4>
+                        </p>
+                    </div>
+                    <div class="col-md-12">&nbsp;</div>
                 </div>
-                <div class="col-md-8">
-
-
-                    <h2 class="blog-title">
-                        <a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a>
-                    </h2>
-                    <p>
-
-                        <i class="fa fa-calendar-o"></i> {{$item->ngaydang}}
-                        <span class="comments-padding"></span>
-                        <i class="fa fa-eye" aria-hidden="true"></i> {{$item->cp_view_count}}</i>
-                        <h4>{{$item->c_name}}</h4>
-                    </p>
-                </div>
-                <div class="col-md-12">&nbsp;</div>
+                @empty
+                <h2 class="blog-title">Chưa có bài viết nào!
+                </h2>
+                @endforelse
+                {!!$blog->links()!!}
             </div>
-            @empty
-            <h2 class="blog-title">Chưa có bài viết nào!
-            </h2>
-            @endforelse
-            {!!$blog->links()!!}
         </div>
         <hr>
 
@@ -70,17 +73,10 @@ Câu lạc bộ
         <div id="app">
             <chat-layout></chat-layout>
         </div>
-        <div class="blog-sidebar">
-            <div class="input-group searchbar">
-                <input type="text" class="form-control searchbar" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Tìm kiếm</button>
-                </span>
-            </div><!-- /input-group -->
-        </div>
+        @include('client.pages.club.search')
         <!-- Blog Categories -->
         <div class="blog-sidebar">
-            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Học phần</h4>
+            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Câu lạc bộ tham gia</h4>
             <hr>
             <ul class="sidebar-list">
                 <li><a href="#">CT258 - Phát triển thương mại điện tử</a></li>

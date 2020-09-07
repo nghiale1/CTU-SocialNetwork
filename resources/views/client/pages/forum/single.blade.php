@@ -242,21 +242,9 @@ Chi tiết bài viết
                     </span>
                 </div><!-- /input-group -->
             </div>
-            <!-- Blog Categories -->
-            <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Categories</h4>
-                <hr>
-                <ul class="sidebar-list">
-                    <li><a href="#">Applications</a></li>
-                    <li><a href="#">Photography</a></li>
-                    <li><a href="#">Art Design</a></li>
-                    <li><a href="#">Graphic Design</a></li>
-                    <li><a href="#">Category Name</a></li>
-                </ul>
-            </div>
             <!-- Recent Posts -->
             <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Recent Posts</h4>
+                <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
                 <hr style="margin-bottom: 5px;">
 
                 <div class="media">
@@ -302,29 +290,6 @@ Chi tiết bài viết
                     </div>
                 </div>
             </div>
-
-            <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-comments"></i> Recent Comments</h4>
-                <hr style="margin-bottom: 5px;">
-                <ul class="sidebar-list">
-                    <li>
-                        <h5 class="blog-title">Author Name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore</p>
-                    </li>
-                    <li>
-                        <h5 class="blog-title">Author Name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore</p>
-                    </li>
-                    <li>
-                        <h5 class="blog-title">Author Name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore</p>
-                    </li>
-                </ul>
-            </div>
-
         </aside>
     </div>
 </div>
@@ -336,7 +301,7 @@ Chi tiết bài viết
 
         //bình luận nè
         $(".showrep").hide();
-          $('.showform').click(function () { 
+          $('.showform').click(function () {
             //   console.log("ok");
             var id = $(this).attr('data-id');
             //   console.log(id);
@@ -346,14 +311,14 @@ Chi tiết bài viết
 
 
         //thích
-          $('.click_like').click(function () { 
+          $('.click_like').click(function () {
             //   console.log("ok");
             var com_id = $(this).attr('data-com_id');
-            
+
             // console.log(com_id);
             var stu_id_cmt = $(".get_stu"+com_id).val();
             // console.log(stu_id_cmt);
-            
+
 
             $.ajaxSetup({
                 headers: {
@@ -370,7 +335,7 @@ Chi tiết bài viết
                     // jQuery(this).children("i").css('color','rgb(51, 111, 172)!important;');
                     // console.log(response.data);
                     // console.log(com_id);
-                    
+
                     $("#show_count"+com_id).html(response.data);
                     $(".show_count"+com_id).append("ok");
                     // document.getElementsByClassName("#show_count"+com_id).innerHTML("ok");
@@ -378,21 +343,21 @@ Chi tiết bài viết
 
                     if(response.data  ==1)
                     {
-                       
+
                         $( ".icon"+com_id).toggleClass( "icon-color");
-                       
+
                         // console.log("ok");
                     }else{
                         $( ".icon"+com_id).toggleClass( "icon-color");
                         // console.log("ok");
-                     
-                        
+
+
                     }
-                   
+
                 }
             });
-           
-            
+
+
 
           });
 

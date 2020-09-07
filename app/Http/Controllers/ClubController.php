@@ -22,15 +22,31 @@ class ClubController extends Controller
         ->join('club_students','club_students.c_id','club_posts.c_id')
         ->join('clubs','clubs.c_id','club_posts.c_id')
         ->where('club_students.cs_role','!=','YC')
-        ->where('club_posts.stu_id',\Auth::id())
+        ->where('club_students.stu_id',\Auth::id())
         ->groupBy('club_posts.cp_id')
         ->paginate(10);
         foreach($blog as $item){
-            $item->ngaydang=$this->getDay($item->cp_id,$item->cp_created);
+            $item->day=$this->getDay($item->cp_id,$item->cp_created);
         }
         // dd($club);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
         return view('client.pages.club.index',compact('blog'));
+    }
+    public function search(Request $request)
+    {
+        $blog=\DB::table('club_posts')
+        ->join('club_students','club_students.c_id','club_posts.c_id')
+        ->join('clubs','clubs.c_id','club_posts.c_id')
+        ->where('club_students.cs_role','!=','YC')
+        ->where('club_students.stu_id',\Auth::id())
+        ->where('cp_title',"LIKE",'%'.$request->content.'%')->get();
+        if($blog->isNotEmpty()){
+            foreach($blog as $item){
+
+            $item->day=$this->getDay($item->cp_id,$item->cp_created);
+            }
+        }
+        return response()->json($blog, 200);
     }
     public function listRequest($slug)
     {
@@ -150,8 +166,7 @@ class ClubController extends Controller
             $name_file=$slug.'.'.$type_file;
             $request->file('avatar')->move(
                 public_path('/img/club_post/'), //nơi cần lưu
-                $name_file,
-                );
+                $name_file);
             \DB::table('club_posts')->insert([
                 'stu_id'=>\Auth::id(),
                 'c_id'=>$request->club,
@@ -184,7 +199,7 @@ class ClubController extends Controller
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,false,$post->cp_id,false);
-        
+
         return view('client.pages.club.single',compact('post','day'));
     }
 
@@ -225,9 +240,9 @@ class ClubController extends Controller
     }
     public function list()
     {
-        $list=DB::select("SELECT clubs.*, COUNT(club_students.stu_id) as sothanhvien,COUNT(cp_id) as sobaiviet 
-        FROM `clubs` 
-        LEFT JOIN club_students on club_students.c_id=clubs.c_id 
+        $list=DB::select("SELECT clubs.*, COUNT(club_students.stu_id) as sothanhvien,COUNT(cp_id) as sobaiviet
+        FROM `clubs`
+        LEFT JOIN club_students on club_students.c_id=clubs.c_id
         LEFT JOIN club_posts on club_students.stu_id=club_posts.stu_id and club_students.c_id=club_posts.c_id
         GROUP BY clubs.c_id");
         return view('client.pages.club.list',compact('list'));

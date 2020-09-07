@@ -27,6 +27,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/bai-viet/{slug}', 'ForumController@show')->name('forum.show');
         Route::get('/them-cau-hoi', 'QuestionController@create')->name('question.create');
         Route::post('/them-cau-hoi', 'QuestionController@store')->name('question.store');
+        // tìm kiếm
+        Route::get('/tim-kiem', 'ForumController@search')->name('forum.search');
         // bình luận
         Route::post('/bai-viet/binh-luan', 'CommentController@store')->name('comment.store');
         Route::post('/bai-viet/binh-luan/tra-loi/', 'CommentController@repcomment')->name('repcomment.store');
@@ -34,7 +36,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/bai-viet/binh-luan/thich', 'CommentController@Ajaxlike')->name('comment.like');
         // báo cáo
         Route::post('/bai-viet/bao-cao', 'ReportController@reportComment')->name('report.store');
-        
+
     });
     Route::group(['prefix' => 'chia-se'], function () {
         Route::get('/', 'ShareController@index')->name('share');
@@ -42,14 +44,19 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/them-bai-viet', 'ShareController@create')->name('share.create');
         Route::post('/them-bai-viet', 'ShareController@store')->name('share.store');
         Route::post('/bao-cao', 'ReportController@reportItem')->name('share.report');
+        // tìm kiếm
+        Route::get('/tim-kiem', 'ShareController@search')->name('share.search');
+        
+        
         Route::get('/{slug}', 'ShareController@list')->name('share.list');
-
     });
     Route::group(['prefix' => 'cau-lac-bo'], function () {
 
         Route::get('/', 'ClubController@index')->name('club');
+         // tìm kiếm
+         Route::get('/tim-kiem', 'ClubController@search')->name('club.search');
         // Route::group(['middleware' => ['checkManage']], function () {
-            
+
             Route::get('/{slug}/danh-sach-thanh-vien', 'ClubController@listMember')->name('club.listMember');
             Route::get('/{slug}/danh-sach-yeu-cau', 'ClubController@listRequest')->name('club.listRequest');
             Route::post('/{slug}/duyet-thanh-vien/', 'ClubController@accept')->name('club.accept');
@@ -58,7 +65,11 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/{slug}/thay-doi-chuc-vu/', 'ClubController@changeRole')->name('club.changeRole');
         // });
 
-        Route::get('/bai-viet/{slug}/', 'ClubController@show')->name('club.show');
+        //Route::get('/bai-viet/{slug}/', 'ClubController@show')->name('club.show');
+        Route::group(['middleware' => ['checkMemberClub']], function () {
+
+            Route::get('/bai-viet/{slug}', 'ClubController@show')->name('club.show');
+        });
         Route::get('/them-bai-viet', 'ClubController@create')->name('club.create');
         Route::post('/them-bai-viet', 'ClubController@store')->name('club.store');
         Route::get('/tham-gia/{slug}', 'ClubController@join')->name('club.join');
@@ -70,7 +81,9 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/them-bai-viet', 'UnionController@create')->name('union.create');
         Route::post('/them-bai-viet', 'UnionController@store')->name('union.store');
     });
-
+    Route::group(['prefix' => 'mon-hoc'], function () {
+        Route::get('/{slug}', 'SubjectController@show')->name('subject.detail');
+    });
     //Tài liệu để chung với cái group này luôn
     Route::group(['prefix' => 'tai-khoan'], function () {
         Route::get('tai-lieu/chon-hoc-ky','DocumentShareController@getHocKy')->name('chon-hoc-ky');
@@ -84,16 +97,18 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('tai-lieu/thu-muc/{nkSelected}/{hkSelected}/{nameFolder}','DocumentShareController@folderDetail')->name('chi-tiet-thu-muc');
 
         Route::post('tai-lieu/thu-muc/tao-thu-muc-con', 'DocumentShareController@createNewFolderChild')->name('tao-thu-muc-con');
+        Route::post('tai-lieu/file/upload-file', 'DocumentShareController@uploadDocuments')->name('upload-file');
+
+        //Thay đổi trạng thái thư mục
+        Route::get('tai-lieu/thu-muc/thay-doi-trang-thai/{id}','DocumentShareController@changePermission')->name('thay-doi-trang-thai');
+        //Xoa thu muc
+        Route::get('tai-lieu/thu-muc/xoa-thu-muc/{id}', 'DocumentShareController@deleteFolder')->name('xoa-thu-muc');
     });
-
-    //lấy tất cả các messages, và sẽ có form để chat
-    Route::get('messages', 'MessageController@index');
-
-    //insert chat content vào trong database
-    Route::post('messages', 'MessageController@store');
-
     //lấy ra user hiện tại
     Route::get('current-user', 'UserController@currentUser');
+
+    //form chat
+    Route::get('chat', 'ChatController@chatRoom')->name('chat');
 });
 Route::get('/x', function () {
     $user=Auth::user();
