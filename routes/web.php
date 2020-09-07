@@ -29,11 +29,19 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/them-cau-hoi', 'QuestionController@store')->name('question.store');
         // tìm kiếm
         Route::get('/tim-kiem', 'ForumController@search')->name('forum.search');
+        Route::get('/xoa-cau-hoi/{id}', 'QuestionController@destroy')->name('question.delete');
         // bình luận
         Route::post('/bai-viet/binh-luan', 'CommentController@store')->name('comment.store');
         Route::post('/bai-viet/binh-luan/tra-loi/', 'CommentController@repcomment')->name('repcomment.store');
         Route::post('/bai-viet/binh-luan/xoa/', 'CommentController@destroycmt')->name('comment.destroy');
         Route::post('/bai-viet/binh-luan/thich', 'CommentController@Ajaxlike')->name('comment.like');
+        Route::post('/bai-viet/binh-luan/sua/{id}', 'CommentController@getcomment')->name('comment.update');
+
+
+
+
+
+
         // báo cáo
         Route::post('/bai-viet/bao-cao', 'ReportController@reportComment')->name('report.store');
 
@@ -41,6 +49,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
     Route::group(['prefix' => 'chia-se'], function () {
         Route::get('/', 'ShareController@index')->name('share');
         Route::get('/bai-viet/{slug}', 'ShareController@show')->name('share.show');
+        Route::get('/bai-viet/xoa/{id}', 'ShareController@destroy')->name('share.delete');
         Route::get('/them-bai-viet', 'ShareController@create')->name('share.create');
         Route::post('/them-bai-viet', 'ShareController@store')->name('share.store');
         Route::post('/bao-cao', 'ReportController@reportItem')->name('share.report');

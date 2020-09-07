@@ -4,7 +4,13 @@
 @section('title')
 Hỏi đáp
 @endsection
-
+@push('css')
+<style>
+    .delete-blog {
+        float: right;
+    }
+</style>
+@endpush
 @section('content')
 <!-- Page Content -->
 <div class="row">
@@ -32,7 +38,12 @@ Hỏi đáp
                     <i class="fa fa-eye" aria-hidden="true">{{$item->p_view_count}}</i>
                     <span class="comments-padding"></span>
                     <i class="fa fa-calendar-o"></i> {{$item->day}}
+                    {{-- <div class="delete-blog"> --}}
+                        <span class="comments-padding"></span>
+                        <a href="{{ route('question.delete', ['id'=>$item->p_id]) }}" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                    {{-- </div> --}}
                 </p>
+               
 
                 <hr>
                 @endforeach

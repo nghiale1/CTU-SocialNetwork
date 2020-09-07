@@ -124,7 +124,7 @@ class ClubController extends Controller
                 }
             }
             
-            usort($list,fn($a,$b)=>strcmp($a->sort,$b->sort));
+            // usort($list,fn($a,$b)=>strcmp($a->sort,$b->sort));
         return view('client.pages.club.member',compact('list','club'));
     }
     

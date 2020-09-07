@@ -48,7 +48,7 @@
             </h2>
 
             @endforelse
-            @if ($blog!='')
+            @if ($blog!=[])
 
             {!!$blog->links()!!}
             @endif
