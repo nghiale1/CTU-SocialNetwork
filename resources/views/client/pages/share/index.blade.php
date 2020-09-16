@@ -39,7 +39,7 @@ Chia sẻ
         <div class="row blogu">
             <div id="content">
 
-                {{--@forelse ($share as $item)
+                {{-- @forelse ($share as $item)
                  <div class="col-md-3">
 
                     <div class="card" style="width: 18rem;">
@@ -66,25 +66,29 @@ Chia sẻ
                 <h2 class="blog-title">Chưa có vật dụng nào được chia sẻ
                 </h2>
                 @endforelse
-                {!!$share->links()!!}
-            </div> --}}
-            @forelse ($share as $item)
-            <div class="col-md-4">
-                <div class="card" style="width: 20rem;">
-                    <img  class="image" data-id="{!!$item->item_id!!}" id="myImg{!!$item->item_id!!}" src="{{asset($item->item_avatar)}}" class="getimg" class="img-responsive card-img-top"
-                    alt="{{asset($item->item_avatar)}}" style="width:200px; height:150px;">
-                    <div class="card-body">
-                      <h5 class="card-title style-color" style="test">{{$item->item_title}}</h5>
-                      <a href="{{route('share.show',$item->item_slug)}}" class="style-color"> Xem chi tiết...</a>
+                {!!$share->links()!!} --}}
+                @forelse ($share as $item)
+                <div class="col-md-4">
+                    <div class="card" style="width: 20rem;">
+                        <img  class="image" data-id="{!!$item->item_id!!}" id="myImg{!!$item->item_id!!}" src="{{asset($item->item_avatar)}}" class="getimg" class="img-responsive card-img-top"
+                        alt="{{asset($item->item_avatar)}}" style="width:200px; height:150px;">
+                        <div class="card-body">
+                        <h5 class="card-title style-color" style="text-transform:capitalize;">{{$item->item_title}}</h5>
+                        <a href="{{route('share.show',$item->item_slug)}}" class="style-color"> Xem chi tiết...</a>
+                        <span style="float: right"><i class="fa fa-eye" aria-hidden="true"></i>
+                            {{$item->item_view_count}}</i></span>
+                        </div>
                     </div>
-                  </div>
-            </div>
-            @empty
-                <h2 class="blog-title">Chưa có vật dụng nào được chia sẻ
-                </h2>
+                </div>
+                @empty
+                    <h2 class="blog-title">Chưa có vật dụng nào được chia sẻ
+                    </h2>
                 @endforelse
-                {!!$share->links()!!}
-        </div>
+                    {!!$share->links()!!}
+                
+            </div>
+               
+
         </div>
         <hr>
 
@@ -155,7 +159,7 @@ Chia sẻ
       
        
     </div>
-    @include('client.pages.share.right')
+    {{-- @include('client.pages.share.right') --}}
 </div>
 
 @endsection

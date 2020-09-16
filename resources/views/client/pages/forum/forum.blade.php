@@ -40,7 +40,9 @@ Hỏi đáp
                     <i class="fa fa-calendar-o"></i> {{$item->day}}
                     {{-- <div class="delete-blog"> --}}
                         <span class="comments-padding"></span>
-                        <a href="{{ route('question.delete', ['id'=>$item->p_id]) }}" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                        @if($item->stu_id==Auth::id())
+                        <a href="{{ route('question.delete', ['id'=>$item->p_id]) }}" id="deleteblog" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                        @endif
                     {{-- </div> --}}
                 </p>
                
@@ -100,4 +102,16 @@ Hỏi đáp
 </div>
 @endsection
 @push('script')
+<script>
+    $('#deleteblog').click(function () { 
+
+        if(confirm('Bạn có muốn xóa ?')){
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+    
+</script>
 @endpush

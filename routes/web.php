@@ -55,6 +55,10 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/bao-cao', 'ReportController@reportItem')->name('share.report');
         // tìm kiếm
         Route::get('/tim-kiem', 'ShareController@search')->name('share.search');
+        //bình luận
+        Route::post('/binh-luan', 'ShareController@comment')->name('share.comment.store');
+        Route::post('/tra-loi-binh-luan', 'ShareController@repcomment')->name('share.comment.store.rep');
+        Route::post('/xoa-binh-luan', 'ShareController@destroycomment')->name('share.comment.destroy');
         
         
         Route::get('/{slug}', 'ShareController@list')->name('share.list');
@@ -72,7 +76,14 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/{slug}/huy-thanh-vien/', 'ClubController@denied')->name('club.denied');
             Route::post('/{slug}/xoa-thanh-vien/', 'ClubController@delete')->name('club.delete');
             Route::post('/{slug}/thay-doi-chuc-vu/', 'ClubController@changeRole')->name('club.changeRole');
+
+            //bình luận
+            Route::post('/binh-luan', 'ClubController@comment')->name('club.comment.store');
+            Route::post('/tra-loi-binh-luan', 'ClubController@commentrep')->name('club.comment.rep');
+
+
         // });
+            
 
         //Route::get('/bai-viet/{slug}/', 'ClubController@show')->name('club.show');
         Route::group(['middleware' => ['checkMemberClub']], function () {
