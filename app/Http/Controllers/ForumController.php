@@ -58,7 +58,7 @@ class ForumController extends Controller
         {
             $baivietdaxem = DB::table('posts')->whereIn('p_slug',$post_viewed)->join('students','students.stu_id','posts.stu_id')->get();
             // dd($baivietdaxem);
-            return view('client.pages.forum.forum',compact('subject','blog','day','getSubPopular','baivietdaxem'));
+            return view('client.pages.forum.forum',compact('subject','blog','getSubPopular','baivietdaxem'));
         }
         // dd($post_viewed);
         $baivietdaxem = 0;

@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return redirect()->route('form_login');
 });
+
 // Route::redirect('/', '/there');
 Route::get('/dang-nhap', 'LoginController@form_login')->name('form_login');
 Route::post('/xac-thuc', 'LoginController@login')->name('login');
@@ -86,6 +87,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
     });
     //Tài liệu để chung với cái group này luôn
     Route::group(['prefix' => 'tai-khoan'], function () {
+        //danh sách học phần
+        Route::get('/hoc-phan-da-hoc', 'AccountController@studied')->name('account.studied');
         Route::get('tai-lieu/chon-hoc-ky','DocumentShareController@getHocKy')->name('chon-hoc-ky');
         Route::get('tai-lieu','DocumentShareController@index')->name('tai-lieu');
         Route::get('tai-lieu/tao-thu-muc/{ten_mon_hoc}/{id_mon_hoc}','DocumentShareController@createNewFolderSubjects')->name('tao-thu-muc-mon-hoc');
