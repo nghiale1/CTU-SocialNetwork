@@ -18,11 +18,11 @@ class ShareController extends Controller
     public function index()
     {
        $share=Item::paginate(10);
-        $day[]='';
+        
 
         foreach($share as $item){
 
-            $day[$item->item_id]=$this->getDay($item->item_id,$item->item_created);
+            $item->day=$this->getDay($item->item_id,$item->item_created);
         }
 
         $lastedPost = DB::table('items')->orderBy('item_created','DESC')->paginate(5);
@@ -33,12 +33,23 @@ class ShareController extends Controller
         {
             $baivietdaxem = DB::table('items')->whereIn('item_slug',$post_viewed)->get();
             // dd($baivietdaxem);
-            return view('client.pages.share.index',compact('share','day','baivietdaxem','lastedPost'));
+            return view('client.pages.share.index',compact('share','baivietdaxem','lastedPost'));
         }
         $baivietdaxem = 0;
-        return view('client.pages.share.index',compact('share','day','baivietdaxem','lastedPost'));
+        return view('client.pages.share.index',compact('share','baivietdaxem','lastedPost'));
     }
 
+    public function search(Request $request)
+    {
+        $share=\DB::table('items')->where('item_name',"LIKE",'%'.$request->content.'%')->get();
+        if($share->isNotEmpty()){
+            foreach($share as $item){
+
+            $item->day=$this->getDay($item->item_id,$item->item_created);
+            }
+        }
+        return response()->json($share, 200);
+    }
     /**
      * Show the form for creating a new resource.
      *

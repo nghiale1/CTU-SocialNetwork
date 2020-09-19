@@ -18,20 +18,20 @@ Hỏi đáp
         <!--
                         First Blog Post -->
         <div class="row blogu">
-            <div class="col-sm-12 col-md-12">
+            <div class="col-sm-12 col-md-12" id="content">
                 {{-- {{dd($blog)}} --}}
                 @foreach ($blog as $item)
                 <h2 class="blog-title">
                     <a href="{{route('forum.show',$item->p_slug)}}">{{$item->p_title}}</a>
                 </h2>
                 <p>
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true">{{$item->count_like($item->p_id)}}</i>
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true">{{$item->likes}}</i>
                     <span class="comments-padding"></span>
-                    <i class="fa fa-comment">{{count($item->comments)}}</i>
+                    <i class="fa fa-comment">{{$item->comments}}</i>
                     <span class="comments-padding"></span>
                     <i class="fa fa-eye" aria-hidden="true">{{$item->p_view_count}}</i>
                     <span class="comments-padding"></span>
-                    <i class="fa fa-calendar-o"></i> {{$day[$item->p_id]}}
+                    <i class="fa fa-calendar-o"></i> {{$item->day}}
                 </p>
 
                 <hr>
@@ -53,21 +53,14 @@ Hỏi đáp
             <chat-layout></chat-layout>
         </div>
         {{-- <script type="text/javascript" src="{{ asset('js/app.js') }}"></script> --}}
-        <div class="blog-sidebar">
-            <div class="input-group searchbar">
-                <input type="text" class="form-control searchbar" placeholder="Search for...">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button">Tìm kiếm</button>
-                </span>
-            </div><!-- /input-group -->
-        </div>
+        @include('client.pages.forum.search')
         <!-- Blog Categories -->
         <div class="blog-sidebar">
             <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Học phần đang học</h4>
             <hr>
             <ul class="sidebar-list">
                 @foreach ($getSubPopular as $item)
-                    <li><a href="{{ route('subject.detail', ['idCode'=>$item->sub_code]) }}">{{ $item->sub_name }}</a></li>
+                <li><a href="{{ route('subject.detail', ['idCode'=>$item->sub_code]) }}">{{ $item->sub_name }}</a></li>
                 @endforeach
             </ul>
         </div>
@@ -76,18 +69,19 @@ Hỏi đáp
             <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
             <hr style="margin-bottom: 5px;">
             @if ($baivietdaxem)
-                @foreach ($baivietdaxem as $item)
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
-                            alt="Media Object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="{{route('forum.show',$item->p_slug)}}">{{ $item->p_title }}</a></h4>
-                        <span><a href="#">{{ $item->stu_name }}</a></span>
-                    </div>
+            @foreach ($baivietdaxem as $item)
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
+                        alt="Media Object">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="{{route('forum.show',$item->p_slug)}}">{{ $item->p_title }}</a>
+                    </h4>
+                    <span><a href="#">{{ $item->stu_name }}</a></span>
                 </div>
-                @endforeach
+            </div>
+            @endforeach
             @endif
 
         </div>

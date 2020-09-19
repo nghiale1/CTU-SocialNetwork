@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< HEAD
     "content-hash": "ff7158a5a04b9b1913d8e0e2150e6a18",
-=======
-    "content-hash": "e9659a79f0a53ce97295a8c3b6419926",
->>>>>>> nghia.le
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -4501,6 +4497,7 @@
             "keywords": [
                 "tokenizer"
             ],
+            "abandoned": true,
             "time": "2019-09-17T06:23:10+00:00"
         },
         {

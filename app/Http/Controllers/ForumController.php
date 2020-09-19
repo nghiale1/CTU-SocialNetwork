@@ -31,12 +31,16 @@ class ForumController extends Controller
         }
         $blog=$blog->paginate(10);
         $now=$this->now();
-        $day[]='';
         if($blog->isNotEmpty()){
             foreach($blog as $item){
-                $day[$item->p_id]=$this->getDay($item->p_id,$item->p_created);
+                $item->day=$this->getDay($item->p_id,$item->p_created);
+                $item->likes=\DB::table('posts as p')->join('comments as c','c.com_id','p.p_id')
+		->join('likes as l','l.com_id','c.com_id')
+		->where('p.p_id',$item->p_id)->count();
+                $item->comments=count($item->comments);
             }
         }
+        // dd($blog);
 
 
         //GET
@@ -54,11 +58,28 @@ class ForumController extends Controller
         {
             $baivietdaxem = DB::table('posts')->whereIn('p_slug',$post_viewed)->join('students','students.stu_id','posts.stu_id')->get();
             // dd($baivietdaxem);
-            return view('client.pages.forum.forum',compact('subject','blog','day','getSubPopular','baivietdaxem'));
+            return view('client.pages.forum.forum',compact('subject','blog','getSubPopular','baivietdaxem'));
         }
         // dd($post_viewed);
         $baivietdaxem = 0;
-        return view('client.pages.forum.forum',compact('subject','blog','day','getSubPopular', 'baivietdaxem'));
+        return view('client.pages.forum.forum',compact('subject','blog','getSubPopular', 'baivietdaxem'));
+    }
+
+    public function search(Request $request)
+    {
+        $blog=DB::table('posts')->where('p_title',"LIKE",'%'.$request->content.'%')->get();
+        if($blog->isNotEmpty()){
+            $now=$this->now();
+                foreach($blog as $item){
+                    $item->day=$this->getDay($item->p_id,$item->p_created);
+                    $item->likes=\DB::table('posts as p')->join('comments as c','c.p_id','p.p_id')
+                    ->join('likes as l','l.com_id','c.com_id')
+                    ->where('p.p_id',$item->p_id)->count();
+                    $item->comments=\DB::table('posts as p')->join('comments as c','c.p_id','p.p_id')
+                    ->where('p.p_id',$item->p_id)->count();
+                }
+            }
+        return response()->json($blog, 200);
     }
 
     /**

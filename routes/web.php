@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return redirect()->route('form_login');
 });
+
 // Route::redirect('/', '/there');
 Route::get('/dang-nhap', 'LoginController@form_login')->name('form_login');
 Route::post('/xac-thuc', 'LoginController@login')->name('login');
@@ -27,6 +28,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/bai-viet/{slug}', 'ForumController@show')->name('forum.show');
         Route::get('/them-cau-hoi', 'QuestionController@create')->name('question.create');
         Route::post('/them-cau-hoi', 'QuestionController@store')->name('question.store');
+        // tìm kiếm
+        Route::get('/tim-kiem', 'ForumController@search')->name('forum.search');
         // bình luận
         Route::post('/bai-viet/binh-luan', 'CommentController@store')->name('comment.store');
         Route::post('/bai-viet/binh-luan/tra-loi/', 'CommentController@repcomment')->name('repcomment.store');
@@ -42,12 +45,28 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/them-bai-viet', 'ShareController@create')->name('share.create');
         Route::post('/them-bai-viet', 'ShareController@store')->name('share.store');
         Route::post('/bao-cao', 'ReportController@reportItem')->name('share.report');
+        // tìm kiếm
+        Route::get('/tim-kiem', 'ShareController@search')->name('share.search');
+        
+        
         Route::get('/{slug}', 'ShareController@list')->name('share.list');
-
     });
     Route::group(['prefix' => 'cau-lac-bo'], function () {
 
         Route::get('/', 'ClubController@index')->name('club');
+         // tìm kiếm
+         Route::get('/tim-kiem', 'ClubController@search')->name('club.search');
+        // Route::group(['middleware' => ['checkManage']], function () {
+
+            Route::get('/{slug}/danh-sach-thanh-vien', 'ClubController@listMember')->name('club.listMember');
+            Route::get('/{slug}/danh-sach-yeu-cau', 'ClubController@listRequest')->name('club.listRequest');
+            Route::post('/{slug}/duyet-thanh-vien/', 'ClubController@accept')->name('club.accept');
+            Route::post('/{slug}/huy-thanh-vien/', 'ClubController@denied')->name('club.denied');
+            Route::post('/{slug}/xoa-thanh-vien/', 'ClubController@delete')->name('club.delete');
+            Route::post('/{slug}/thay-doi-chuc-vu/', 'ClubController@changeRole')->name('club.changeRole');
+        // });
+
+        //Route::get('/bai-viet/{slug}/', 'ClubController@show')->name('club.show');
         Route::group(['middleware' => ['checkMemberClub']], function () {
 
             Route::get('/bai-viet/{slug}', 'ClubController@show')->name('club.show');
@@ -68,6 +87,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
     });
     //Tài liệu để chung với cái group này luôn
     Route::group(['prefix' => 'tai-khoan'], function () {
+        //danh sách học phần
+        Route::get('/hoc-phan-da-hoc', 'AccountController@studied')->name('account.studied');
         Route::get('tai-lieu/chon-hoc-ky','DocumentShareController@getHocKy')->name('chon-hoc-ky');
         Route::get('tai-lieu','DocumentShareController@index')->name('tai-lieu');
         Route::get('tai-lieu/tao-thu-muc/{ten_mon_hoc}/{id_mon_hoc}','DocumentShareController@createNewFolderSubjects')->name('tao-thu-muc-mon-hoc');
@@ -114,3 +135,5 @@ Route::get('/da-like', 'ApiController@Liked')->name('Liked');
 Route::get('/cau-lac-bo-da-tham-gia', 'ApiController@JoinedClub')->name('JoinedClub');
 Route::get('/vat-dung-da-chia-se', 'ApiController@ShareItem')->name('ShareItem');
 Route::get('/bai-da-dang', 'ApiController@PostForum')->name('PostForum');
+
+Route::view('/404', '404')->name('404');

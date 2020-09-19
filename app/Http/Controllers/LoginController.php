@@ -63,7 +63,7 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
-        // dd($request);
+       
         $arr = [
             'username' => $request->code,
             'password' => $request->password,

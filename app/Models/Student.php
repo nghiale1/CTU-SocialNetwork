@@ -83,6 +83,10 @@ class Student extends Authenticatable
 		return $this->belongsToMany(Club::class, 'club_students', 'stu_id', 'c_id')
 					->withPivot('cs_role', 'cs_created');
 	}
+	public function club_students()
+	{
+		return $this->hasMany(ClubStudent::class, 'stu_id');
+	}
 
 	public function count_view_clubs()
 	{
