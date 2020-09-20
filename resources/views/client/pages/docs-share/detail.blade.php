@@ -9,11 +9,11 @@ Quản lý tài liệu - Tên môn
 <div class="row">
     <a href="{{ url("http://127.0.0.1:8000/tai-khoan/tai-lieu?nienkhoa=$nkSelected&hocky=$hkSelected") }}" class="label label-default">Quay lại trang môn học</a>
 </div>
-<div class="row" style="margin-bottom: 20px;">
+<div class="row">
     <h1 class="text-center">Tài liệu môn: {{ $folder->fo_name }}</h1>
     <p style="border-top: 2px solid blue;"></p>
 
-    <div class="col-md-12" style="margin-bottom: 10px;">
+    <div class="col-md-12">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1">
             Tải tệp lên
@@ -24,74 +24,75 @@ Quản lý tài liệu - Tên môn
 
     </div>
 </div>
-<div class="row" style="margin-bottom: 20px;">
-    {{-- {{ dd($folder->fo_child) }} --}}
-
-    @if ($folder->fo_child != null )
+<div class="row">
+    {{-- Phần cây thư mục --}}
+    {{-- Phần thư mục và file --}}
+    <div class="col-md-12"  style="padding-left: 0px;">
+        @if ($folder->fo_child != null )
+            <div class="col-md-12">
+                <a href="{{ route('chi-tiet-thu-muc', [
+                    'nkSelected' => $nkSelected1->school_year_id,
+                    'hkSelected' => $hkSelected1->semester_id,
+                    'nameFolder'=> $folder_child->fo_slug,
+                    ]) }}" class="label label-warning">Quay lại</a>
+            </div>
+        @endif
         <div class="col-md-12">
-            <a href="{{ route('chi-tiet-thu-muc', [
-                'nkSelected' => $nkSelected1->school_year_id,
-                'hkSelected' => $hkSelected1->semester_id,
-                'nameFolder'=> $folder_child->fo_slug,
-                ]) }}" class="label label-warning">Quay lại</a>
+            <h2>Các thư mục</h2>
         </div>
-    @endif
-    <br>
-    <br>
-    <div class="col-md-12">
-        <h2>Các thư mục</h2>
-    </div>
-    @if (count($folder_detail) > 0)
-        @foreach ($folder_detail as $item)
+        @if (count($folder_detail) > 0)
+            @foreach ($folder_detail as $item)
+                <div class="col-md-3">
+                    <div class="folder">
+                        <a href="{{ route('chi-tiet-thu-muc', [
+                            'nkSelected' => $nkSelected1->school_year_id,
+                            'hkSelected' => $hkSelected1->semester_id,
+                            'nameFolder'=> $item->fo_slug,
+                            ]) }}" class="btn
+                                            @if ($item->fo_permission == 'access')
+                                                btn-success
+                                            @else
+                                                btn-warning
+                                            @endif" style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
+                            <h5 style="font-size: 10px;">
+                                <i class="fa fa-folder" aria-hidden="true"></i> {{$item->fo_name}}
+                            </h5>
+                        </a>
+                    </div>
+                </div>
+            @endforeach
+        @else
             <div class="col-md-3">
                 <div class="folder">
-                    <a href="{{ route('chi-tiet-thu-muc', [
-                        'nkSelected' => $nkSelected1->school_year_id,
-                        'hkSelected' => $hkSelected1->semester_id,
-                        'nameFolder'=> $item->fo_slug,
-                        ]) }}" class="btn
-                                        @if ($item->fo_permission == 'access')
-                                            btn-success
-                                        @else
-                                            btn-warning
-                                        @endif" style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
+                    <h5>Không có thư mục con</h5>
+                </div>
+            </div>
+        @endif
+        <br>
+        <br>
+
+        <div class="col-md-12">
+            <h2>Các tập tin</h2>
+        </div>
+        @if (count($files) != null)
+            @foreach ($files as $item)
+                <div class="col-md-3">
+                    <a href="#" class="btn btn-success" style="width: 100%;" >
                         <h5 style="font-size: 10px;">
-                            <i class="fa fa-folder" aria-hidden="true"></i> {{$item->fo_name}}
+                            <i class="fa fa-folder" aria-hidden="true"></i> {{$item->f_name}}
                         </h5>
                     </a>
                 </div>
-            </div>
-        @endforeach
-    @else
-        <div class="col-md-3">
-            <div class="folder">
-                <h5>Không có thư mục con</h5>
-            </div>
-        </div>
-    @endif
-    <br>
-    <br>
-
-    <div class="col-md-12">
-        <h2>Các tập tin</h2>
-    </div>
-    @if (count($files) != null)
-        @foreach ($files as $item)
+            @endforeach
+        @else
             <div class="col-md-3">
-                <a href="#" class="btn btn-success" style="width: 100%;" >
-                    <h5 style="font-size: 10px;">
-                        <i class="fa fa-folder" aria-hidden="true"></i> {{$item->f_name}}
-                    </h5>
-                </a>
+                <div class="folder">
+                    <h5>Không có tệp</h5>
+                </div>
             </div>
-        @endforeach
-    @else
-        <div class="col-md-3">
-            <div class="folder">
-                <h5>Không có tệp</h5>
-            </div>
-        </div>
-    @endif
+        @endif
+    </div>
+
 </div>
 <!-- Modal Upload file-->
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
