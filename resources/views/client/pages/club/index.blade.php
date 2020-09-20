@@ -4,7 +4,15 @@
 @section('title')
 Câu lạc bộ
 @endsection
-
+@push('css')
+    <style>
+        
+    .col-md-12.club-frame {
+        /* border: 1px solid #fff2f2; */
+        margin: 10px 0;
+    }
+    </style>
+@endpush
 @section('content')
 
 <div class="row">
@@ -21,12 +29,12 @@ Câu lạc bộ
             <div id="content">
 
                 @forelse ($blog as $item)
-                <div class="col-md-12">
+                <div class="col-md-12 club-frame">
 
                     <div class="col-md-4 ">
                         <div class="blog-thumb">
                             <a href="{{route('club.show',$item->cp_slug)}}">
-                                <img class="img-responsive" src="{{asset($item->cp_avatar)}}" alt="photo">
+                                <img class="" src="{{asset($item->cp_avatar)}}" alt="photo" style="width:400px; height:200px" >
                             </a>
                         </div>
                     </div>
@@ -46,6 +54,7 @@ Câu lạc bộ
                     </div>
                     <div class="col-md-12">&nbsp;</div>
                 </div>
+                <hr>
                 @empty
                 <h2 class="blog-title">Chưa có bài viết nào!
                 </h2>

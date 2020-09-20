@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Student;
+use App\Models\Comment;
 use App\Notifications\InvoicePaid;
 use DB;
 use Carbon\Carbon;
@@ -118,8 +119,11 @@ class ShareController extends Controller
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,false,false,$post->item_id);
+        $comment = DB::table('comments')
+        ->join('students','students.stu_id','comments.stu_id')
+        ->OrderBy('com_id','DESC')->get();
 
-        return view('client.pages.share.single',compact('post','day','reason'));
+        return view('client.pages.share.single',compact('post','day','reason','comment'));
     }
 
     /**
@@ -131,6 +135,41 @@ class ShareController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    //Bình luận nè
+    public function comment(Request $request)
+    {
+        $date = Carbon::now();
+        $comment['com_content']= $request->com_content;
+        $comment['com_created']= $date;
+        $comment['stu_id']= $request->st_id;
+        $comment['item_id']= $request->item_id;
+    
+        // dd($comment);
+       
+
+        $result = DB::table('comments')->insert($comment);
+        if($result)
+        {
+           return redirect()->back();
+        }
+    }
+
+    public function repcomment(Request $request)
+    {
+        $date = Carbon::now();
+        $comment['com_content']= $request->com_repcontent;
+        $comment['com_created']= $date;
+        $comment['stu_id']= $request->st_id;
+        $comment['item_id']= $request->item_id;
+        $comment['com_idrep']=$request->com_id;
+
+        $result = DB::table('comments')->insert($comment);
+        if($result)
+        {
+           return redirect()->back();
+        }
     }
 
     /**
@@ -153,7 +192,21 @@ class ShareController extends Controller
      */
     public function destroy($id)
     {
-        //
+       $item = Item::find($id);
+       $item->delete();
+       return redirect()->route('share');
+    
+
+    }
+
+    // xóa bình luận
+    public function destroycomment(Request $request)
+    {
+       $item = Comment::find($request->com_id);
+       $item->delete();
+       return redirect()->back();
+    
+
     }
     public function list($slug)
     {

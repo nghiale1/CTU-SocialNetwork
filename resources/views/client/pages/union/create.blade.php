@@ -17,6 +17,7 @@
                 @csrf
                 <input type="hidden" name="union" value="{{$union->ub_id}}">
                 <table class="table table-responsive borderless text-right">
+                    {{die}}
                     <tr>
                         <td>Chọn ảnh<red-star></red-star>
                         </td>
@@ -25,6 +26,7 @@
                             width: 230px;" src="https://via.placeholder.com/230x185" />
 
                     </tr>
+                    
                     <tr>
                         <td></td>
                         <td><label for="avatar" style="float: left">Chọn ảnh đại diện của tin...</label>
@@ -39,6 +41,7 @@
                             <br></td>
                     </tr>
                     <br>
+                   
                     <tr>
                         <td style="white-space: nowrap;">Nội dung <red-star></red-star>
                         </td>
