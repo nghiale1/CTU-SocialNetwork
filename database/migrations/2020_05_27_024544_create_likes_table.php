@@ -15,13 +15,14 @@ class CreateLikesTable extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             //foreign key
-            $table->bigInteger('p_id')->index()->unsigned();
+            $table->bigInteger('com_id')->index()->unsigned();
             $table->integer('stu_id')->unsigned();
-            
-            $table->foreign('p_id')->references('p_id')->on('posts')->onDelete('cascade');
+            $table->integer('l_status')->unsigned();
+
+            $table->foreign('com_id')->references('com_id')->on('comments')->onDelete('cascade');
             $table->foreign('stu_id')->references('stu_id')->on('students')->onDelete('cascade');
 
-            $table->primary(['p_id', 'stu_id']);
+            $table->primary(['com_id', 'stu_id']);
         });
     }
 

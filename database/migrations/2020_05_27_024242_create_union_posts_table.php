@@ -19,7 +19,7 @@ class CreateUnionPostsTable extends Migration
             $table->string('up_avatar');
             $table->string('up_title');
             $table->text('up_content');
-            $table->integer('up_view_count');
+            $table->integer('up_view_count')->default(0);
             $table->timestamp('up_created')
                 ->default(DB::raw('CURRENT_TIMESTAMP'));
 

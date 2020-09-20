@@ -11,10 +11,10 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Like
  * 
- * @property int $p_id
+ * @property int $com_id
  * @property int $stu_id
  * 
- * @property Post $post
+ * @property Comment $comment
  * @property Student $student
  *
  * @package App\Models
@@ -26,13 +26,13 @@ class Like extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'p_id' => 'int',
+		'com_id' => 'int',
 		'stu_id' => 'int'
 	];
 
-	public function post()
+	public function comment()
 	{
-		return $this->belongsTo(Post::class, 'p_id');
+		return $this->belongsTo(Comment::class, 'com_id');
 	}
 
 	public function student()
