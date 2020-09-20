@@ -1,5 +1,4 @@
 @extends('client.client')
-
 {{-- Thêm khúc này để có trang tiêu đề nha --}}
 @section('title')
 Quản lý tài liệu - Tên môn

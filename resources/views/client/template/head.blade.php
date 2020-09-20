@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="{{asset('client/css/patros.css')}}">
 
     {{-- <link rel="stylesheet" href="{{asset('css/app.css')}}"> --}}
-
     {{-- upload file --}}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.4.7/css/fileinput.min.css"
         media="all" type="text/css" rel="stylesheet">
