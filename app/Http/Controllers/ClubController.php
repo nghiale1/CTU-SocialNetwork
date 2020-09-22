@@ -50,13 +50,13 @@ class ClubController extends Controller
     }
     public function listRequest($slug)
     {
-        
+
         $list=ClubStudent::join('clubs','clubs.c_id','club_students.c_id')
         ->join('students','students.stu_id','club_students.stu_id')
         ->where('cs_role','YC')
         ->where('c_slug',$slug)->get();
         return view('client.pages.club.request',compact('list'));
-            
+
     }
     public function accept(Request $request)
     {
@@ -69,7 +69,7 @@ class ClubController extends Controller
             ]);
         }
         return response()->json('success', 200);
-        
+
     }
     public function denied(Request $request)
     {
@@ -118,16 +118,16 @@ class ClubController extends Controller
                 $item->sort=array_search($item->cs_role,$arr);
                 foreach($count as $item2){
                     if($item->stu_id==$item2->stu_id){
-                        
+
                         $item->count=$item2->sobaidang;
                     }
                 }
             }
-            
-            usort($list,fn($a,$b)=>strcmp($a->sort,$b->sort));
+
+            // usort($list,fn($a,$b)=>strcmp($a->sort,$b->sort));
         return view('client.pages.club.member',compact('list','club'));
     }
-    
+
     public function changeRole(Request $request)
     {
         $c=DB::table('clubs')->where('c_slug',$request->slug)->first();
