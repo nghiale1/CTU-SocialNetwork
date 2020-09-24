@@ -30,7 +30,7 @@
         <ul class="sidebar-list">
 
             @foreach ($joined as $item)
-            @if ($item->cs_role!='YC'||$item->cs_role!='TV')
+            @if ($item->cs_role!='YC'&&$item->cs_role!='TV')
             <li class="btn-group">
                 <a class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">{{$item->c_name}}
