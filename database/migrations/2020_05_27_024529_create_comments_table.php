@@ -22,10 +22,14 @@ class CreateCommentsTable extends Migration
 
             //foreign key
             $table->bigInteger('p_id')->index()->unsigned();
-            $table->integer('stu_id')->index()->unsigned();
+            $table->bigInteger('stu_id')->index()->unsigned();
+            $table->bigInteger('item_id')->index()->unsigned();
+            $table->bigInteger('cp_id')->index()->unsigned();
             
             $table->foreign('stu_id')->references('stu_id')->on('students')->onDelete('cascade');
             $table->foreign('p_id')->references('p_id')->on('posts')->onDelete('cascade');
+            $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
+            $table->foreign('cp_id')->references('cp_id')->on('club_posts')->onDelete('cascade');
         });
     }
 
