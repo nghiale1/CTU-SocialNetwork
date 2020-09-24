@@ -4,7 +4,13 @@
 @section('title')
 Đoàn, hội
 @endsection
-
+@push('css')
+<style>
+    .delete-blog {
+        float: right;
+    }
+</style>
+@endpush
 @section('content')
 
 <div class="row">
@@ -18,6 +24,7 @@
         <!--
                         First Blog Post -->
         <div class="row blogu">
+             {{-- {{dd($blog)}} --}}
             @forelse ($blog as $item)
             <div class="col-md-12">
 
@@ -33,12 +40,18 @@
 
                     <h2 class="blog-title">
                         <a href="{{route('union.show',$item->up_slug)}}">{{$item->up_title}}</a>
+                        <span class="comments-padding"></span>
+                        @if($item->stu_id==Auth::id())
+                         <a href="{{ route('union.delete', ['id'=>$item->up_id]) }}" id="deleteblog" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                        @endif
                     </h2>
                     <p>
 
                         <i class="fa fa-calendar-o"></i> {{$item->ngaydang}}
                         <span class="comments-padding"></span>
                         <i class="fa fa-eye" aria-hidden="true"></i> {{$item->up_view_count}}</i>
+                        <span class="comments-padding"></span>
+                        <i class="fa fa-user" aria-hidden="true"></i>Đăng bởi: {{$item->stu_name}}</i>
                     </p>
                 </div>
             </div>
@@ -148,4 +161,16 @@
 
 @endsection
 @push('script')
+<script>
+    $('#deleteblog').click(function () {
+
+        if(confirm('Bạn có muốn xóa ?')){
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+
+</script>
 @endpush

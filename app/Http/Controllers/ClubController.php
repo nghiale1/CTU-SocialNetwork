@@ -264,7 +264,8 @@ class ClubController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('club_posts')->where('cp_id',$id)->delete();
+        return  redirect()->back();
     }
     public function join($slug)
     {

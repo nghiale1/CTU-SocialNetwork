@@ -11,6 +11,9 @@ Câu lạc bộ
         /* border: 1px solid #fff2f2; */
         margin: 10px 0;
     }
+    .delete-blog {
+        float: right;
+    }
     </style>
 @endpush
 @section('content')
@@ -27,7 +30,7 @@ Câu lạc bộ
                         First Blog Post -->
         <div class="row blogu">
             <div id="content">
-
+                {{-- {{dd($blog)}} --}}
                 @forelse ($blog as $item)
                 <div class="col-md-12 club-frame">
 
@@ -43,12 +46,18 @@ Câu lạc bộ
 
                         <h2 class="blog-title">
                             <a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a>
+                            <span class="comments-padding"></span>
+                            @if($item->stu_id==Auth::id())
+                            <a href="{{ route('club.delete', ['id'=>$item->cp_id]) }}" id="deleteblog" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                            @endif
                         </h2>
                         <p>
 
                             <i class="fa fa-calendar-o"></i> {{$item->day}}
                             <span class="comments-padding"></span>
                             <i class="fa fa-eye" aria-hidden="true"></i> {{$item->cp_view_count}}</i>
+                            <span class="comments-padding"></span>
+                            <i class="fa fa-user" aria-hidden="true"></i> Đăng bởi: {{$item->stu_name}}</i>
                             <h4>{{$item->c_name}}</h4>
                         </p>
                     </div>
@@ -150,4 +159,15 @@ Câu lạc bộ
 
 @endsection
 @push('script')
+<script>
+     $('#deleteblog').click(function () {
+
+        if(confirm('Bạn có muốn xóa ?')){
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+</script>
 @endpush

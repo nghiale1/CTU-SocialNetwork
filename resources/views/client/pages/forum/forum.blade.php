@@ -27,27 +27,37 @@ Hỏi đáp
             <div class="col-sm-12 col-md-12" id="content">
                 {{-- {{dd($blog)}} --}}
                 @foreach ($blog as $item)
-                <h2 class="blog-title">
-                    <a href="{{route('forum.show',$item->p_slug)}}">{{$item->p_title}}</a>
-                </h2>
-                <p>
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true">{{$item->likes}}</i>
-                    <span class="comments-padding"></span>
-                    <i class="fa fa-comment">{{$item->comments}}</i>
-                    <span class="comments-padding"></span>
-                    <i class="fa fa-eye" aria-hidden="true">{{$item->p_view_count}}</i>
-                    <span class="comments-padding"></span>
-                    <i class="fa fa-calendar-o"></i> {{$item->day}}
-                    {{-- <div class="delete-blog"> --}}
-                        <span class="comments-padding"></span>
-                        @if($item->stu_id==Auth::id())
-                        <a href="{{ route('question.delete', ['id'=>$item->p_id]) }}" id="deleteblog" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                     @foreach ($stu as $i)
+                        @if ($item->p_id ==$i->p_id)
+                            
+                            <h2 class="blog-title">
+                                <a href="{{route('forum.show',$item->p_slug)}}">{{$item->p_title}}</a>
+                            </h2>
+                            <p>
+                                <i class="fa fa-thumbs-o-up" aria-hidden="true">{{$item->likes}}</i>
+                                <span class="comments-padding"></span>
+                                <i class="fa fa-comment">{{$item->comments}}</i>
+                                <span class="comments-padding"></span>
+                                <i class="fa fa-eye" aria-hidden="true">{{$item->p_view_count}}</i>
+                                <span class="comments-padding"></span>
+                                <i class="fa fa-calendar-o"></i> {{$item->day}}
+                                @if ($item->stu_id ==$i->stu_id)
+                                <span class="comments-padding"></span>
+                                <i class="fa fa-user"></i> Đăng bởi: {{$i->stu_name}}
+                                    
+                                @endif
+                                {{-- <div class="delete-blog"> --}}
+                                    <span class="comments-padding"></span>
+                                    @if($item->stu_id==Auth::id())
+                                    <a href="{{ route('question.delete', ['id'=>$item->p_id]) }}" id="deleteblog" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                                    @endif
+                                {{-- </div> --}}
+                            </p>
+
+
+                            <hr>
                         @endif
-                    {{-- </div> --}}
-                </p>
-
-
-                <hr>
+                    @endforeach
                 @endforeach
                 {{-- {!!$blog->links()!!} --}}
             </div>

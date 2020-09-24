@@ -77,7 +77,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/{slug}/huy-thanh-vien/', 'ClubController@denied')->name('club.denied');
             Route::post('/{slug}/xoa-thanh-vien/', 'ClubController@delete')->name('club.delete');
             Route::post('/{slug}/thay-doi-chuc-vu/', 'ClubController@changeRole')->name('club.changeRole');
-
+            Route::get('/xoa-cau-hoi/{id}', 'ClubController@destroy')->name('club.delete');
             //bình luận
             Route::post('/binh-luan', 'ClubController@comment')->name('club.comment.store');
             Route::post('/tra-loi-binh-luan', 'ClubController@commentrep')->name('club.comment.rep');
@@ -101,6 +101,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/bai-viet/{slug}', 'UnionController@show')->name('union.show');
         Route::get('/them-bai-viet', 'UnionController@create')->name('union.create');
         Route::post('/them-bai-viet', 'UnionController@store')->name('union.store');
+        Route::get('/xoa-bai-viet/{id}', 'UnionController@destroy')->name('union.delete');
     });
     Route::group(['prefix' => 'mon-hoc'], function () {
         Route::get('/{slug}', 'SubjectController@show')->name('subject.detail');
