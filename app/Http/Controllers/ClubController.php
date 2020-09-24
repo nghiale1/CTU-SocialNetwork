@@ -80,7 +80,9 @@ class ClubController extends Controller
         ->join('students','students.stu_id','club_students.stu_id')
         ->where('cs_role','YC')
         ->where('c_slug',$slug)->get();
-        return view('client.pages.club.request',compact('list'));
+        $viewed=$this->viewed();
+        $joined=$this->joined();
+        return view('client.pages.club.request',compact('list','viewed','joined'));
             
     }
     public function accept(Request $request)
