@@ -29,10 +29,33 @@ class ClubController extends Controller
         foreach($blog as $item){
             $item->day=$this->getDay($item->cp_id,$item->cp_created);
         }
+        $viewed=$this->viewed();
+        $joined=$this->joined();
    
         // dd($club);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.club.index',compact('blog'));
+        return view('client.pages.club.index',compact('blog','viewed','joined'));
+    }
+
+    public function clubPostSlug($slug)
+    {
+        $blog='';
+        // dd($club);
+        $blog=\DB::table('club_posts')
+        ->join('club_students','club_students.c_id','club_posts.c_id')
+        ->join('clubs','clubs.c_id','club_posts.c_id')
+        ->join('students','students.stu_id','club_posts.stu_id')
+        ->where('club_students.cs_role','!=','YC')
+        ->where('club_students.stu_id',\Auth::id())
+        ->where('clubs.c_slug',$slug)
+        ->groupBy('club_posts.cp_id')
+        ->paginate(10);
+        foreach($blog as $item){
+            $item->day=$this->getDay($item->cp_id,$item->cp_created);
+        }
+        $viewed=$this->viewed();
+        $joined=$this->joined();
+        return view('client.pages.club.index',compact('blog','viewed','joined'));
     }
     public function search(Request $request)
     {
@@ -125,10 +148,35 @@ class ClubController extends Controller
                     }
                 }
             }
-            
-            // usort($list,fn($a,$b)=>strcmp($a->sort,$b->sort));
-        return view('client.pages.club.member',compact('list','club'));
+            $viewed=$this->viewed();
+            $joined=$this->joined();
+            // dd($joined);
+        return view('client.pages.club.member',compact('list','club','joined','viewed'));
     }
+    public function viewed()
+    {
+        $idStudent = \Auth::id();
+        $viewed = DB::table('count_view_clubs')
+        ->join('club_posts','club_posts.cp_id','count_view_clubs.cp_id')
+        ->where('count_view_clubs.stu_id',$idStudent)->limit(3)->get();
+        if($viewed->isEmpty()){
+            $viewed=0; 
+        }
+        // dd($viewed);
+        return $viewed;
+    }
+    public function joined()
+    {
+        $idStudent = \Auth::id();
+        $joined = DB::table('club_students')
+        ->join('clubs','clubs.c_id','club_students.c_id')
+        ->where('club_students.stu_id',$idStudent)->get();
+        if($joined->isEmpty()){
+            $joined=0; 
+        }
+        return $joined;
+    }
+    
     
     public function changeRole(Request $request)
     {
@@ -153,7 +201,9 @@ class ClubController extends Controller
     {
         // dd(\Auth::id());
         $club=$this->getClubStudent();
-        return view('client.pages.club.create',compact('club'));
+        $viewed=$this->viewed();
+        $joined=$this->joined();
+        return view('client.pages.club.create',compact('club','viewed','joined'));
     }
     public function store(Request $request)
     {
@@ -204,7 +254,9 @@ class ClubController extends Controller
         $comment = DB::table('comments')
         ->join('students','students.stu_id','comments.stu_id')
         ->OrderBy('com_id','DESC')->get();
-        return view('client.pages.club.single',compact('post','day','comment'));
+        $viewed=$this->viewed();
+        $joined=$this->joined();
+        return view('client.pages.club.single',compact('post','day','comment','viewed','joined'));
     }
 
     /**
@@ -270,14 +322,25 @@ class ClubController extends Controller
     {
         $find=DB::table('clubs')->where('c_slug',$slug)->first();
         if($find){
-            DB::table('club_students')->insert([
-                'c_id'=>$find->c_id,
-                'stu_id'=>\Auth::id(),
-                'cs_role'=>'YC'
-            ]);
-            return back()->with('success','Yêu cầu tham gia của bạn đã được gửi!');
+            $check=DB::table('club_students')
+            ->where('c_id',$find->c_id)
+            ->where('stu_id',\Auth::id())->first();
+            if(!$check){
+
+
+                DB::table('club_students')->insert([
+                    'c_id'=>$find->c_id,
+                    'stu_id'=>\Auth::id(),
+                    'cs_role'=>'YC'
+                ]);
+                return back()->with('success','Yêu cầu tham gia của bạn đã được gửi!');
+            }
+            else{
+
+                return back()->with('error','Bạn đã gia nhập rồi!');
+            }
         }
-        return back()->with('error','Yêu cầu tham gia của bạn đã được gửi!');
+        return back()->with('error','Có lỗi xảy ra!');
     }
     public function list()
     {
@@ -286,6 +349,25 @@ class ClubController extends Controller
         LEFT JOIN club_students on club_students.c_id=clubs.c_id
         LEFT JOIN club_posts on club_students.stu_id=club_posts.stu_id and club_students.c_id=club_posts.c_id
         GROUP BY clubs.c_id");
+        $join=DB::table('club_students')->where('stu_id',\Auth::id())->get();
+        foreach($list as $item){
+            if($join->isNotEmpty()){
+
+                foreach($join as $item2){
+                    if($item2->c_id==$item->c_id){
+                        $item->status=1;
+                    break;
+                    }
+                    else{
+                        $item->status=0;
+                    }
+                }
+            }else{
+
+                $item->status=1;
+            }
+        }
+        // dd($list);
         return view('client.pages.club.list',compact('list'));
     }
 }

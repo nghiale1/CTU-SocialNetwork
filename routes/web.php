@@ -67,6 +67,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
     Route::group(['prefix' => 'cau-lac-bo'], function () {
 
         Route::get('/', 'ClubController@index')->name('club');
+        Route::get('/bai-viet-rieng/{slug}', 'ClubController@clubPostSlug')->name('club.clubPostSlug');
          // tìm kiếm
          Route::get('/tim-kiem', 'ClubController@search')->name('club.search');
         // Route::group(['middleware' => ['checkManage']], function () {
