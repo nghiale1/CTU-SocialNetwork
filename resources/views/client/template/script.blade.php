@@ -134,6 +134,6 @@
 
     });
 </script> --}}
-
+<script src="{{ asset('chat-box/chat.js') }}"></script>
 
 @stack('script')

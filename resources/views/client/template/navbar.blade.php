@@ -28,7 +28,7 @@
 
                     </a> --}}
                     <!-- Button to Open the Modal -->
-                    <a href="#" id="user-click" class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <a href="{{ route('Info',Auth::guard('student')->user()->stu_code.'.'.Str::slug(Auth::guard('student')->user()->stu_name, '-')) }}" class="nav-link">
                         Chào,
                         {{ Auth::guard('student')->user()->stu_name }}
                     </a>

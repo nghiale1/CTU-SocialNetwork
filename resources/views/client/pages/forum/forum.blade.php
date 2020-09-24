@@ -45,7 +45,7 @@ Hỏi đáp
                         @endif
                     {{-- </div> --}}
                 </p>
-               
+
 
                 <hr>
                 @endforeach
@@ -103,7 +103,7 @@ Hỏi đáp
 @endsection
 @push('script')
 <script>
-    $('#deleteblog').click(function () { 
+    $('#deleteblog').click(function () {
 
         if(confirm('Bạn có muốn xóa ?')){
             return true;
@@ -112,6 +112,6 @@ Hỏi đáp
             return false;
         }
     });
-    
+
 </script>
 @endpush

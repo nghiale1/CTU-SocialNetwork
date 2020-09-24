@@ -7,7 +7,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('client/images/logo-ctu.png')}}" />
-
     <!-- Bootstrap Core CSS -->
 
     <link href="{{asset('client/css/bootstrap.min.css')}}" rel="stylesheet">
