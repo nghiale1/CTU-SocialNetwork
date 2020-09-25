@@ -51,10 +51,7 @@
             <a href="{{route('share')}}">Chia sẻ</a></li> --}}
         <li @if (Request::segment(1)=='cau-lac-bo' ) class='active' @endif>
             <a href="{{route('club.admin')}}">Câu lạc bộ</a></li>
-        <li @if (Request::segment(1)=='doan-hoi' ) class='active' @endif>
-            <a href="{{route('union')}}">Đoàn, Hội</a></li>
-        <?php endif?>
-        </ul>
+        <?php endif?> </ul>
     </div>
     </div>
 </nav>
