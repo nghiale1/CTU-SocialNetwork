@@ -103,12 +103,13 @@ Danh sách câu lạc bộ
                         <td><input type="text" class="edi" data-id="{{$item->c_id}}" value="{{$item->c_name}}"></td>
 
                         <td>
-                            <form action="{{route('club.admin.adminDelete',$item->c_id)}}" method="post">
+                            <form action="{{route('club.admin.adminDelete',$item->c_id)}}" method="post" id="frmrmcl"
+                                onsubmit="return confirm('Bạn có chắc muốn câu lạc bộ này?');">
                                 @csrf
                                 &nbsp;&nbsp;&nbsp;&nbsp;
                                 <button type="submit" class="btn btn-sm btn-icon btn-pure btn-outline delete-row-btn"
-                                    style="background-color: transparent;"><i class="fa fa-times" aria-hidden="true"
-                                        style="color: red"></i></button>
+                                    style="background-color: transparent;"><i class=" fa fa-times" aria-hidden="true"
+                                        style="color: red"></i> </button>
                             </form>
                         </td>
                     </tr>
