@@ -372,4 +372,46 @@ class ClubController extends Controller
         // dd($list);
         return view('client.pages.club.list',compact('list'));
     }
+    public function admin()
+    {
+        $list=DB::table('clubs')->get();
+        return view('client.pages.club.admin_list',compact('list')); 
+    }
+    public function adminCreate(Request $request)
+    {
+        $mssv=\DB::table('students')->where('stu_code',$request->CNCLB)->first();
+        if($mssv){
+            $id=\DB::table('clubs')->insertGetId([
+                'c_name'=>$request->name,
+                'c_slug'=>\Str::slug($request->name, '-')
+            ]);
+
+            \DB::table('club_students')->insert([
+                'c_id'=>$id,
+                'stu_id'=>$mssv->stu_id,
+                'cs_role'=>'CNCLB'
+            ]);
+            return response()->json('success', 200);
+        }
+        return response()->json('Mã số sinh viên không đúng', 400);
+    }
+    public function adminDelete($id)
+    {
+        \DB::table('clubs')
+        ->join('club_students','club_students.c_id','clubs.c_id')
+        ->join('club_posts','club_posts.stu_id','club_students.stu_id')
+        ->where('clubs.c_id',$id)
+        ->delete();
+        return redirect()->route('club.admin');
+    }
+    public function adminUpdate(Request $request)
+    {
+        \DB::table('clubs')
+        ->where('clubs.c_id',$request->id)
+        ->update([
+            'c_name'=>$request->name,
+            'c_slug'=>\Str::slug($request->name, '-')
+        ]);
+        return response()->json('success', 200);
+    }
 }
