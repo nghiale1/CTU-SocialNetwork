@@ -25,6 +25,11 @@ Câu lạc bộ
             Câu lạc bộ
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('club.create')}}'"> Thêm bài viết</button> </span>
+                    <marquee scrolldelay="1" scrollamount="5">
+                        <span class="gioithiu">
+                             Đây là nơi giao lưu học hỏi, chia sẻ các kĩ năng với nhau như: Guitar, Sáo, Đờn ca tài tử,...
+                        </span>
+                     </marquee>
         </h1>
         <!--
                         First Blog Post -->

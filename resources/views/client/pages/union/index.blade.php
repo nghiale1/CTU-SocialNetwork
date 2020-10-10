@@ -20,6 +20,11 @@
             Đoàn hội
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('union.create')}}'"> Thêm bài viết</button> </span>
+                    <marquee scrolldelay="1" scrollamount="5">
+                        <span class="gioithiu">
+                             Đây là nơi kết nối các bạn cùng quê với nhau, Tổ chức các buổi hoạt động ngoại khóa, Giúp đỡ và hộ trợ các bạn trong quá trình học tập cũng như trong cuộc sống.
+                        </span>
+                     </marquee>
         </h1>
         <!--
                         First Blog Post -->

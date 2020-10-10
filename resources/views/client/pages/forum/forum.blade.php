@@ -9,6 +9,11 @@ Hỏi đáp
     .delete-blog {
         float: right;
     }
+    .gioithiu {
+    text-transform: capitalize;
+    color: #3471ad;
+    font-size: 14px;
+}
 </style>
 @endpush
 @section('content')
@@ -20,6 +25,11 @@ Hỏi đáp
             Hỏi đáp
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('question.create')}}'"> Thêm câu hỏi</button> </span>
+                    <marquee scrolldelay="1" scrollamount="5">
+                       <span class="gioithiu">
+                            Mời các bạn cùng nhau trao đổi, chia sẻ kinh nghiệm các lĩnh vực: Lập trình, Công nghệ,...  
+                       </span>
+                    </marquee>
         </h1>
         <!--
                         First Blog Post -->
