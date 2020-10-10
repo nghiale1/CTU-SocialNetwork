@@ -16,7 +16,7 @@ class UnionController extends Controller
     {
         //get subject of user
         $union=$this->getUnionStudent();
-        $blog='';
+        $blog=[];
         if($union->isNotEmpty()){
 
             $blog=\DB::table('union_posts')
@@ -45,6 +45,7 @@ class UnionController extends Controller
     {
         // dd(\Auth::id());
         $union=$this->getUnionStudent();
+        // dd($union);
         $union=$union[0];
         return view('client.pages.union.create',compact('union'));
     }

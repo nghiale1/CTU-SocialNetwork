@@ -21,6 +21,7 @@ class ClubController extends Controller
         $blog=\DB::table('club_posts')
         ->join('club_students','club_students.c_id','club_posts.c_id')
         ->join('clubs','clubs.c_id','club_posts.c_id')
+        ->join('students','students.stu_id','club_posts.stu_id')
         ->where('club_students.cs_role','!=','YC')
         ->where('club_students.stu_id',\Auth::id())
         ->groupBy('club_posts.cp_id')
@@ -28,6 +29,7 @@ class ClubController extends Controller
         foreach($blog as $item){
             $item->day=$this->getDay($item->cp_id,$item->cp_created);
         }
+
         // dd($club);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
         return view('client.pages.club.index',compact('blog'));
@@ -199,8 +201,10 @@ class ClubController extends Controller
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,false,$post->cp_id,false);
-
-        return view('client.pages.club.single',compact('post','day'));
+        $comment = DB::table('comments')
+        ->join('students','students.stu_id','comments.stu_id')
+        ->OrderBy('com_id','DESC')->get();
+        return view('client.pages.club.single',compact('post','day','comment'));
     }
 
     /**
@@ -213,6 +217,43 @@ class ClubController extends Controller
     public function update(Request $request, $id)
     {
         //
+    }
+
+    //bình luận
+    public function comment(Request $request)
+    {
+        $date = Carbon::now();
+        $comment['com_content']= $request->com_content;
+        $comment['com_created']= $date;
+        $comment['stu_id']= $request->st_id;
+        $comment['cp_id']= $request->cp_id;
+
+        // dd($comment);
+
+
+        $result = DB::table('comments')->insert($comment);
+        if($result)
+        {
+           return redirect()->back();
+        }
+    }
+
+    public function commentrep(Request $request)
+    {
+        $date = Carbon::now();
+        $comment['com_content']= $request->com_repcontent;
+        $comment['com_created']= $date;
+        $comment['stu_id']= $request->st_id;
+        $comment['cp_id']= $request->cp_id;
+        $comment['com_idrep']=$request->com_id;
+
+        //  dd($comment);
+
+        $result = DB::table('comments')->insert($comment);
+        if($result)
+        {
+           return redirect()->back();
+        }
     }
 
     /**

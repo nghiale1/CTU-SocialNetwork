@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Student;
 use App\Notifications\InvoicePaid;
+use App\Notifications\Noti;
+use DB;
 
 class QuestionController extends Controller
 {
@@ -96,6 +98,7 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('posts')->where('p_id',$id)->delete();
+        return  redirect()->back();
     }
 }

@@ -37,6 +37,26 @@
 </style>
 @endpush
 @section('content')
+@if (Auth::guard('student')->user()->stu_code == $student->stu_code)
+<div class="col-12">
+    <h4>Các chức năng cá nhân</h4>
+    <a href="{{ route('chat') }}" class="btn btn-success">Nhóm trò chuyện lớp</a>
+    <a href="{{ route('chon-hoc-ky') }}" class="btn btn-success">Tài liệu cá nhân</a>
+    <a href="{{ route('chat-all', ['mssv'=> Auth::guard('student')->user()->stu_code]) }}">Các cuộc trò chuyện</a>
+
+</div>
+@else
+    <h4>Thông tin</h4>
+    <a href="{{ route('tai-lieu.sinhvien', ['codeStudent' => $student->stu_code]) }}" class="btn btn-success">Tài liệu công khai</a>
+    <a href="{{ route('chat-person', ['mssv'=> $student->stu_code]) }}">Trò chuyện trao đổi</a>
+@endif
+<div class="col-12">
+    @if (Auth::guard('student')->user()->stu_code == $student->stu_code)
+        <h3 class="text-center">Thông tin cá nhân</h3>
+    @else
+        <h3 class="text-center">Thông tin sinh viên</h3>
+    @endif
+</div>
 
 <table class="table table-striped borderless">
     <tr>
@@ -201,7 +221,7 @@
 @push('script')
 <script>
     $(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();   
+    $('[data-toggle="tooltip"]').tooltip();
 });
 </script>
 {{-- @include('client.pages.account.script') --}}

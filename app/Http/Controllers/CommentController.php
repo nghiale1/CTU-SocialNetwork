@@ -41,7 +41,12 @@ class CommentController extends Controller
         }
     }
 
-
+    //Cập nhập
+    public function getcomment($id)
+    {
+        $comupdate= DB::table('comments')->where('com_id',$id)->get();
+        return view('client.pages.forum.single',compact(['comupdate']));
+    }
 
     //bình luận --có thêm cột trong bảng bình luận, nhớ chạy lại migrate, không thì insert DB mới trong file doc
     public function store(Request $request)
@@ -162,10 +167,10 @@ class CommentController extends Controller
             }
           
         }
-        else
-        {
-            return response()->json(["data"=>'Khong cho like cmt cua minh'], 200);
-        }
+        // else
+        // {
+        //     return response()->json(["data"=>'Khong cho like cmt cua minh'], 200);
+        // }
 
        
 

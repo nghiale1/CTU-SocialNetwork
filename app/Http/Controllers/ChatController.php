@@ -20,4 +20,16 @@ class ChatController extends Controller
         // dd($listStudent);
         return view('client.pages.chat.index', compact('listStudent','studentInClass','student'));
     }
+
+    public function chatPerson($mssv)
+    {
+        $sinhVien = DB::table('students')->where('username',$mssv)->first();
+        return view('client.pages.chat-detail.index', compact('sinhVien'));
+    }
+
+    public function chat($mssv)
+    {
+        $sinhVien = DB::table('students')->where('username',$mssv)->first();
+        return view('client.pages.chat-detail.index-2', compact('sinhVien'));
+    }
 }
