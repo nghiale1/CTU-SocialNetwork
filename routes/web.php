@@ -65,8 +65,18 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/{slug}', 'ShareController@list')->name('share.list');
     });
     Route::group(['prefix' => 'cau-lac-bo'], function () {
-
+        Route::group(['middleware' => ['checkAdmin']], function () {
+            
+            Route::group(['prefix' => 'quan-tri'], function () {
+                
+                Route::get('/', 'ClubController@admin')->name('club.admin');
+                Route::post('/tao-cau-lac-bo', 'ClubController@adminCreate')->name('club.admin.create');
+                Route::post('/cap-nhat', 'ClubController@adminUpdate')->name('club.admin.adminUpdate');
+                Route::post('/xoa/{id}', 'ClubController@adminDelete')->name('club.admin.adminDelete');
+            });
+        });
         Route::get('/', 'ClubController@index')->name('club');
+        Route::get('/bai-viet-rieng/{slug}', 'ClubController@clubPostSlug')->name('club.clubPostSlug');
          // tìm kiếm
          Route::get('/tim-kiem', 'ClubController@search')->name('club.search');
         // Route::group(['middleware' => ['checkManage']], function () {

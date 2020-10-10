@@ -1,7 +1,9 @@
 @extends('client.client')
 @push('css')
 <style>
-
+    .avatar {
+        width: 100%;
+    }
 </style>
 @endpush
 {{-- Thêm khúc này để có trang tiêu đề nha --}}
@@ -12,30 +14,52 @@ Yêu cầu tham gia
 @section('content')
 
 <div class="row">
+    {{-- <div class="col-md-3">
+
+        </div> --}}
     <!-- Blog Column -->
+
+
     <div class="col-md-8">
         <div data-url="{{$club->c_slug}}" id="slug"></div>
-        @forelse ($list as $key=>$item)
-        <ul>
-            <li class="{{$key}}">
+        <div class="row">
 
-                {{$item->stu_code}} mssv<br>
-                {{$item->stu_name}} họ tên <br>
-                {{$item->cs_created}} ngày tham gia <br>
-                {{$item->count}} số bài đăng <br>
+            @forelse ($list as $key=>$item)
+            <div class="col-md-2">
+                <img src="{{asset($item->stu_avatar)}}" alt="" class="avatar">
+            </div>
+            <div class="{{$key}} col-md-8 ">
+                <h4 style="display: inline">
+
+                    {{$item->stu_code}}
+                </h4>
+                <span style="float: right">
+                    <a href="#" data-data="{{$item->stu_code}}" data-url="{{$club->c_slug}}" data-no="{{$key}}"
+                        class="delete"><i class="fa fa-times" aria-hidden="true"></i></a>
+                </span><br>
+                <h4>
+
+                    {{$item->stu_name}}<br>
+                </h4>
+                <p style="padding: 0;margin:0">
+
+                    ngày tham gia: {{$item->cs_created}} <br>
+                    số bài đăng: {{$item->count}} <br>
+                </p>
                 <select name="role" id="" class="role" data-no="{{$item->stu_code}}">
                     <option value="CNCLB" @if($item->cs_role=='CNCLB') selected @endif>CNCLB</option>
                     <option value="PCNCLB" @if($item->cs_role=='PCNCLB') selected @endif>PCNCLB</option>
                     <option value="UVCLB" @if($item->cs_role=='UVCLB') selected @endif>UVCLB</option>
                     <option value="TV" @if($item->cs_role=='TV') selected @endif>TV</option>
                 </select>
-                <a href="#" data-data="{{$item->stu_code}}" data-url="{{$club->c_slug}}" data-no="{{$key}}"
-                    class="delete">Xóa</a>
-            </li>
-        </ul>
-        @empty
-        <h3>Không có yêu cầu nào</h3>
-        @endforelse
+
+            </div>
+
+            <div class="col-md-12">&nbsp;</div>
+            @empty
+            <h3>Không có yêu cầu nào</h3>
+            @endforelse
+        </div>
 
 
 
@@ -43,6 +67,8 @@ Yêu cầu tham gia
 
 
     </div>
+    <!-- Blog Sidebar Column -->
+    @include('client.pages.club.sidebar')
 </div>
 
 @endsection
@@ -81,7 +107,7 @@ Yêu cầu tham gia
             });
         });
         $(".delete").click(function(e){
-            if(!confirm("bạn có chắc muốn xóa")){
+            if(!confirm("Bạn có chắc muốn xóa")){
                 return false;
             }
             e.preventDefault(); 
