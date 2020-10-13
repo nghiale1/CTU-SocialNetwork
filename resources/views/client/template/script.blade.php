@@ -34,6 +34,7 @@
         selector:'.tiny',
         language: 'vi',
         branding: false,
+        height: 400,
         plugins: '  paste importcss searchreplace autolink autosave save directionality  visualblocks visualchars fullscreen image link media   table charmap hr pagebreak nonbreaking  toc insertdatetime advlist lists wordcount imagetools textpattern noneditable  charmap quickbars emoticons',
         imagetools_cors_hosts: ['picsum.photos'],
         menubar: 'file edit view insert format tools table help',
@@ -51,6 +52,14 @@
         toolbar_mode: 'sliding',
         contextmenu: "link image imagetools table",
         });
+    // $('.tiny').tinymce({
+    //     theme : 'advanced',
+    //     plugins : 'autoresize',
+    //     width: '100%',
+    //     height: 400,
+    //     autoresize_min_height: 400,
+    //     autoresize_max_height: 800,
+    // });
 </script>
 
 <!--Jquery Smooth Scrolling-->
@@ -125,6 +134,6 @@
 
     });
 </script> --}}
-
+<script src="{{ asset('chat-box/chat.js') }}"></script>
 
 @stack('script')

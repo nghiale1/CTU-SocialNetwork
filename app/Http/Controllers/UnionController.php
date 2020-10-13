@@ -16,10 +16,11 @@ class UnionController extends Controller
     {
         //get subject of user
         $union=$this->getUnionStudent();
-        $blog='';
+        $blog=[];
         if($union->isNotEmpty()){
 
             $blog=\DB::table('union_posts')
+            ->join('students','students.stu_id','union_posts.stu_id')
             ->where('ub_id',$union[0]->ub_id)
             ->paginate(10);
             $now=$this->now();
@@ -45,7 +46,9 @@ class UnionController extends Controller
     {
         // dd(\Auth::id());
         $union=$this->getUnionStudent();
+        // dd($union);
         $union=$union[0];
+        // dd($union);
         return view('client.pages.union.create',compact('union'));
     }
     public function store(Request $request)
@@ -117,6 +120,8 @@ class UnionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('union_posts')->where('up_id',$id)->delete();
+        return  redirect()->back();
     }
+
 }

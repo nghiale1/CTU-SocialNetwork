@@ -2,7 +2,6 @@
 <html lang="en">
 
 @include('client.template.head')
-
 <body data-spy="scroll">
     <div id="app">
 
@@ -14,11 +13,11 @@
             @yield('content')
 
         </section>
-        @include('client.template.footer')
+        {{-- @include('client.template.footer') --}}
     </div>
     <!-- The Modal -->
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -43,7 +42,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     @include('client.template.script')
     <script>
         $(document).ready(function () {

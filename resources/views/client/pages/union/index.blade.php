@@ -4,7 +4,13 @@
 @section('title')
 Đoàn, hội
 @endsection
-
+@push('css')
+<style>
+    .delete-blog {
+        float: right;
+    }
+</style>
+@endpush
 @section('content')
 
 <div class="row">
@@ -14,10 +20,16 @@
             Đoàn hội
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('union.create')}}'"> Thêm bài viết</button> </span>
+                    <marquee scrolldelay="1" scrollamount="5">
+                        <span class="gioithiu">
+                             Đây là nơi kết nối các bạn cùng quê với nhau, Tổ chức các buổi hoạt động ngoại khóa, Giúp đỡ và hộ trợ các bạn trong quá trình học tập cũng như trong cuộc sống.
+                        </span>
+                     </marquee>
         </h1>
         <!--
                         First Blog Post -->
         <div class="row blogu">
+             {{-- {{dd($blog)}} --}}
             @forelse ($blog as $item)
             <div class="col-md-12">
 
@@ -33,12 +45,18 @@
 
                     <h2 class="blog-title">
                         <a href="{{route('union.show',$item->up_slug)}}">{{$item->up_title}}</a>
+                        <span class="comments-padding"></span>
+                        @if($item->stu_id==Auth::id())
+                         <a href="{{ route('union.delete', ['id'=>$item->up_id]) }}" id="deleteblog" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                        @endif
                     </h2>
                     <p>
 
                         <i class="fa fa-calendar-o"></i> {{$item->ngaydang}}
                         <span class="comments-padding"></span>
                         <i class="fa fa-eye" aria-hidden="true"></i> {{$item->up_view_count}}</i>
+                        <span class="comments-padding"></span>
+                        <i class="fa fa-user" aria-hidden="true"></i>Đăng bởi: {{$item->stu_name}}</i>
                     </p>
                 </div>
             </div>
@@ -48,7 +66,7 @@
             </h2>
 
             @endforelse
-            @if ($blog!='')
+            @if ($blog!=[])
 
             {!!$blog->links()!!}
             @endif
@@ -148,4 +166,16 @@
 
 @endsection
 @push('script')
+<script>
+    $('#deleteblog').click(function () {
+
+        if(confirm('Bạn có muốn xóa ?')){
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+
+</script>
 @endpush

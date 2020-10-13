@@ -97,7 +97,7 @@ class DocumentShareController extends Controller
 
         //Lấy id của students
         $idStudent = Auth::guard('student')->id();
-        try {
+        // try {
             //code...
             $subject_studying = DB::table('folders')->where('stu_id','=',$idStudent)->get();
             foreach ($subject_studying as $key => $value) {
@@ -123,10 +123,10 @@ class DocumentShareController extends Controller
             File::makeDirectory($path, 0777, true);
             return redirect()->back();
 
-        } catch (\Throwable $th) {
-            //throw $th;
-            return response()->json('Có lỗi trong quá trình tạo thư mục', 401);
-        }
+        // } catch (\Throwable $th) {
+        //     //throw $th;
+        //     return response()->json('Có lỗi trong quá trình tạo thư mục', 401);
+        // }
     }
 
     //Chi tiết thư mục

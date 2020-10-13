@@ -30,11 +30,19 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/them-cau-hoi', 'QuestionController@store')->name('question.store');
         // tìm kiếm
         Route::get('/tim-kiem', 'ForumController@search')->name('forum.search');
+        Route::get('/xoa-cau-hoi/{id}', 'QuestionController@destroy')->name('question.delete');
         // bình luận
         Route::post('/bai-viet/binh-luan', 'CommentController@store')->name('comment.store');
         Route::post('/bai-viet/binh-luan/tra-loi/', 'CommentController@repcomment')->name('repcomment.store');
         Route::post('/bai-viet/binh-luan/xoa/', 'CommentController@destroycmt')->name('comment.destroy');
         Route::post('/bai-viet/binh-luan/thich', 'CommentController@Ajaxlike')->name('comment.like');
+        Route::post('/bai-viet/binh-luan/sua/{id}', 'CommentController@getcomment')->name('comment.update');
+
+
+
+
+
+
         // báo cáo
         Route::post('/bai-viet/bao-cao', 'ReportController@reportComment')->name('report.store');
 
@@ -42,18 +50,33 @@ Route::group(['middleware' => ['checkLogin']], function () {
     Route::group(['prefix' => 'chia-se'], function () {
         Route::get('/', 'ShareController@index')->name('share');
         Route::get('/bai-viet/{slug}', 'ShareController@show')->name('share.show');
+        Route::get('/bai-viet/xoa/{id}', 'ShareController@destroy')->name('share.delete');
         Route::get('/them-bai-viet', 'ShareController@create')->name('share.create');
         Route::post('/them-bai-viet', 'ShareController@store')->name('share.store');
         Route::post('/bao-cao', 'ReportController@reportItem')->name('share.report');
         // tìm kiếm
         Route::get('/tim-kiem', 'ShareController@search')->name('share.search');
+        //bình luận
+        Route::post('/binh-luan', 'ShareController@comment')->name('share.comment.store');
+        Route::post('/tra-loi-binh-luan', 'ShareController@repcomment')->name('share.comment.store.rep');
+        Route::post('/xoa-binh-luan', 'ShareController@destroycomment')->name('share.comment.destroy');
         
         
         Route::get('/{slug}', 'ShareController@list')->name('share.list');
     });
     Route::group(['prefix' => 'cau-lac-bo'], function () {
-
+        Route::group(['middleware' => ['checkAdmin']], function () {
+            
+            Route::group(['prefix' => 'quan-tri'], function () {
+                
+                Route::get('/', 'ClubController@admin')->name('club.admin');
+                Route::post('/tao-cau-lac-bo', 'ClubController@adminCreate')->name('club.admin.create');
+                Route::post('/cap-nhat', 'ClubController@adminUpdate')->name('club.admin.adminUpdate');
+                Route::post('/xoa/{id}', 'ClubController@adminDelete')->name('club.admin.adminDelete');
+            });
+        });
         Route::get('/', 'ClubController@index')->name('club');
+        Route::get('/bai-viet-rieng/{slug}', 'ClubController@clubPostSlug')->name('club.clubPostSlug');
          // tìm kiếm
          Route::get('/tim-kiem', 'ClubController@search')->name('club.search');
         // Route::group(['middleware' => ['checkManage']], function () {
@@ -64,7 +87,14 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/{slug}/huy-thanh-vien/', 'ClubController@denied')->name('club.denied');
             Route::post('/{slug}/xoa-thanh-vien/', 'ClubController@delete')->name('club.delete');
             Route::post('/{slug}/thay-doi-chuc-vu/', 'ClubController@changeRole')->name('club.changeRole');
+            Route::get('/xoa-cau-hoi/{id}', 'ClubController@destroy')->name('club.delete');
+            //bình luận
+            Route::post('/binh-luan', 'ClubController@comment')->name('club.comment.store');
+            Route::post('/tra-loi-binh-luan', 'ClubController@commentrep')->name('club.comment.rep');
+
+
         // });
+            
 
         //Route::get('/bai-viet/{slug}/', 'ClubController@show')->name('club.show');
         Route::group(['middleware' => ['checkMemberClub']], function () {
@@ -81,6 +111,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/bai-viet/{slug}', 'UnionController@show')->name('union.show');
         Route::get('/them-bai-viet', 'UnionController@create')->name('union.create');
         Route::post('/them-bai-viet', 'UnionController@store')->name('union.store');
+        Route::get('/xoa-bai-viet/{id}', 'UnionController@destroy')->name('union.delete');
     });
     Route::group(['prefix' => 'mon-hoc'], function () {
         Route::get('/{slug}', 'SubjectController@show')->name('subject.detail');
