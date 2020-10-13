@@ -138,8 +138,6 @@ Quản lý tài liệu
             },
             items: {
                 "change" : {name : "Thay đôi trạng thái"},
-                "copy": {name: "Sao chép"},
-                "paste": {name: "Dán"},
                 "delete": {name: "Xóa"},
             }
         });

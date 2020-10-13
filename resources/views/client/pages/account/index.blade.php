@@ -42,13 +42,11 @@
     <h4>Các chức năng cá nhân</h4>
     <a href="{{ route('chat') }}" class="btn btn-success">Nhóm trò chuyện lớp</a>
     <a href="{{ route('chon-hoc-ky') }}" class="btn btn-success">Tài liệu cá nhân</a>
-    <a href="{{ route('chat-all', ['mssv'=> Auth::guard('student')->user()->stu_code]) }}">Các cuộc trò chuyện</a>
 
 </div>
 @else
     <h4>Thông tin</h4>
     <a href="{{ route('tai-lieu.sinhvien', ['codeStudent' => $student->stu_code]) }}" class="btn btn-success">Tài liệu công khai</a>
-    <a href="{{ route('chat-person', ['mssv'=> $student->stu_code]) }}">Trò chuyện trao đổi</a>
 @endif
 <div class="col-12">
     @if (Auth::guard('student')->user()->stu_code == $student->stu_code)

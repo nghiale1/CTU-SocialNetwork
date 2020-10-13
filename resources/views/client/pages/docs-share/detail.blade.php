@@ -77,9 +77,9 @@ Quản lý tài liệu - Tên môn
         @if (count($files) != null)
             @foreach ($files as $item)
                 <div class="col-md-3">
-                    <a href="#" class="btn btn-success" style="width: 100%;" >
+                    <a href="{{ asset($item->f_path) }}" class="btn btn-success" style="width: 100%;" download>
                         <h5 style="font-size: 10px;">
-                            <i class="fa fa-folder" aria-hidden="true"></i> {{$item->f_name}}
+                            <i class="fa fa-item" aria-hidden="true"></i> {{$item->f_name}}
                         </h5>
                     </a>
                 </div>
@@ -230,8 +230,6 @@ Quản lý tài liệu - Tên môn
                 //     }
                 // },
                 "change" : {name : "Thay đôi trạng thái"},
-                "copy": {name: "Sao chép"},
-                "paste": {name: "Dán"},
                 "delete": {name: "Xóa"},
             }
         });
