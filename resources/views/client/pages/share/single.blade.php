@@ -131,7 +131,7 @@ div#dropdown-menu4 {
                         <span><i class="fa fa-flag"></i><a href="#" title="Báo cáo" data-toggle="modal" data-target="#report"
                             data-modal="{!! $post->item_id!!}" class="clickModal">  Báo cáo
                         </a></span>
-                        <span ><i class="fa fa-trash"></i><a href="{{ route('share.delete', ['id'=> $post->item_id]) }}">  Xóa bài viết</a></span>
+                        <span ><i class="fa fa-trash"></i><a href="{{ route('share.delete', ['id'=> $post->item_id]) }} " id="xoabaiviet">  Xóa bài viết</a></span>
                     </div>
                     @include('client.pages.share.report')
                 </div>
@@ -358,6 +358,15 @@ div#dropdown-menu4 {
             $("#showrep"+id).toggle();
 
           });
+
+      
+        $('#xoabaiviet').click(function (e) { 
+            if(confirm('Bạn có muốn xóa !')){
+                return true;
+            }
+            return false;
+            e.preventDefault();
+        });
 
       });
 </script>

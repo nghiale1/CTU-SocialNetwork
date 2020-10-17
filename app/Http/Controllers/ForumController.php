@@ -34,15 +34,15 @@ class ForumController extends Controller
         if($blog->isNotEmpty()){
             foreach($blog as $item){
                 $item->day=$this->getDay($item->p_id,$item->p_created);
-                $item->likes=\DB::table('posts as p')->join('comments as c','c.com_id','p.p_id')
-		->join('likes as l','l.com_id','c.com_id')
-		->where('p.p_id',$item->p_id)->count();
+                $item->likes=\DB::table('posts as p')
+                ->join('comments as c','c.com_id','p.p_id')
+                ->where('p.p_id',$item->p_id)
+                ->count();
                 $item->comments=count($item->comments);
             }
         }
+
         // dd($blog);
-
-
         //GET
         $idStudent = Auth::guard('student')->id();
         $getSubjectStudy = DB::table('subjects_student')->where('stu_id',$idStudent)->get();
@@ -56,13 +56,20 @@ class ForumController extends Controller
         $post_viewed = session()->get('posts.post_viewed');
         if($post_viewed)
         {
-            $baivietdaxem = DB::table('posts')->whereIn('p_slug',$post_viewed)->join('students','students.stu_id','posts.stu_id')->get();
+            $baivietdaxem = DB::table('posts')->whereIn('p_slug',$post_viewed)
+            ->join('students','students.stu_id','posts.stu_id')
+            ->get();
+            $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+
             // dd($baivietdaxem);
-            return view('client.pages.forum.forum',compact('subject','blog','getSubPopular','baivietdaxem'));
+            return view('client.pages.forum.forum',compact('subject','blog','getSubPopular','baivietdaxem','stu'));
         }
-        // dd($post_viewed);
+        $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+
+        // dd($stu) ;
         $baivietdaxem = 0;
-        return view('client.pages.forum.forum',compact('subject','blog','getSubPopular', 'baivietdaxem'));
+        // dd($stu);
+        return view('client.pages.forum.forum',compact('subject','blog','getSubPopular', 'baivietdaxem','stu'));
     }
 
     public function search(Request $request)

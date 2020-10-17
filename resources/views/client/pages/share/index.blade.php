@@ -33,6 +33,11 @@ Chia sẻ
             Chia sẻ
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('share.create')}}'"> Thêm vật dụng chia sẻ</button> </span>
+                    <marquee scrolldelay="1" scrollamount="5">
+                        <span class="gioithiu">
+                             Mời các bạn cùng nhau chia sẻ những vật dụng cá nhân: Tài liệu, bàn ghế, sách vở...  
+                        </span>
+                     </marquee>
         </h1>
         <!--
                         First Blog Post -->

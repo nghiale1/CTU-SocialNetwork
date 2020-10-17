@@ -17,7 +17,7 @@
                 @csrf
                 <input type="hidden" name="union" value="{{$union->ub_id}}">
                 <table class="table table-responsive borderless text-right">
-                    {{die}}
+     
                     <tr>
                         <td>Chọn ảnh<red-star></red-star>
                         </td>
