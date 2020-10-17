@@ -48,7 +48,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
     });
     Route::group(['prefix' => 'chia-se'], function () {
-        Route::get('/', 'ShareController@index')->name('share');
+        Route::get('/', 'ShareController@select')->name('share');
         Route::get('/bai-viet/{slug}', 'ShareController@show')->name('share.show');
         Route::get('/bai-viet/xoa/{id}', 'ShareController@destroy')->name('share.delete');
         Route::get('/them-bai-viet', 'ShareController@create')->name('share.create');
@@ -61,8 +61,9 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/tra-loi-binh-luan', 'ShareController@repcomment')->name('share.comment.store.rep');
         Route::post('/xoa-binh-luan', 'ShareController@destroycomment')->name('share.comment.destroy');
         
+        // Route::get('/danh-sach/{slug}', 'ShareController@list')->name('share.list');
+        Route::get('/{type}', 'ShareController@index')->name('share.type');
         
-        Route::get('/{slug}', 'ShareController@list')->name('share.list');
     });
     Route::group(['prefix' => 'cau-lac-bo'], function () {
         Route::group(['middleware' => ['checkAdmin']], function () {

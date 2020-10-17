@@ -16,9 +16,27 @@ class ShareController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function select()
     {
-       $share=Item::paginate(10);
+        $type=\DB::table('types')->get();
+        $lastedPost = DB::table('items')->orderBy('item_created','DESC')->paginate(5);
+
+        $post_viewed = session()->get('posts.post_club');
+        // dd($post_viewed);
+        if($post_viewed)
+        {
+            $baivietdaxem = DB::table('items')->whereIn('item_slug',$post_viewed)->get();
+            // dd($baivietdaxem);
+            return view('client.pages.share.select',compact('type','baivietdaxem','lastedPost'));
+        }
+        $baivietdaxem = 0;
+        return view('client.pages.share.select',compact('type','baivietdaxem','lastedPost'));
+    }
+    public function index($slug)
+    {
+       $share=Item::join('types as t','t.type_id','items.type_id')
+       ->where('type_slug',$slug)
+       ->paginate(10);
         
 
         foreach($share as $item){
@@ -123,7 +141,15 @@ class ShareController extends Controller
         ->join('students','students.stu_id','comments.stu_id')
         ->OrderBy('com_id','DESC')->get();
 
-        return view('client.pages.share.single',compact('post','day','reason','comment'));
+
+        $lastedPost = DB::table('items')->orderBy('item_created','DESC')->paginate(5);
+
+        // dd($post_viewed);   
+        $post_viewed=DB::table('count_view_items')
+        ->join('items','items.item_id','count_view_items.item_id')
+        ->where('count_view_items.stu_id',\Auth::id())->get();
+
+        return view('client.pages.share.single',compact('post','day','reason','comment','lastedPost','post_viewed'));
     }
 
     /**
