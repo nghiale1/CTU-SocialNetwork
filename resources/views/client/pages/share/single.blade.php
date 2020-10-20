@@ -107,7 +107,7 @@ div#dropdown-menu4 {
     <li><a href="{{route('share.list',$post->type_slug)}}">
             {{$post->type_name}}
         </a>
-       
+
     </li>
 </ul>
 @endsection
@@ -124,14 +124,14 @@ div#dropdown-menu4 {
             <div class="col-md-12">
                 <div class="entry-meta">
                     <span><i class="fa fa-calendar-o"></i> {{$day}}</span>
-                    <span><i class="fa fa-user"></i> Bởi <a href="#">
+                    <span><i class="fa fa-user"></i> Bởi <a href="{{ route('Info',$post->stu_code.'.'.Str::slug($post->stu_name, '-')) }}">
                             {{$post->stu_name}}</a></span>
                     <div class="pull-right">
                         <span><i class="fa fa-eye"></i> {{$post->item_view_count}}</span>
                         <span><i class="fa fa-flag"></i><a href="#" title="Báo cáo" data-toggle="modal" data-target="#report"
                             data-modal="{!! $post->item_id!!}" class="clickModal">  Báo cáo
                         </a></span>
-                        <span ><i class="fa fa-trash"></i><a href="{{ route('share.delete', ['id'=> $post->item_id]) }}">  Xóa bài viết</a></span>
+                        <span ><i class="fa fa-trash"></i><a href="{{ route('share.delete', ['id'=> $post->item_id]) }} " id="xoabaiviet">  Xóa bài viết</a></span>
                     </div>
                     @include('client.pages.share.report')
                 </div>
@@ -139,7 +139,7 @@ div#dropdown-menu4 {
         </div>
         <br>
         <img src="{{asset($post->item_avatar)}}" class="img-responsive" alt="photo" />
-   
+
         <br>
 
         <div class="form-group" style="color: black; font-size:18px">
@@ -218,9 +218,9 @@ div#dropdown-menu4 {
                                 <div class="_cm_right">
                                     @if ($val->stu_id == Auth::guard('student')->id())
                                     <div class="dropdown" id="dropdown-menu1">
-                                    
+
                                         <a class="pull-right" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</a>
-                                
+
                                         {{-- thông báo xóa bình luận --}}
                                         <div class="modal fade" id="delete" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -311,7 +311,7 @@ div#dropdown-menu4 {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>
                                             @endif
                                         </div>
                                     </div>
@@ -339,7 +339,7 @@ div#dropdown-menu4 {
 
             </div>
     </article>
-    
+
     @include('client.pages.share.right')
 </div>
 
@@ -359,6 +359,15 @@ div#dropdown-menu4 {
 
           });
 
+      
+        $('#xoabaiviet').click(function (e) { 
+            if(confirm('Bạn có muốn xóa !')){
+                return true;
+            }
+            return false;
+            e.preventDefault();
+        });
+
       });
-</script>   
+</script>
 @endpush

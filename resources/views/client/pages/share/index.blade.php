@@ -33,6 +33,11 @@ Chia sẻ
             Chia sẻ
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('share.create')}}'"> Thêm vật dụng chia sẻ</button> </span>
+                    <marquee scrolldelay="1" scrollamount="5">
+                        <span class="gioithiu">
+                             Mời các bạn cùng nhau chia sẻ những vật dụng cá nhân: Tài liệu, bàn ghế, sách vở...
+                        </span>
+                     </marquee>
         </h1>
         <!--
                         First Blog Post -->
@@ -74,6 +79,7 @@ Chia sẻ
                         alt="{{asset($item->item_avatar)}}" style="width:200px; height:150px;">
                         <div class="card-body">
                         <h5 class="card-title style-color" style="text-transform:capitalize;">{{$item->item_title}}</h5>
+                        <p>{{ $item->type_name }}</p>
                         <a href="{{route('share.show',$item->item_slug)}}" class="style-color"> Xem chi tiết...</a>
                         <span style="float: right"><i class="fa fa-eye" aria-hidden="true"></i>
                             {{$item->item_view_count}}</i></span>
@@ -85,9 +91,9 @@ Chia sẻ
                     </h2>
                 @endforelse
                     {!!$share->links()!!}
-                
+
             </div>
-               
+
 
         </div>
         <hr>
@@ -153,11 +159,11 @@ Chia sẻ
     </aside>
     {{-- show ra hình --}}
     <div id="myModal" class="modal" aria-hidden="true" tabindex="-1" role="dialog" >
-      
-       
+
+
         <img class="modal-content" id="img01">
-      
-       
+
+
     </div>
     {{-- @include('client.pages.share.right') --}}
 </div>
@@ -166,7 +172,7 @@ Chia sẻ
 @push('script')
 <script>
 
-    $('.image').click(function (e) { 
+    $('.image').click(function (e) {
         e.preventDefault();
         var id =$(this).attr("data-id");
         // Get the modal
@@ -178,7 +184,7 @@ Chia sẻ
         $('#myModal').show();
         modalImg.src = this.src;
 
-    
+
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
@@ -187,7 +193,7 @@ Chia sẻ
         // img.click(){
         //     $('#myModal').hidden();
         // }
-        $('#img01').click(function (e) { 
+        $('#img01').click(function (e) {
             e.preventDefault();
             // alert("tat");
             $('#myModal').hide();

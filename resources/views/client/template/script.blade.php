@@ -134,6 +134,4 @@
 
     });
 </script> --}}
-
-
 @stack('script')
