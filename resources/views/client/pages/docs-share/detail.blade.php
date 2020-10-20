@@ -7,10 +7,11 @@ Quản lý tài liệu - Tên môn
 
 @section('content')
 <div class="row">
-    <a href="{{ url("http://127.0.0.1:8000/tai-khoan/tai-lieu?nienkhoa=$nkSelected&hocky=$hkSelected") }}" class="label label-default">Quay lại trang môn học</a>
+    <a href="{{ url("http://127.0.0.1:8000/tai-khoan/tai-lieu?nienkhoa=$nkSelected&hocky=$hkSelected") }}" class="label label-default">Quay lại</a>
 </div>
 <div class="row">
-    <h1 class="text-center">Tài liệu môn: {{ $folder->fo_name }}</h1>
+    <h1>Tài liệu môn học</h1>
+    <h1>{{ $folder->fo_name }}</h1>
     <p style="border-top: 2px solid blue;"></p>
 
     <div class="col-md-12">
@@ -38,7 +39,7 @@ Quản lý tài liệu - Tên môn
             </div>
         @endif
         <div class="col-md-12">
-            <h2>Các thư mục</h2>
+            <h2>Thư mục</h2>
         </div>
         @if (count($folder_detail) > 0)
             @foreach ($folder_detail as $item)
@@ -54,7 +55,7 @@ Quản lý tài liệu - Tên môn
                                             @else
                                                 btn-warning
                                             @endif" style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
-                            <h5 style="font-size: 10px;">
+                            <h5 style="font-size: 20px;">
                                 <i class="fa fa-folder" aria-hidden="true"></i> {{$item->fo_name}}
                             </h5>
                         </a>
@@ -72,16 +73,20 @@ Quản lý tài liệu - Tên môn
         <br>
 
         <div class="col-md-12">
-            <h2>Các tập tin</h2>
+            <h2>Tập tin</h2>
         </div>
         @if (count($files) != null)
             @foreach ($files as $item)
                 <div class="col-md-3">
-                    <a href="{{ asset($item->f_path) }}" class="btn btn-success" style="width: 100%;" download>
-                        <h5 style="font-size: 10px;">
-                            <i class="fa fa-item" aria-hidden="true"></i> {{$item->f_name}}
+                    <button href="#" style="width: 100%;height: 120px;line-height: 120px;background-color: #e2f8ff;color: black; white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis; " class="btn btn-success" style="width: 100%;" download>
+                        <h5 style="font-size: 15px; padding-top: 5px;">
+                            {{$item->f_name}}
+                            <br>
+                            <a href="{{ asset($item->f_path) }}" style="text-decoration: underline; font-size: 12px; color: blue;  ">Download</a>
                         </h5>
-                    </a>
+                    </button>
                 </div>
             @endforeach
         @else

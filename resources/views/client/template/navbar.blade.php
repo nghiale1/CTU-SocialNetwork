@@ -14,6 +14,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right custom-menu">
+                <li><a href="{{ route('chon-hoc-ky') }}">Tài liệu cá nhân</a></li>
                 <?php if(\Auth::check()):?>
                 <li @if (Request::segment(1)=='hoc-tap' ) class='active' @endif>
                     <a href="{{route('forum')}}">Học tập</a></li>

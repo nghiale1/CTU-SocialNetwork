@@ -7,15 +7,14 @@ Quản lý tài liệu
 
 @section('content')
 <div class="row">
-    <h1 class="text-center">Quản lý tài liệu cá nhân</h1>
+    <h1>Quản lý tài liệu cá nhân</h1>
     <p style="border-top: 2px solid blue;"></p>
 </div>
 <div class="row">
     <div class="col-md-6" style="margin-bottom: 20px;">
-        <h3 class="text-center">Chọn năm học - học kỳ</h3>
+        <h3>Chọn năm học - học kỳ</h3>
         <form method="GET" action="{{ route('tai-lieu') }}">
             <div class="form-group row">
-                <div class="col-md-2"></div>
                 <label class="col-md-2">Năm học</label>
                 <div class="col-md-4">
                     <select class="form-control" id="exampleFormControlSelect1" name="nienkhoa">
@@ -27,7 +26,6 @@ Quản lý tài liệu
                 <div class="col-md-4"></div>
             </div>
             <div class="form-group row">
-                <div class="col-md-2"></div>
                 <label class="col-md-2">Học kỳ</label>
                 <div class="col-md-4">
                     <select class="form-control" id="exampleFormControlSelect1" name="hocky">
@@ -41,7 +39,7 @@ Quản lý tài liệu
         </form>
     </div>
     <div class="col-md-6">
-        <h3 class="text-center">Các môn học chưa tạo thư mục:
+        <h3>Các môn học trong:
             {{ $hkSelected->semester_name }} - {{ $nkSelected->school_year_name }}
         </h3>
         <div class="list-group" style="color: black; font-weight: bold">
@@ -60,10 +58,10 @@ Quản lý tài liệu
     </div>
 </div>
 <div class="row" style="margin-bottom: 20px;" id="right-click-bg">
-    <h1 class="text-center">Thư mục môn học đã tạo</h1>
+    <h1>Thư mục môn học</h1>
     <p style="border-top: 2px solid blue;"></p>
     @foreach ($sub_studied as $item)
-        <div class="col-md-3">
+        <div class="col-md-12">
             <div class="folder">
                 <a href="{{ route('chi-tiet-thu-muc', [
 
@@ -78,7 +76,7 @@ Quản lý tài liệu
                                                         btn-warning
                                                     @endif"
                                                     style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
-                    <h5 style="font-size: 10px;">
+                    <h5 style="font-size: 20px;>
                         <i class="fa fa-folder" aria-hidden="true"></i> {{ $item->fo_name }}
                     </h5>
                 </a>
