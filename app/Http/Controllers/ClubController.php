@@ -81,7 +81,7 @@ class ClubController extends Controller
     }
     public function listRequest($slug)
     {
-        
+
         $list=ClubStudent::join('clubs','clubs.c_id','club_students.c_id')
         ->join('students','students.stu_id','club_students.stu_id')
         ->where('cs_role','YC')
@@ -89,7 +89,7 @@ class ClubController extends Controller
         $viewed=$this->viewed();
         $joined=$this->joined();
         return view('client.pages.club.request',compact('list','viewed','joined'));
-            
+
     }
     public function accept(Request $request)
     {
@@ -102,7 +102,7 @@ class ClubController extends Controller
             ]);
         }
         return response()->json('success', 200);
-        
+
     }
     public function denied(Request $request)
     {
@@ -151,7 +151,7 @@ class ClubController extends Controller
                 $item->sort=array_search($item->cs_role,$arr);
                 foreach($count as $item2){
                     if($item->stu_id==$item2->stu_id){
-                        
+
                         $item->count=$item2->sobaidang;
                     }
                 }
@@ -168,7 +168,7 @@ class ClubController extends Controller
         ->join('club_posts','club_posts.cp_id','count_view_clubs.cp_id')
         ->where('count_view_clubs.stu_id',$idStudent)->limit(3)->get();
         if($viewed->isEmpty()){
-            $viewed=0; 
+            $viewed=0;
         }
         // dd($viewed);
         return $viewed;
@@ -180,12 +180,12 @@ class ClubController extends Controller
         ->join('clubs','clubs.c_id','club_students.c_id')
         ->where('club_students.stu_id',$idStudent)->get();
         if($joined->isEmpty()){
-            $joined=0; 
+            $joined=0;
         }
         return $joined;
     }
-    
-    
+
+
     public function changeRole(Request $request)
     {
         $c=DB::table('clubs')->where('c_slug',$request->slug)->first();
@@ -292,9 +292,9 @@ class ClubController extends Controller
         $comment['com_created']= $date;
         $comment['stu_id']= $request->st_id;
         $comment['cp_id']= $request->cp_id;
-    
+
         // dd($comment);
-       
+
 
         $result = DB::table('comments')->insert($comment);
         if($result)
@@ -387,7 +387,7 @@ class ClubController extends Controller
     public function admin()
     {
         $list=DB::table('clubs')->get();
-        return view('client.pages.club.admin_list',compact('list')); 
+        return view('client.pages.club.admin_list',compact('list'));
     }
 
 

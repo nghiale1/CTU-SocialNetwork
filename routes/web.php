@@ -60,8 +60,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/binh-luan', 'ShareController@comment')->name('share.comment.store');
         Route::post('/tra-loi-binh-luan', 'ShareController@repcomment')->name('share.comment.store.rep');
         Route::post('/xoa-binh-luan', 'ShareController@destroycomment')->name('share.comment.destroy');
-        
-        
+
+
         Route::get('/{slug}', 'ShareController@list')->name('share.list');
     });
 
@@ -97,7 +97,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
 
         // });
-            
+
 
         //Route::get('/bai-viet/{slug}/', 'ClubController@show')->name('club.show');
         Route::group(['middleware' => ['checkMemberClub']], function () {
@@ -119,8 +119,13 @@ Route::group(['middleware' => ['checkLogin']], function () {
     Route::group(['prefix' => 'mon-hoc'], function () {
         Route::get('/{slug}', 'SubjectController@show')->name('subject.detail');
     });
+
+    //Xem tai lieu sinh vien khac
+    Route::get('tai-lieu/{codeStudent}','DocumentShareController@getDocument')->name('tai-lieu.sinhvien');
+
     //Tài liệu để chung với cái group này luôn
     Route::group(['prefix' => 'tai-khoan'], function () {
+
         //danh sách học phần
         Route::get('/hoc-phan-da-hoc', 'AccountController@studied')->name('account.studied');
         Route::get('tai-lieu/chon-hoc-ky','DocumentShareController@getHocKy')->name('chon-hoc-ky');
@@ -146,6 +151,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
     //form chat
     Route::get('chat', 'ChatController@chatRoom')->name('chat');
+    Route::get('chat-person/{mssv}', 'ChatController@chatPerson')->name('chat-person');
+    Route::get('chat-person-all/{mssv}', 'ChatController@chat')->name('chat-all');
 });
 Route::get('/x', function () {
     $user=Auth::user();

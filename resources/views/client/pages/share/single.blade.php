@@ -107,7 +107,7 @@ div#dropdown-menu4 {
     <li><a href="{{route('share.list',$post->type_slug)}}">
             {{$post->type_name}}
         </a>
-       
+
     </li>
 </ul>
 @endsection
@@ -124,7 +124,7 @@ div#dropdown-menu4 {
             <div class="col-md-12">
                 <div class="entry-meta">
                     <span><i class="fa fa-calendar-o"></i> {{$day}}</span>
-                    <span><i class="fa fa-user"></i> Bởi <a href="#">
+                    <span><i class="fa fa-user"></i> Bởi <a href="{{ route('Info',$post->stu_code.'.'.Str::slug($post->stu_name, '-')) }}">
                             {{$post->stu_name}}</a></span>
                     <div class="pull-right">
                         <span><i class="fa fa-eye"></i> {{$post->item_view_count}}</span>
@@ -139,7 +139,7 @@ div#dropdown-menu4 {
         </div>
         <br>
         <img src="{{asset($post->item_avatar)}}" class="img-responsive" alt="photo" />
-   
+
         <br>
 
         <div class="form-group" style="color: black; font-size:18px">
@@ -218,9 +218,9 @@ div#dropdown-menu4 {
                                 <div class="_cm_right">
                                     @if ($val->stu_id == Auth::guard('student')->id())
                                     <div class="dropdown" id="dropdown-menu1">
-                                    
+
                                         <a class="pull-right" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</a>
-                                
+
                                         {{-- thông báo xóa bình luận --}}
                                         <div class="modal fade" id="delete" tabindex="-1" role="dialog"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -311,7 +311,7 @@ div#dropdown-menu4 {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>  
+                                            </div>
                                             @endif
                                         </div>
                                     </div>
@@ -339,7 +339,7 @@ div#dropdown-menu4 {
 
             </div>
     </article>
-    
+
     @include('client.pages.share.right')
 </div>
 
@@ -369,5 +369,5 @@ div#dropdown-menu4 {
         });
 
       });
-</script>   
+</script>
 @endpush

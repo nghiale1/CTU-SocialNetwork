@@ -62,13 +62,17 @@ class ForumController extends Controller
             $baivietdaxem = DB::table('posts')->whereIn('p_slug',$post_viewed)
             ->join('students','students.stu_id','posts.stu_id')
             ->get();
+            $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+
             // dd($baivietdaxem);
             return view('client.pages.forum.forum',compact('subject','blog','getSubPopular','baivietdaxem','stu'));
         }
+        $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
 
        
         $baivietdaxem = 0;
-        return view('client.pages.forum.forum',compact(['subject','blog','getSubPopular', 'baivietdaxem','stu']));
+        // dd($stu);
+        return view('client.pages.forum.forum',compact('subject','blog','getSubPopular', 'baivietdaxem','stu'));
     }
 
     public function search(Request $request)

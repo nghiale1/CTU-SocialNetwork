@@ -28,7 +28,7 @@ Hỏi đáp
                     onclick="window.location.href='{{route('question.create')}}'"> Thêm câu hỏi</button> </span>
                     <marquee scrolldelay="1" scrollamount="5">
                        <span class="gioithiu">
-                            Mời các bạn cùng nhau trao đổi, chia sẻ kinh nghiệm các lĩnh vực: Lập trình, Công nghệ,...  
+                            Mời các bạn cùng nhau trao đổi, chia sẻ kinh nghiệm các lĩnh vực: Lập trình, Công nghệ,...
                        </span>
                     </marquee>
         </h1>
@@ -40,7 +40,7 @@ Hỏi đáp
                 @foreach ($blog as $item)
                      @foreach ($stu as $i)
                         @if ($item->p_id ==$i->p_id)
-                            
+
                             <h2 class="blog-title">
                                 <a href="{{route('forum.show',$item->p_slug)}}">{{$item->p_title}}</a>
                             </h2>
@@ -55,7 +55,7 @@ Hỏi đáp
                                 @if ($item->stu_id ==$i->stu_id)
                                 <span class="comments-padding"></span>
                                 <i class="fa fa-user"></i> Đăng bởi: {{$i->stu_name}}
-                                    
+
                                 @endif
                                 {{-- <div class="delete-blog"> --}}
                                     <span class="comments-padding"></span>

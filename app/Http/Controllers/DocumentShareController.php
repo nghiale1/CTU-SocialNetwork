@@ -9,6 +9,15 @@ use File;
 use Carbon\Carbon;
 class DocumentShareController extends Controller
 {
+
+    public function getDocument($codeStudent)
+    {
+        // $docStu = DB::table('')
+        $idStudent = DB::table('students')->where('stu_code',$codeStudent)->first();
+        $sub_studied_id = DB::table('folders')->where('stu_id','=',$idStudent->stu_id)->get()->pluck('sub_id')->toArray();
+        $sub_studied = DB::table('folders')->where('stu_id','=',$idStudent->stu_id)->where('fo_child','=',null)->whereIn('sub_id',$sub_studied_id)->get();
+        dd($sub_studied);
+    }
     //Chọn niên khóa và học kỳ
     public function getHocKy()
     {
