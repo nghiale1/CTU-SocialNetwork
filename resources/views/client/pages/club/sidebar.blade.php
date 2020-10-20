@@ -28,7 +28,7 @@
         <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Câu lạc bộ đã tham gia</h4>
         <hr>
         <ul class="sidebar-list">
-
+            
             @foreach ($joined as $item)
             @if ($item->cs_role!='YC'&&$item->cs_role!='TV')
             <li class="btn-group">
@@ -50,6 +50,19 @@
             @endforeach
         </ul>
     </div>
+    <div class="blog-sidebar">
+        <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Câu lạc bộ chưa tham gia</h4>
+        <hr>
+        <ul class="sidebar-list">
+            @foreach ($clubNotJoin as $val)
+             <li>
+                 <div class="row">
+                     <div class="col-md-9" style="">{{$val->c_name}}</div>
+                     <div class="col-md-3"><a href=""  title="Tham gia" style="float: right" > <i class="fa fa-file-text-o" aria-hidden="true" style="color: #3471ad" ></i> </a></div>
+                 </div>
+             </li>
+            @endforeach
+        </ul>
     <!-- Recent Posts -->
     <div class="blog-sidebar">
         <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>

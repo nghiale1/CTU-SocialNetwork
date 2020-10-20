@@ -31,10 +31,16 @@ class ClubController extends Controller
         }
         $viewed=$this->viewed();
         $joined=$this->joined();
+        foreach($joined as $val)
+            $c_id = $val->c_id;
+        //CLB chưa tham gia
+        $clubJoin = DB::table('club_students')->where('stu_id',\Auth::id())->pluck('c_id');
+        $clubNotJoin = DB::table('clubs')->whereNotIn('c_id',$clubJoin)->get();
+        // ->where('cs.c_id',$c_id)->get();
    
-        // dd($club);
+        // dd($clubNotJoin);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.club.index',compact('blog','viewed','joined'));
+        return view('client.pages.club.index',compact('blog','viewed','joined','clubNotJoin'));
     }
 
     public function clubPostSlug($slug)
@@ -244,8 +250,13 @@ class ClubController extends Controller
         $post=DB::table('club_posts as p')
         ->join('club_students as cs','cs.c_id','p.c_id')
         ->join('students as s','s.stu_id','p.stu_id')
+        ->join('clubs as c','c.c_id','p.c_id')
         ->where('cp_slug',$slug)
         ->first();
+        $studentJoinClub= DB::table('club_students as cs')
+        ->join('students as st','st.stu_id','cs.stu_id')
+        ->where('cs.c_id',$post->c_id)->get();
+        // dd($studentJoinClub);
         $day='';
         if($post){
 
@@ -258,7 +269,7 @@ class ClubController extends Controller
         ->OrderBy('com_id','DESC')->get();
         $viewed=$this->viewed();
         $joined=$this->joined();
-        return view('client.pages.club.single',compact('post','day','comment','viewed','joined'));
+        return view('client.pages.club.single',compact('post','day','comment','viewed','joined','studentJoinClub'));
     }
 
     /**
@@ -378,6 +389,10 @@ class ClubController extends Controller
         $list=DB::table('clubs')->get();
         return view('client.pages.club.admin_list',compact('list')); 
     }
+
+
+
+
     public function adminCreate(Request $request)
     {
         $mssv=\DB::table('students')->where('stu_code',$request->CNCLB)->first();
