@@ -19,6 +19,7 @@ Hỏi đáp
 @section('content')
 <!-- Page Content -->
 <div class="row">
+    {{-- {{dd($stu)}} --}}
     <!-- Blog Column -->
     <div class="col-md-8">
         <h1 class="page-header sidebar-title">
@@ -35,7 +36,7 @@ Hỏi đáp
                         First Blog Post -->
         <div class="row blogu">
             <div class="col-sm-12 col-md-12" id="content">
-                {{-- {{dd($blog)}} --}}
+                {{-- {{dd($stu)}} --}}
                 @foreach ($blog as $item)
                      @foreach ($stu as $i)
                         @if ($item->p_id ==$i->p_id)

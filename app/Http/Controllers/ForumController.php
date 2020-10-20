@@ -18,6 +18,9 @@ class ForumController extends Controller
      */
     public function index()
     {
+        $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+
+        // dd($stu);
         //get subject of user
         $subject=\App::call('App\Http\Controllers\QuestionController@getSubjectsStudent');
         // dd($subject);
@@ -60,15 +63,12 @@ class ForumController extends Controller
             ->join('students','students.stu_id','posts.stu_id')
             ->get();
             // dd($baivietdaxem);
-            return view('client.pages.forum.forum',compact('subject','blog','getSubPopular','baivietdaxem'));
+            return view('client.pages.forum.forum',compact('subject','blog','getSubPopular','baivietdaxem','stu'));
         }
-        $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')
-       
-        ->get();
 
-        // dd($stu) ;
+       
         $baivietdaxem = 0;
-        return view('client.pages.forum.forum',compact('subject','blog','getSubPopular', 'baivietdaxem','stu'));
+        return view('client.pages.forum.forum',compact(['subject','blog','getSubPopular', 'baivietdaxem','stu']));
     }
 
     public function search(Request $request)
