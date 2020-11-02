@@ -131,7 +131,8 @@ Chi tiết bài viết
             <div class="col-md-12">
                 <div class="entry-meta">
                     <span><i class="fa fa-calendar-o"></i> {{$day}}</span>
-                    <span><i class="fa fa-user"></i> Bởi <a href="#">
+                    <span><i class="fa fa-user"></i> Bởi <a
+                            href="{{ route('Info',$post->stu_code.'.'.Str::slug($post->stu_name, '-')) }}">
                             {{$post->stu_name}}</a></span>
                     <div class="pull-right">
                         <span><i class="fa fa-eye"></i> {{$post->item_view_count}}</span>
@@ -420,6 +421,15 @@ Chi tiết bài viết
             $("#showrep"+id).toggle();
 
           });
+
+      
+        $('#xoabaiviet').click(function (e) { 
+            if(confirm('Bạn có muốn xóa !')){
+                return true;
+            }
+            return false;
+            e.preventDefault();
+        });
 
       });
 </script>

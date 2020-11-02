@@ -88,14 +88,14 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/{slug}/huy-thanh-vien/', 'ClubController@denied')->name('club.denied');
             Route::post('/{slug}/xoa-thanh-vien/', 'ClubController@delete')->name('club.delete');
             Route::post('/{slug}/thay-doi-chuc-vu/', 'ClubController@changeRole')->name('club.changeRole');
-
+            Route::get('/xoa-cau-hoi/{id}', 'ClubController@destroy')->name('club.delete');
             //bình luận
             Route::post('/binh-luan', 'ClubController@comment')->name('club.comment.store');
             Route::post('/tra-loi-binh-luan', 'ClubController@commentrep')->name('club.comment.rep');
 
 
         // });
-            
+
 
         //Route::get('/bai-viet/{slug}/', 'ClubController@show')->name('club.show');
         Route::group(['middleware' => ['checkMemberClub']], function () {
@@ -112,12 +112,18 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/bai-viet/{slug}', 'UnionController@show')->name('union.show');
         Route::get('/them-bai-viet', 'UnionController@create')->name('union.create');
         Route::post('/them-bai-viet', 'UnionController@store')->name('union.store');
+        Route::get('/xoa-bai-viet/{id}', 'UnionController@destroy')->name('union.delete');
     });
     Route::group(['prefix' => 'mon-hoc'], function () {
         Route::get('/{slug}', 'SubjectController@show')->name('subject.detail');
     });
+
+    //Xem tai lieu sinh vien khac
+    Route::get('tai-lieu/{codeStudent}','DocumentShareController@getDocument')->name('tai-lieu.sinhvien');
+
     //Tài liệu để chung với cái group này luôn
     Route::group(['prefix' => 'tai-khoan'], function () {
+
         //danh sách học phần
         Route::get('/hoc-phan-da-hoc', 'AccountController@studied')->name('account.studied');
         Route::get('tai-lieu/chon-hoc-ky','DocumentShareController@getHocKy')->name('chon-hoc-ky');
@@ -143,6 +149,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
     //form chat
     Route::get('chat', 'ChatController@chatRoom')->name('chat');
+    Route::get('chat-person/{mssv}', 'ChatController@chatPerson')->name('chat-person');
+    Route::get('chat-person-all/{mssv}', 'ChatController@chat')->name('chat-all');
 });
 Route::get('/x', function () {
     $user=Auth::user();

@@ -35,6 +35,11 @@ Chia sẻ
             Chia sẻ
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('share.create')}}'"> Thêm vật dụng chia sẻ</button> </span>
+            <marquee scrolldelay="1" scrollamount="5">
+                <span class="gioithiu">
+                    Mời các bạn cùng nhau chia sẻ những vật dụng cá nhân: Tài liệu, bàn ghế, sách vở...
+                </span>
+            </marquee>
         </h1>
         <!--
                         First Blog Post -->
@@ -151,6 +156,14 @@ Chia sẻ
         @endforeach
         @endif
 
+        <<<<<<< HEAD=======</aside> {{-- show ra hình --}} <div id="myModal" class="modal" aria-hidden="true"
+            tabindex="-1" role="dialog">
+
+
+            <img class="modal-content" id="img01">
+
+
+            >>>>>>> ngoc.duc
     </div>
 
 </aside>
@@ -180,7 +193,7 @@ Chia sẻ
         $('#myModal').show();
         modalImg.src = this.src;
 
-    
+
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
@@ -189,7 +202,7 @@ Chia sẻ
         // img.click(){
         //     $('#myModal').hidden();
         // }
-        $('#img01').click(function (e) { 
+        $('#img01').click(function (e) {
             e.preventDefault();
             // alert("tat");
             $('#myModal').hide();

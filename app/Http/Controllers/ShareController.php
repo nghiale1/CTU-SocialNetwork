@@ -48,6 +48,7 @@ class ShareController extends Controller
 
         $post_viewed = session()->get('posts.post_club');
         // dd($post_viewed);
+        // dd($share);
         if($post_viewed)
         {
             $baivietdaxem = DB::table('items')->whereIn('item_slug',$post_viewed)->get();
@@ -171,9 +172,9 @@ class ShareController extends Controller
         $comment['com_created']= $date;
         $comment['stu_id']= $request->st_id;
         $comment['item_id']= $request->item_id;
-    
+
         // dd($comment);
-       
+
 
         $result = DB::table('comments')->insert($comment);
         if($result)
@@ -221,7 +222,7 @@ class ShareController extends Controller
        $item = Item::find($id);
        $item->delete();
        return redirect()->route('share');
-    
+
 
     }
 
@@ -231,7 +232,7 @@ class ShareController extends Controller
        $item = Comment::find($request->com_id);
        $item->delete();
        return redirect()->back();
-    
+
 
     }
     public function list($slug)

@@ -72,6 +72,11 @@
         input#search {
             width: auto;
         }
+        .gioithiu {
+    text-transform: capitalize;
+    color: #3471ad;
+    font-size: 14px;
+}
     </style>
     @stack('css')
 </head>
