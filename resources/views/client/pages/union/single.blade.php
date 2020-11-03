@@ -62,14 +62,36 @@ Chi tiết bài viết
             </div>
             <!-- Blog Categories -->
             <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Categories</h4>
+                <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> {{$post->ub_name}} </h4>
                 <hr>
                 <ul class="sidebar-list">
-                    <li><a href="#">Applications</a></li>
-                    <li><a href="#">Photography</a></li>
-                    <li><a href="#">Art Design</a></li>
-                    <li><a href="#">Graphic Design</a></li>
-                    <li><a href="#">Category Name</a></li>
+                    <li><a href="#">
+                        @foreach ($chihoi as $val)
+                            @if ($val->sub_role == 'LCHT')
+                            Chi hội trưởng: &nbsp; {{$val->stu_name}}
+                                
+                            @endif
+                        @endforeach
+                    </a></li>
+                    <li><a href="#">
+                        @foreach ($chihoi as $val)
+                            @if ($val->sub_role == 'LCHP')
+                            Chi hội Phó: &nbsp; {{$val->stu_name}}
+                                
+                            @endif
+                        @endforeach
+                    </a></li>
+                    <li><a href="#">
+                        @foreach ($chihoi as $val)
+                            @if ($val->sub_role == 'UV')
+                            Ủy viên: &nbsp; {{$val->stu_name}}
+                                
+                            @endif
+                        @endforeach
+                    </a></li>
+                    <li><a href="#">
+                        Số lương hội viên: {{count($chihoi)}}
+                    </a></li>
                 </ul>
             </div>
             <!-- Recent Posts -->

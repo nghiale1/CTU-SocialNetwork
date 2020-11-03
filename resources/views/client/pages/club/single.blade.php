@@ -288,9 +288,90 @@ Chi tiết bài viết
             </div>
 
         </article>
-        <div class="col-md-1 clear-center"></div>
-        @include('client.pages.club.sidebar')
-    </div>
+        {{-- @include('client.pages.club.sidebar') --}}
+        {{-- Phần này của phụng chỉnh lại theo yêu cầu Của Đức --}}
+        <aside class="col-md-4 sidebar-padding">
+            <div id="app">
+                <chat-layout></chat-layout>
+            </div>
+            {{-- @include('client.pages.club.search') --}}
+            <!-- Blog Categories -->
+            <div class="blog-sidebar">
+                <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> {{$post->c_name}}</h4>
+                <hr>
+                <ul class="sidebar-list">
+                    <li><a href="">Chủ nhiệm CLB: &nbsp; &nbsp;
+                            @foreach ($studentJoinClub as $vl)
+                            @if( $vl->cs_role=='CNCLB')
+                            {{$vl->stu_name}}
+                            @endif
+                            @endforeach
+                        </a></li>
+                    <li><a href="">Phó chủ nhiệm CLB:
+                            @foreach ($studentJoinClub as $vl)
+                            @if( $vl->cs_role=='PCNCLB')
+                            &nbsp;{{$vl->stu_name}} &nbsp; &nbsp;,
+                            @endif
+                            @endforeach
+                        </a></li>
+                    <li><a href="#">Tổng số thành viên: {{ count($studentJoinClub  )}} thành viên</a></li>
+                    <a class="btn btn-ctu" style="color: white;margin-top:5px;" data-toggle="collapse" href="#xemThem"
+                        role="button">Xem thành viên</a>
+                    <div class="collapse" id="xemThem">
+                        <div class="card card-body">
+                            <ul class="sidebar-list">
+                                @foreach ($studentJoinClub as $vl)
+
+                                <li>&nbsp;{{$vl->stu_name}} </li>
+
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    {{-- @foreach ($joined as $item)
+                    @if ($item->cs_role!='YC'&&$item->cs_role!='TV')
+                    <li class="btn-group">
+                        <a class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false">{{$item->c_name}}
+                    </a>
+                    <div class="dropdown-menu" style="padding: 15px">
+                        <a class="dropdown-item" href="{{route('club.clubPostSlug',$item->c_slug)}}">Xem bài
+                            viết</a><br>
+                        <a class="dropdown-item" href="{{route('club.listMember',$item->c_slug)}}">Danh sách thành
+                            viên</a><br>
+                        <a class="dropdown-item" href="{{route('club.listRequest',$item->c_slug)}}">Danh sách yêu
+                            cầu</a><br>
+                    </div>
+                    </li>
+                    @else
+
+                    <li><a href="{{route('club.clubPostSlug',$item->c_slug)}}">{{$item->c_name}}</a></li>
+                    @endif
+                    @endforeach --}}
+                </ul>
+            </div>
+            <!-- Recent Posts -->
+            {{-- <div class="blog-sidebar">
+                <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
+                <hr style="margin-bottom: 5px;"> --}}
+            {{-- {{dd($joined)}} --}}
+            {{-- @foreach ($viewed as $item)
+                <div class="media">
+                    <a class="pull-left" href="#">
+                        <img class="img-responsive media-object" src="{{asset($item->cp_avatar)}}" alt="Media Object">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading"><a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a></h4>
+            </div>
+            @endforeach
+    </div> --}}
+
+
+    {{-- </div> --}}
+
+
+    </aside>
+</div>
 </div>
 
 @endsection

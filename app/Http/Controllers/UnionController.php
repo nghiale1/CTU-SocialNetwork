@@ -87,8 +87,16 @@ class UnionController extends Controller
         $post=DB::table('union_posts as p')
         ->join('students_ub as sub','sub.ub_id','p.up_id')
         ->join('students as s','s.stu_id','p.stu_id')
-        ->where('up_slug',$slug)
+        ->join('union_branchs as ub','ub.ub_id','p.ub_id')
+        ->where('up_slug',$slug)    
         ->first();
+        // dd($post);
+
+        $chihoi = DB::table('students_ub as ub')
+        ->join('students as st','st.stu_id','ub.stu_id')
+        ->where('ub.ub_id',$post->ub_id)->get();
+        // dd($chihoi);
+
         $day='';
         if($post){
 
@@ -97,7 +105,7 @@ class UnionController extends Controller
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,$post->up_id,false,false);
 
-        return view('client.pages.union.single',compact('post','day'));
+        return view('client.pages.union.single',compact('post','day','chihoi'));
     }
 
     /**

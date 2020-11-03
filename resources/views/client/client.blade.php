@@ -33,24 +33,25 @@
             <h4>Nhóm trò chuyện</h4>
         </header>
 
-        <div class="chat" style="display: none;">
+        <div class="chat" id="chat2">
 
             <div class="chat-history" id="messages">
 
 
-                <hr>
-
+                <div id="scrollBottom"></div>
             </div> <!-- end chat-history -->
+        </div> <!-- end chat -->
+        <div class="send-message">
             <form onsubmit="return sendMessage();" name="chat-form">
 
                 <div class="form-group">
-                    <input type="text" class="form-control type_msg" id="messaage" placeholder="Nhập nội dung . . ."></input>
+                    <input type="text" class="form-control type_msg" id="messaage"
+                        placeholder="Nhập nội dung . . ."></input>
                     <input type="submit" hidden>
                 </div>
 
             </form>
-
-        </div> <!-- end chat -->
+        </div>
 
     </div> <!-- end live-chat -->
     @include('client.template.script')
@@ -109,6 +110,7 @@
         var branch =  "{{ Auth::guard('student')->user()->yb_id }}";
         console.log(branch);
         function sendMessage() {
+
             //get message
             var message = document.getElementById("messaage").value;
             //save in database
@@ -118,6 +120,7 @@
                 "branch" : branch
             });
             console.log(message);
+            ScrollBottom();
             var frm = document.getElementsByName('chat-form')[0];
             frm.reset();  // Reset all form data
             return false;
@@ -132,7 +135,7 @@
                                 '<div class="chat-message-content clearfix">' +
                                     '<span class="chat-time"><b>13:35</b></span>' +
                                         '<b>' + 'Tôi' + '</b>' +
-                                    '<p>' + snapshot.val().message + '</p>' +
+                                    '<p class="title-message">' + snapshot.val().message + '</p>' +
                                 '</div>' +
                             '</div>'
                     document.getElementById("messages").innerHTML += html;
@@ -143,18 +146,26 @@
                                 '<div class="chat-message-content clearfix">' +
                                     '<span class="chat-time"><b>13:35</b></span>' +
                                         '<b>' + snapshot.val().sender + '</b>' +
-                                    '<p>' + snapshot.val().message + '</p>' +
+                                    '<p class="title-message-rep">' + snapshot.val().message + '</p>' +
                                 '</div>' +
                             '</div>'
                     document.getElementById("messages").innerHTML += html;
                 }
             }
         });
+
+        // function ScrollBottom(){
+        //     if (firstTime) {
+        //     container.scrollTop = container.scrollHeight;
+        //     firstTime = false;
+        //     } else if (container.scrollTop + container.clientHeight === container.scrollHeight) {
+        //     container.scrollTop = container.scrollHeight;
+        //     }
+                    
+        // }
+        
     </script>
     <script>
-
-
-
         //đóng mở box
         $(document).on('click', '.panel-heading span.icon_minim', function (e) {
         var $this = $(this);
@@ -188,6 +199,8 @@
             $( "#chatbox" ).hide();
         });
     </script>
+
+
 </body>
 
 </html>

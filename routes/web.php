@@ -65,6 +65,9 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/{type}', 'ShareController@index')->name('share.type');
         
     });
+
+
+    
     Route::group(['prefix' => 'cau-lac-bo'], function () {
         Route::group(['middleware' => ['checkAdmin']], function () {
             

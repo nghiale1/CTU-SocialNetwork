@@ -77,6 +77,9 @@
     color: #3471ad;
     font-size: 14px;
 }
+button.btn.btn-ctu {
+    margin-top: 15px;
+}
     </style>
     @stack('css')
 </head>
