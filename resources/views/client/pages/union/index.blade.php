@@ -9,6 +9,10 @@
     .delete-blog {
         float: right;
     }
+
+    .btn {
+        padding: 6px 10px;
+    }
 </style>
 @endpush
 @section('content')
@@ -20,16 +24,17 @@
             Đoàn hội
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('union.create')}}'"> Thêm bài viết</button> </span>
-                    <marquee scrolldelay="1" scrollamount="5">
-                        <span class="gioithiu">
-                             Đây là nơi kết nối các bạn cùng quê với nhau, Tổ chức các buổi hoạt động ngoại khóa, Giúp đỡ và hộ trợ các bạn trong quá trình học tập cũng như trong cuộc sống.
-                        </span>
-                     </marquee>
+            <marquee scrolldelay="1" scrollamount="5">
+                <span class="gioithiu">
+                    Đây là nơi kết nối các bạn cùng quê với nhau, Tổ chức các buổi hoạt động ngoại khóa, Giúp đỡ và hộ
+                    trợ các bạn trong quá trình học tập cũng như trong cuộc sống.
+                </span>
+            </marquee>
         </h1>
         <!--
                         First Blog Post -->
         <div class="row blogu">
-             {{-- {{dd($blog)}} --}}
+            {{-- {{dd($blog)}} --}}
             @forelse ($blog as $item)
             <div class="col-md-12">
 
@@ -47,7 +52,8 @@
                         <a href="{{route('union.show',$item->up_slug)}}">{{$item->up_title}}</a>
                         <span class="comments-padding"></span>
                         @if($item->stu_id==Auth::id())
-                         <a href="{{ route('union.delete', ['id'=>$item->up_id]) }}" id="deleteblog" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                        <a href="{{ route('union.delete', ['id'=>$item->up_id]) }}" id="deleteblog" class="delete-blog"
+                            title="Xóa"><i class="fa fa-trash"></i></a>
                         @endif
                     </h2>
                     <p>
@@ -93,7 +99,7 @@
         </div>
         <div class="blog-sidebar">
             <div class="input-group searchbar">
-                <input type="text" class="form-control searchbar" placeholder="Search for...">
+                <input type="text" class="form-control searchbar" placeholder="Tìm kiếm...">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Tìm kiếm</button>
                 </span>

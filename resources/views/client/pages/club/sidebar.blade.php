@@ -18,7 +18,7 @@
     }
 </style>
 @endpush
-<aside class="col-md-4 sidebar-padding">
+<aside class="col-md-3 sidebar-padding ben-phai">
     <div id="app">
         <chat-layout></chat-layout>
     </div>

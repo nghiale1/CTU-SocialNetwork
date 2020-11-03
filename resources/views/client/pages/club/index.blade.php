@@ -10,22 +10,26 @@ Câu lạc bộ
         /* border: 1px solid #fff2f2; */
         margin: 10px 0;
     }
+
+    .btn {
+        padding: 6px 10px;
+    }
 </style>
 @endpush
 @section('content')
 
 <div class="row">
     <!-- Blog Column -->
-    <div class="col-md-8">
+    <div class="col-md-8 ben-trai">
         <h1 class="page-header sidebar-title">
             Câu lạc bộ
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('club.create')}}'"> Thêm bài viết</button> </span>
-                    <marquee scrolldelay="1" scrollamount="5">
-                        <span class="gioithiu">
-                             Đây là nơi giao lưu học hỏi, chia sẻ các kĩ năng với nhau như: Guitar, Sáo, Đờn ca tài tử,...
-                        </span>
-                     </marquee>
+            <marquee scrolldelay="1" scrollamount="5">
+                <span class="gioithiu">
+                    Đây là nơi giao lưu học hỏi, chia sẻ các kĩ năng với nhau như: Guitar, Sáo, Đờn ca tài tử,...
+                </span>
+            </marquee>
         </h1>
         <!--
                         First Blog Post -->
@@ -50,7 +54,8 @@ Câu lạc bộ
                             <a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a>
                             <span class="comments-padding"></span>
                             @if($item->stu_id==Auth::id())
-                            <a href="{{ route('club.delete', ['id'=>$item->cp_id]) }}" id="deleteblog" class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                            <a href="{{ route('club.delete', ['id'=>$item->cp_id]) }}" id="deleteblog"
+                                class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
                             @endif
                         </h2>
                         <p>
@@ -88,6 +93,7 @@ Câu lạc bộ
             </ul>
         </div>
     </div>
+    <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
     @include('client.pages.club.sidebar')
 </div>
@@ -95,7 +101,7 @@ Câu lạc bộ
 @endsection
 @push('script')
 <script>
-     $('#deleteblog').click(function () {
+    $('#deleteblog').click(function () {
 
         if(confirm('Bạn có muốn xóa ?')){
             return true;
