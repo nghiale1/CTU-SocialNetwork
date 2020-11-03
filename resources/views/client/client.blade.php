@@ -2,6 +2,13 @@
 <html lang="en">
 
 @include('client.template.head')
+{{-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
+<link rel="stylesheet" href="{{ asset('chat-template') }}/style.css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+
 <body data-spy="scroll">
     <div id="app">
 
@@ -15,36 +22,40 @@
         </section>
         {{-- @include('client.template.footer') --}}
     </div>
-    <!-- The Modal -->
-    <!-- Modal -->
-    {{-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel">Thông tin sinh viên</h4>
+
+    {{-- ~~((^-^))~~ --}}
+    <div id="live-chat">
+
+        <header class="clearfix">
+
+            <a href="#" class="chat-close">x</a>
+
+            <h4>Nhóm trò chuyện</h4>
+        </header>
+
+        <div class="chat" id="chat2">
+
+            <div class="chat-history" id="messages">
+
+
+                <div id="scrollBottom"></div>
+            </div> <!-- end chat-history -->
+        </div> <!-- end chat -->
+        <div class="send-message">
+            <form onsubmit="return sendMessage();" name="chat-form">
+
+                <div class="form-group">
+                    <input type="text" class="form-control type_msg" id="messaage"
+                        placeholder="Nhập nội dung . . ."></input>
+                    <input type="submit" hidden>
                 </div>
-                <div class="modal-body">
-                    <h5><b>Họ tên:</b> {{ Auth::guard('student')->user()->stu_name }}</h5>
-                    <h5><b>MSSV:</b> {{ Auth::guard('student')->user()->stu_code }}</h5>
-                    <h5><b>Ngày sinh:</b> {{ date('d-m-Y',strtotime(Auth::guard('student')->user()->stu_birth)) }}</h5>
-                    <img src="{{ asset('') }}client/images/img/avatar.jpg" alt="">
-                    <h4><a class="dropdown-item"
-                            href="{{ route('Info',Auth::guard('student')->user()->stu_code.'.'.Str::slug(Auth::guard('student')->user()->stu_name, '-')) }}">Thông
-                            tin cá nhân</a></h4>
-                    <h4><a class="dropdown-item" href="{{ route('chon-hoc-ky') }}">Tài liệu sinh viên</a></h4>
-                    <h4><a class="dropdown-item" href="{{ route('chat') }}">Nhóm trò chuyện</a></h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close-modal">Đóng</button>
-                    <a class="btn btn-primary" href="{{ route('logout') }}"
-                        style="background-color: red; color: white; ">Đăng xuất</a>
-                </div>
-            </div>
+
+            </form>
         </div>
-    </div> --}}
+
+    </div> <!-- end live-chat -->
     @include('client.template.script')
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $('#user-click').click(function (e) {
                 $('#app').css("opacity", 0.5);
@@ -54,7 +65,142 @@
                 $('#app').css("opacity", 1);
             });
         });
+    </script> --}}
+
+    <script>
+        (function() {
+
+
+            $('#live-chat header').on('click', function() {
+
+                $('.chat').slideToggle(300, 'swing');
+                $('.chat-message-counter').fadeToggle(300, 'swing');
+
+            });
+
+            $('.chat-close').on('click', function(e) {
+
+                e.preventDefault();
+                $('#live-chat').fadeOut(300);
+
+            });
+
+        }) ();
     </script>
+
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.1/firebase-database.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyAKmobXNJAls9qdE-6aTTBYUpMzrtGAkIw",
+            authDomain: "my-chat-app-7e47b.firebaseapp.com",
+            databaseURL: "https://my-chat-app-7e47b.firebaseio.com",
+            projectId: "my-chat-app-7e47b",
+            storageBucket: "my-chat-app-7e47b.appspot.com",
+            messagingSenderId: "570655077052",
+            appId: "1:570655077052:web:d589c9e1bd4696fb4316b9",
+            measurementId: "G-2RCQ1JE087"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        // firebase.analytics();
+        var myName = "{{  Auth::guard('student')->user()->stu_code  }}";
+        var branch =  "{{ Auth::guard('student')->user()->yb_id }}";
+        console.log(branch);
+        function sendMessage() {
+
+            //get message
+            var message = document.getElementById("messaage").value;
+            //save in database
+            firebase.database().ref("messages").push().set({
+                "sender" : myName,
+                "message" : message,
+                "branch" : branch
+            });
+            console.log(message);
+            ScrollBottom();
+            var frm = document.getElementsByName('chat-form')[0];
+            frm.reset();  // Reset all form data
+            return false;
+        }
+        // listen for incoming message
+        firebase.database().ref("messages").on("child_added", function (snapshot) {
+            var html = "";
+            if(snapshot.val().branch == branch){
+                if(snapshot.val().sender == myName){
+                    html += '<div class="chat-message clearfix">' +
+                                '<img src="{{ asset("client/images/img/avatar.jpg") }}" alt="" width="32" height="32">' +
+                                '<div class="chat-message-content clearfix">' +
+                                    '<span class="chat-time"><b>13:35</b></span>' +
+                                        '<b>' + 'Tôi' + '</b>' +
+                                    '<p class="title-message">' + snapshot.val().message + '</p>' +
+                                '</div>' +
+                            '</div>'
+                    document.getElementById("messages").innerHTML += html;
+                    // console.log(html);
+                }else{
+                    html += '<div class="chat-message clearfix">' +
+                                '<img src="{{ asset("client/images/img/avatar.jpg") }}" alt="" width="32" height="32">' +
+                                '<div class="chat-message-content clearfix">' +
+                                    '<span class="chat-time"><b>13:35</b></span>' +
+                                        '<b>' + snapshot.val().sender + '</b>' +
+                                    '<p class="title-message-rep">' + snapshot.val().message + '</p>' +
+                                '</div>' +
+                            '</div>'
+                    document.getElementById("messages").innerHTML += html;
+                }
+            }
+        });
+
+        // function ScrollBottom(){
+        //     if (firstTime) {
+        //     container.scrollTop = container.scrollHeight;
+        //     firstTime = false;
+        //     } else if (container.scrollTop + container.clientHeight === container.scrollHeight) {
+        //     container.scrollTop = container.scrollHeight;
+        //     }
+                    
+        // }
+        
+    </script>
+    <script>
+        //đóng mở box
+        $(document).on('click', '.panel-heading span.icon_minim', function (e) {
+        var $this = $(this);
+            if (!$this.hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideUp();
+                $this.addClass('panel-collapsed');
+                $this.removeClass('glyphicon-minus').addClass('glyphicon-plus');
+            } else {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $this.removeClass('panel-collapsed');
+                $this.removeClass('glyphicon-plus').addClass('glyphicon-minus');
+            }
+        });
+        $(document).on('focus', '.panel-footer input.chat_input', function (e) {
+            var $this = $(this);
+            if ($('#minim_chat_window').hasClass('panel-collapsed')) {
+                $this.parents('.panel').find('.panel-body').slideDown();
+                $('#minim_chat_window').removeClass('panel-collapsed');
+                $('#minim_chat_window').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+            }
+        });
+        $(document).on('click', '#new_chat', function (e) {
+            var size = $( ".chat-window:last-child" ).css("margin-left");
+            size_total = parseInt(size) + 400;
+            alert(size_total);
+            var clone = $( "#chat_window_1" ).clone().appendTo( ".container" );
+            clone.css("margin-left", size_total);
+        });
+        $(document).on('click', '.icon_close', function (e) {
+            //$(this).parent().parent().parent().parent().remove();
+            $( "#chatbox" ).hide();
+        });
+    </script>
+
+
 </body>
 
 </html>

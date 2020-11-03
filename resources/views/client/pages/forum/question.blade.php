@@ -7,9 +7,8 @@
 
 @section('content')
 <!-- Page Content -->
-<section class="container blog">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 ben-trai">
             <form action="" method="post">
                 @csrf
                 <table class="table table-responsive borderless text-right">
@@ -50,9 +49,9 @@
                 </table>
             </form>
         </div>
-
+        <div class="col-md-1 clear-center"></div>
         <!-- Blog Sidebar Column -->
-        <aside class="col-md-4 sidebar-padding">
+        <aside class="col-md-3 sidebar-padding ben-phai">
             <div class="blog-sidebar">
                 <div class="input-group searchbar">
                     <input type="text" class="form-control searchbar" placeholder="Search for...">
@@ -64,7 +63,6 @@
             <!-- Blog Categories -->
             <div class="blog-sidebar">
                 <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Học phần</h4>
-                <hr>
                 <ul class="sidebar-list">
                     <li><a href="#">CT258 - Phát triển thương mại điện tử</a></li>
                     <li><a href="#">CT255 - Nghiệp vụ thông minh</a></li>
@@ -121,36 +119,12 @@
                     </div>
                 </div>
             </div>
-
-            <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-comments"></i> Recent Comments</h4>
-                <hr style="margin-bottom: 5px;">
-                <ul class="sidebar-list">
-                    <li>
-                        <h5 class="blog-title">Author Name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore</p>
-                    </li>
-                    <li>
-                        <h5 class="blog-title">Author Name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore</p>
-                    </li>
-                    <li>
-                        <h5 class="blog-title">Author Name</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                            labore et dolore</p>
-                    </li>
-                </ul>
-            </div>
-
         </aside>
     </div>
-</section>
 
 @endsection
 @push('script')
 <script>
-    
+
 </script>
 @endpush
