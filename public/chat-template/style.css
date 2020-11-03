@@ -120,3 +120,19 @@
     font-style: italic;
     margin: 0 0 0 80px;
 }
+
+.ben-trai {
+    background-color: whitesmoke;
+    height: 850px;
+}
+
+.ben-phai {
+    background-color: whitesmoke;
+    height: 850px;
+    width: 30%;
+    padding-left: 0px !important;
+}
+
+.clear-center {
+    width: 0.333333%;
+}

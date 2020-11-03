@@ -71,7 +71,7 @@ Chi tiết bài viết
 <div class="container singlepost">
     {{-- {{dd($post)}} --}}
     <div class="row">
-        <article class="col-md-8">
+        <article class="col-md-8 ben-trai">
             <h1 class="page-header sidebar-title">{{ $post->cp_title}}</h1>
             {{-- <img src="{{asset('client/images/unsplash1.jpg')}}" class="img-responsive" alt="photo" /> --}}
             {{-- <hr> --}}
@@ -288,6 +288,7 @@ Chi tiết bài viết
             </div>
 
         </article>
+        <div class="col-md-1 clear-center"></div>
         @include('client.pages.club.sidebar')
     </div>
 </div>

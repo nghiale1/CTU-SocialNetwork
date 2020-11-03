@@ -33,7 +33,7 @@
             <h4>Nhóm trò chuyện</h4>
         </header>
 
-        <div class="chat">
+        <div class="chat" style="display: none;">
 
             <div class="chat-history" id="messages">
 
@@ -54,7 +54,7 @@
 
     </div> <!-- end live-chat -->
     @include('client.template.script')
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $('#user-click').click(function (e) {
                 $('#app').css("opacity", 0.5);
@@ -64,10 +64,11 @@
                 $('#app').css("opacity", 1);
             });
         });
-    </script>
+    </script> --}}
 
     <script>
         (function() {
+
 
             $('#live-chat header').on('click', function() {
 

@@ -9,10 +9,8 @@
 </style>
 @endpush
 @section('content')
-<!-- Page Content -->
-<section class="container blog">
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-8 ben-trai">
             <form action="{{route('club.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <table class="table table-responsive borderless text-right">
@@ -66,11 +64,9 @@
                 </table>
             </form>
         </div>
-
+        <div class="col-md-1 clear-center"></div>
         @include('client.pages.club.sidebar')
     </div>
-</section>
-
 @endsection
 @push('script')
 

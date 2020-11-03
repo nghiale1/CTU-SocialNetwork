@@ -20,7 +20,7 @@ Hỏi đáp
 <!-- Page Content -->
 <div class="row">
     <!-- Blog Column -->
-    <div class="col-md-8">
+    <div class="col-md-8 ben-trai">
         <h1 class="page-header sidebar-title">
             Hỏi đáp
             <span style="float: right"><button class="btn btn-ctu"
@@ -79,9 +79,9 @@ Hỏi đáp
             {{ $blog->links() }}
         </div>
     </div>
-
+    <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
-    <aside class="col-md-4 sidebar-padding">
+    <aside class="col-md-3 sidebar-padding ben-phai">
         <div id="app">
             <chat-layout></chat-layout>
         </div>

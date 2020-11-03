@@ -5,30 +5,30 @@
 Chia sẻ
 @endsection
 @push('css')
-    <style>
+<style>
     .style-color {
         font-size: 16px;
         font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
         margin: 10px 0;
     }
     div#myModal {
-    width: 65%;
-    height: 500px;
-    margin: 113px auto;
-    margin-left: 359px;
-}
-#close {
-    font-size: 52px;
-    margin-right: 134px;
-    margin-top: -14px;
-}
-    </style>
+        width: 65%;
+        height: 500px;
+        margin: 113px auto;
+        margin-left: 359px;
+    }
+    #close {
+        font-size: 52px;
+        margin-right: 134px;
+        margin-top: -14px;
+    }
+</style>
 @endpush
 @section('content')
 
 <div class="row">
     <!-- Blog Column -->
-    <div class="col-md-8">
+    <div class="col-md-8 ben-trai">
         <h1 class="page-header sidebar-title">
             Chia sẻ
             <span style="float: right"><button class="btn btn-ctu"
@@ -43,35 +43,6 @@ Chia sẻ
                         First Blog Post -->
         <div class="row blogu">
             <div id="content">
-
-                {{-- @forelse ($share as $item)
-                 <div class="col-md-3">
-
-                    <div class="card" style="width: 18rem;">
-                        <a href="{{route('share.show',$item->item_slug)}}">
-                            <img src="{{asset($item->item_avatar)}}" class="img-responsive card-img-top"
-                                alt="{{asset($item->item_avatar)}}">
-                        </a>
-                        <span>{{$item->day}}</span>
-                        <span style="float: right"><i class="fa fa-eye" aria-hidden="true"></i>
-                            {{$item->item_view_count}}</i></span>
-                        <div class="card-body">
-                            <a href="{{route('share.show',$item->item_slug)}}">
-                                <h4>{{$item->item_title}}</h4>
-                            </a>
-                            <ul style="padding-left: 0px;">
-                                <li>{{number_format($item->item_price)}} đ</li>
-                                <li>{{$item->item_phone}}</li>
-                                <li>{{$item->item_name}}</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                @empty
-                <h2 class="blog-title">Chưa có vật dụng nào được chia sẻ
-                </h2>
-                @endforelse
-                {!!$share->links()!!} --}}
                 @forelse ($share as $item)
                 <div class="col-md-4">
                     <div class="card" style="width: 20rem;">
@@ -111,8 +82,9 @@ Chia sẻ
             </ul>
         </div>
     </div>
+    <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
-    <aside class="col-md-4 sidebar-padding">
+    <aside class="col-md-3 sidebar-padding ben-phai">
         @include('client.pages.share.search')
         <!-- Blog Categories -->
         <div class="blog-sidebar">
