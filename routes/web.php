@@ -60,19 +60,19 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::post('/binh-luan', 'ShareController@comment')->name('share.comment.store');
         Route::post('/tra-loi-binh-luan', 'ShareController@repcomment')->name('share.comment.store.rep');
         Route::post('/xoa-binh-luan', 'ShareController@destroycomment')->name('share.comment.destroy');
-        
+
         // Route::get('/danh-sach/{slug}', 'ShareController@list')->name('share.list');
         Route::get('/{type}', 'ShareController@index')->name('share.type');
-        
+
     });
 
 
-    
+
     Route::group(['prefix' => 'cau-lac-bo'], function () {
         Route::group(['middleware' => ['checkAdmin']], function () {
-            
+
             Route::group(['prefix' => 'quan-tri'], function () {
-                
+
                 Route::get('/', 'ClubController@admin')->name('club.admin');
                 Route::post('/tao-cau-lac-bo', 'ClubController@adminCreate')->name('club.admin.create');
                 Route::post('/cap-nhat', 'ClubController@adminUpdate')->name('club.admin.adminUpdate');

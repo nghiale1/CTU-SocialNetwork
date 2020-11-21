@@ -37,7 +37,7 @@ class ShareController extends Controller
        $share=Item::join('types as t','t.type_id','items.type_id')
        ->where('type_slug',$slug)
        ->paginate(10);
-        
+
 
         foreach($share as $item){
 
@@ -145,7 +145,7 @@ class ShareController extends Controller
 
         $lastedPost = DB::table('items')->orderBy('item_created','DESC')->paginate(5);
 
-        // dd($post_viewed);   
+        // dd($post_viewed);
         $post_viewed=DB::table('count_view_items')
         ->join('items','items.item_id','count_view_items.item_id')
         ->where('count_view_items.stu_id',\Auth::id())->get();

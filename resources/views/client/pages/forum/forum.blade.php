@@ -59,7 +59,8 @@ Hỏi đáp
                     <i class="fa fa-calendar-o"></i> {{$item->day}}
                     @if ($item->stu_id ==$i->stu_id)
                     <span class="comments-padding"></span>
-                    <i class="fa fa-user"></i> Đăng bởi: {{$i->stu_name}}
+                    <i class="fa fa-user"></i> Đăng bởi: <a href="{{ route('Info',$i->stu_code.'.'.Str::slug($i->stu_name, '-')) }}">
+                        {{$i->stu_name}}</a>
 
                     @endif
                     {{-- <div class="delete-blog"> --}}
