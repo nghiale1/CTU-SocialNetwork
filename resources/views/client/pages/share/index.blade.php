@@ -146,7 +146,7 @@ Chia sẻ
 @endsection
 @push('script')
 <script>
-    $('.image').click(function (e) { 
+    $('.image').click(function (e) {
         e.preventDefault();
         var id =$(this).attr("data-id");
         // Get the modal

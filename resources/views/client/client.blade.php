@@ -108,7 +108,7 @@
         // firebase.analytics();
         var myName = "{{  Auth::guard('student')->user()->stu_code  }}";
         var branch =  "{{ Auth::guard('student')->user()->yb_id }}";
-        console.log(branch);
+        // console.log(branch);
         function sendMessage() {
 
             //get message
@@ -161,9 +161,9 @@
         //     } else if (container.scrollTop + container.clientHeight === container.scrollHeight) {
         //     container.scrollTop = container.scrollHeight;
         //     }
-                    
+
         // }
-        
+
     </script>
     <script>
         //đóng mở box
