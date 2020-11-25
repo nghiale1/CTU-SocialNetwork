@@ -169,8 +169,6 @@ Route::get('/tong-luot-thich', 'StatisticController@getLikeSingleUser')->name('g
 // Trang thông tin cá nhân
 Route::get('/thong-tin/{slug}', 'AccountController@Info')->name('Info');
 
-
-
 Route::get('/nam-hoc-hien-tai', 'ApiController@SemesterYear')->name('SemesterYear');
 Route::get('/bai-viet-da-dang', 'ApiController@Posted')->name('Posted');
 Route::get('/da-like', 'ApiController@Liked')->name('Liked');

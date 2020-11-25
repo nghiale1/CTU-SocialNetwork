@@ -23,7 +23,7 @@
                 <li @if (Request::segment(1)=='cau-lac-bo' ) class='active' @endif>
                     <a href="{{route('club')}}">Câu lạc bộ</a></li>
                 <li @if (Request::segment(1)=='doan-hoi' ) class='active' @endif>
-                    <a href="{{route('union')}}">Đoàn, Hội</a></li>
+                    <a href="{{route('union')}}">Chi Hội</a></li>
                 <li class="nav-item dropdown @if (Request::segment(1)=='tai-khoan') active @endif">
                     <!-- Button to Open the Modal -->
                     <a href="{{ route('Info',Auth::guard('student')->user()->stu_code.'.'.Str::slug(Auth::guard('student')->user()->stu_name, '-')) }}"

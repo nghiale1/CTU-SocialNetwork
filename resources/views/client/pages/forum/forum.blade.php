@@ -47,21 +47,22 @@ Hỏi đáp
                 @if ($item->p_id ==$i->p_id)
 
                 <h2 class="blog-title">
-                    <a href="{{route('forum.show',$item->p_slug)}}">{{$item->p_title}}</a>
+                    <a href="{{route('forum.show',$item->p_slug)}}">{{$item->p_title}}</a> <span style="font-size: 14px;float: right;padding: 4px;color: #9d9d9d;"> <i class="fa fa-book"></i> {{$i->sub_name}}</span>
+                    <p style="margin-left: -40px;margin-top: -1px;margin-bottom: -20px;"> @if ($item->stu_id ==$i->stu_id)
+                        <span class="comments-padding"></span>
+                        <i class="fa fa-user"></i> Đăng bởi: {{$i->stu_name}}
+    
+                        @endif  </p>
                 </h2>
                 <p>
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true">{{$item->likes}}</i>
-                    <span class="comments-padding"></span>
+                    {{-- <i class="fa fa-thumbs-o-up" aria-hidden="true">{{$item->likes}}</i>
+                    <span class="comments-padding"></span> --}}
                     <i class="fa fa-comment">{{$item->comments}}</i>
                     <span class="comments-padding"></span>
                     <i class="fa fa-eye" aria-hidden="true">{{$item->p_view_count}}</i>
                     <span class="comments-padding"></span>
                     <i class="fa fa-calendar-o"></i> {{$item->day}}
-                    @if ($item->stu_id ==$i->stu_id)
-                    <span class="comments-padding"></span>
-                    <i class="fa fa-user"></i> Đăng bởi: {{$i->stu_name}}
-
-                    @endif
+                   
                     {{-- <div class="delete-blog"> --}}
                     <span class="comments-padding"></span>
                     @if($item->stu_id==Auth::id())

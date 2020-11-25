@@ -18,7 +18,9 @@ class ForumController extends Controller
      */
     public function index()
     {
-        $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+        $stu = DB::table('posts')
+        ->join('subjects as sub','sub.sub_id','posts.sub_id')
+        ->join('students','students.stu_id','posts.stu_id')->get();
 
         // dd($stu);
         //get subject of user
@@ -62,12 +64,12 @@ class ForumController extends Controller
             $baivietdaxem = DB::table('posts')->whereIn('p_slug',$post_viewed)
             ->join('students','students.stu_id','posts.stu_id')
             ->get();
-            $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+            // $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
 
             // dd($baivietdaxem);
             return view('client.pages.forum.forum',compact('subject','blog','getSubPopular','baivietdaxem','stu'));
         }
-        $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+        // $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
 
        
         $baivietdaxem = 0;
