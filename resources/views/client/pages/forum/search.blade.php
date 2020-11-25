@@ -14,11 +14,11 @@
 </div>
 @push('script')
 <script>
-    $("#btnSearch").click(function (e) { 
+    $("#btnSearch").click(function (e) {
         e.preventDefault();
-        
+
     var content=$('#search').val();
-    
+
         $.ajax({
             type: "GET",
             url: "{{route('forum.search')}}",
@@ -36,16 +36,16 @@
                     inner+="<i class='fa fa-comment'>"+element['comments']+"</i>";
                     inner+="<span class='comments-padding'></span>";
                     inner+="<i class='fa fa-eye' aria-hidden='true'>"+element['p_view_count']+"</i>";
-                    
+
                     inner+="<span class='comments-padding'></span>";
                     inner+="<i class='fa fa-calendar-o'></i>"+element['day'];
                     inner+="</p>";
-                    inner+="<hr>";    
+                    inner+="<hr>";
                 console.log(element);
                 });
                     $("#content").html(inner);
                 console.log(response);
-                
+
             }
         });
     });

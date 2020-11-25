@@ -115,7 +115,7 @@ div#dropdown-menu4 {
 
 <!-- Page Content -->
 <div class="row">
-    <article class="col-md-8">
+    <article class="col-md-8 ben-trai">
         {{-- <hr> --}}
         <div class="row">
             <div class="col-smd-12">
@@ -339,8 +339,58 @@ div#dropdown-menu4 {
 
             </div>
     </article>
+    <div class="col-md-1 clear-center"></div>
+    <!-- Blog Sidebar Column -->
+    <aside class="col-md-3 sidebar-padding ben-phai">
+        <div class="blog-sidebar">
+            <div class="input-group searchbar">
+                <input type="text" class="form-control searchbar" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Tìm kiếm</button>
+                </span>
+            </div><!-- /input-group -->
+        </div>
+        <!-- Blog Categories -->
+        <div class="blog-sidebar">
+            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Bài chia sẻ gần đây</h4>
+            <hr>
+            @foreach ($lastedPost as $item)
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
+                        alt="Media Object">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><a
+                            href="{{route('share.show',$item->item_slug)}}">{{ $item->item_title }}</a></h4>
+                    <span><a href="#">{{ $item->item_name }}</a></span>
+                    <br>
+                    <span>{{ date('d/m/Y', strtotime($item->item_created)) }}</span>
+                </div>
+            </div>
+            @endforeach
+        </div>
+        <div class="blog-sidebar">
+            <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
+            <hr style="margin-bottom: 5px;">
+            @if ($baivietdaxem)
+            @foreach ($baivietdaxem as $item)
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
+                        alt="Media Object">
+                </a>
+                <div class="media-body">
+                    <h4 class="media-heading"><a
+                            href="{{route('share.show',$item->item_slug)}}">{{ $item->item_title }}</a></h4>
+                    <span><a href="#">{{ $item->item_name }}</a></span>
+                </div>
+            </div>
+            @endforeach
+            @endif
 
-    @include('client.pages.share.right')
+        </div>
+    </aside>
 </div>
 
 @endsection
@@ -359,8 +409,8 @@ div#dropdown-menu4 {
 
           });
 
-      
-        $('#xoabaiviet').click(function (e) { 
+
+        $('#xoabaiviet').click(function (e) {
             if(confirm('Bạn có muốn xóa !')){
                 return true;
             }
