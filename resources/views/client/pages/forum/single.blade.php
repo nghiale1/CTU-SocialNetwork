@@ -87,22 +87,6 @@ div#dropdown-menu4 {
             <p>{!!$post->p_content!!}</p>
             @include('client.pages.forum.report')
 
-            {{-- <div class="mysharing">
-                <!-- Twitter -->
-                <a href="http://twitter.com/home?status=" title="Share on Twitter" target="_blank"
-                    class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/sharer/sharer.php?u=" title="Share on Facebook" target="_blank"
-                    class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                <!-- Google+ -->
-                <a href="https://plus.google.com/share?url=" title="Share on Google+" target="_blank"
-                    class="btn btn-googleplus"><i class="fa fa-google-plus"></i> Google+</a>
-                <!-- LinkedIn -->
-                <a href="http://www.linkedin.com/shareArticle?mini=true" title="Share on LinkedIn" target="_blank"
-                    class="btn btn-linkedin"><i class="fa fa-linkedin"></i> LinkedIn</a>
-            </div> --}}
-
-            <!-- Blog Comments -->
             <div class="comments1">
                 <div class="well">
                     <h4>Bình luận:</h4>

@@ -118,8 +118,11 @@ class UnionController extends Controller
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,$post->up_id,false,false);
-
-        return view('client.pages.union.single',compact('post','day','chihoi'));
+        $comment = DB::table('comments')
+        ->join('students','students.stu_id','comments.stu_id')
+        ->OrderBy('com_id','DESC')->get();
+        // dd($comment);
+        return view('client.pages.union.single',compact('post','day','chihoi','comment'));
     }
 
     /**
@@ -129,6 +132,46 @@ class UnionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function comment(Request $request)
+    {
+        $date = Carbon::now();
+        $comment['com_content']= $request->com_content;
+        $comment['com_created']= $date;
+        $comment['stu_id']= $request->st_id;
+        $comment['up_id']= $request->up_id;
+
+        // dd($comment);
+
+
+        $result = DB::table('comments')->insert($comment);
+        if($result)
+        {
+           return redirect()->back();
+        }
+
+
+    }
+    public function commentrep(Request $request)
+    {
+        $date = Carbon::now();
+        $comment['com_content']= $request->com_content;
+        $comment['com_created']= $date;
+        $comment['stu_id']= $request->st_id;
+        $comment['up_id']= $request->up_id;
+
+        // dd($comment);
+
+
+        $result = DB::table('comments')->insert($comment);
+        if($result)
+        {
+           return redirect()->back();
+        }
+
+
+    }
+
+    
     public function update(Request $request, $id)
     {
         //

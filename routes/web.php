@@ -108,13 +108,25 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/tham-gia/{slug}', 'ClubController@join')->name('club.join');
         Route::get('/danh-sach','ClubController@list' )->name('club.list');
     });
+
+
+
     Route::group(['prefix' => 'doan-hoi'], function () {
         Route::get('/', 'UnionController@index')->name('union');
         Route::get('/bai-viet/{slug}', 'UnionController@show')->name('union.show');
         Route::get('/them-bai-viet', 'UnionController@create')->name('union.create');
         Route::post('/them-bai-viet', 'UnionController@store')->name('union.store');
         Route::get('/xoa-bai-viet/{id}', 'UnionController@destroy')->name('union.delete');
+        //bình luận
+        Route::post('/binh-luan', 'UnionController@comment')->name('union.comment.store');
+        Route::post('/tra-loi-binh-luan', 'UnionController@commentrep')->name('union.comment.rep');
+
     });
+
+
+
+
+
     Route::group(['prefix' => 'mon-hoc'], function () {
         Route::get('/{slug}', 'SubjectController@show')->name('subject.detail');
     });
