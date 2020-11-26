@@ -39,14 +39,15 @@ Chia sẻ
 
 <div class="row">
     <!-- Blog Column -->
-    <div class="col-md-8">
-
-        <!--
-                        First Blog Post -->
+    <div class="col-md-12 o-giua">
         <div class="row blogu">
-            <div id="content">
+            <div id="content" style="margin-top: 20px; margin-left: 20px; margin-right: 20px;">
                 <div class="row">
-
+                    <h1 class="page-header sidebar-title">
+                        Danh mục chia sẻ
+                    </h1>
+                </div>
+                <div class="row">
                     @forelse ($type as $item)
                     <div class="col-md-2">
                         <a href="{{route('share.type',$item->type_slug)}}">
@@ -71,7 +72,7 @@ Chia sẻ
 @endsection
 @push('script')
 <script>
-    $('.image').click(function (e) { 
+    $('.image').click(function (e) {
         e.preventDefault();
         var id =$(this).attr("data-id");
         // Get the modal
@@ -83,7 +84,7 @@ Chia sẻ
         $('#myModal').show();
         modalImg.src = this.src;
 
-    
+
 
         // Get the <span> element that closes the modal
         var span = document.getElementsByClassName("close")[0];
@@ -92,7 +93,7 @@ Chia sẻ
         // img.click(){
         //     $('#myModal').hidden();
         // }
-        $('#img01').click(function (e) { 
+        $('#img01').click(function (e) {
             e.preventDefault();
             // alert("tat");
             $('#myModal').hide();

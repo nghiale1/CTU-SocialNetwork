@@ -19,7 +19,7 @@
 
 <div class="row">
     <!-- Blog Column -->
-    <div class="col-md-8">
+    <div class="col-md-8 ben-trai">
         <h1 class="page-header sidebar-title">
             Đoàn hội
             <span style="float: right"><button class="btn btn-ctu"
@@ -83,14 +83,15 @@
 
 
     </div>
+    <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
-    <aside class="col-md-4 sidebar-padding">
+    <aside class="col-md-3 sidebar-padding ben-phai">
         <div id="app">
             <chat-layout></chat-layout>
         </div>
         <div class="blog-sidebar">
             <div class="input-group searchbar">
-                <input type="text" class="form-control searchbar" placeholder="Tìm kiếm...">
+                <input type="text" class="form-control searchbar" placeholder="Nhập từ khóa cần tìm">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Tìm kiếm</button>
                 </span>

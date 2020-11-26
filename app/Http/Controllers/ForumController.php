@@ -32,7 +32,7 @@ class ForumController extends Controller
             // dd($item->sub_id);
             $blog=$blog->orwhere('sub_id',$item->sub_id);
         }
-        $blog=$blog->paginate(10);
+        $blog=$blog->orderBy('p_id','DESC')->paginate(5);
         $now=$this->now();
         if($blog->isNotEmpty()){
             foreach($blog as $item){

@@ -78,10 +78,6 @@ Chia sẻ
 
         </div>
         <hr>
-
-
-
-
     </div>
     <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
@@ -105,8 +101,8 @@ Chia sẻ
                     <span>{{ date('d/m/Y', strtotime($item->item_created)) }}</span>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
         {{-- </div> --}}
         <!-- Recent Posts -->
         <div class="blog-sidebar">

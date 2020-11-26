@@ -133,6 +133,7 @@ class ShareController extends Controller
         ->first();
         $day='';
         session()->push('posts.post_club', $slug);
+        $lastedPost = DB::table('items')->orderBy('item_created','DESC')->paginate(5);
         if($post){
             $day=$this->getDay($post->item_id,$post->item_created);
         }
@@ -141,16 +142,17 @@ class ShareController extends Controller
         $comment = DB::table('comments')
         ->join('students','students.stu_id','comments.stu_id')
         ->OrderBy('com_id','DESC')->get();
-
-
-        $lastedPost = DB::table('items')->orderBy('item_created','DESC')->paginate(5);
-
+        $post_viewed = session()->get('posts.post_club');
         // dd($post_viewed);
-        $post_viewed=DB::table('count_view_items')
-        ->join('items','items.item_id','count_view_items.item_id')
-        ->where('count_view_items.stu_id',\Auth::id())->get();
-
-        return view('client.pages.share.single',compact('post','day','reason','comment','lastedPost','post_viewed'));
+        // dd($share);
+        if($post_viewed)
+        {
+            $baivietdaxem = DB::table('items')->whereIn('item_slug',$post_viewed)->get();
+            // dd($baivietdaxem);
+            return view('client.pages.share.single',compact('post','day','reason','comment','lastedPost','baivietdaxem','post_viewed'));
+        }
+        $baivietdaxem = 0;
+        return view('client.pages.share.single',compact('post','day','reason','comment','lastedPost','baivietdaxem','post_viewed'));
     }
 
     /**
