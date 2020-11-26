@@ -82,8 +82,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/', 'ClubController@index')->name('club');
         Route::get('/bai-viet-rieng/{slug}', 'ClubController@clubPostSlug')->name('club.clubPostSlug');
          // tìm kiếm
-         Route::get('/tim-kiem', 'ClubController@search')->name('club.search');
-        // Route::group(['middleware' => ['checkManage']], function () {
+        Route::get('/tim-kiem', 'ClubController@search')->name('club.search');
+        Route::group(['middleware' => ['checkManage']], function () {
 
             Route::get('/{slug}/danh-sach-thanh-vien', 'ClubController@listMember')->name('club.listMember');
             Route::get('/{slug}/danh-sach-yeu-cau', 'ClubController@listRequest')->name('club.listRequest');
@@ -95,9 +95,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
             //bình luận
             Route::post('/binh-luan', 'ClubController@comment')->name('club.comment.store');
             Route::post('/tra-loi-binh-luan', 'ClubController@commentrep')->name('club.comment.rep');
-
-
-        // });
+        });
 
 
         //Route::get('/bai-viet/{slug}/', 'ClubController@show')->name('club.show');

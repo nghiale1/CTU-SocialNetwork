@@ -82,7 +82,7 @@ Câu lạc bộ
 
 
 
-     
+
     </div>
     <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
@@ -113,7 +113,7 @@ Câu lạc bộ
                     </div>
                 </li>
                 @else
-    
+
                 <li><a href="{{route('club.clubPostSlug',$item->c_slug)}}">{{$item->c_name}}</a></li>
                 @endif
                 @endforeach
@@ -137,7 +137,7 @@ Câu lạc bộ
             <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
             <hr style="margin-bottom: 5px;">
             {{-- {{dd($joined)}} --}}
-            @foreach ($viewed as $item)
+            {{-- @foreach ($viewed as $item)
             <div class="media">
                 <a class="pull-left" href="#">
                     <img class="img-responsive media-object" src="{{asset($item->cp_avatar)}}" alt="Media Object">
@@ -145,15 +145,15 @@ Câu lạc bộ
                 <div class="media-body">
                     <h4 class="media-heading"><a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a></h4>
                 </div>
-                @endforeach
+                @endforeach --}}
             </div>
-    
-    
+
+
         </div>
-    
-    
+
+
     </aside>
-    
+
 </div>
 
 @endsection
