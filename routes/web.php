@@ -66,19 +66,31 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
     });
 
+    #Quản trị viên
+    Route::group(['middleware' => ['checkAdmin']], function () {
+        Route::group(['prefix' => 'quan-tri'], function () {
 
-
-    Route::group(['prefix' => 'cau-lac-bo'], function () {
-        Route::group(['middleware' => ['checkAdmin']], function () {
-
-            Route::group(['prefix' => 'quan-tri'], function () {
-
-                Route::get('/', 'ClubController@admin')->name('club.admin');
+            Route::group(['prefix' => 'cau-lac-bo'], function () {
+                Route::get('/danh-sach', 'ClubController@admin')->name('club.admin');
                 Route::post('/tao-cau-lac-bo', 'ClubController@adminCreate')->name('club.admin.create');
                 Route::post('/cap-nhat', 'ClubController@adminUpdate')->name('club.admin.adminUpdate');
                 Route::post('/xoa/{id}', 'ClubController@adminDelete')->name('club.admin.adminDelete');
             });
+            #Chia sẽ đồng dùng
+            Route::group(['prefix' => 'chia-se-do-dung'], function () {
+                Route::get('/danh-sach', 'QuanTri\ShareItemController@getItems')->name('quan-tri.chia-se-do-dung');
+            });
         });
+
+
+    });
+
+    Route::group(['prefix' => 'cau-lac-bo'], function () {
+
+
+
+
+
         Route::get('/', 'ClubController@index')->name('club');
         Route::get('/bai-viet-rieng/{slug}', 'ClubController@clubPostSlug')->name('club.clubPostSlug');
          // tìm kiếm

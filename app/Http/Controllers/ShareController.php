@@ -19,7 +19,7 @@ class ShareController extends Controller
     public function select()
     {
         $type=\DB::table('types')->get();
-        $lastedPost = DB::table('items')->orderBy('item_created','DESC')->paginate(5);
+        $lastedPost = DB::table('items')->join('types','types.type_id','items.type_id')->orderBy('item_created','DESC')->paginate(15);
 
         $post_viewed = session()->get('posts.post_club');
         // dd($post_viewed);
@@ -30,6 +30,8 @@ class ShareController extends Controller
             return view('client.pages.share.select',compact('type','baivietdaxem','lastedPost'));
         }
         $baivietdaxem = 0;
+        // $baiVietGanDay = DB::table('items')->orderBy('item_created','DESC')
+
         return view('client.pages.share.select',compact('type','baivietdaxem','lastedPost'));
     }
     public function index($slug)
