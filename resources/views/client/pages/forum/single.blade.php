@@ -74,7 +74,8 @@ div#dropdown-menu4 {
                 <div class="col-md-12">
                     <div class="entry-meta">
                         <span><i class="fa fa-calendar-o"></i> {{$day}}</span>
-                        <span><i class="fa fa-user"></i> Bởi <a href="#">{{$post->stu_name}}</a></span>
+                        <i class="fa fa-user"></i> Đăng bởi: <a href="{{ route('Info',$post->stu_code.'.'.Str::slug($post->stu_name, '-')) }}">
+                            {{$post->stu_name}}</a>
                         <div class="pull-right">
                             <span><i class="fa fa-eye"></i> 184</span>
                             <span> <i class="fa fa-thumbs-up" aria-hidden="true"></i>20</a></span>
@@ -84,7 +85,7 @@ div#dropdown-menu4 {
                     </div>
                 </div>
             </div>
-            <p>{!!$post->p_content!!}</p>
+            <div class="dinh_dang_text">{!!$post->p_content!!}</div>
             @include('client.pages.forum.report')
 
             <div class="comments1">

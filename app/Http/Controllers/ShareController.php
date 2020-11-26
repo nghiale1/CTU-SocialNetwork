@@ -116,7 +116,7 @@ class ShareController extends Controller
             ]);
         }
 
-        return redirect()->route('share')->with('success','Đã thêm thành công');
+        return redirect()->back()->with('success','Đã thêm thành công');
     }
 
     /**

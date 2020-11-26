@@ -50,7 +50,8 @@ Hỏi đáp
                     <a href="{{route('forum.show',$item->p_slug)}}">{{$item->p_title}}</a> <span style="font-size: 14px;float: right;padding: 4px;color: #9d9d9d;"> <i class="fa fa-book"></i> {{$i->sub_name}}</span>
                     <p style="margin-left: -40px;margin-top: -1px;margin-bottom: -20px;"> @if ($item->stu_id ==$i->stu_id)
                         <span class="comments-padding"></span>
-                        <i class="fa fa-user"></i> Đăng bởi: {{$i->stu_name}}
+                        <i class="fa fa-user"></i> Đăng bởi: <a href="{{ route('Info',$i->stu_code.'.'.Str::slug($i->stu_name, '-')) }}">
+                            {{$i->stu_name}}</a>
 
                         @endif  </p>
                 </h2>
@@ -64,8 +65,7 @@ Hỏi đáp
                     <i class="fa fa-calendar-o"></i> {{$item->day}}
                     @if ($item->stu_id ==$i->stu_id)
                     <span class="comments-padding"></span>
-                    <i class="fa fa-user"></i> Đăng bởi: <a href="{{ route('Info',$i->stu_code.'.'.Str::slug($i->stu_name, '-')) }}">
-                        {{$i->stu_name}}</a>
+                    
 
                     @endif
                     {{-- <div class="delete-blog"> --}}

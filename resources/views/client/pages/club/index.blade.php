@@ -39,15 +39,15 @@ Câu lạc bộ
                 @forelse ($blog as $item)
                 <div class="col-md-12 club-frame">
 
-                    <div class="col-md-4 ">
+                    <div class="col-md-3 ">
                         <div class="blog-thumb">
                             <a href="{{route('club.show',$item->cp_slug)}}">
                                 <img class="" src="{{asset($item->cp_avatar)}}" alt="photo"
-                                    style="width:400px; height:200px">
+                                    style="width:400px; height:100px">
                             </a>
                         </div>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-9">
 
 
                         <h2 class="blog-title">
@@ -55,7 +55,7 @@ Câu lạc bộ
                             <span class="comments-padding"></span>
                             @if($item->stu_id==Auth::id())
                             <a href="{{ route('club.delete', ['id'=>$item->cp_id]) }}" id="deleteblog"
-                                class="delete-blog" title="Xóa"><i class="fa fa-trash"></i></a>
+                                class="delete-blog" title="Xóa" style="float: right"><i class="fa fa-trash"></i></a>
                             @endif
                         </h2>
                         <p>
@@ -64,8 +64,8 @@ Câu lạc bộ
                             <span class="comments-padding"></span>
                             <i class="fa fa-eye" aria-hidden="true"></i> {{$item->cp_view_count}}</i>
                             <span class="comments-padding"></span>
-                            <i class="fa fa-user" aria-hidden="true"></i> Đăng bởi: {{$item->stu_name}}</i>
-                            <h4>{{$item->c_name}}</h4>
+                            <i class="fa fa-user"></i> Đăng bởi: <a href="{{ route('Info',$item->stu_code.'.'.Str::slug($item->stu_name, '-')) }}">
+                                {{$item->stu_name}}</a>
                         </p>
                     </div>
                     <div class="col-md-12">&nbsp;</div>
@@ -75,7 +75,11 @@ Câu lạc bộ
                 <h2 class="blog-title">Chưa có bài viết nào!
                 </h2>
                 @endforelse
-                {!!$blog->links()!!}
+                @if ($blog!=null)
+                  <div class="text-center">
+                      {{$blog->links()}}
+                    </div>  
+                @endif
             </div>
         </div>
         <hr>
@@ -123,6 +127,7 @@ Câu lạc bộ
             <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Câu lạc bộ chưa tham gia</h4>
             <hr>
             <ul class="sidebar-list">
+
                 @foreach ($clubNotJoin as $val)
                  <li>
                      <div class="row">

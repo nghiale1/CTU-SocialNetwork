@@ -4,6 +4,34 @@
     .avatar {
         width: 100%;
     }
+    .level_1 {
+        text-align: right
+    }
+
+    .level_2 {
+        text-align: left
+    }
+
+    thead {
+        background-color: #3571ad;
+        color: white;
+    }
+
+    hr {
+        border-color: #3571ad;
+    }
+
+    thead th:first-child {
+        border-radius: 10px 0px 0px 0px;
+    }
+
+    thead th:last-child {
+        border-radius: 0px 10px 0px 0px;
+    }
+
+    .fade {
+        display: inline !important;
+    }
 </style>
 @endpush
 {{-- Thêm khúc này để có trang tiêu đề nha --}}
@@ -14,26 +42,62 @@ Yêu cầu tham gia
 @section('content')
 
 <div class="row">
+    <div class="col-md-12 ">
+        <div data-url="{{$club->c_slug}}" id="slug"></div>
+        <div class="row">
+            <h4>Danh sách yêu cầu tham gia <strong>{{$club->c_name}}</strong></h4>
+            <h5>Admin:    <strong>{{auth::guard('student')->user()->stu_name}}</strong></h5>
+            <div class="col-md-12">
+                <table class="table table-striped borderless">
+                    <thead>
+    
+                        <tr>
+                            <th>Tên sinh viên </th>
+                            <th>Mã sinh viên</th>
+                            <th>
+                                <div>Ngày yêu cầu tham gia</div>
+                            </th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody id="club">
+                       
+                        @foreach($list as $key=>$item)
+                        @if ($item->stu_code == auth::guard('student')->user()->stu_code)
 
-    {{-- @forelse ($list as $key=>$item)
-        <ul>
-            <li class="{{$key}}">
+                        @else
+                        
+                        <tr>
+                           <td>{{$item->stu_name}}</td>
+                           <td>{{$item->stu_code}}</td>
+                           <td>{{$item->cs_created}}</td>
+                           <td>
+                            <a href="#" data-data="{{$item->stu_code}}" data-url="{{$item->c_slug}}" data-no="{{$key}}"
+                                class="accept" style="color: #2f9de3">Duyệt</a>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <a href="#" data-data="{{$item->stu_code}}" data-url="{{$item->c_slug}}" data-no="{{$key}}"
+                                class="denied" style="color: red">Xóa</a>
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                </table>
+               
+            </div>
+        
+         
+        </div>
 
-    {{$item->stu_code}} <br>
-    {{$item->stu_name}} mssv <br>
-    {{$item->cs_created}} ngày <br>
-    <a href="#" data-data="{{$item->stu_code}}" data-url="{{$item->c_slug}}" data-no="{{$key}}" class="accept">Duyệt</a>
-    <a href="#" data-data="{{$item->stu_code}}" data-url="{{$item->c_slug}}" data-no="{{$key}}" class="denied">Xóa</a>
-    </li>
-    </ul>
-    @empty
-    <h3>Không có yêu cầu nào</h3>
-    @endforelse --}}
 
 
-    <div class="col-md-8">
+
+
+
+    </div>
+
+    {{-- <div class="col-md-8"> --}}
         {{-- <div data-url="{{$club->c_slug}}" id="slug"></div> --}}
-    <div class="row">
+    {{-- <div class="row">
 
         @forelse ($list as $key=>$item)
         <div class="{{$key}}">
@@ -65,7 +129,7 @@ Yêu cầu tham gia
         @empty
         <h3>Không có yêu cầu nào</h3>
         @endforelse
-    </div>
+    </div> --}}
 
 
 

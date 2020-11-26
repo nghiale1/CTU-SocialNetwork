@@ -126,7 +126,7 @@ Chi tiết bài viết
         {{-- <hr> --}}
         <div class="row">
             <div class="col-smd-12">
-                <h1 class="sidebar-title" style="width:100%;">{{$post->item_title}}</h1>
+                <h1 class="sidebar-title" style="width:100%;margin 20px;text-transform: uppercase;">{{$post->item_title}}</h1>
             </div>
             <div class="col-md-12">
                 <div class="entry-meta">
