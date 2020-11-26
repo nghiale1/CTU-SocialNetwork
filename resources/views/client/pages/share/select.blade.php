@@ -43,16 +43,13 @@ Chia sẻ
     <div class="col-md-12 o-giua" style="height: auto;">
         <div class="row blogu">
             <div id="content" style="margin-top: 20px; margin-left: 20px; margin-right: 20px;">
-                <div class="row">
-                    <h1 class="page-header sidebar-title">
-                        Danh mục chia sẻ
-                    </h1>
-                </div>
+                <h1 class="page-header sidebar-title">
+                    Danh mục chia sẻ
+                </h1>
                 <div class="row">
                     @forelse ($type as $item)
                     <div class="col-md-2">
                         <a href="{{route('share.type',$item->type_slug)}}">
-
                             <div class="card" style="width: 18rem;">
                                 <img src="{{asset($item->type_image)}}" class="card-img-top" alt="{{$item->type_name}}" style="border: 2px solid white;
                                 border-radius: 20% !important;">
