@@ -31,7 +31,8 @@ Chia sẻ
     }
 
     .card img {
-        width: 100%;
+        width: 60%;
+
     }
 </style>
 @endpush
@@ -39,7 +40,7 @@ Chia sẻ
 
 <div class="row">
     <!-- Blog Column -->
-    <div class="col-md-12 o-giua">
+    <div class="col-md-12 o-giua" style="height: auto;">
         <div class="row blogu">
             <div id="content" style="margin-top: 20px; margin-left: 20px; margin-right: 20px;">
                 <div class="row">
@@ -53,7 +54,8 @@ Chia sẻ
                         <a href="{{route('share.type',$item->type_slug)}}">
 
                             <div class="card" style="width: 18rem;">
-                                <img src="{{asset($item->type_image)}}" class="card-img-top" alt="{{$item->type_name}}">
+                                <img src="{{asset($item->type_image)}}" class="card-img-top" alt="{{$item->type_name}}" style="border: 2px solid white;
+                                border-radius: 20% !important;">
                                 <div class="card-body">
                                     <p class="card-text">{{$item->type_name}}</p>
                                 </div>
@@ -66,6 +68,30 @@ Chia sẻ
             </div>
         </div>
         <hr>
+    </div>
+    <hr>
+    <hr>
+    <div class="col-md-12 o-giua" style="margin-top: 20px; height: auto; padding-bottom: 50px;">
+        <h1 class="page-header sidebar-title">
+            Bài viết gần đây
+        </h1>
+        @foreach ($lastedPost as $item)
+            <div class="col-md-3">
+                <div class="card" style="width: 20rem; border: 2px solid silver; padding: 20px; background-color: white;">
+                    <img class="image" data-id="{!!$item->item_id!!}" id="myImg{!!$item->item_id!!}"
+                        src="{{asset($item->item_avatar)}}" class="getimg" class="img-responsive card-img-top"
+                        alt="{{asset($item->item_avatar)}}" style="width:200px; height:150px;">
+                    <div class="card-body">
+                        <h5 class="card-title style-color" style="text-transform:capitalize;">{{$item->item_title}}
+                        </h5>
+                        <p>{{ $item->type_name }}</p>
+                        <a href="{{route('share.show',$item->item_slug)}}" class="style-color"> Xem chi tiết...</a>
+                        <span style="float: right"><i class="fa fa-eye" aria-hidden="true"></i>
+                            {{$item->item_view_count}}</i></span>
+                    </div>
+                </div>
+            </div>
+        @endforeach
     </div>
 </div>
 

@@ -27,6 +27,7 @@
     </div>
 
     {{-- ~~((^-^))~~ --}}
+    @if(Auth::guard('student')->check())
     <div id="live-chat">
 
         <header class="clearfix">
@@ -57,6 +58,7 @@
         </div>
 
     </div> <!-- end live-chat -->
+    @endif
     @include('client.template.script')
     {{-- <script>
         $(document).ready(function () {
