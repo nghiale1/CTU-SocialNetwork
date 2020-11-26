@@ -34,7 +34,7 @@ class ForumController extends Controller
             // dd($item->sub_id);
             $blog=$blog->orwhere('sub_id',$item->sub_id);
         }
-        $blog=$blog->paginate(10);
+        $blog=$blog->orderBy('p_id','DESC')->paginate(5);
         $now=$this->now();
         if($blog->isNotEmpty()){
             foreach($blog as $item){
@@ -71,7 +71,7 @@ class ForumController extends Controller
         }
         // $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
 
-       
+
         $baivietdaxem = 0;
         // dd($stu);
         return view('client.pages.forum.forum',compact('subject','blog','getSubPopular', 'baivietdaxem','stu'));

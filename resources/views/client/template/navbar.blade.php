@@ -14,8 +14,9 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right custom-menu">
-                <li><a href="{{ route('chon-hoc-ky') }}">Tài liệu cá nhân</a></li>
+
                 <?php if(\Auth::check()):?>
+                <li><a href="{{ route('chon-hoc-ky') }}">Tài liệu cá nhân</a></li>
                 <li @if (Request::segment(1)=='hoc-tap' ) class='active' @endif>
                     <a href="{{route('forum')}}">Học tập</a></li>
                 <li @if (Request::segment(1)=='chia-se' ) class='active' @endif>
@@ -42,6 +43,9 @@
             <a href="{{route('share')}}">Chia sẻ</a></li> --}}
         <li @if (Request::segment(1)=='cau-lac-bo' ) class='active' @endif>
             <a href="{{route('club.admin')}}">Câu lạc bộ</a></li>
+            <li>
+                <a href="{{ route('logout') }}" style="color: red;">Đăng xuất</a>
+            </li>
         <?php endif?> </ul>
     </div>
     </div>

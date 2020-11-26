@@ -51,7 +51,7 @@ Hỏi đáp
                     <p style="margin-left: -40px;margin-top: -1px;margin-bottom: -20px;"> @if ($item->stu_id ==$i->stu_id)
                         <span class="comments-padding"></span>
                         <i class="fa fa-user"></i> Đăng bởi: {{$i->stu_name}}
-    
+
                         @endif  </p>
                 </h2>
                 <p>
@@ -62,7 +62,12 @@ Hỏi đáp
                     <i class="fa fa-eye" aria-hidden="true">{{$item->p_view_count}}</i>
                     <span class="comments-padding"></span>
                     <i class="fa fa-calendar-o"></i> {{$item->day}}
-                   
+                    @if ($item->stu_id ==$i->stu_id)
+                    <span class="comments-padding"></span>
+                    <i class="fa fa-user"></i> Đăng bởi: <a href="{{ route('Info',$i->stu_code.'.'.Str::slug($i->stu_name, '-')) }}">
+                        {{$i->stu_name}}</a>
+
+                    @endif
                     {{-- <div class="delete-blog"> --}}
                     <span class="comments-padding"></span>
                     @if($item->stu_id==Auth::id())

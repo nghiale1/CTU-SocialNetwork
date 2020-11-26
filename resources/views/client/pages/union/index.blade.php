@@ -19,7 +19,7 @@ Chi Hội
 
 <div class="row">
     <!-- Blog Column -->
-    <div class="col-md-8">
+    <div class="col-md-8 ben-trai">
         <h1 class="page-header sidebar-title">
             Đoàn hội
             <span style="float: right"><button class="btn btn-ctu"
@@ -81,16 +81,17 @@ Chi Hội
 
 
 
-       
+
     </div>
+    <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
-    <aside class="col-md-4 sidebar-padding">
+    <aside class="col-md-3 sidebar-padding ben-phai">
         <div id="app">
             <chat-layout></chat-layout>
         </div>
         <div class="blog-sidebar">
             <div class="input-group searchbar">
-                <input type="text" class="form-control searchbar" placeholder="Tìm kiếm...">
+                <input type="text" class="form-control searchbar" placeholder="Nhập từ khóa cần tìm">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Tìm kiếm</button>
                 </span>
@@ -105,7 +106,7 @@ Chi Hội
                     @foreach ($chihoi as $val)
                         @if ($val->sub_role == 'LCHT')
                         Chi hội trưởng: &nbsp; {{$val->stu_name}}
-                            
+
                         @endif
                     @endforeach
                 </a></li>
@@ -113,7 +114,7 @@ Chi Hội
                     @foreach ($chihoi as $val)
                         @if ($val->sub_role == 'LCHP')
                         Chi hội Phó: &nbsp; {{$val->stu_name}}
-                            
+
                         @endif
                     @endforeach
                 </a></li>
@@ -121,7 +122,7 @@ Chi Hội
                     @foreach ($chihoi as $val)
                         @if ($val->sub_role == 'UV')
                         Ủy viên: &nbsp; {{$val->stu_name}}
-                            
+
                         @endif
                     @endforeach
                 </a></li>
@@ -130,57 +131,6 @@ Chi Hội
                 </a></li>
             </ul>
         </div>
-        <!-- Recent Posts -->
-        {{-- <div class="blog-sidebar">
-            <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
-            <hr style="margin-bottom: 5px;">
-
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
-                        alt="Media Object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#">BI thi gì vậy mấy bạn?</a></h4>
-                    Mọi người cho mình hỏi môn BI thầy nghe thi đề gì vậy
-                </div>
-            </div>
-
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog2.jpg')}}"
-                        alt="Media Object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#">Post title 2</a></h4>
-                    This is some sample text. This is some sample text. This is some sample text.
-                </div>
-            </div>
-
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog3.jpg')}}"
-                        alt="Media Object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#">Post title 3</a></h4>
-                    This is some sample text. This is some sample text. This is some sample text.
-                </div>
-            </div>
-            <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog1.jpg')}}"
-                        alt="Media Object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="#">Post title 4</a></h4>
-                    This is some sample text. This is some sample text. This is some sample text.
-                </div>
-            </div>
-        </div>
-         --}}
-
-
     </aside>
 </div>
 

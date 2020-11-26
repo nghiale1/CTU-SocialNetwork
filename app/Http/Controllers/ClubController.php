@@ -37,7 +37,7 @@ class ClubController extends Controller
         $clubJoin = DB::table('club_students')->where('stu_id',\Auth::id())->pluck('c_id');
         $clubNotJoin = DB::table('clubs')->whereNotIn('c_id',$clubJoin)->get();
         // ->where('cs.c_id',$c_id)->get();
-   
+
         // dd($clubNotJoin);
         // dd($clubNotJoin);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();

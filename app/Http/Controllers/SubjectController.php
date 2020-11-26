@@ -46,7 +46,11 @@ class SubjectController extends Controller
      */
     public function show($subCode)
     {
-        $subject = DB::table('subjects')->where('sub_code',$subCode)->first();
+        $subject = DB::table('subjects')
+                        ->where('sub_code',$subCode)
+                        ->join('semesters','semesters.semester_id','subjects.semester_id')
+                        ->join('school_years','school_years.school_year_id','subjects.school_year_id')
+                        ->first();
         $postSubject = DB::table('posts')
                         ->join('subjects','subjects.sub_id','posts.sub_id')
                         ->join('students','students.stu_id','posts.stu_id')

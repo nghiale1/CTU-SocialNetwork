@@ -275,7 +275,7 @@ Chi tiết bài viết
                         @foreach ($chihoi as $val)
                             @if ($val->sub_role == 'LCHT')
                             Chi hội trưởng: &nbsp; {{$val->stu_name}}
-                                
+
                             @endif
                         @endforeach
                     </a></li>
@@ -283,7 +283,7 @@ Chi tiết bài viết
                         @foreach ($chihoi as $val)
                             @if ($val->sub_role == 'LCHP')
                             Chi hội Phó: &nbsp; {{$val->stu_name}}
-                                
+
                             @endif
                         @endforeach
                     </a></li>
@@ -291,7 +291,7 @@ Chi tiết bài viết
                         @foreach ($chihoi as $val)
                             @if ($val->sub_role == 'UV')
                             Ủy viên: &nbsp; {{$val->stu_name}}
-                                
+
                             @endif
                         @endforeach
                     </a></li>
@@ -300,56 +300,6 @@ Chi tiết bài viết
                     </a></li>
                 </ul>
             </div>
-            <!-- Recent Posts -->
-            <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Recent Posts</h4>
-                <hr style="margin-bottom: 5px;">
-
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog1.jpg')}}"
-                            alt="Media Object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="#">Post title 1</a></h4>
-                        This is some sample text. This is some sample text. This is some sample text.
-                    </div>
-                </div>
-
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog2.jpg')}}"
-                            alt="Media Object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="#">Post title 2</a></h4>
-                        This is some sample text. This is some sample text. This is some sample text.
-                    </div>
-                </div>
-
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog3.jpg')}}"
-                            alt="Media Object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="#">Post title 3</a></h4>
-                        This is some sample text. This is some sample text. This is some sample text.
-                    </div>
-                </div>
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog1.jpg')}}"
-                            alt="Media Object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="#">Post title 4</a></h4>
-                        This is some sample text. This is some sample text. This is some sample text.
-                    </div>
-                </div>
-            </div>
-
-
         </aside>
     </div>
 </div>

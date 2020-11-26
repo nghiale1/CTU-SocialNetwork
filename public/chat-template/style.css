@@ -8,7 +8,7 @@
 /* ---------- LIVE-CHAT ---------- */
 
 #live-chat {
-    bottom: 15px;
+    bottom: 1px;
     font-size: 12px;
     right: 24px;
     position: fixed;
@@ -56,6 +56,10 @@
     margin-bottom: -15px;
 }
 
+.send-message{
+    display: none;
+}
+
 .chat-message-counter {
     background: #e62727;
     border: 1px solid #fff;
@@ -92,6 +96,7 @@
     /* overflow: auto;
     overflow-x: hidden;
     height: 252px; */
+    display: none;
 }
 
 
@@ -100,7 +105,7 @@
     padding: 8px 24px;
     overflow: auto;
     overflow-x: hidden;
-    height: 252px;
+    height: 300px;
 }
 
 .chat-message {
@@ -158,6 +163,12 @@ p.title-message-rep{
 .ben-trai {
     background-color: whitesmoke;
     height: 850px;
+}
+
+.o-giua {
+    /* padding-top: 20px; */
+    background-color:  whitesmoke;
+    height: 800px;
 }
 
 .ben-phai {
