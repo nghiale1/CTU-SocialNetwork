@@ -10,7 +10,7 @@
 @endpush
 @section('content')
     <div class="row">
-        <div class="col-md-8 ben-trai">
+        <div class="col-md-12 ben-trai">
             <form action="{{route('club.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <table class="table table-responsive borderless text-right">

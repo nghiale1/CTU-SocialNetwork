@@ -106,8 +106,11 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         // firebase.analytics();
-        var myName = "{{  Auth::guard('student')->user()->stu_code  }}";
-        var branch =  "{{ Auth::guard('student')->user()->yb_id }}";
+        @if(Auth::guard('student')->check())
+            var myName = "{{  Auth::guard('student')->user()->stu_code  }}";
+            var branch =  "{{ Auth::guard('student')->user()->yb_id }}";
+        @endif
+
         // console.log(branch);
         function sendMessage() {
 

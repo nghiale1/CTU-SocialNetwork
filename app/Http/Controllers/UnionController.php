@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use Auth;
 class UnionController extends Controller
 {
     /**
@@ -17,6 +18,19 @@ class UnionController extends Controller
         //get subject of user
         $union=$this->getUnionStudent();
         $blog=[];
+        
+        $ub_branch = DB::table('students_ub as ub')
+        ->join('union_branchs as br','br.ub_id','ub.stu_id')
+        ->where('ub.stu_id',Auth::guard('student')->id())->first();
+
+        
+        $chihoi = DB::table('students_ub as ub')
+        ->join('students as st','st.stu_id','ub.stu_id')
+      
+        ->where('ub.ub_id',$ub_branch->ub_id)->get();
+
+        // dd($ub_branch);
+
         if($union->isNotEmpty()){
 
             $blog=\DB::table('union_posts')
@@ -27,7 +41,7 @@ class UnionController extends Controller
 
             foreach($blog as $item)
             $item->ngaydang=$this->getDay($item->up_id,$item->up_created);
-            return view('client.pages.union.index',compact('union','blog'));
+            return view('client.pages.union.index',compact('union','blog','chihoi','ub_branch'));
         }
         else{
             return redirect('/404');
@@ -90,7 +104,7 @@ class UnionController extends Controller
         ->join('union_branchs as ub','ub.ub_id','p.ub_id')
         ->where('up_slug',$slug)
         ->first();
-        // dd($post);
+        // dd($slug);
 
         $chihoi = DB::table('students_ub as ub')
         ->join('students as st','st.stu_id','ub.stu_id')

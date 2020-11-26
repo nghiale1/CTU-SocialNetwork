@@ -2,7 +2,7 @@
 
 {{-- Thêm khúc này để có trang tiêu đề nha --}}
 @section('title')
-Đoàn, hội
+Chi Hội
 @endsection
 @push('css')
 <style>
@@ -99,13 +99,36 @@
         </div>
         <!-- Blog Categories -->
         <div class="blog-sidebar">
-            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Thông tin</h4>
+            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> {{$ub_branch->ub_name}} </h4>
+            <hr>
             <ul class="sidebar-list">
-                <li><a href="#">CT258 - Phát triển thương mại điện tử</a></li>
-                <li><a href="#">CT255 - Nghiệp vụ thông minh</a></li>
-                <li><a href="#">CT264 - Cơ sở dữ liệu phân tán</a></li>
-                <li><a href="#">CT244 - Bảo trì phần mềm</a></li>
-                <li><a href="#">CT236 - Quản trị cơ sở dữ liệu trên Windows</a></li>
+                <li><a href="#">
+                    @foreach ($chihoi as $val)
+                        @if ($val->sub_role == 'LCHT')
+                        Chi hội trưởng: &nbsp; {{$val->stu_name}}
+
+                        @endif
+                    @endforeach
+                </a></li>
+                <li><a href="#">
+                    @foreach ($chihoi as $val)
+                        @if ($val->sub_role == 'LCHP')
+                        Chi hội Phó: &nbsp; {{$val->stu_name}}
+
+                        @endif
+                    @endforeach
+                </a></li>
+                <li><a href="#">
+                    @foreach ($chihoi as $val)
+                        @if ($val->sub_role == 'UV')
+                        Ủy viên: &nbsp; {{$val->stu_name}}
+
+                        @endif
+                    @endforeach
+                </a></li>
+                <li><a href="#">
+                    Số lương hội viên: {{count($chihoi)}}
+                </a></li>
             </ul>
         </div>
     </aside>

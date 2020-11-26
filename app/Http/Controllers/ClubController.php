@@ -37,7 +37,8 @@ class ClubController extends Controller
         $clubJoin = DB::table('club_students')->where('stu_id',\Auth::id())->pluck('c_id');
         $clubNotJoin = DB::table('clubs')->whereNotIn('c_id',$clubJoin)->get();
         // ->where('cs.c_id',$c_id)->get();
-   
+
+        // dd($clubNotJoin);
         // dd($clubNotJoin);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
         return view('client.pages.club.index',compact('blog','viewed','joined','clubNotJoin'));
@@ -256,7 +257,7 @@ class ClubController extends Controller
         $studentJoinClub= DB::table('club_students as cs')
         ->join('students as st','st.stu_id','cs.stu_id')
         ->where('cs.c_id',$post->c_id)->get();
-        // dd($studentJoinClub);
+        dd($studentJoinClub);
         $day='';
         if($post){
 
