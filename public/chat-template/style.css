@@ -181,3 +181,17 @@ p.title-message-rep{
 .clear-center {
     width: 0.333333%;
 }
+
+
+/* .page-header {
+    border-bottom: 0px solid #eee;
+    font-family: serif;
+    font-size: 40px;
+    text-transform: unset;
+} */
+
+.dinh_dang_text > p {
+    color: black;
+    font-size: 18px;
+    font-family: Arial;
+}

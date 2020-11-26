@@ -16,7 +16,8 @@
 @section('content')
 <!-- Page Content -->
 <div class="row">
-    <div class="col-md-8 ben-trai">
+    <div class="col-md-1"></div>
+    <div class="col-md-10 o-giua">
         <form action="{{route('share.store')}}" method="post" enctype="multipart/form-data">
             @csrf
             <table class="table table-responsive borderless text-right">
@@ -90,9 +91,9 @@
             </table>
         </form>
     </div>
-    <div class="col-md-1 clear-center"></div>
+    <div class="col-md-1"></div>
     <!-- Blog Sidebar Column -->
-    <aside class="col-md-3 sidebar-padding ben-phai">
+    {{-- <aside class="col-md-3 sidebar-padding ben-phai">
         <div class="blog-sidebar">
             <div class="input-group searchbar">
                 <input type="text" class="form-control searchbar" placeholder="Search for...">
@@ -158,7 +159,7 @@
                 </div>
             </div>
         </div>
-    </aside>
+    </aside> --}}
 
 </div>
 
