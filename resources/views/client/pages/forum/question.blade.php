@@ -10,6 +10,7 @@
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-10 o-giua">
+            <h3 class="sidebar-title">Thêm câu hỏi học tập</h3>
             <form action="" method="post">
                 @csrf
                 <table class="table table-responsive borderless text-right">

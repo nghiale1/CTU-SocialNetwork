@@ -47,7 +47,7 @@ Chi tiết bài viết
 <!-- Page Content -->
 <div class="container singlepost">
     <div class="row">
-        <article class="col-md-8">
+        <article class="col-md-8 ben-trai">
             <h1 class="page-header sidebar-title">{{$post->up_title}}</h1>
             {{-- <img src="{{asset('client/images/unsplash1.jpg')}}" class="img-responsive" alt="photo" /> --}}
             {{-- <hr> --}}
@@ -64,7 +64,10 @@ Chi tiết bài viết
                 </div>
                 
             </div>
-            <p>{!!$post->up_content!!}</p>
+            <div class="dinh_dang_text">
+
+                <p>{!!$post->up_content!!}</p>
+            </div>
             
             <div class="comments1">
                 <div class="well">
@@ -258,14 +261,14 @@ Chi tiết bài viết
         </article>
         <!-- Blog Sidebar Column -->
         <aside class="col-md-4 sidebar-padding">
-            <div class="blog-sidebar">
+            {{-- <div class="blog-sidebar">
                 <div class="input-group searchbar">
                     <input type="text" class="form-control searchbar" placeholder="Tìm kiếm...">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button">Tìm kiếm</button>
                     </span>
                 </div><!-- /input-group -->
-            </div>
+            </div> --}}
             <!-- Blog Categories -->
             <div class="blog-sidebar">
                 <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> {{$post->ub_name}} </h4>

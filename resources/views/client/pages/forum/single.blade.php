@@ -66,7 +66,8 @@ div#dropdown-menu4 {
 <!-- Page Content -->
 <div class="container singlepost">
     <div class="row">
-        <article class="col-md-8">
+        <div class="col-md-1"></div>
+        <article class="col-md-10 o-giua">
             <h1 class="page-header sidebar-title">{{$post->p_title}}</h1>
             {{-- <img src="{{asset('client/images/unsplash1.jpg')}}" class="img-responsive" alt="photo" /> --}}
             {{-- <hr> --}}
@@ -296,65 +297,7 @@ div#dropdown-menu4 {
 
             </div>
         </article>
-        <!-- Blog Sidebar Column -->
-        <aside class="col-md-4 sidebar-padding">
-            <div class="blog-sidebar">
-                <div class="input-group searchbar">
-                    <input type="text" class="form-control searchbar" placeholder="Search for...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button">Search</button>
-                    </span>
-                </div><!-- /input-group -->
-            </div>
-            <!-- Recent Posts -->
-            <div class="blog-sidebar">
-                <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
-                <hr style="margin-bottom: 5px;">
-
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog1.jpg')}}"
-                            alt="Media Object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="#">Post title 1</a></h4>
-                        This is some sample text. This is some sample text. This is some sample text.
-                    </div>
-                </div>
-
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog2.jpg')}}"
-                            alt="Media Object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="#">Post title 2</a></h4>
-                        This is some sample text. This is some sample text. This is some sample text.
-                    </div>
-                </div>
-
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog3.jpg')}}"
-                            alt="Media Object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="#">Post title 3</a></h4>
-                        This is some sample text. This is some sample text. This is some sample text.
-                    </div>
-                </div>
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="img-responsive media-object" src="{{asset('client/images/blog1.jpg')}}"
-                            alt="Media Object">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading"><a href="#">Post title 4</a></h4>
-                        This is some sample text. This is some sample text. This is some sample text.
-                    </div>
-                </div>
-            </div>
-        </aside>
+        <div class="col-md-1"></div>
     </div>
 </div>
 @endsection

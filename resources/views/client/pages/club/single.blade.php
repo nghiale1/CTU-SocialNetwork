@@ -88,7 +88,7 @@ Chi tiết bài viết
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 dinh_dang_text">
                     <p>{!!$post->cp_content!!}</p>
                 </div>
                 <div class="col-md-12">
