@@ -10,9 +10,12 @@
 @endpush
 @section('content')
 <!-- Page Content -->
-<section class="container blog">
+{{-- <section class="container blog"> --}}
     <div class="row">
-        <div class="col-md-8">
+      
+        <div class="col-md-1"></div>
+        <div class="col-md-10 o-giua">
+            <h3 class="sidebar-title"> Bài viết Chi Hội</h3>
             <form action="{{route('union.store')}}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="union" value="{{$union->ub_id}}">
@@ -59,9 +62,9 @@
                 </table>
             </form>
         </div>
-
+        <div class="col-md-1"></div>
         <!-- Blog Sidebar Column -->
-        <aside class="col-md-4 sidebar-padding">
+        {{-- <aside class="col-md-4 sidebar-padding">
             <div class="blog-sidebar">
                 <div class="input-group searchbar">
                     <input type="text" class="form-control searchbar" placeholder="Search for...">
@@ -153,9 +156,9 @@
                 </ul>
             </div>
 
-        </aside>
+        </aside> --}}
     </div>
-</section>
+{{-- </section> --}}
 
 @endsection
 @push('script')

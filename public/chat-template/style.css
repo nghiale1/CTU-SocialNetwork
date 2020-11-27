@@ -1,3 +1,16 @@
+ /* .blog-title a {
+    color: #100a08;
+    -webkit-transition: all .3s;
+    -moz-transition: all .3s;
+    -ms-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
+}
+.blog-title a:hover {
+    color: #2f9de3;
+    text-decoration: none;
+} */
+
 .clearfix { *zoom: 1; } /* For IE 6/7 */
 .clearfix:before, .clearfix:after {
     content: "";
@@ -108,9 +121,6 @@
     height: 300px;
 }
 
-.chat-message {
-    /* margin: 16px 0; */
-}
 p.title-message{
     /* border: 1px solid; */
     /* text-align: center; */

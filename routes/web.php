@@ -79,6 +79,12 @@ Route::group(['middleware' => ['checkLogin']], function () {
             #Chia sẽ đồng dùng
             Route::group(['prefix' => 'chia-se-do-dung'], function () {
                 Route::get('/danh-sach', 'QuanTri\ShareItemController@getItems')->name('quan-tri.chia-se-do-dung');
+                Route::post('/danh-sach/them', 'QuanTri\ShareItemController@ItemStore')->name('quan-tri.chia-se-do-dung.luu');
+                Route::post('/danh-sach/get', 'QuanTri\ShareItemController@getAjax')->name('quan-tri.chia-se-do-dung.ajax');
+                Route::post('/danh-sach/update', 'QuanTri\ShareItemController@itemUpdate')->name('quan-tri.chia-se-do-dung.update');
+                Route::get('/danh-sach/delete/{id}', 'QuanTri\ShareItemController@itemDelete')->name('quan-tri.chia-se-do-dung.delete');
+
+
             });
         });
 
