@@ -6,14 +6,23 @@ Quản lý tài liệu - Tên môn
 @endsection
 
 @section('content')
-<div class="row">
-    <a href="{{ url("http://127.0.0.1:8000/tai-khoan/tai-lieu?nienkhoa=$nkSelected&hocky=$hkSelected") }}" class="label label-default">Quay lại</a>
-</div>
+    {{-- {{ dd($folder) }} --}}
+@if (Auth::guard('student')->id() == $folder->stu_id)
+    <div class="row">
+        <a href="{{ url("http://127.0.0.1:8000/tai-khoan/tai-lieu?nienkhoa=$nkSelected&hocky=$hkSelected") }}" class="label label-default">Quay lại</a>
+    </div>
+@else
+    <div class="row">
+        <a href="{{ route('tai-lieu.sinhvien', ['codeStudent'=> $folder->stu_code]) }}" class="label label-default">Quay lại</a>
+    </div>
+@endif
 <div class="row">
     <h1>Tài liệu môn học</h1>
     <h1>{{ $folder->fo_name }}</h1>
     <p style="border-top: 2px solid blue;"></p>
 
+    {{-- Up load --}}
+    @if (Auth::guard('student')->id() == $folder->stu_id)
     <div class="col-md-12">
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal1">
@@ -24,10 +33,13 @@ Quản lý tài liệu - Tên môn
         </button>
 
     </div>
+    @else
+    @endif
 </div>
 <div class="row">
     {{-- Phần cây thư mục --}}
     {{-- Phần thư mục và file --}}
+    @if (Auth::guard('student')->id() == $folder->stu_id)
     <div class="col-md-12"  style="padding-left: 0px;">
         @if ($folder->fo_child != null )
             <div class="col-md-12">
@@ -97,7 +109,82 @@ Quản lý tài liệu - Tên môn
             </div>
         @endif
     </div>
+    @else
+    <div class="col-md-12"  style="padding-left: 0px;">
+        @if ($folder->fo_child != null )
+            <div class="col-md-12">
+                <a href="{{ route('chi-tiet-thu-muc-hoc-sinh', [
+                    'nkSelected' => $nkSelected1->school_year_id,
+                    'hkSelected' => $hkSelected1->semester_id,
+                    'nameFolder'=> $folder_child->fo_slug,
+                    'idStudent' => $folder->stu_id
+                    ]) }}" class="label label-warning">Quay lại</a>
+            </div>
+        @endif
+        <div class="col-md-12">
+            <h2>Thư mục</h2>
+        </div>
+        @if (count($folder_detail) > 0)
+            @foreach ($folder_detail as $item)
+                @if ($item->fo_permission == 'access')
+                    <div class="col-md-3">
+                        <div class="folder">
+                            <a href="{{ route('chi-tiet-thu-muc-hoc-sinh', [
+                                'nkSelected' => $nkSelected1->school_year_id,
+                                'hkSelected' => $hkSelected1->semester_id,
+                                'nameFolder'=> $item->fo_slug,
+                                'idStudent' => $folder->stu_id
+                                ]) }}" class="btn
+                                                @if ($item->fo_permission == 'access')
+                                                    btn-success
+                                                @else
+                                                    btn-warning
+                                                @endif" style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
+                                <h5 style="font-size: 20px;">
+                                    <i class="fa fa-folder" aria-hidden="true"></i> {{$item->fo_name}}
+                                </h5>
+                            </a>
+                        </div>
+                    </div>
+                @else
+                @endif
+            @endforeach
+        @else
+            <div class="col-md-3">
+                <div class="folder">
+                    <h5>Không có thư mục con</h5>
+                </div>
+            </div>
+        @endif
+        <br>
+        <br>
 
+        <div class="col-md-12">
+            <h2>Tập tin</h2>
+        </div>
+        @if (count($files) != null)
+            @foreach ($files as $item)
+                <div class="col-md-3">
+                    <button href="#" style="width: 100%;height: 120px;line-height: 120px;background-color: #e2f8ff;color: black; white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis; " class="btn btn-success" style="width: 100%;" download>
+                        <h5 style="font-size: 15px; padding-top: 5px;">
+                            {{$item->f_name}}
+                            <br>
+                            <a href="{{ asset($item->f_path) }}" style="text-decoration: underline; font-size: 12px; color: blue;  ">Download</a>
+                        </h5>
+                    </button>
+                </div>
+            @endforeach
+        @else
+            <div class="col-md-3">
+                <div class="folder">
+                    <h5>Không có tệp</h5>
+                </div>
+            </div>
+        @endif
+    </div>
+    @endif
 </div>
 <!-- Modal Upload file-->
 <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -168,8 +255,7 @@ Quản lý tài liệu - Tên môn
     </div>
     </div>
 </div>
-{{-- <script src="https://blueimp.github.io/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
-<script src="https://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload.js"></script> --}}
+
 <script>
     $(document).ready(function() {
         // console.log("loi roi");
@@ -201,6 +287,7 @@ Quản lý tài liệu - Tên môn
 
 </script>
 @endsection
+@if (Auth::guard('student')->id() == $folder->stu_id)
 @push('script')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
@@ -240,7 +327,6 @@ Quản lý tài liệu - Tên môn
                 "delete": {name: "Xóa"},
             }
         });
-
         $.contextMenu({
             selector: '#right-click-bg',
             callback: function(key, options) {
@@ -262,3 +348,4 @@ Quản lý tài liệu - Tên môn
     });
 </script>
 @endpush
+@endif

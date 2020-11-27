@@ -103,7 +103,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/{slug}/huy-thanh-vien/', 'ClubController@denied')->name('club.denied');
             Route::post('/{slug}/xoa-thanh-vien/', 'ClubController@delete')->name('club.delete');
             Route::post('/{slug}/thay-doi-chuc-vu/', 'ClubController@changeRole')->name('club.changeRole');
-            
+
         });
         Route::get('/xoa-cau-hoi/{id}', 'ClubController@destroy')->name('club.delete');
             //bình luận
@@ -155,6 +155,10 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('tai-lieu/chon-hoc-ky','DocumentShareController@getHocKy')->name('chon-hoc-ky');
         Route::get('tai-lieu','DocumentShareController@index')->name('tai-lieu');
         Route::get('tai-lieu/tao-thu-muc/{ten_mon_hoc}/{id_mon_hoc}','DocumentShareController@createNewFolderSubjects')->name('tao-thu-muc-mon-hoc');
+
+
+        #xem của người khác
+        Route::get('tai-lieu/thu-muc/{nkSelected}/{hkSelected}/{nameFolder}/{idStudent}', 'DocumentShareController@folderDetailForUser')->name('chi-tiet-thu-muc-hoc-sinh');
         //up bài nè
         Route::get('tai-lieu-1', function () {
             return view('client.pages.docs-share.index-2');
