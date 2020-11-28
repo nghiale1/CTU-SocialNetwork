@@ -49,7 +49,8 @@ Yêu cầu tham gia
 
 
     <div class="col-md-12 ">
-        <div data-url="{{$club->c_slug}}" id="slug"></div>
+        <div data-url="{{$club->c_slug}}" id="slug"><span> <a style="float: right" href="{{ route('club.listRequest', ['id'=>$club->c_slug]) }}" class="btn btn-ctu">Danh sách yêu cầu</a> </span></div>
+        
         <div class="row">
             <h4>Câu lạc bộ <strong>{{$club->c_name}}</strong></h4>
             <div class="col-md-12">

@@ -52,7 +52,7 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/bai-viet/{slug}', 'ShareController@show')->name('share.show');
         Route::get('/bai-viet/xoa/{id}', 'ShareController@destroy')->name('share.delete');
         Route::get('/them-bai-viet', 'ShareController@create')->name('share.create');
-        Route::post('/them-bai-viet', 'ShareController@stocre')->name('share.store');
+        Route::post('/them-bai-viet', 'ShareController@store')->name('share.store');
         Route::post('/bao-cao', 'ReportController@reportItem')->name('share.report');
         // tìm kiếm
         Route::get('/tim-kiem', 'ShareController@search')->name('share.search');
@@ -101,6 +101,8 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/bai-viet-rieng/{slug}', 'ClubController@clubPostSlug')->name('club.clubPostSlug');
          // tìm kiếm
         Route::get('/tim-kiem', 'ClubController@search')->name('club.search');
+
+        
         Route::group(['middleware' => ['checkManage']], function () {
 
             Route::get('/{slug}/danh-sach-thanh-vien', 'ClubController@listMember')->name('club.listMember');
@@ -122,8 +124,14 @@ Route::group(['middleware' => ['checkLogin']], function () {
 
             Route::get('/bai-viet/{slug}', 'ClubController@show')->name('club.show');
         });
+
+
+
+
         Route::get('/them-bai-viet', 'ClubController@create')->name('club.create');
         Route::post('/them-bai-viet', 'ClubController@store')->name('club.store');
+
+        //tham gia câu lạc bộ
         Route::get('/tham-gia/{slug}', 'ClubController@join')->name('club.join');
         Route::get('/danh-sach','ClubController@list' )->name('club.list');
     });
@@ -136,6 +144,11 @@ Route::group(['middleware' => ['checkLogin']], function () {
         Route::get('/them-bai-viet', 'UnionController@create')->name('union.create');
         Route::post('/them-bai-viet', 'UnionController@store')->name('union.store');
         Route::get('/xoa-bai-viet/{id}', 'UnionController@destroy')->name('union.delete');
+
+        //Xem danh sách thành viên
+        Route::get('/danh-sach-than-vien/{slug}', 'UnionController@ListMember')->name('union-list-member');
+
+
         //bình luận
         Route::post('/binh-luan', 'UnionController@comment')->name('union.comment.store');
         Route::post('/tra-loi-binh-luan', 'UnionController@commentrep')->name('union.comment.rep');

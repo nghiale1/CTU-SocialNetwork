@@ -59,7 +59,7 @@ Chia sẻ
                             </div>
                         </a>
                     </div>
-                    @empty <p>Không có dữ liệu</p>
+                    @empty <p  ></p>Không có dữ liệu</p>
                     @endforelse
                 </div>
             </div>

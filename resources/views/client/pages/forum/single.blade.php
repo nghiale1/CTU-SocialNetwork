@@ -223,7 +223,7 @@ div#dropdown-menu4 {
                                         {{date('d-m-Y H:m', strtotime($val1->com_created))}}</small>
                                 </h4>
                                 {{$val1->stu_name}}
-                                {{$val1->com_content}}
+                                {{-- {{$val1->com_content}} --}}
                                 <div class="row cm_icon">
                                     <div class="col-md-6">
                                         <div class="_cm_left">

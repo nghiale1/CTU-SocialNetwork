@@ -36,7 +36,7 @@ Chia sẻ
     <!-- Blog Column -->
     <div class="col-md-8 ben-trai">
         <h1 class="page-header sidebar-title">
-            {{ $share[0]->type_name }}
+           {{$typeName->type_name}}
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('share.create')}}'"> Thêm vật dụng chia sẻ</button> </span>
             <marquee scrolldelay="1" scrollamount="5">
@@ -51,7 +51,7 @@ Chia sẻ
             <div id="content">
                 @forelse ($share as $item)
                 <div class="col-md-4">
-                    <div class="card" style="width: 20rem; border: 2px solid rgb(230, 215, 215); padding: 20px; background-color: white; height: 200px;">
+                    <div class="card" style="width: 20rem; border: 2px solid rgb(230, 215, 215); padding: 20px; background-color: white; height: auto;">
                         <img class="image" data-id="{!!$item->item_id!!}" id="myImg{!!$item->item_id!!}"
                             src="{{asset($item->item_avatar)}}" class="getimg" class="img-responsive card-img-top"
                             alt="{{asset($item->item_avatar)}}" style="width:100%;">
@@ -67,7 +67,7 @@ Chia sẻ
                 {{-- </div>
         </div> --}}
                 @empty
-                <h2 class="blog-title">Chưa có vật dụng nào được chia sẻ
+                <h2 class="blog-title" style="margin-left: 10px">Chưa có vật dụng nào được chia sẻ
                 </h2>
                 @endforelse
                 {!!$share->links()!!}

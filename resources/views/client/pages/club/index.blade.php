@@ -44,7 +44,6 @@ Câu lạc bộ
                 {{-- {{dd($blog)}} --}}
                 @forelse ($blog as $item)
                 <div class="col-md-12 club-frame">
-
                     <div class="col-md-3 ">
                         <div class="blog-thumb">
                             <a href="{{route('club.show',$item->cp_slug)}}">
