@@ -35,6 +35,12 @@ class ClubController extends Controller
         }
         $viewed=$this->viewed();
         $joined=$this->joined();
+        $request=$this->request();
+
+
+  
+        
+
         foreach($joined as $val)
             $c_id = $val->c_id;
         //CLB chưa tham gia
@@ -46,7 +52,7 @@ class ClubController extends Controller
 
         // dd($blog);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
-        return view('client.pages.club.index',compact('blog','viewed','joined','clubNotJoin'));
+        return view('client.pages.club.index',compact('blog','viewed','joined','clubNotJoin','request'));
     }
 
     public function clubPostSlug($slug)
@@ -67,6 +73,7 @@ class ClubController extends Controller
         }
         $viewed=$this->viewed();
         $joined=$this->joined();
+        $request=$this->request();
 
          //CLB chưa tham gia
          $clubJoin = DB::table('club_students')->where('stu_id',\Auth::id())->pluck('c_id');
@@ -74,7 +81,7 @@ class ClubController extends Controller
          $clubNotJoin = DB::table('clubs')->whereNotIn('c_id',$clubJoin)->get();
 
         //  dd($clubNotJoin);
-        return view('client.pages.club.index',compact('blog','viewed','joined','clubNotJoin'));
+        return view('client.pages.club.index',compact('blog','viewed','joined','clubNotJoin','request'));
     }
     public function search(Request $request)
     {
@@ -192,11 +199,26 @@ class ClubController extends Controller
         $idStudent = \Auth::id();
         $joined = DB::table('club_students')
         ->join('clubs','clubs.c_id','club_students.c_id')
-        ->where('club_students.stu_id',$idStudent)->get();
+        ->where('club_students.stu_id',$idStudent)
+        ->where('club_students.cs_role','<>','YC')
+        ->get();
         if($joined->isEmpty()){
             $joined=0;
         }
         return $joined;
+    }
+    public function request()
+    {
+        $idStudent = \Auth::id();
+        $request = DB::table('club_students')
+        ->join('clubs','clubs.c_id','club_students.c_id')
+        ->where('club_students.stu_id',$idStudent)
+        ->where('club_students.cs_role','YC')
+        ->get();
+        if($request->isEmpty()){
+            $request=0;
+        }
+        return $request;
     }
 
 

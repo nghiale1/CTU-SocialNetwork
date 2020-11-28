@@ -96,7 +96,7 @@
     {{-- <aside class="col-md-3 sidebar-padding ben-phai">
         <div class="blog-sidebar">
             <div class="input-group searchbar">
-                <input type="text" class="form-control searchbar" placeholder="Search for...">
+                <input type="text" class="form-control searchbar" placeholder="Tìm kiếm...">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button">Tìm kiếm</button>
                 </span>
@@ -132,7 +132,8 @@
 
             <div class="media">
                 <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog2.jpg')}}" alt="Media Object">
+                    <img class="img-responsive media-object" src="{{asset('client/images/blog2.jpg')}}"
+                        alt="Media Object">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading"><a href="#">Post title 2</a></h4>
@@ -142,7 +143,8 @@
 
             <div class="media">
                 <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog3.jpg')}}" alt="Media Object">
+                    <img class="img-responsive media-object" src="{{asset('client/images/blog3.jpg')}}"
+                        alt="Media Object">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading"><a href="#">Post title 3</a></h4>
@@ -151,7 +153,8 @@
             </div>
             <div class="media">
                 <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog1.jpg')}}" alt="Media Object">
+                    <img class="img-responsive media-object" src="{{asset('client/images/blog1.jpg')}}"
+                        alt="Media Object">
                 </a>
                 <div class="media-body">
                     <h4 class="media-heading"><a href="#">Post title 4</a></h4>

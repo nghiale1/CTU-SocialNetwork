@@ -21,20 +21,24 @@
             @include('client.template.error')
             @yield('breadcrumb')
             @yield('content')
-
         </section>
         {{-- @include('client.template.footer') --}}
     </div>
 
     {{-- ~~((^-^))~~ --}}
+    <?php
+        $youth_branch = DB::table('youth_branchs')
+                        ->join('majors','majors.major_id','youth_branchs.major_id')
+                        ->join('courses','courses.course_id','youth_branchs.course_id')
+                        ->where('yb_id',Auth::guard('student')->id())->first();
+    ?>
     @if(Auth::guard('student')->check())
     <div id="live-chat">
 
         <header class="clearfix">
 
             <a href="#" class="chat-close">x</a>
-
-            <h4>Nhóm trò chuyện</h4>
+            <h4>{{ $youth_branch->major_name }} {{ $youth_branch->course_name }}</h4>
         </header>
 
         <div class="chat" id="chat2">
