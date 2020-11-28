@@ -92,11 +92,6 @@ Route::group(['middleware' => ['checkLogin']], function () {
     });
 
     Route::group(['prefix' => 'cau-lac-bo'], function () {
-
-
-
-
-
         Route::get('/', 'ClubController@index')->name('club');
         Route::get('/bai-viet-rieng/{slug}', 'ClubController@clubPostSlug')->name('club.clubPostSlug');
          // tìm kiếm
@@ -111,6 +106,10 @@ Route::group(['middleware' => ['checkLogin']], function () {
             Route::post('/{slug}/thay-doi-chuc-vu/', 'ClubController@changeRole')->name('club.changeRole');
 
         });
+
+
+
+
         Route::get('/xoa-cau-hoi/{id}', 'ClubController@destroy')->name('club.delete');
             //bình luận
             Route::post('/binh-luan', 'ClubController@comment')->name('club.comment.store');

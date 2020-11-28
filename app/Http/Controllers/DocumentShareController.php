@@ -39,10 +39,10 @@ class DocumentShareController extends Controller
                             ->where('subjects_student.stu_id','=',$idStudent->stu_id)
                             ->whereNotIn('subjects.sub_id',$sub_studied_id)
                             ->get();
+
         // dd($subject_student);
 
-        return view('client.pages.docs-share.index',compact(['subject_student','hocky','nienkhoa','nkSelected','hkSelected','sub_studied']));
-        // dd($sub_studied);
+        return view('client.pages.docs-share.index-2',compact(['subject_student','hocky','nienkhoa','nkSelected','hkSelected','sub_studied','idStudent']));
     }
     //Chọn niên khóa và học kỳ
     public function getHocKy()
@@ -84,6 +84,7 @@ class DocumentShareController extends Controller
                             ->whereNotIn('subjects.sub_id',$sub_studied_id)
                             ->get();
         // dd($subject_student);
+
         return view('client.pages.docs-share.index',compact(['subject_student','hocky','nienkhoa','nkSelected','hkSelected','sub_studied']));
     }
 

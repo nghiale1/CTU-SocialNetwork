@@ -19,7 +19,8 @@
             <ul class="nav navbar-nav navbar-right custom-menu">
 
                 <?php if(\Auth::check()):?>
-                <li><a href="{{ route('chon-hoc-ky') }}">Tài liệu cá nhân</a></li>
+                <li @if (Request::segment(1) =='tai-lieu' || Request::segment(2) == 'tai-lieu') class='active' @endif>
+                    <a href="{{ route('chon-hoc-ky') }}">Tài liệu cá nhân</a></li>
                 <li @if (Request::segment(1)=='hoc-tap' ) class='active' @endif>
                     <a href="{{route('forum')}}">Học tập</a></li>
                 <li @if (Request::segment(1)=='chia-se' ) class='active' @endif>
@@ -28,7 +29,7 @@
                     <a href="{{route('club')}}">Câu lạc bộ</a></li>
                 <li @if (Request::segment(1)=='doan-hoi' ) class='active' @endif>
                     <a href="{{route('union')}}">Chi Hội</a></li>
-                <li class="nav-item dropdown @if (Request::segment(1)=='tai-khoan') active @endif">
+                <li class="nav-item dropdown @if (Request::segment(1)=='thong-tin') active @endif">
                     <!-- Button to Open the Modal -->
                     <a href="{{ route('Info',Auth::guard('student')->user()->stu_code.'.'.Str::slug(Auth::guard('student')->user()->stu_name, '-')) }}"
                         class="nav-link">

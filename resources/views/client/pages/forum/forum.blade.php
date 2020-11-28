@@ -65,7 +65,7 @@ Hỏi đáp
                     <i class="fa fa-calendar-o"></i> {{$item->day}}
                     @if ($item->stu_id ==$i->stu_id)
                     <span class="comments-padding"></span>
-                    
+
 
                     @endif
                     {{-- <div class="delete-blog"> --}}

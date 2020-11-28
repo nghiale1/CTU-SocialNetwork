@@ -6,8 +6,8 @@ Quản lý tài liệu
 @endsection
 
 @section('content')
-{{-- {{ dd($sub_studied) }} --}}
-@if($sub_studied != '')
+{{-- {{ dd(count($sub_studied)) }} --}}
+@if(count($sub_studied) != 0)
     @if ($sub_studied[0]->stu_id != Auth::guard('student')->id())
     <div class="row">
         <h1>Tài liệu: {{ $sub_studied[0]->stu_id }}</h1>
@@ -21,7 +21,7 @@ Quản lý tài liệu
     </div>
 @endif
 
-@if($sub_studied != [])
+@if(count($sub_studied) != 0)
     @if ($sub_studied[0]->stu_id != Auth::guard('student')->id())
         <div class="row">
             <div class="col-md-12" style="margin-bottom: 20px;">
@@ -52,7 +52,7 @@ Quản lý tài liệu
                 </form>
             </div>
         </div>
-        @else
+    @else
         <div class="row">
             <div class="col-md-6" style="margin-bottom: 20px;">
                 <h3>Chọn năm học - học kỳ</h3>
@@ -101,6 +101,54 @@ Quản lý tài liệu
             </div>
         </div>
     @endif
+@else
+    <div class="row">
+        <div class="col-md-6" style="margin-bottom: 20px;">
+            <h3>Chọn năm học - học kỳ</h3>
+            <form method="GET" action="{{ route('tai-lieu') }}">
+                <div class="form-group row">
+                    <label class="col-md-2">Năm học</label>
+                    <div class="col-md-4">
+                        <select class="form-control" id="exampleFormControlSelect1" name="nienkhoa">
+                            @foreach ($nienkhoa as $item)
+                                <option value="{{ $item->school_year_id }}">{{ $item->school_year_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2">Học kỳ</label>
+                    <div class="col-md-4">
+                        <select class="form-control" id="exampleFormControlSelect1" name="hocky">
+                            @foreach ($hocky as $item)
+                                <option value="{{ $item->semester_id }}">{{ $item->semester_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-md-4"><button type="submit" class="btn btn-success">Chọn</button></div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h3>Các môn học trong:
+                {{ $hkSelected->semester_name }} - {{ $nkSelected->school_year_name }}
+            </h3>
+            <div class="list-group" style="color: black; font-weight: bold">
+                @if (count($subject_student) == 0)
+                    <p class="text-center" style="color: red;">Đã tạo hết thư mục</p>
+                @endif
+                @foreach ($subject_student as $item1)
+                        <p href="" class="list-group-item list-group-item-action">
+                            {{ $item1->sub_name }}
+                            <a href="{{ route('tao-thu-muc-mon-hoc', ['id_mon_hoc'=> $item1->sub_id, 'ten_mon_hoc' => $item1->sub_name]) }}" style="float: right">
+                                TẠO <i class="fa fa-plus-square" aria-hidden="true" ></i>
+                            </a>
+                        </p>
+                @endforeach
+            </div>
+        </div>
+    </div>
 @endif
 
 
@@ -152,6 +200,8 @@ Quản lý tài liệu
         </div>
     @endforeach
 </div>
+
+
 @endsection
 @push('script')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
