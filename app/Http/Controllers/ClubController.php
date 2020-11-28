@@ -29,7 +29,7 @@ class ClubController extends Controller
         ->paginate(3);
         // ->get();
 
-        
+
         foreach($blog as $item){
             $item->day=$this->getDay($item->cp_id,$item->cp_created);
         }
@@ -43,7 +43,7 @@ class ClubController extends Controller
 
         $clubNotJoin = DB::table('clubs')->whereNotIn('c_id',$clubJoin)->get();
 
-    
+
 
         // dd($blog);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
@@ -418,7 +418,12 @@ class ClubController extends Controller
     }
     public function admin()
     {
-        $list=DB::table('clubs')->get();
+        $list=DB::table('club_students')
+                ->join('clubs','clubs.c_id','club_students.c_id')
+                ->join('students','students.stu_id','club_students.stu_id')
+                ->where('cs_role','CNCLB')
+                ->get();
+        // dd($list);
         return view('client.pages.club.admin_list',compact('list'));
     }
 

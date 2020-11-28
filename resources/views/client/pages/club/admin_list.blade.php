@@ -92,6 +92,8 @@ Danh sách câu lạc bộ
                     <tr>
                         <th>STT</th>
                         <th>Câu lạc bộ</th>
+                        <th>Chủ nhiệm</th>
+                        <th>Phó chủ nhiệm</th>
                         <th>Tác vụ</th>
                     </tr>
                 </thead>
@@ -101,7 +103,22 @@ Danh sách câu lạc bộ
                     <tr>
                         <td>{{$i}}</td>
                         <td><input type="text" class="edi" data-id="{{$item->c_id}}" value="{{$item->c_name}}"></td>
-
+                        <td><span style="font-weight: bold">{{ $item->stu_name }}</span> - {{ $item->stu_code }}</td>
+                        <td>
+                            {{-- <span style="font-weight: bold">$value->stu_name</span> --}}
+                            <?php
+                                $PCN = DB::table('club_students')
+                                        ->join('clubs','clubs.c_id','club_students.c_id')
+                                        ->join('students','students.stu_id','club_students.stu_id')
+                                        ->where('club_students.c_id',$item->c_id)
+                                        ->where('cs_role','PCNCLB')
+                                        ->get();
+                                foreach ($PCN as $key => $value) {
+                                    # code...
+                                    echo '<span style="font-weight: bold">'.$value->stu_name.'</span>'.' - '.$value->stu_code.'<br>';
+                                }
+                            ?>
+                        </td>
                         <td>
                             <form action="{{route('club.admin.adminDelete',$item->c_id)}}" method="post" id="frmrmcl"
                                 onsubmit="return confirm('Bạn có chắc muốn câu lạc bộ này?');">
@@ -112,6 +129,7 @@ Danh sách câu lạc bộ
                                         style="color: red"></i> </button>
                             </form>
                         </td>
+
                     </tr>
                     <?php $i++?>
                     @endforeach
@@ -130,14 +148,14 @@ Danh sách câu lạc bộ
 @push('script')
 <script>
     $(document).ready(function(){
-        
+
 
         $("#CNCLB").keypress(function(e){
-             
+
         });
         $("#frmcrtclb").submit(function(e){
-            
-            e.preventDefault(); 
+
+            e.preventDefault();
             var name=$('#name').val();
             var CNCLB=$('#CNCLB').val();
             $.ajaxSetup({
@@ -157,7 +175,7 @@ Danh sách câu lạc bộ
                 error: function (response) {
                     alert(response.responseJSON);
                 },
-                
+
             });
         });
         $('.edi').bind("enterKey",function(e){
@@ -190,7 +208,7 @@ Danh sách câu lạc bộ
                 $(this).trigger("enterKey");
             }
         });
-        
+
     });
 </script>
 @endpush
