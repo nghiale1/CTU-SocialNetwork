@@ -68,7 +68,7 @@ Chi Hội
             </div>
             <div class="col-md-12">&nbsp;</div>
             @empty
-            <h2 class="blog-title">Bạn chưa tham gia chi hội nào
+            <h2 class="blog-title">Chưa có bài viết nào
             </h2>
 
             @endforelse

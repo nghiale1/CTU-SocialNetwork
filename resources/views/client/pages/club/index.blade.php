@@ -14,6 +14,12 @@ Câu lạc bộ
     .btn {
         padding: 6px 10px;
     }
+    div#multiCollapseExample1 {
+    /* border: 1px solid; */
+    background: white;
+    padding: 16px;
+    margin-left: 18px;
+}
 </style>
 @endpush
 @section('content')
@@ -105,17 +111,37 @@ Câu lạc bộ
                 @foreach ($joined as $item)
                 @if ($item->cs_role!='YC'&&$item->cs_role!='TV')
                 <li class="btn-group">
-                    <a class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
+                    {{-- <a class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">{{$item->c_name}}
                     </a>
+                    
                     <div class="dropdown-menu" style="padding: 15px">
                         <a class="dropdown-item" href="{{route('club.clubPostSlug',$item->c_slug)}}">Xem bài viết</a><br>
                         <a class="dropdown-item" href="{{route('club.listMember',$item->c_slug)}}">Danh sách thành
                             viên</a><br>
                         <a class="dropdown-item" href="{{route('club.listRequest',$item->c_slug)}}">Danh sách yêu
                             cầu</a><br>
-                    </div>
+                    </div> --}}
+                    <a data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">{{$item->c_name}}</a>
+                    
                 </li>
+                {{-- <div class="container"> --}}
+                    <div class="row">
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample1">
+                            <div class="card card-body" >
+            
+                                <a class="dropdown-item" href="{{route('club.clubPostSlug',$item->c_slug)}}">Xem bài viết</a><br>
+                                <a class="dropdown-item" href="{{route('club.listMember',$item->c_slug)}}">Danh sách thành
+                                    viên</a><br>
+                                <a class="dropdown-item" href="{{route('club.listRequest',$item->c_slug)}}">Danh sách yêu
+                                    cầu</a>
+                             </div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                {{-- </div> --}}
                 @else
 
                 <li><a href="{{route('club.clubPostSlug',$item->c_slug)}}">{{$item->c_name}}</a></li>

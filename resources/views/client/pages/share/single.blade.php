@@ -122,7 +122,8 @@ Chi tiết bài viết
 
 <!-- Page Content -->
 <div class="row">
-    <article class="col-md-8 ben-trai">
+    <div class="col-md-1"></div>
+    <article class="col-md-10 o-giua">
         {{-- <hr> --}}
         <div class="row">
             <div class="col-smd-12">
@@ -349,9 +350,10 @@ Chi tiết bài viết
 
         </div>
     </article>
+    <div class="col-md-1"></div> 
     <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
-    <aside class="col-md-3 sidebar-padding ben-phai">
+    {{-- <aside class="col-md-3 sidebar-padding ben-phai">
         <div class="blog-sidebar">
             <div class="input-group searchbar">
                 <input type="text" class="form-control searchbar" placeholder="Search for...">
@@ -397,9 +399,10 @@ Chi tiết bài viết
                 </div>
             </div>
             @endforeach
-            @endif
+            @endif --}}
 
-    {{-- show ra hình --}}
+   
+            {{-- show ra hình --}}
     <div id="myModal" class="modal" aria-hidden="true" tabindex="-1" role="dialog">
 
 

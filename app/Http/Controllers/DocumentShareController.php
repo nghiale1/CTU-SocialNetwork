@@ -16,7 +16,33 @@ class DocumentShareController extends Controller
         $idStudent = DB::table('students')->where('stu_code',$codeStudent)->first();
         $sub_studied_id = DB::table('folders')->where('stu_id','=',$idStudent->stu_id)->get()->pluck('sub_id')->toArray();
         $sub_studied = DB::table('folders')->where('stu_id','=',$idStudent->stu_id)->where('fo_child','=',null)->whereIn('sub_id',$sub_studied_id)->get();
-        dd($sub_studied);
+
+        $hocky = DB::table('semesters')->get();
+        $nienkhoa = DB::table('school_years')->get();
+
+        //Lấy thư mục đã tạo ở đây
+        $sub_studied_id = DB::table('folders')->where('stu_id','=',$idStudent->stu_id)->get()->pluck('sub_id')->toArray();
+        $sub_studied = DB::table('folders')->where('stu_id','=',$idStudent->stu_id)->where('fo_child','=',null)->where('fo_permission','access')->whereIn('sub_id',$sub_studied_id)->get();
+        $hkSelected = DB::table('semesters')->where('semester_id','=',1)->first();
+        $nkSelected = DB::table('school_years')->where('school_year_id','=',1)->first();
+
+
+        // Lấy tất cả học phần người đó học trong năm học nào đó !
+        $subject_student = DB::table('subjects_student')
+                            // ->join('students','students.stu_id','subjects_student.stu_id')
+                            ->join('subjects','subjects.sub_id','subjects_student.sub_id')
+                            ->join('semesters','semesters.semester_id','subjects.semester_id')
+                            ->join('school_years','school_years.school_year_id','subjects.school_year_id')
+                            ->join('students','students.stu_id','subjects_student.stu_id')
+                            ->where('subjects.semester_id','=',1)
+                            ->where('subjects.school_year_id','=',1)
+                            ->where('subjects_student.stu_id','=',$idStudent->stu_id)
+                            ->whereNotIn('subjects.sub_id',$sub_studied_id)
+                            ->get();
+        // dd($subject_student);
+
+        return view('client.pages.docs-share.index',compact(['subject_student','hocky','nienkhoa','nkSelected','hkSelected','sub_studied']));
+        // dd($sub_studied);
     }
     //Chọn niên khóa và học kỳ
     public function getHocKy()
@@ -142,7 +168,7 @@ class DocumentShareController extends Controller
     public function folderDetail( $nkSelected,$hkSelected,$nameFolders)
     {
         try {
-            // code...
+            #code...
             // dd($nameFolders);
             $idStudent = Auth::guard('student')->id();
             $hkSelected1 = DB::table('semesters')->where('semester_id','=',$hkSelected)->first();
@@ -153,6 +179,26 @@ class DocumentShareController extends Controller
             // dd($folder->fo_id);
             $files = DB::table('files')->where('fo_id','=',$folder->fo_id)->get();
             // dd($files);
+            // dd($folder);
+            return view('client.pages.docs-share.detail',compact(['folder','folder_detail','hkSelected','nkSelected','hkSelected1','nkSelected1','folder_child','files']));
+        } catch (\Throwable $th) {
+            //throw $th;
+            dd("Có lỗi gì đó sửa đi");
+        }
+    }
+
+    public function folderDetailForUser( $nkSelected,$hkSelected,$nameFolders,$idStudent)
+    {
+        try {
+            #code...
+            // dd($nameFolders);
+            // $idStudent = Auth::guard('student')->id();
+            $hkSelected1 = DB::table('semesters')->where('semester_id','=',$hkSelected)->first();
+            $nkSelected1 = DB::table('school_years')->where('school_year_id','=',$nkSelected)->first();
+            $folder = DB::table('folders')->join('students','students.stu_id','folders.stu_id')->where('fo_slug','=',$nameFolders)->where('folders.stu_id','=',$idStudent)->first();
+            $folder_detail = DB::table('folders')->where('fo_child','=',$folder->fo_id)->get();
+            $folder_child = DB::table('folders')->where('fo_id','=',$folder->fo_child)->first();
+            $files = DB::table('files')->where('fo_id','=',$folder->fo_id)->get();
             // dd($folder);
             return view('client.pages.docs-share.detail',compact(['folder','folder_detail','hkSelected','nkSelected','hkSelected1','nkSelected1','folder_child','files']));
         } catch (\Throwable $th) {
