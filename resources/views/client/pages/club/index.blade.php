@@ -14,12 +14,13 @@ Câu lạc bộ
     .btn {
         padding: 6px 10px;
     }
+
     div#multiCollapseExample1 {
-    /* border: 1px solid; */
-    background: white;
-    padding: 16px;
-    margin-left: 18px;
-}
+        /* border: 1px solid; */
+        background: white;
+        padding: 16px;
+        margin-left: 18px;
+    }
 </style>
 @endpush
 @section('content')
@@ -70,7 +71,8 @@ Câu lạc bộ
                             <span class="comments-padding"></span>
                             <i class="fa fa-eye" aria-hidden="true"></i> {{$item->cp_view_count}}</i>
                             <span class="comments-padding"></span>
-                            <i class="fa fa-user"></i> Đăng bởi: <a href="{{ route('Info',$item->stu_code.'.'.Str::slug($item->stu_name, '-')) }}">
+                            <i class="fa fa-user"></i> Đăng bởi: <a
+                                href="{{ route('Info',$item->stu_code.'.'.Str::slug($item->stu_name, '-')) }}">
                                 {{$item->stu_name}}</a>
                         </p>
                     </div>
@@ -82,9 +84,9 @@ Câu lạc bộ
                 </h2>
                 @endforelse
                 @if ($blog!=null)
-                  <div class="text-center">
-                      {{$blog->links()}}
-                    </div>  
+                <div class="text-center">
+                    {{$blog->links()}}
+                </div>
                 @endif
             </div>
         </div>
@@ -114,76 +116,83 @@ Câu lạc bộ
                     {{-- <a class=" dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true"
                         aria-expanded="false">{{$item->c_name}}
                     </a>
-                    
+
                     <div class="dropdown-menu" style="padding: 15px">
-                        <a class="dropdown-item" href="{{route('club.clubPostSlug',$item->c_slug)}}">Xem bài viết</a><br>
+                        <a class="dropdown-item" href="{{route('club.clubPostSlug',$item->c_slug)}}">Xem bài
+                            viết</a><br>
                         <a class="dropdown-item" href="{{route('club.listMember',$item->c_slug)}}">Danh sách thành
                             viên</a><br>
                         <a class="dropdown-item" href="{{route('club.listRequest',$item->c_slug)}}">Danh sách yêu
                             cầu</a><br>
                     </div> --}}
-                    <a data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">{{$item->c_name}}</a>
-                    
+                    <a data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false"
+                        aria-controls="multiCollapseExample1">{{$item->c_name}}</a>
+
                 </li>
                 {{-- <div class="container"> --}}
-                    <div class="row">
-                        <div class="col">
-                          <div class="collapse multi-collapse" id="multiCollapseExample1">
-                            <div class="card card-body" >
-            
-                                <a class="dropdown-item" href="{{route('club.clubPostSlug',$item->c_slug)}}">Xem bài viết</a><br>
-                                <a class="dropdown-item" href="{{route('club.listMember',$item->c_slug)}}">Danh sách thành
+                <div class="row">
+                    <div class="col">
+                        <div class="collapse multi-collapse" id="multiCollapseExample1">
+                            <div class="card card-body">
+
+                                <a class="dropdown-item" href="{{route('club.clubPostSlug',$item->c_slug)}}">Xem bài
+                                    viết</a><br>
+                                <a class="dropdown-item" href="{{route('club.listMember',$item->c_slug)}}">Danh sách
+                                    thành
                                     viên</a><br>
-                                <a class="dropdown-item" href="{{route('club.listRequest',$item->c_slug)}}">Danh sách yêu
+                                <a class="dropdown-item" href="{{route('club.listRequest',$item->c_slug)}}">Danh sách
+                                    yêu
                                     cầu</a>
-                             </div>
                             </div>
-                          </div>
                         </div>
                     </div>
-                {{-- </div> --}}
-                @else
-
-                <li><a href="{{route('club.clubPostSlug',$item->c_slug)}}">{{$item->c_name}}</a></li>
-                @endif
-                @endforeach
-            </ul>
+                </div>
         </div>
-        <div class="blog-sidebar">
-            <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Câu lạc bộ chưa tham gia</h4>
-            <hr>
-            <ul class="sidebar-list">
+        {{-- </div> --}}
+        @else
 
-                @foreach ($clubNotJoin as $val)
-                 <li>
-                     <div class="row">
-                         <div class="col-md-9" style="">{{$val->c_name}}</div>
-                         <div class="col-md-3"><a href=""  title="Tham gia" style="float: right" > <i class="fa fa-file-text-o" aria-hidden="true" style="color: #3471ad" ></i> </a></div>
-                     </div>
-                 </li>
-                @endforeach
-            </ul>
-        <!-- Recent Posts -->
-        <div class="blog-sidebar">
-            <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
-            <hr style="margin-bottom: 5px;">
-            {{-- {{dd($joined)}} --}}
-            {{-- @foreach ($viewed as $item)
+        <li><a href="{{route('club.clubPostSlug',$item->c_slug)}}">{{$item->c_name}}</a></li>
+        @endif
+        @endforeach
+        </ul>
+</div>
+<div class="blog-sidebar">
+    <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Câu lạc bộ chưa tham gia</h4>
+    <hr>
+    <ul class="sidebar-list">
+
+        @foreach ($clubNotJoin as $val)
+        <li>
+            <div class="row">
+                <div class="col-md-9" style="">{{$val->c_name}}</div>
+                <div class="col-md-3"><a href="{{route('club.join',$val->c_slug)}}" title="Tham gia"
+                        style="float: right"> <i class="fa fa-file-text-o" aria-hidden="true"
+                            style="color: #3471ad"></i> </a></div>
+            </div>
+        </li>
+        @endforeach
+    </ul>
+    <!-- Recent Posts -->
+    <div class="blog-sidebar">
+        <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
+        <hr style="margin-bottom: 5px;">
+        {{-- {{dd($joined)}} --}}
+        {{-- @foreach ($viewed as $item)
             <div class="media">
                 <a class="pull-left" href="#">
                     <img class="img-responsive media-object" src="{{asset($item->cp_avatar)}}" alt="Media Object">
-                </a>
-                <div class="media-body">
-                    <h4 class="media-heading"><a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a></h4>
-                </div>
-                @endforeach --}}
-            </div>
-
-
+        </a>
+        <div class="media-body">
+            <h4 class="media-heading"><a href="{{route('club.show',$item->cp_slug)}}">{{$item->cp_title}}</a></h4>
         </div>
+        @endforeach --}}
+    </div>
 
 
-    </aside>
+</div>
+
+
+</aside>
 
 </div>
 
