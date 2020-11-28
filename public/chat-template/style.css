@@ -8,7 +8,7 @@
 /* ---------- LIVE-CHAT ---------- */
 
 #live-chat {
-    bottom: 15px;
+    bottom: 1px;
     font-size: 12px;
     right: 24px;
     position: fixed;
@@ -51,7 +51,13 @@
     outline: none;
     /* width: 234px; */
     position: relative;
-    top: 15px;
+    top: 0px;
+    height: 40px;
+    margin-bottom: -15px;
+}
+
+.send-message{
+    display: none;
 }
 
 .chat-message-counter {
@@ -90,6 +96,7 @@
     /* overflow: auto;
     overflow-x: hidden;
     height: 252px; */
+    display: none;
 }
 
 
@@ -98,7 +105,7 @@
     padding: 8px 24px;
     overflow: auto;
     overflow-x: hidden;
-    height: 252px;
+    height: 300px;
 }
 
 .chat-message {
@@ -158,6 +165,12 @@ p.title-message-rep{
     height: 850px;
 }
 
+.o-giua {
+    /* padding-top: 20px; */
+    background-color:  whitesmoke;
+    height: 800px;
+}
+
 .ben-phai {
     background-color: whitesmoke;
     height: 850px;
@@ -167,4 +180,18 @@ p.title-message-rep{
 
 .clear-center {
     width: 0.333333%;
+}
+
+
+/* .page-header {
+    border-bottom: 0px solid #eee;
+    font-family: serif;
+    font-size: 40px;
+    text-transform: unset;
+} */
+
+.dinh_dang_text > p {
+    color: black;
+    font-size: 18px;
+    font-family: Arial;
 }

@@ -113,8 +113,8 @@ Quản lý tài liệu - Tên môn
             <form action="{{ route('upload-file') }}" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <input type="text" value="{{ $folder->fo_id }}" name="fo_id">
-                    <input type="text" value="{{ $folder->fo_directory }}" name="fo_dir">
+                    <input type="text" value="{{ $folder->fo_id }}" hidden name="fo_id">
+                    <input type="text" value="{{ $folder->fo_directory }}" hidden name="fo_dir">
                     <div class="file-loading">
                         <input id="input-res-1"
                         name="file[]"
@@ -168,9 +168,11 @@ Quản lý tài liệu - Tên môn
     </div>
     </div>
 </div>
-
+{{-- <script src="https://blueimp.github.io/jQuery-File-Upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="https://blueimp.github.io/jQuery-File-Upload/js/jquery.fileupload.js"></script> --}}
 <script>
     $(document).ready(function() {
+        // console.log("loi roi");
         $("#input-res-1").fileinput({
             uploadUrl: "{{ route('upload-file') }}",
             enableResumableUpload: true,
@@ -194,10 +196,10 @@ Quản lý tài liệu - Tên môn
 
         $('.file-drop-zone-title').text('Kéo & thả file vào đây');
         $('.file-caption-name').attr('placeholder','Chọn file tải lên');
-        $('.close fileinput-remove').style('display','none');
+        $('.close fileinput-remove').attr('style','display: none;');
     });
 
-    </script>
+</script>
 @endsection
 @push('script')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">

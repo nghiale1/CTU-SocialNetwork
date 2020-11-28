@@ -12,11 +12,11 @@
 </div>
 @push('script')
 <script>
-    $("#btnSearch").click(function (e) { 
+    $("#btnSearch").click(function (e) {
         e.preventDefault();
-        
+
     var content=$('#search').val();
-    
+
         $.ajax({
             type: "GET",
             url: "{{route('share.search')}}",
@@ -27,7 +27,7 @@
                 var asset='{{ asset(":id") }}';
                 var inner='';
                 response.forEach(element => {
-                    
+
                     url = url.replace(':id', element['item_slug']);
                     asset = asset.replace(':id', element['item_avatar']);
 
@@ -38,8 +38,8 @@
                     inner+="</a>";
                     inner+="<span>"+element['day']+"</span>";
                     inner+="<span style='float: right'>";
-                    
-       
+
+
                     inner+="<i class='fa fa-eye' aria-hidden='true'></i>"+element['item_view_count']+"</i>";
                     inner+="</span>";
                     inner+=" <div class='card-body'>";
@@ -54,15 +54,15 @@
                     inner+="</div>";
                     inner+="</div>";
                     inner+="</div>";
-                   
 
 
-                    
+
+
                 // console.log(element);
                 });
                     $("#content").html(inner);
                 // console.log(response);
-                
+
             }
         });
     });

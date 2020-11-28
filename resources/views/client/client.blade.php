@@ -4,7 +4,10 @@
 @include('client.template.head')
 {{-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> --}}
 <link rel="stylesheet" href="{{ asset('chat-template') }}/style.css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+{{-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> --}}
+<style>
+
+</style>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 
 <!------ Include the above in your HEAD tag ---------->
@@ -24,6 +27,7 @@
     </div>
 
     {{-- ~~((^-^))~~ --}}
+    @if(Auth::guard('student')->check())
     <div id="live-chat">
 
         <header class="clearfix">
@@ -54,6 +58,7 @@
         </div>
 
     </div> <!-- end live-chat -->
+    @endif
     @include('client.template.script')
     {{-- <script>
         $(document).ready(function () {
@@ -69,20 +74,17 @@
 
     <script>
         (function() {
-
-
             $('#live-chat header').on('click', function() {
-
                 $('.chat').slideToggle(300, 'swing');
                 $('.chat-message-counter').fadeToggle(300, 'swing');
 
+                $('.send-message').fadeToggle(300,'swing');
             });
 
             $('.chat-close').on('click', function(e) {
-
                 e.preventDefault();
                 $('#live-chat').fadeOut(300);
-
+                $('.send-message').fadeOut(300);
             });
 
         }) ();
@@ -106,9 +108,12 @@
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         // firebase.analytics();
-        var myName = "{{  Auth::guard('student')->user()->stu_code  }}";
-        var branch =  "{{ Auth::guard('student')->user()->yb_id }}";
-        console.log(branch);
+        @if(Auth::guard('student')->check())
+            var myName = "{{  Auth::guard('student')->user()->stu_code  }}";
+            var branch =  "{{ Auth::guard('student')->user()->yb_id }}";
+        @endif
+
+        // console.log(branch);
         function sendMessage() {
 
             //get message
@@ -161,9 +166,9 @@
         //     } else if (container.scrollTop + container.clientHeight === container.scrollHeight) {
         //     container.scrollTop = container.scrollHeight;
         //     }
-                    
+
         // }
-        
+
     </script>
     <script>
         //đóng mở box

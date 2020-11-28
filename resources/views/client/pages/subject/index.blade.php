@@ -58,6 +58,17 @@ Môn học -
         </div>
         <!-- Recent Posts -->
         <div class="blog-sidebar">
+            <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Thông tin môn học</h4>
+            <div class="media">
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="#">{{ $subject->sub_name }}</a></h4>
+                    <h5 style="color: black;">Mã môn: <b>{{ $subject->sub_code }}</b></h5>
+                    <h5 style="color: black;">{{ $subject->semester_name }}</h5>
+                    <h5 style="color: black;">Năm học: {{ $subject->school_year_name }}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="blog-sidebar">
             <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
             <hr style="margin-bottom: 5px;">
             @foreach ($baivietdaxem as $item)

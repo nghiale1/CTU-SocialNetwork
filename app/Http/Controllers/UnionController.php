@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use Carbon\Carbon;
+use Auth;
 class UnionController extends Controller
 {
     /**
@@ -17,6 +18,19 @@ class UnionController extends Controller
         //get subject of user
         $union=$this->getUnionStudent();
         $blog=[];
+        
+        $ub_branch = DB::table('students_ub as ub')
+        ->join('union_branchs as br','br.ub_id','ub.stu_id')
+        ->where('ub.stu_id',Auth::guard('student')->id())->first();
+
+        
+        $chihoi = DB::table('students_ub as ub')
+        ->join('students as st','st.stu_id','ub.stu_id')
+      
+        ->where('ub.ub_id',$ub_branch->ub_id)->get();
+
+        // dd($ub_branch);
+
         if($union->isNotEmpty()){
 
             $blog=\DB::table('union_posts')
@@ -27,7 +41,7 @@ class UnionController extends Controller
 
             foreach($blog as $item)
             $item->ngaydang=$this->getDay($item->up_id,$item->up_created);
-            return view('client.pages.union.index',compact('union','blog'));
+            return view('client.pages.union.index',compact('union','blog','chihoi','ub_branch'));
         }
         else{
             return redirect('/404');
@@ -88,9 +102,9 @@ class UnionController extends Controller
         ->join('students_ub as sub','sub.ub_id','p.up_id')
         ->join('students as s','s.stu_id','p.stu_id')
         ->join('union_branchs as ub','ub.ub_id','p.ub_id')
-        ->where('up_slug',$slug)    
+        ->where('up_slug',$slug)
         ->first();
-        // dd($post);
+        // dd($slug);
 
         $chihoi = DB::table('students_ub as ub')
         ->join('students as st','st.stu_id','ub.stu_id')
@@ -104,8 +118,11 @@ class UnionController extends Controller
         }
         // đếm lượt xem
         app(\App\Http\Controllers\CountViewController::class)->check(false,$post->up_id,false,false);
-
-        return view('client.pages.union.single',compact('post','day','chihoi'));
+        $comment = DB::table('comments')
+        ->join('students','students.stu_id','comments.stu_id')
+        ->OrderBy('com_id','DESC')->get();
+        // dd($comment);
+        return view('client.pages.union.single',compact('post','day','chihoi','comment'));
     }
 
     /**
@@ -115,6 +132,46 @@ class UnionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function comment(Request $request)
+    {
+        $date = Carbon::now();
+        $comment['com_content']= $request->com_content;
+        $comment['com_created']= $date;
+        $comment['stu_id']= $request->st_id;
+        $comment['up_id']= $request->up_id;
+
+        // dd($comment);
+
+
+        $result = DB::table('comments')->insert($comment);
+        if($result)
+        {
+           return redirect()->back();
+        }
+
+
+    }
+    public function commentrep(Request $request)
+    {
+        $date = Carbon::now();
+        $comment['com_content']= $request->com_content;
+        $comment['com_created']= $date;
+        $comment['stu_id']= $request->st_id;
+        $comment['up_id']= $request->up_id;
+
+        // dd($comment);
+
+
+        $result = DB::table('comments')->insert($comment);
+        if($result)
+        {
+           return redirect()->back();
+        }
+
+
+    }
+
+    
     public function update(Request $request, $id)
     {
         //

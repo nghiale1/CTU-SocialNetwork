@@ -78,7 +78,9 @@ Chi tiết bài viết
                 <div class="col-md-12">
                     <div class="entry-meta">
                         <span><i class="fa fa-calendar-o"></i> {{$day}}</span>
-                        <span><i class="fa fa-user"></i> Bởi <a href="#">{{$post->stu_name}}</a></span>
+                        <i class="fa fa-user"></i> Đăng bởi: <a
+                            href="{{ route('Info',$post->stu_code.'.'.Str::slug($post->stu_name, '-')) }}">
+                            {{$post->stu_name}}</a>
                         <div class="pull-right">
                             <span><i class="fa fa-eye"></i> 184</span>
                             <span> <i class="fa fa-thumbs-up" aria-hidden="true"></i>20</a></span>
@@ -88,25 +90,9 @@ Chi tiết bài viết
                     </div>
                 </div>
             </div>
-            <p>{!!$post->p_content!!}</p>
+            <div class="dinh_dang_text">{!!$post->p_content!!}</div>
             @include('client.pages.forum.report')
 
-            {{-- <div class="mysharing">
-                <!-- Twitter -->
-                <a href="http://twitter.com/home?status=" title="Share on Twitter" target="_blank"
-                    class="btn btn-twitter"><i class="fa fa-twitter"></i> Twitter</a>
-                <!-- Facebook -->
-                <a href="https://www.facebook.com/sharer/sharer.php?u=" title="Share on Facebook" target="_blank"
-                    class="btn btn-facebook"><i class="fa fa-facebook"></i> Facebook</a>
-                <!-- Google+ -->
-                <a href="https://plus.google.com/share?url=" title="Share on Google+" target="_blank"
-                    class="btn btn-googleplus"><i class="fa fa-google-plus"></i> Google+</a>
-                <!-- LinkedIn -->
-                <a href="http://www.linkedin.com/shareArticle?mini=true" title="Share on LinkedIn" target="_blank"
-                    class="btn btn-linkedin"><i class="fa fa-linkedin"></i> LinkedIn</a>
-            </div> --}}
-
-            <!-- Blog Comments -->
             <div class="comments1">
                 <div class="well">
                     <h4>Bình luận:</h4>
@@ -206,7 +192,7 @@ Chi tiết bài viết
                                                         <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        
+
                                                     </div>
                                                     <div class="modal-footer">
 

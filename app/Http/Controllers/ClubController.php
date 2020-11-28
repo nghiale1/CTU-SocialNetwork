@@ -24,8 +24,12 @@ class ClubController extends Controller
         ->join('students','students.stu_id','club_posts.stu_id')
         ->where('club_students.cs_role','!=','YC')
         ->where('club_students.stu_id',\Auth::id())
-        ->groupBy('club_posts.cp_id')
-        ->paginate(10);
+        // ->groupBy('club_posts.cp_id')
+        ->orderBy('club_posts.cp_id')
+        ->paginate(3);
+        // ->get();
+
+        
         foreach($blog as $item){
             $item->day=$this->getDay($item->cp_id,$item->cp_created);
         }
@@ -35,10 +39,12 @@ class ClubController extends Controller
             $c_id = $val->c_id;
         //CLB chưa tham gia
         $clubJoin = DB::table('club_students')->where('stu_id',\Auth::id())->pluck('c_id');
+
         $clubNotJoin = DB::table('clubs')->whereNotIn('c_id',$clubJoin)->get();
-        // ->where('cs.c_id',$c_id)->get();
-   
-        // dd($clubNotJoin);
+
+    
+
+        // dd($blog);
         // $subject=app(\App\Http\Controllers\QuestionController::class)->getSubjectsStudent();
         return view('client.pages.club.index',compact('blog','viewed','joined','clubNotJoin'));
     }
@@ -61,7 +67,14 @@ class ClubController extends Controller
         }
         $viewed=$this->viewed();
         $joined=$this->joined();
-        return view('client.pages.club.index',compact('blog','viewed','joined'));
+
+         //CLB chưa tham gia
+         $clubJoin = DB::table('club_students')->where('stu_id',\Auth::id())->pluck('c_id');
+
+         $clubNotJoin = DB::table('clubs')->whereNotIn('c_id',$clubJoin)->get();
+
+        //  dd($clubNotJoin);
+        return view('client.pages.club.index',compact('blog','viewed','joined','clubNotJoin'));
     }
     public function search(Request $request)
     {
@@ -81,6 +94,7 @@ class ClubController extends Controller
     }
     public function listRequest($slug)
     {
+        $club=DB::table('clubs')->where('c_slug',$slug)->first();
 
         $list=ClubStudent::join('clubs','clubs.c_id','club_students.c_id')
         ->join('students','students.stu_id','club_students.stu_id')
@@ -88,7 +102,7 @@ class ClubController extends Controller
         ->where('c_slug',$slug)->get();
         $viewed=$this->viewed();
         $joined=$this->joined();
-        return view('client.pages.club.request',compact('list','viewed','joined'));
+        return view('client.pages.club.request',compact('list','viewed','joined','club'));
 
     }
     public function accept(Request $request)
@@ -139,8 +153,8 @@ class ClubController extends Controller
             ->join('students','students.stu_id','club_students.stu_id')->where('cs_role','!=','YC')
             ->where('club_students.c_id',$club->c_id)
             ->groupby('club_students.stu_id')
-            ->get()->ToArray();
-
+            ->paginate(20);
+            // dd($list);
             $arr=['CNCLB','PCNCLB','UVCLB','TV'];
 
             $count=DB::table('club_posts')
@@ -329,6 +343,7 @@ class ClubController extends Controller
      */
     public function destroy($id)
     {
+
         DB::table('club_posts')->where('cp_id',$id)->delete();
         return  redirect()->back();
     }

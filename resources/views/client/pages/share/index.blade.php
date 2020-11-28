@@ -36,7 +36,7 @@ Chia sẻ
     <!-- Blog Column -->
     <div class="col-md-8 ben-trai">
         <h1 class="page-header sidebar-title">
-            Chia sẻ
+            {{ $share[0]->type_name }}
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('share.create')}}'"> Thêm vật dụng chia sẻ</button> </span>
             <marquee scrolldelay="1" scrollamount="5">
@@ -51,14 +51,13 @@ Chia sẻ
             <div id="content">
                 @forelse ($share as $item)
                 <div class="col-md-4">
-                    <div class="card" style="width: 20rem;">
+                    <div class="card" style="width: 20rem; border: 2px solid rgb(230, 215, 215); padding: 20px; background-color: white; height: 200px;">
                         <img class="image" data-id="{!!$item->item_id!!}" id="myImg{!!$item->item_id!!}"
                             src="{{asset($item->item_avatar)}}" class="getimg" class="img-responsive card-img-top"
-                            alt="{{asset($item->item_avatar)}}" style="width:200px; height:150px;">
+                            alt="{{asset($item->item_avatar)}}" style="width:100%;">
                         <div class="card-body">
-                            <h5 class="card-title style-color" style="text-transform:capitalize;">{{$item->item_title}}
+                            <h5 class="card-title style-color" style="text-transform:unset; font-weight: bold;">{{$item->item_title}}
                             </h5>
-                            <p>{{ $item->type_name }}</p>
                             <a href="{{route('share.show',$item->item_slug)}}" class="style-color"> Xem chi tiết...</a>
                             <span style="float: right"><i class="fa fa-eye" aria-hidden="true"></i>
                                 {{$item->item_view_count}}</i></span>
@@ -78,10 +77,6 @@ Chia sẻ
 
         </div>
         <hr>
-
-
-
-
     </div>
     <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
@@ -105,8 +100,8 @@ Chia sẻ
                     <span>{{ date('d/m/Y', strtotime($item->item_created)) }}</span>
                 </div>
             </div>
+            @endforeach
         </div>
-        @endforeach
         {{-- </div> --}}
         <!-- Recent Posts -->
         <div class="blog-sidebar">
@@ -146,7 +141,7 @@ Chia sẻ
 @endsection
 @push('script')
 <script>
-    $('.image').click(function (e) { 
+    $('.image').click(function (e) {
         e.preventDefault();
         var id =$(this).attr("data-id");
         // Get the modal

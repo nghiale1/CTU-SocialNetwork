@@ -18,7 +18,9 @@ class ForumController extends Controller
      */
     public function index()
     {
-        $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+        $stu = DB::table('posts')
+        ->join('subjects as sub','sub.sub_id','posts.sub_id')
+        ->join('students','students.stu_id','posts.stu_id')->get();
 
         // dd($stu);
         //get subject of user
@@ -32,7 +34,7 @@ class ForumController extends Controller
             // dd($item->sub_id);
             $blog=$blog->orwhere('sub_id',$item->sub_id);
         }
-        $blog=$blog->paginate(10);
+        $blog=$blog->orderBy('p_id','DESC')->paginate(5);
         $now=$this->now();
         if($blog->isNotEmpty()){
             foreach($blog as $item){
@@ -62,14 +64,14 @@ class ForumController extends Controller
             $baivietdaxem = DB::table('posts')->whereIn('p_slug',$post_viewed)
             ->join('students','students.stu_id','posts.stu_id')
             ->get();
-            $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+            // $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
 
             // dd($baivietdaxem);
             return view('client.pages.forum.forum',compact('subject','blog','getSubPopular','baivietdaxem','stu'));
         }
-        $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
+        // $stu = DB::table('posts')->join('students','students.stu_id','posts.stu_id')->get();
 
-       
+
         $baivietdaxem = 0;
         // dd($stu);
         return view('client.pages.forum.forum',compact('subject','blog','getSubPopular', 'baivietdaxem','stu'));

@@ -63,7 +63,7 @@ class LoginController extends Controller
     }
     public function login(Request $request)
     {
-       
+
         $arr = [
             'username' => $request->code,
             'password' => $request->password,
@@ -81,7 +81,7 @@ class LoginController extends Controller
             return redirect()->route('forum');
         }
         if (Auth::guard('admin')->attempt($arr, $remember)) {
-            return redirect()->route('forum');
+            return redirect()->route('club.admin');
         }
         else{
             return redirect()->back()->with('error','MSSV hoặc mật khẩu chưa chính xác')->withInput();
@@ -104,6 +104,6 @@ class LoginController extends Controller
         if(Auth::check() || Auth::guard('admin')->check()){
             return redirect()->route('forum');
         }
-        return view('login.login'); 
+        return view('login.login');
     }
 }

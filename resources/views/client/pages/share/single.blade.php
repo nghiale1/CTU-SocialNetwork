@@ -122,11 +122,11 @@ Chi tiết bài viết
 
 <!-- Page Content -->
 <div class="row">
-    <article class="col-md-8">
+    <article class="col-md-8 ben-trai">
         {{-- <hr> --}}
         <div class="row">
             <div class="col-smd-12">
-                <h1 class="sidebar-title" style="width:100%;">{{$post->item_title}}</h1>
+                <h1 class="sidebar-title" style="width:100%;margin 20px;text-transform: uppercase;">{{$post->item_title}}</h1>
             </div>
             <div class="col-md-12">
                 <div class="entry-meta">
@@ -349,10 +349,17 @@ Chi tiết bài viết
 
         </div>
     </article>
-
+    <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
-    <aside class="col-md-4 sidebar-padding">
-        @include('client.pages.share.search')
+    <aside class="col-md-3 sidebar-padding ben-phai">
+        <div class="blog-sidebar">
+            <div class="input-group searchbar">
+                <input type="text" class="form-control searchbar" placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button">Tìm kiếm</button>
+                </span>
+            </div><!-- /input-group -->
+        </div>
         <!-- Blog Categories -->
         <div class="blog-sidebar">
             <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Bài chia sẻ gần đây</h4>
@@ -373,29 +380,25 @@ Chi tiết bài viết
             </div>
             @endforeach
         </div>
-        <!-- Recent Posts -->
         <div class="blog-sidebar">
             <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
             <hr style="margin-bottom: 5px;">
-            @if ($post_viewed!=null)
-            @foreach ($post_viewed as $item)
+            @if ($baivietdaxem)
+            @foreach ($baivietdaxem as $item)
             <div class="media">
-                <a class="pull-left" href="{{route('share.show',$item->item_slug)}}">
+                <a class="pull-left" href="#">
                     <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
                         alt="Media Object">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading">
-                        <a href="{{route('share.show',$item->item_slug)}}">{{ $item->item_title }}</a></h4>
-                    <span><a href="{{route('share.show',$item->item_slug)}}">{{ $item->item_name }}</a></span>
+                    <h4 class="media-heading"><a
+                            href="{{route('share.show',$item->item_slug)}}">{{ $item->item_title }}</a></h4>
+                    <span><a href="#">{{ $item->item_name }}</a></span>
                 </div>
             </div>
             @endforeach
             @endif
 
-        </div>
-
-    </aside>
     {{-- show ra hình --}}
     <div id="myModal" class="modal" aria-hidden="true" tabindex="-1" role="dialog">
 
@@ -422,8 +425,8 @@ Chi tiết bài viết
 
           });
 
-      
-        $('#xoabaiviet').click(function (e) { 
+
+        $('#xoabaiviet').click(function (e) {
             if(confirm('Bạn có muốn xóa !')){
                 return true;
             }
