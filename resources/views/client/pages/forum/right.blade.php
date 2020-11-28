@@ -2,7 +2,7 @@
 <aside class="col-md-4 sidebar-padding">
     <div class="blog-sidebar">
         <div class="input-group searchbar">
-            <input type="text" class="form-control searchbar" placeholder="Search for...">
+            <input type="text" class="form-control searchbar" placeholder="Tìm kiếm...">
             <span class="input-group-btn">
                 <button class="btn btn-default" type="button">Search</button>
             </span>

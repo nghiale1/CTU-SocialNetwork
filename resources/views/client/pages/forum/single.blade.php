@@ -40,25 +40,29 @@ Chi tiết bài viết
         color: #3571ad;
 
     }
+
     #dropdown-menu1 {
-    position: relative;
-}
-div#dropdown-menu2 {
-    position: absolute;
-    top: -32px;
-    left: 165px;
-    padding: 5px;
-    text-align: center;
-}
-div#dropdown-menu3 {
-    position: relative;
-}
-div#dropdown-menu4 {
-    position: absolute;
-    top: -32px;
-    left: 124px;
-    text-align: center;
-}
+        position: relative;
+    }
+
+    div#dropdown-menu2 {
+        position: absolute;
+        top: -32px;
+        left: 165px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    div#dropdown-menu3 {
+        position: relative;
+    }
+
+    div#dropdown-menu4 {
+        position: absolute;
+        top: -32px;
+        left: 124px;
+        text-align: center;
+    }
 </style>
 @endpush
 @section('content')
@@ -75,7 +79,8 @@ div#dropdown-menu4 {
                 <div class="col-md-12">
                     <div class="entry-meta">
                         <span><i class="fa fa-calendar-o"></i> {{$day}}</span>
-                        <i class="fa fa-user"></i> Đăng bởi: <a href="{{ route('Info',$post->stu_code.'.'.Str::slug($post->stu_name, '-')) }}">
+                        <i class="fa fa-user"></i> Đăng bởi: <a
+                            href="{{ route('Info',$post->stu_code.'.'.Str::slug($post->stu_name, '-')) }}">
                             {{$post->stu_name}}</a>
                         <div class="pull-right">
                             <span><i class="fa fa-eye"></i> 184</span>
@@ -148,7 +153,8 @@ div#dropdown-menu4 {
                                     @if ($val->stu_id == Auth::guard('student')->id())
                                     <div class="dropdown" id="dropdown-menu1">
 
-                                        <a class="pull-right" id="dropdownMenuButton"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</a>
+                                        <a class="pull-right" id="dropdownMenuButton" data-toggle="dropdown"
+                                            aria-haspopup="true" aria-expanded="false">...</a>
                                         {{-- <a class="pull-right" title="Xóa bình luận"><i class="fa fa-trash "
                                                 data-toggle="modal" data-target="#delete"></i></a> --}}
                                         {{-- thông báo xóa bình luận --}}
@@ -166,7 +172,8 @@ div#dropdown-menu4 {
 
                                                         <form action="{{ route('comment.destroy') }}" method="post">
                                                             @csrf
-                                                            <input type="hidden" name="com_id" value="{!! $val->com_id!!}">
+                                                            <input type="hidden" name="com_id"
+                                                                value="{!! $val->com_id!!}">
                                                             <button type="button" class="btn btn-secondary"
                                                                 data-dismiss="modal">Đóng</button>
                                                             <button type="submit" class="btn btn-primary">Xóa</button>
@@ -202,8 +209,10 @@ div#dropdown-menu4 {
                                             </div>
                                         </div> --}}
 
-                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" id="dropdown-menu2">
-                                            <a class="dropdown-item"  data-toggle="modal" data-target="#delete" >Xóa bình luận</a>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton"
+                                            id="dropdown-menu2">
+                                            <a class="dropdown-item" data-toggle="modal" data-target="#delete">Xóa bình
+                                                luận</a>
                                         </div>
                                     </div>
                                     @endif
@@ -240,16 +249,20 @@ div#dropdown-menu4 {
                                             @if ($val1->stu_id == Auth::guard('student')->id())
                                             {{-- <a href="" class="pull-right" title="Xóa bình luận"><i
                                                     class="fa fa-trash "></i></a> --}}
-                                                <a class="pull-right" id="dropdownMenuButton1"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">...</a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1" id="dropdown-menu4">
-                                                    <a class="dropdown-item"  data-toggle="modal" data-target="#delete1" >Xóa bình luận</a>
-                                                </div>
-                                                <div class="modal fade" id="delete1" tabindex="-1" role="dialog"
+                                            <a class="pull-right" id="dropdownMenuButton1" data-toggle="dropdown"
+                                                aria-haspopup="true" aria-expanded="false">...</a>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1"
+                                                id="dropdown-menu4">
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#delete1">Xóa
+                                                    bình luận</a>
+                                            </div>
+                                            <div class="modal fade" id="delete1" tabindex="-1" role="dialog"
                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Thông báo</h5>
+                                                            <h5 class="modal-title" id="exampleModalLabel">Thông báo
+                                                            </h5>
                                                         </div>
                                                         <div class="modal-body">
                                                             Bạn có thất sự muốn xóa?
@@ -258,10 +271,12 @@ div#dropdown-menu4 {
 
                                                             <form action="{{ route('comment.destroy') }}" method="post">
                                                                 @csrf
-                                                                <input type="hidden" name="com_id" value="{!! $val1->com_id!!}">
+                                                                <input type="hidden" name="com_id"
+                                                                    value="{!! $val1->com_id!!}">
                                                                 <button type="button" class="btn btn-secondary"
                                                                     data-dismiss="modal">Đóng</button>
-                                                                <button type="submit" class="btn btn-primary">Xóa</button>
+                                                                <button type="submit"
+                                                                    class="btn btn-primary">Xóa</button>
                                                             </form>
 
                                                         </div>
