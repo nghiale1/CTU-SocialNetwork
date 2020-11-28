@@ -178,12 +178,12 @@ p.title-message-rep{
 .o-giua {
     /* padding-top: 20px; */
     background-color:  whitesmoke;
-    height: 800px;
+    height: auto;
 }
 
 .ben-phai {
     background-color: whitesmoke;
-    height: 850px;
+    height: auto;
     width: 30%;
     padding-left: 0px !important;
 }

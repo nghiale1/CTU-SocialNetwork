@@ -36,6 +36,8 @@ class ShareController extends Controller
     }
     public function index($slug)
     {
+
+        $typeName = DB::table('types')->where('type_slug',$slug)->first();
        $share=Item::join('types as t','t.type_id','items.type_id')
        ->where('type_slug',$slug)
        ->paginate(10);
@@ -55,10 +57,10 @@ class ShareController extends Controller
         {
             $baivietdaxem = DB::table('items')->whereIn('item_slug',$post_viewed)->get();
             // dd($baivietdaxem);
-            return view('client.pages.share.index',compact('share','baivietdaxem','lastedPost'));
+            return view('client.pages.share.index',compact('share','baivietdaxem','lastedPost','typeName'));
         }
         $baivietdaxem = 0;
-        return view('client.pages.share.index',compact('share','baivietdaxem','lastedPost'));
+        return view('client.pages.share.index',compact('share','baivietdaxem','lastedPost','typeName'));
     }
 
     public function search(Request $request)
@@ -116,7 +118,7 @@ class ShareController extends Controller
             ]);
         }
 
-        return redirect()->back()->with('success','Đã thêm thành công');
+        return redirect()->route('share')->with('success','Đã thêm thành công');
     }
 
     /**

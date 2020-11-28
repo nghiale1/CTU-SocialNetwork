@@ -18,18 +18,29 @@ class UnionController extends Controller
         //get subject of user
         $union=$this->getUnionStudent();
         $blog=[];
-
+        
+        // dd(Auth::guard('student')->id());
         $ub_branch = DB::table('students_ub as ub')
-        ->join('union_branchs as br','br.ub_id','ub.stu_id')
-        ->where('ub.stu_id',Auth::guard('student')->id())->first();
-
-
-        $chihoi = DB::table('students_ub as ub')
-        ->join('students as st','st.stu_id','ub.stu_id')
-
-        ->where('ub.ub_id',$ub_branch->ub_id)->get();
+        ->join('union_branchs as br','br.ub_id','ub.ub_id')
+        ->where('ub.stu_id',Auth::guard('student')->id())
+        ->first();
 
         // dd($ub_branch);
+        $chihoi = DB::table('students_ub as ub')
+        ->join('students as st','st.stu_id','ub.stu_id')
+        ->where('ub.ub_id',$ub_branch->ub_id)->get();
+
+        foreach($chihoi as $val){
+            if($val->sub_role =="LCHT")
+            {
+                $lcht=$val->stu_id;
+            }
+
+        }
+
+        // dd($lcht);
+
+
 
         if($union->isNotEmpty()){
 
@@ -41,7 +52,7 @@ class UnionController extends Controller
 
             foreach($blog as $item)
             $item->ngaydang=$this->getDay($item->up_id,$item->up_created);
-            return view('client.pages.union.index',compact('union','blog','chihoi','ub_branch'));
+            return view('client.pages.union.index',compact('union','blog','chihoi','ub_branch','lcht'));
         }
         else{
             return redirect('/404');
@@ -170,6 +181,29 @@ class UnionController extends Controller
 
 
     }
+
+    
+
+    //danh sách thành viên
+    public function ListMember($id)
+    {
+
+        $chihoi = DB::table('union_branchs')
+        ->where('ub_id',$id)->first();
+
+        $thanhvien = DB::table('students_ub as ub')
+        ->join('students as st','st.stu_id','ub.stu_id')
+        ->where('ub.ub_id',$id)->paginate(5);
+
+        return view('client.pages.union.list-member',compact('chihoi','thanhvien'));
+    }
+
+
+
+
+
+
+
 
 
     public function update(Request $request, $id)

@@ -36,6 +36,11 @@ class ClubController extends Controller
         $viewed=$this->viewed();
         $joined=$this->joined();
         $request=$this->request();
+
+
+  
+        
+
         foreach($joined as $val)
             $c_id = $val->c_id;
         //CLB chưa tham gia

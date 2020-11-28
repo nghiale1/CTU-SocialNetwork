@@ -148,7 +148,7 @@ Chi tiết bài viết
             </div>
         </div>
         <br>
-        <img src="{{asset($post->item_avatar)}}" class="img-responsive" alt="photo" />
+        <img src="{{asset($post->item_avatar)}}" class="img-responsive" alt="photo"  style="width: 30%;margin-left: 133px;"/>
 
         <br>
 

@@ -21,10 +21,12 @@ Chi Hội
     <!-- Blog Column -->
     <div class="col-md-8 ben-trai">
         <h1 class="page-header sidebar-title">
-            Đoàn hội
+            CHI HỘI SINH VIÊN
+            @if ($lcht == Auth::guard('student')->id())
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('union.create')}}'"> Thêm bài viết</button> </span>
-            <marquee scrolldelay="1" scrollamount="5">
+                    @endif
+                <marquee scrolldelay="1" scrollamount="5">
                 <span class="gioithiu">
                     Đây là nơi kết nối các bạn cùng quê với nhau, Tổ chức các buổi hoạt động ngoại khóa, Giúp đỡ và hộ
                     trợ các bạn trong quá trình học tập cũng như trong cuộc sống.
@@ -103,6 +105,7 @@ Chi Hội
             <hr>
             <ul class="sidebar-list">
                 <li><a href="#">
+                    {{-- {{dd($chihoi)}} --}}
                     @foreach ($chihoi as $val)
                         @if ($val->sub_role == 'LCHT')
                         Chi hội trưởng: &nbsp; {{$val->stu_name}}
@@ -129,6 +132,11 @@ Chi Hội
                 <li><a href="#">
                     Số lương hội viên: {{count($chihoi)}}
                 </a></li>
+                <li>
+                    @if ($lcht == Auth::guard('student')->id())
+                  <span><a href="{{ route('union-list-member', ['id'=>$ub_branch->ub_id]) }}">Xem danh sách hội viên</a></span></li>
+                            @endif
+                     
             </ul>
         </div>
     </aside>

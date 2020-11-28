@@ -48,6 +48,7 @@ Yêu cầu tham gia
             <h4>Danh sách yêu cầu tham gia <strong>{{$club->c_name}}</strong></h4>
             <h5>Admin:    <strong>{{auth::guard('student')->user()->stu_name}}</strong></h5>
             <div class="col-md-12">
+                @if (count($list) != 0)
                 <table class="table table-striped borderless">
                     <thead>
     
@@ -61,29 +62,33 @@ Yêu cầu tham gia
                         </tr>
                     </thead>
                     <tbody id="club">
-                       
-                        @foreach($list as $key=>$item)
-                        @if ($item->stu_code == auth::guard('student')->user()->stu_code)
+                            @foreach($list as $key=>$item)
+                                @if ($item->stu_code == auth::guard('student')->user()->stu_code)
 
-                        @else
-                        
-                        <tr>
-                           <td>{{$item->stu_name}}</td>
-                           <td>{{$item->stu_code}}</td>
-                           <td>{{$item->cs_created}}</td>
-                           <td>
-                            <a href="#" data-data="{{$item->stu_code}}" data-url="{{$item->c_slug}}" data-no="{{$key}}"
-                                class="accept" style="color: #2f9de3">Duyệt</a>
-                            &nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href="#" data-data="{{$item->stu_code}}" data-url="{{$item->c_slug}}" data-no="{{$key}}"
-                                class="denied" style="color: red">Xóa</a>
-                        </tr>
-                        @endif
-                        @endforeach
-                    </tbody>
-                </table>
-               
-            </div>
+                                @else
+                                
+                                <tr>
+                                <td>{{$item->stu_name}}</td>
+                                <td>{{$item->stu_code}}</td>
+                                <td>{{$item->cs_created}}</td>
+                                <td>
+                                    <a href="#" data-data="{{$item->stu_code}}" data-url="{{$item->c_slug}}" data-no="{{$key}}"
+                                        class="accept" style="color: #2f9de3" onclick="return DongY()">Duyệt</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a href="#" data-data="{{$item->stu_code}}" data-url="{{$item->c_slug}}" data-no="{{$key}}"
+                                        class="denied" style="color: red">Xóa</a>
+                                </tr>
+                                @endif
+                            @endforeach
+                            
+                        </tbody>
+                    </table>
+                    
+                </div>
+                @else 
+                <p><img src=" {{asset('svg/nulll.png')}} " alt="" style="width: 10%;position: relative;top: 10px;left: 514px;"></p>
+                <p style="font-size: 25px;text-align: center;color: black;font-weight: bold;">  Không có yêu cầu nào !</p>
+                @endif
         
          
         </div>
@@ -148,6 +153,20 @@ Yêu cầu tham gia
 @endsection
 @push('script')
 <script>
+
+
+    function DongY(){
+        if(confirm('Bạn có muốn Duyệt người này ? '))
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
     $(document).ready(function(){
         $(".accept").click(function(e){
             e.preventDefault(); 
@@ -167,8 +186,9 @@ Yêu cầu tham gia
                 dataType: "json",
                 success: function (response) {
                     $('.'+no).addClass('hidden');
-                    if(response=='error'){
-                        alert('có lỗi xảy ra, vui lòng thử lại');
+                    if(response!='error'){
+                        alert('Duyệt Thành công!');
+                        window.location.href = "{{URL::to('cau-lac-bo/')}}"
                     }
                 },
             });
@@ -191,8 +211,9 @@ Yêu cầu tham gia
                 dataType: "json",
                 success: function (response) {
                     $('.'+no).addClass('hidden');
-                    if(response=='error'){
-                        alert('có lỗi xảy ra, vui lòng thử lại');
+                    if(response!='error'){
+                        alert('Xóa Thành công!');
+                        window.location.href = "{{URL::to('cau-lac-bo/')}}"
                     }
                 },
             });
