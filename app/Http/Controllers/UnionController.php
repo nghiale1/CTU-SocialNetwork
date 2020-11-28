@@ -18,15 +18,15 @@ class UnionController extends Controller
         //get subject of user
         $union=$this->getUnionStudent();
         $blog=[];
-        
+
         $ub_branch = DB::table('students_ub as ub')
         ->join('union_branchs as br','br.ub_id','ub.stu_id')
         ->where('ub.stu_id',Auth::guard('student')->id())->first();
 
-        
+
         $chihoi = DB::table('students_ub as ub')
         ->join('students as st','st.stu_id','ub.stu_id')
-      
+
         ->where('ub.ub_id',$ub_branch->ub_id)->get();
 
         // dd($ub_branch);
@@ -171,7 +171,7 @@ class UnionController extends Controller
 
     }
 
-    
+
     public function update(Request $request, $id)
     {
         //

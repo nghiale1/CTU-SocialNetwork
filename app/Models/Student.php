@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 /**
  * Class Student
- * 
+ *
  * @property int $stu_id
  * @property string $username
  * @property string $password
@@ -24,7 +24,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  * @property string $stu_address
  * @property string $stu_gmail
  * @property int $yb_id
- * 
+ *
  * @property YouthBranch $youth_branch
  * @property Collection|ClubPost[] $club_posts
  * @property Collection|Club[] $clubs

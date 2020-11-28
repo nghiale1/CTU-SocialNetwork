@@ -11,12 +11,12 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class YouthBranch
- * 
+ *
  * @property int $yb_id
  * @property string $yb_name
  * @property int $course_id
  * @property int $major_id
- * 
+ *
  * @property Course $course
  * @property Major $major
  * @property Collection|Student[] $students
