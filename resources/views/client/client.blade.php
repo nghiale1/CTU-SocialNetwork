@@ -56,13 +56,11 @@
         </div> <!-- end chat -->
         <div class="send-message">
             <form onsubmit="return sendMessage();" name="chat-form">
-
                 <div class="form-group">
                     <input type="text" class="form-control type_msg" id="messaage"
                         placeholder="Nhập nội dung . . ."></input>
                     <input type="submit" hidden>
                 </div>
-
             </form>
         </div>
 
@@ -134,11 +132,12 @@
                 "branch" : branch
             });
             console.log(message);
-            ScrollBottom();
+
             var frm = document.getElementsByName('chat-form')[0];
             frm.reset();  // Reset all form data
             return false;
         }
+
         // listen for incoming message
         firebase.database().ref("messages").on("child_added", function (snapshot) {
             var html = "";
@@ -167,16 +166,6 @@
                 }
             }
         });
-
-        // function ScrollBottom(){
-        //     if (firstTime) {
-        //     container.scrollTop = container.scrollHeight;
-        //     firstTime = false;
-        //     } else if (container.scrollTop + container.clientHeight === container.scrollHeight) {
-        //     container.scrollTop = container.scrollHeight;
-        //     }
-
-        // }
 
     </script>
     <script>
