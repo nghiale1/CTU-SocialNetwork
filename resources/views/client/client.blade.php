@@ -26,12 +26,17 @@
     </div>
 
     {{-- ~~((^-^))~~ --}}
-    <?php
-        $youth_branch = DB::table('youth_branchs')
+    {{-- {{ dd(Request::segment(1)) }} --}}
+    @if (Request::segment(1) == 'quan-tri')
+    @else
+        <?php
+            $youth_branch = DB::table('youth_branchs')
                         ->join('majors','majors.major_id','youth_branchs.major_id')
                         ->join('courses','courses.course_id','youth_branchs.course_id')
-                        ->where('yb_id',Auth::guard('student')->id())->first();
-    ?>
+                        ->where('yb_id',Auth::guard('student')->user()->yb_id)->first();
+        ?>
+    @endif
+
     @if(Auth::guard('student')->check())
     <div id="live-chat">
 

@@ -22,7 +22,7 @@ class classes extends Seeder
                 // tạo theo lớp
                 $j=rand(1,2);
                 for($i=1;$i<=$j;$i++){
-    
+
                     DB::table('youth_branchs')->insert([
                         'major_id'=>$item->major_id,
                         'course_id'=>$value,
