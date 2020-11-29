@@ -110,12 +110,12 @@ class UnionController extends Controller
     public function show($slug)
     {
         $post=DB::table('union_posts as p')
-        ->join('students_ub as sub','sub.ub_id','p.up_id')
+        ->join('students_ub as sub','sub.ub_id','p.ub_id')
         ->join('students as s','s.stu_id','p.stu_id')
         ->join('union_branchs as ub','ub.ub_id','p.ub_id')
         ->where('up_slug',$slug)
         ->first();
-        // dd($slug);
+        // dd($post);
 
         $chihoi = DB::table('students_ub as ub')
         ->join('students as st','st.stu_id','ub.stu_id')

@@ -47,9 +47,10 @@ Chi tiết bài viết
 <!-- Page Content -->
 <div class="container singlepost">
     <div class="row">
+        {{-- {{dd($post)}} --}}
         <article class="col-md-8 ben-trai">
             <h1 class="page-header sidebar-title">{{$post->up_title}}</h1>
-            {{-- <img src="{{asset('client/images/unsplash1.jpg')}}" class="img-responsive" alt="photo" /> --}}
+            <img src="{{asset($post->up_avatar)}}" class="img-responsive" alt="photo" />
             {{-- <hr> --}}
             <div class="row">
                 <div class="col-md-12">

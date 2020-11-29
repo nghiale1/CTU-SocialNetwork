@@ -303,18 +303,19 @@ Chi tiết bài viết
                     <li><a href="">Chủ nhiệm CLB: &nbsp; &nbsp;
                             @foreach ($studentJoinClub as $vl)
                             @if( $vl->cs_role=='CNCLB')
-                            {{$vl->stu_name}}
+                            <strong>{{$vl->stu_name}}</strong>
                             @endif
                             @endforeach
                         </a></li>
                     <li><a href="">Phó chủ nhiệm CLB:
                             @foreach ($studentJoinClub as $vl)
                             @if( $vl->cs_role=='PCNCLB')
-                            &nbsp;{{$vl->stu_name}} &nbsp; &nbsp;,
+                                &nbsp;<strong> {{$vl->stu_name}} </strong>&nbsp; &nbsp;,
+                           
                             @endif
                             @endforeach
                         </a></li>
-                    <li><a href="#">Tổng số thành viên: {{ count($studentJoinClub  )}} thành viên</a></li>
+                    {{-- <li><a href="#">Tổng số thành viên: {{ count($studentJoinClub  )}} thành viên</a></li>
                     <a class="btn btn-ctu" style="color: white;margin-top:5px;" data-toggle="collapse" href="#xemThem"
                         role="button">Xem thành viên</a>
                     <div class="collapse" id="xemThem">
@@ -327,7 +328,7 @@ Chi tiết bài viết
                                 @endforeach
                             </ul>
                         </div>
-                    </div>
+                    </div> --}}
                     {{-- @foreach ($joined as $item)
                     @if ($item->cs_role!='YC'&&$item->cs_role!='TV')
                     <li class="btn-group">

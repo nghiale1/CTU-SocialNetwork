@@ -267,7 +267,7 @@ Chi tiết bài viết
                     @if ($val->com_id ==$val1->com_idrep)
                     <div class="media" style="border-bottom:none;">
                         <a class="pull-left" href="#">
-                            <img class="media-object" src="{{asset('$val1->stu_avatar')}}" alt="{{$val1->username}}">
+                            <img class="media-object" src="{{asset($val1->stu_avatar)}}" alt="{{$val1->username}}">
                         </a>
                         <div class="media-body">
                             <h4 class="media-heading">{{$val1->com_content}}
@@ -275,7 +275,6 @@ Chi tiết bài viết
                                     {{date('d-m-Y H:m', strtotime($val1->com_created))}}</small>
                             </h4>
                             {{$val1->stu_name}}
-                            {{$val1->com_content}}
                             <div class="row cm_icon">
                                 <div class="col-md-6">
                                     <div class="_cm_left">
