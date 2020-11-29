@@ -20,7 +20,7 @@ class CreateSubjectsTable extends Migration
             //foreign key
             $table->integer('semester_id')->index()->unsigned();
             $table->integer('school_year_id')->index()->unsigned();
-            
+
             $table->foreign('semester_id')->references('semester_id')->on('semesters')->onDelete('cascade');
             $table->foreign('school_year_id')->references('school_year_id')->on('school_years')->onDelete('cascade');
 

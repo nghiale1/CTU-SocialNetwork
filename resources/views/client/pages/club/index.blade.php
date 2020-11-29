@@ -29,7 +29,13 @@ Câu lạc bộ
     <!-- Blog Column -->
     <div class="col-md-8 ben-trai">
         <h1 class="page-header sidebar-title">
-            Bài viết câu lạc bộ
+            <?php $slug = Request::segment(3); ?>
+            <?php $nameClub = DB::table('clubs')->where('c_slug',$slug)->first(); ?>
+            @if ($nameClub)
+                Bài viết {{ $nameClub->c_name }}
+            @else
+                Bài viết câu lạc bộ
+            @endif
             <span style="float: right"><button class="btn btn-ctu"
                     onclick="window.location.href='{{route('club.create')}}'"> Thêm bài viết</button> </span>
             <marquee scrolldelay="1" scrollamount="5">
@@ -107,7 +113,7 @@ Câu lạc bộ
         {{-- @if ($joined > 0) --}}
         @foreach ($joined as $item)
         {{-- {{dd($item)}} --}}
-            @if ($item->cs_role =='CNCLB' || $item->cs_role=='PCNCLB')  
+            @if ($item->cs_role =='CNCLB' || $item->cs_role=='PCNCLB')
             <div class="blog-sidebar">
                 <h4 class="sidebar-title"><i class="fa fa-list-ul"></i>  Trưởng {{$item->c_name}} </h4>
                 <hr>
@@ -125,8 +131,8 @@ Câu lạc bộ
             @endif
         @endforeach
         {{-- @endif --}}
-       
-        
+
+
         <div class="blog-sidebar">
             <h4 class="sidebar-title"><i class="fa fa-list-ul"></i> Chờ duyệt</h4>
             <hr>
@@ -140,12 +146,12 @@ Câu lạc bộ
                         aria-controls="multiCollapseExample1">{{$item->c_name}}</a>
 
                 </li>
-               
+
                 @endforeach
                    @else
                 <li>
-                   <strong>Bạn chưa yêu cầu tham gia câu lạc bộ</strong> 
-                </li>  
+                   <strong>Bạn chưa yêu cầu tham gia câu lạc bộ</strong>
+                </li>
                 @endif
             </ul>
         </div>
@@ -166,14 +172,14 @@ Câu lạc bộ
                             </li>
 
                         @else
-                
+
                         <li><a href="{{route('club.clubPostSlug',$item->c_slug)}}">{{$item->c_name}}</a></li>
                         @endif
                     @endforeach
                 {{-- @else
                     <li><strong>Bạn chưa tham gia CLB nào !</strong></li>
                 @endif --}}
-            </ul>   
+            </ul>
         </div>
         {{-- </div> --}}
         {{-- </div> --}}
@@ -193,7 +199,7 @@ Câu lạc bộ
                 </li>
                 @endforeach
             </ul>
-        
+
 
 
         </div>

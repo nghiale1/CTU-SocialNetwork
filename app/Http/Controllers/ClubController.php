@@ -38,8 +38,8 @@ class ClubController extends Controller
         $request=$this->request();
 
 
-  
-        
+
+
 
         foreach($joined as $val)
             $c_id = $val->c_id;
