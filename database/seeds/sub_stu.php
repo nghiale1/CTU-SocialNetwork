@@ -20,5 +20,6 @@ class sub_stu extends Seeder
                 ]);
             }
         }
+
     }
 }
