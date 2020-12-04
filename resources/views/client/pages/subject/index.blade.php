@@ -71,6 +71,7 @@ Môn học -
         <div class="blog-sidebar">
             <h4 class="sidebar-title"><i class="fa fa-align-left"></i> Bài viết đã xem</h4>
             <hr style="margin-bottom: 5px;">
+            {{-- {{dd($baivietdaxem)}} --}}
             @foreach ($baivietdaxem as $item)
             <div class="media">
                 <a class="pull-left" href="#">

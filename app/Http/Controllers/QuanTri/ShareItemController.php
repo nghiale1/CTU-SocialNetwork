@@ -25,7 +25,7 @@ class ShareItemController extends Controller
             $request->file('type_hinh')->move(
                 public_path('svg/'), //nơi cần lưu
                 $file);
-            $data['type_image']=$file;
+            $data['type_image']='svg/'.$file;
         }
         $data['type_name']=$request->type_name;
         $data['type_slug']= Str::slug($request->type_name);

@@ -19,7 +19,7 @@ class ShareController extends Controller
     public function select()
     {
         $type=\DB::table('types')->get();
-        $lastedPost = DB::table('items')->join('types','types.type_id','items.type_id')->orderBy('item_created','DESC')->paginate(15);
+        $lastedPost = DB::table('items')->join('types','types.type_id','items.type_id')->orderBy('item_created','DESC')->paginate(8);
 
         $post_viewed = session()->get('posts.post_club');
         // dd($post_viewed);
