@@ -5,7 +5,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>CTU Social Network | @yield('title')</title>
+    <title>Mạng xã hội sinh viên CTU | @yield('title')</title>
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('client/images/logo-ctu.png')}}" />
     <!-- Bootstrap Core CSS -->
 

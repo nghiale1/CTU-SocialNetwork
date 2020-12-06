@@ -18,8 +18,8 @@ Quản lý tài liệu - Tên môn
     </div>
 @endif
 <div class="row">
-    <h1>Tài liệu môn học</h1>
-    <h1>{{ $folder->fo_name }}</h1>
+    <h2>Tài liệu môn học</h2>
+    <h2 style="font-weight: bold;">{{ $folder->fo_name }}</h2>
     <p style="border-top: 2px solid blue;"></p>
 
     {{-- Up load --}}

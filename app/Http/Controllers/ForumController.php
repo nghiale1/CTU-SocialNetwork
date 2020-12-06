@@ -50,7 +50,8 @@ class ForumController extends Controller
         // dd($blog);
         //GET
         $idStudent = Auth::guard('student')->id();
-        $getSubjectStudy = DB::table('subjects_student')->where('stu_id',$idStudent)->get();
+        #hoc phan dang hoc
+        $getSubjectStudy = DB::table('subjects_student')->where('stu_id',$idStudent)->where('sub_stu_trangthai',1)->get();
         // dd($getSubjectStudy->pluck('sub_id'));
         $getSubPopular = DB::table('subjects_student')
                         ->join('subjects','subjects.sub_id','subjects_student.sub_id')

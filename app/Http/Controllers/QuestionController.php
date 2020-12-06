@@ -28,6 +28,8 @@ class QuestionController extends Controller
         $subject=\DB::table('subjects_student as ss')->join('students as s','ss.stu_id','s.stu_id')
         ->join('subjects as su','su.sub_id','ss.sub_id')
         ->where('s.stu_id',$id)
+        ->where('sub_stu_trangthai',1)
+        ->orderBy('sub_stu_trangthai','ASC')
         ->get('su.*');
         // dd($subject);
         return $subject;
