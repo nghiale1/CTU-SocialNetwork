@@ -88,9 +88,6 @@ Chi Hội
     <div class="col-md-1 clear-center"></div>
     <!-- Blog Sidebar Column -->
     <aside class="col-md-3 sidebar-padding ben-phai">
-        <div id="app">
-            <chat-layout></chat-layout>
-        </div>
         <div class="blog-sidebar">
             <div class="input-group searchbar">
                 <input type="text" class="form-control searchbar" placeholder="Nhập từ khóa cần tìm">
@@ -136,7 +133,7 @@ Chi Hội
                     @if ($lcht == Auth::guard('student')->id())
                   <span><a href="{{ route('union-list-member', ['id'=>$ub_branch->ub_id]) }}">Xem danh sách hội viên</a></span></li>
                             @endif
-                     
+
             </ul>
         </div>
     </aside>

@@ -117,14 +117,14 @@ Hỏi đáp
             @if ($baivietdaxem)
             @foreach ($baivietdaxem as $item)
             <div class="media">
-                <a class="pull-left" href="#">
-                    <img class="img-responsive media-object" src="{{asset('client/images/blog-photo1.jpg')}}"
+                {{-- <a class="pull-left" href="#">
+                    <img class="img-responsive media-object" src=""
                         alt="Media Object">
-                </a>
+                </a> --}}
                 <div class="media-body">
                     <h4 class="media-heading"><a href="{{route('forum.show',$item->p_slug)}}">{{ $item->p_title }}</a>
                     </h4>
-                    <span><a href="#">{{ $item->stu_name }}</a></span>
+                    <span><a href="{{ route('Info',$item->stu_code.'.'.Str::slug($item->stu_name, '-')) }}">{{ $item->stu_name }}</a></span>
                 </div>
             </div>
             @endforeach

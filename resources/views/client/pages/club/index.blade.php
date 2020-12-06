@@ -108,7 +108,7 @@ Câu lạc bộ
         <div id="app">
             <chat-layout></chat-layout>
         </div>
-        {{-- @include('client.pages.club.search') --}}
+        @include('client.pages.club.search')
         <!-- Blog Categories -->
         {{-- @if ($joined > 0) --}}
         @foreach ($joined as $item)

@@ -9,7 +9,8 @@ Quản lý tài liệu - Tên môn
     {{-- {{ dd($folder) }} --}}
 @if (Auth::guard('student')->id() == $folder->stu_id)
     <div class="row">
-        <a href="{{ url("http://127.0.0.1:8000/tai-khoan/tai-lieu?nienkhoa=$nkSelected&hocky=$hkSelected") }}" class="label label-default">Quay lại</a>
+        <?php $url = asset('');?>
+        <a href="{{ url($url."tai-khoan/tai-lieu?nienkhoa=$nkSelected&hocky=$hkSelected") }}" class="label label-default">Quay lại</a>
     </div>
 @else
     <div class="row">
@@ -67,7 +68,7 @@ Quản lý tài liệu - Tên môn
                                             @else
                                                 btn-warning
                                             @endif" style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
-                            <h5 style="font-size: 20px;">
+                            <h5 style="font-size: 15px; text-align: center;">
                                 <i class="fa fa-folder" aria-hidden="true"></i> {{$item->fo_name}}
                             </h5>
                         </a>
@@ -140,7 +141,7 @@ Quản lý tài liệu - Tên môn
                                                 @else
                                                     btn-warning
                                                 @endif" style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
-                                <h5 style="font-size: 20px;">
+                                <h5 style="font-size: 15px; text-align: center;">
                                     <i class="fa fa-folder" aria-hidden="true"></i> {{$item->fo_name}}
                                 </h5>
                             </a>

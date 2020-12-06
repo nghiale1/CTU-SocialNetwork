@@ -60,7 +60,7 @@ Tài liệu cá nhân
                             btn-warning
                         @endif"
                         style="width: 100%;" id="right-click" data-id="{{ $item->fo_id }}">
-                        <h5 style="font-size: 20px; float: left;">
+                        <h5 style="font-size: 15px; text-align: center;">
                         <i class="fa fa-folder" aria-hidden="true"></i> : {{ $item->fo_name }}
                         </h5>
                     </a>
