@@ -54,7 +54,7 @@ Chia sẻ
                                 <img src="{{asset($item->type_image)}}" class="card-img-top" alt="{{$item->type_name}}" style="border: 2px solid white;
                                 border-radius: 20% !important;">
                                 <div class="card-body">
-                                    <p class="card-text">{{$item->type_name}}</p>
+                                    <p class="card-text" style="font-size:14px;color: #326fab;font-weight: bold; ">{{$item->type_name}}</p>
                                 </div>
                             </div>
                         </a>
@@ -73,7 +73,7 @@ Chia sẻ
             Bài viết gần đây
         </h1>
         @foreach ($lastedPost as $item)
-            <div class="col-md-3">
+            <div class="col-md-3" style="margin-bottom: 20px">
                 <div class="card" style="width: 20rem; border: 2px solid silver; padding: 20px; background-color: white;">
                     <img class="image" data-id="{!!$item->item_id!!}" id="myImg{!!$item->item_id!!}"
                         src="{{asset($item->item_avatar)}}" class="getimg" class="img-responsive card-img-top"
@@ -81,7 +81,7 @@ Chia sẻ
                     <div class="card-body">
                         <h5 class="card-title style-color" style="text-transform:capitalize;">{{$item->item_title}}
                         </h5>
-                        <p>{{ $item->type_name }}</p>
+                        <p style="font-size:14px;color: #326fab;font-weight: bold;">{{ $item->type_name }}</p>
                         <a href="{{route('share.show',$item->item_slug)}}" class="style-color"> Xem chi tiết...</a>
                         <span style="float: right"><i class="fa fa-eye" aria-hidden="true"></i>
                             {{$item->item_view_count}}</i></span>
@@ -90,6 +90,7 @@ Chia sẻ
             </div>
         @endforeach
     </div>
+    <div class="col-md-12 o-giua"> {{$lastedPost->links()}} </div>
 </div>
 
 @endsection
